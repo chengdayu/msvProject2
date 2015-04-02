@@ -1,2 +1,5 @@
-IRTree: (int x;True);True
-
+IRTree: 
+int x;
+output();
+output()
+wangmeng
