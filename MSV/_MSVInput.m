@@ -1,1 +1,1 @@
-int x and skip
+exists x :{int x and skip}
