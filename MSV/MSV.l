@@ -1,13 +1,13 @@
 %{
-#include"function.h"
+#include "function.h"
 #include <string.h> // strcpy, strncpy
 #include <math.h>
-//#include <io.h>     // isatty.h>
-//#include "map.h"
-//extern CMAP g_StructNameMap;
-int lineno=1;
+#include <io.h>     // isatty.h>
+#include "MyMap.h"
 
-#include"SyntaxNode.h"
+#include "SyntaxNode.h"
+extern CMAP g_StructNameMap;
+int lineno=1;
 
 // For some reason isatty is called _isatty in Visual C++
 #ifdef MSVC
@@ -16,20 +16,18 @@ int lineno=1;
 
 // Forward declarations for include files
 class CSyntaxNode;
-//class Symbol;
-//class SymbolTable;
+class Symbol;
+class SymbolTable;
 
 // Make sure our variables get created
 #define  _LEX_CPP_
-//#include "lex.h"
-//#include "lexSymbol.h"
-#include"parse.cpp.h"
+#include "parse.cpp.h"
 
 
 // The yywrap and error functions are declared by the caller
-//extern "C" int yywrap();
+extern "C" int yywrap();
 extern void error( char *cFormat, ... );
-extern
+extern 
 
 void DeleteSingleLineComment (void);
 void passStringConstant (void);
@@ -90,7 +88,7 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "union"	   {return UNION;}
 "true"     {return MY_TRUE;}
 "false"    {return MY_FALSE;}
-"pre"      {return PREVIOUS;}
+
 "len"      {return LENGTH;}
 "frame"    {return FRAME;}
 "if"       {return IF;}
@@ -107,15 +105,21 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "input"    {return REQUEST;}
 "request"  {return REQUEST;}
 "prefix"   {return PREFIX;}
+
+"switch"   {return SWITCH;}
+"case"     {return CASE;}
+"break"    {return BREAK;}
+":"        {return COLON;}
+
 ";"        {return CHOP;}
 "&"        {return ADDRESS;}
 
-"int"      {return INTDECLARATION;}//  added by Jane 2012-05-21
-"string"   {return STRDECLARATION;}//STRVARIABLE  added by Jane 2012-05-21
-"pointer"  {return POINTERDECLARATION;}//POINTER  added by Jane 2012-05-21
-"char"	   {return CHARDECLARATION;}//CHARVARIABLE  added by Jane 2012-05-21
-"float"    {return FLOATDECLARATION;}//FLOATVARIABLE  added by Jane 2012-05-21
-"list"		{return LISTDECLARATION;}//LISTVARIABLE  added by Jane 2012-05-21
+"int"      {return INTDECLARATION;}
+"string"   {return STRDECLARATION;}
+"pointer"  {return POINTERDECLARATION;}
+"char"	   {return CHARDECLARATION;}//CHARVARIABLE  
+"float"    {return FLOATDECLARATION;}//FLOATVARIABLE  
+"list"		{return LISTDECLARATION;}//LISTVARIABLE  
 "void"     {return VOIDDECLARATION;}
 
 "head"		{return		STRFUNCHEAD;}
@@ -158,24 +162,19 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "frexp"		{return FREXP;}
 
 "fopen"		{return FOPEN;}
-"fgets"    	{return FGETS;}
-"fgetc"    	{return FGETC;}
-"fputs"    	{return FPUTS;}
-"fputc"    	{return FPUTC;}
+"fgets"    	{return FGETS;} 
+"fgetc"    	{return FGETC;} 
+"fputs"    	{return FPUTS;} 
+"fputc"    	{return FPUTC;} 
 "fclose"	{return FCLOSE;}
 "FILE"		{return FILEDECLARATION;}
 "system"   {return SYSTEM;}
 
-"switch"	{return SWITCH;}//add by yubin 2015-3-23
-"break"		{return BREAK;}//add by yubin 2015-3-23
-"case"		{return CASE;}//add by yubin 2015-3-23
-"default"		{return DEFAULT;}//add by yubin 2015-3-23
-
 "."        {return DOT;}
-"="        {return EQU;}     //比较相等符号 “=”
-"<=="      {return ASS_EQU;}   //赋值符号已修改为“<==”
+"="        {return EQ;}     
+"<=="      {return ASS_P;}   
 
-":="       {return UNITASSIGN;}
+":="       {return ASS_N;}
 
 "<"        {return LT;}
 ">"        {return GT;}
@@ -192,9 +191,9 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "/"	       {return DIV;}
 "%"        {return MOD;}
 "^"        {return CON;}
-"<<"       {return LST;}//add by yubin 2013-12-19 左移 left shift
-">>"       {return RST;}//add by yubin 2013-12-19 右移 right shift
-"~"        {return BNE;}//add by yubin 2013-12-20 按位非 bit negation
+"<<"       {return LST;}//左移 left shift
+">>"       {return RST;}//右移 right shift
+"~"        {return BNE;}//按位非 bit negation
 
 "=>"	   {return PROPIMPLY;}
 "->"       {return IMPLY;}
@@ -210,12 +209,12 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "#"        {return CHOPSTAR;}
 
 
-"ov"        {return OVER;}//2010-04-23 add
-"|||"       {return CYLINDER;}//2010-04-23 add
-"rp"        {return OVEREP;}//2010-07-07 add
+"ov"        {return OVER;}
+"|||"       {return CYLINDER;}
+"rp"        {return OVEREP;}
 
-"|"			{return	INTER_OR;}//2011-08-22 Jane added begin
-"nd"		{return NON_DETERMINED;}//2011-08-22 Jane added end
+"|"			{return	INTER_OR;}
+"nd"		{return NON_DETERMINED;}
 
 "proc"		{return PROCESS;}
 "chn"		{return CHANNEL;}
@@ -230,32 +229,32 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "signed"    {return SIGNED;}
 "unsigned"  {return UNSIGNED;}
 
-"malloc"    {return MALLOC;}//yangkai malloc相关
+"malloc"    {return MALLOC;}//malloc相关
 "free"      {return FREE;}
 
 
 {IDENT}  {
 			   yylval.cString=new char[strlen(yytext)+1];
 			   strcpy(yylval.cString,yytext);
-
-			  // if(!g_StructNameMap.find(yytext))
-			 // {
+               
+			   if(!g_StructNameMap.find(yytext))
+			   {
 			       return ID;
-			 //  }
-			  // else
-			  // {
+			   }
+			   else
+			   {
                    return STRUCT_TYPE;
-			 //  }
+			   }
 		}
-{DIGIT}  {
+{DIGIT}  {    
                yylval.nInteger=atoi(yytext);
-               return INTEGER;
+               return INTLITERAL;
 		 }
-{HEXDIGIT}  {
+{HEXDIGIT}  {    
                int decValue;//int，保存16进制对应的十进制数
 			   sscanf(yytext,"%x",&decValue);//将16进制字符串转成10进制数
 			   yylval.nInteger=decValue;//将10进制数赋给yytext
-               return INTEGER;
+               return INTLITERAL;
 			}
 {EXPONENT} {
                char* result=NULL;
@@ -269,18 +268,18 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 				  result = strtok(NULL, "e");
 				}
 
-               yylval.floatval = fVal*pow(10, iVal);
+               yylval.floatval = fVal*pow(10, iVal); 
 			   return FLOATLITERAL;
 			}
 {STR}    {
                passStringConstant ();
-			   return STR;
+			   return STRLITERAL;
          }
 
-{RFLOAT}	 {
-				yylval. floatval = atof(yytext);
-				return FLOATLITERAL;
-		 }//Added by Jane 2012-05-21
+{RFLOAT}	 {		
+				yylval. floatval = atof(yytext); 
+				return FLOATLITERAL; 
+		 }//Added by Jane 2012-05-21 
 {RCHAR}		{//modified by yubin 2014/2/25，第一个if分支处理没有转义字符的情况，下面的分支处理有转义字符的情况
 				if(yytext[1]!='\\')
 				{
@@ -360,13 +359,13 @@ void DeleteSingleLineComment(void)
 }
 
 void passStringConstant (void)
-{//modified by yubin 2014/2/25，处理char*字符串中的转义字符，第一个if分支处理没有转义字符的情况，下面的分支处理有转义字符的情况
+{//处理char*字符串中的转义字符，第一个if分支处理没有转义字符的情况，下面的分支处理有转义字符的情况
 	int l = ( strlen( yytext ) - 2 );
 	yylval.cString = new char[l+1];
 	strncpy( yylval.cString, &yytext[1], l );
 	int j=0;//j用来记录转义字符的个数
 	int i=0;
-	for(;i+j<l;i=i+1)
+	for(i=0;i+j<l;i=i+1)
 	{
 		if(yylval.cString[i+j]!='\\')
 		{
@@ -419,8 +418,8 @@ void passStringConstant (void)
 		}
 		else//是转义字符，但是不是上面的一些转义字符，暂时什么也不做
 		{
-
-		}
+		
+		}	
 	}
 	yylval.cString[i] = '\0';
 }

@@ -1,3 +1,7 @@
+
+#ifndef IR_H_INCLUDED
+#define IR_H_INCLUDED
+
 #include "llvm/ADT/SmallVector.h"
 #include "llvm/Analysis/Verifier.h"
 #include "llvm/IR/BasicBlock.h"
@@ -28,26 +32,33 @@ public:
 	*/
 	void Trslt2IR(CSyntaxTree *IRTree);
 
-	/**
+	/**add by yubin 2015-4-7
 	* 将每个结点转成对应的IR代码
 	* @param 传入待分析的语法树
 	* @return void
 	*/
 	void Stmt2IR(CSyntaxNode* pTree); //
 
-	/**
+	/**add by yubin 2015-4-7
 	* 将声明转成对应的IR代码
 	* @param 传入待分析的语法树
 	* @return void
 	*/
 	void __Declr2IR(CSyntaxNode *pTree);
 
-	/**
+	/**add by yubin 2015-4-7
 	* 处理int类型的声明
 	* @param 传入待分析的语法树
 	* @return void
 	*/
 	void __DeclrInt2IR(CSyntaxNode *pTree);
+
+	/**add by yubin 2015-4-7
+	* 处理float类型的声明
+	* @param 传入待分析的语法树
+	* @return void
+	*/
+	void __DeclrFloat2IR(CSyntaxNode *pTree);
 
 	/**
 	* 赋值语句转成对应的IR代码
@@ -56,23 +67,12 @@ public:
 	*/
 	void __Ass2IR(CSyntaxNode* pTree);
 
-	/**
+	/**add by yubin 2015-4-7
 	* 顺序语句转成对应的IR代码
 	* @param 传入待分析的语法树
 	* @return void
 	*/
 	void __Chop2IR(CSyntaxNode *pTree);
-
-
-private:
-
-	///
-	llvm::IRBuilder<> *builder;
-
-	///
-	Module* module;
-
-	///符号表
-	map<string, AllocaInst *> m_IRSTable;
-
 };
+
+#endif 
