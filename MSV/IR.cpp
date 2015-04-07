@@ -118,7 +118,7 @@ void IR::__DeclrInt2IR(CSyntaxNode *pTree)
 	m_IRSTable.insert(map<string, AllocaInst *>::value_type(pTree->GetNName(), allocDeclrInt));
 }
 
-///add by yubin 2015/4/7,处理int类型变量的声明
+///add by yubin 2015/4/7,处理float类型变量的声明
 void IR::__DeclrFloat2IR(CSyntaxNode *pTree)
 {
 	if (pTree == NULL)
