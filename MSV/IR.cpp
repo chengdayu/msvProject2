@@ -123,5 +123,18 @@ void IR::__Ass2IR(CSyntaxNode* pTree)
 		return;
 	}
 
-	StoreInst *store = builder->CreateStore(ConstantInt::get(module->getContext(), APInt(32, 4)), m_IRSTable[pTree->GetChild0()->GetNName()], false);
+	Value *RightValue=__Expr2IR(pTree->GetChild1());
+	StoreInst *store = builder->CreateStore(RightValue, m_IRSTable[pTree->GetChild0()->GetNName()], false);
+
+}
+
+/**
+* 表达式转成对应的IR代码
+* @param 传入待分析的语法树
+* @return void
+*/
+///2015-4-7 add by wangmeng
+Value * IR::__Expr2IR(CSyntaxNode* pTree)
+{
+	return ConstantInt::get(module->getContext(), APInt(32, pTree->GetChild1()->GetiValue()));
 }

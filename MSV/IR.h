@@ -14,6 +14,8 @@ class IR
 public:
 	///构造函数
 	IR();
+
+	///析构函数
 	~IR();
 
 	/**add by yubin 2015-4-7
@@ -30,6 +32,7 @@ public:
 	*/
 	void Stmt2IR(CSyntaxNode* pTree); //
 
+private:
 	/**
 	* 将声明转成对应的IR代码
 	* @param 传入待分析的语法树
@@ -58,6 +61,12 @@ public:
 	*/
 	void __Chop2IR(CSyntaxNode *pTree);
 
+	/**
+	* 表达式转成对应的IR代码
+	* @param 传入待分析的语法树
+	* @return 得到的表达式值
+	*/
+	Value * __Expr2IR(CSyntaxNode* pTree);
 
 private:
 
