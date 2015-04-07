@@ -76,6 +76,7 @@ void IR::__Declr2IR(CSyntaxNode *pTree)
 	CSyntaxNode* visit = pTree;
 	switch (visit->GetRType())
 	{
+
 	case INTTYPE://如果是int类型
 	{
 		visit = visit->GetChild0();//类型是PARAMETER_EXP
@@ -161,5 +162,32 @@ void IR::__Ass2IR(CSyntaxNode* pTree)
 		return;
 	}
 
-	StoreInst *store = m_builder->CreateStore(ConstantInt::get(m_module->getContext(), APInt(32, 4)), m_IRSTable[pTree->GetChild0()->GetNName()], false);
+	Value *RightValue=__Expr2IR(pTree->GetChild1());
+	StoreInst *store = m_builder->CreateStore(RightValue, m_IRSTable[pTree->GetChild0()->GetNName()], false);
+	store->setAlignment(4);
+
+}
+
+/**
+* 表达式转成对应的IR代码
+* @param 传入待分析的语法树
+* @return void
+*/
+///2015-4-7 add by wangmeng
+Value * IR::__Expr2IR(CSyntaxNode* pTree)
+{
+	if (pTree == NULL)
+	{
+		cout << "__Expr2IR error!" << endl;
+		return NULL;
+	}
+	switch (pTree->GetNType())
+	{
+	    case INTEGER_EXP: 
+	    {
+		    return ConstantInt::get(m_module->getContext(), APInt(32, pTree->GetiValue()));
+			break;
+	    }
+	}
+	
 }
