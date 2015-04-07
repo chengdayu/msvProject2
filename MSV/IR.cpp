@@ -15,7 +15,7 @@ IR::~IR()
 }
 void IR::Trslt2IR(CSyntaxTree *IRTree)
 {
-	if (IRTree = NULL)
+	if (IRTree== NULL)
 	{
 		cout << "In function Trslt2IR, IRTree is NULL" << endl;
 		return;
@@ -36,7 +36,7 @@ void IR::Trslt2IR(CSyntaxTree *IRTree)
 
 void IR::Stmt2IR(CSyntaxNode *pTree)
 {
-	if (pTree = NULL)
+	if (pTree == NULL)
 	{
 		cout << "In function Stmt2IR, IRTree is NULL" << endl;
 		return;
@@ -44,17 +44,21 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 	
 	switch (pTree->GetNType())
 	{
-	case DECLARE_STA:
-	{
-		__Declr2IR(pTree);
-		break;
-	}
-	case CHOP_STA:
-	{
-		__Chop2IR(pTree);
-		break;
-		
-	}
+	    case DECLARE_STA:
+	    {
+			__Declr2IR(pTree);
+			break;
+	    }
+	    case CHOP_STA:
+	    {
+		    __Chop2IR(pTree);
+		    break;
+	    }
+	    case ASS_EQU_EXP:
+	    {
+		    __Ass2IR(pTree);
+		    break;
+	    }
 	}
 		
 
@@ -63,7 +67,7 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 
 void IR::__Declr2IR(CSyntaxNode *pTree)
 {
-	if (pTree = NULL)
+	if (pTree == NULL)
 	{
 		cout << "In function __Declr2IR, IRTree is NULL" << endl;
 		return;
@@ -76,9 +80,10 @@ void IR::__Declr2IR(CSyntaxNode *pTree)
 
 }
 
+///
 void IR::__DeclrInt2IR(CSyntaxNode *pTree)
 {
-	if (pTree = NULL)
+	if (pTree == NULL)
 	{
 		cout << "In function __DeclrInt2IR, IRTree is NULL" << endl;
 		return;
@@ -87,9 +92,10 @@ void IR::__DeclrInt2IR(CSyntaxNode *pTree)
 	allo_a->setAlignment(4);
 }
 
+///
 void IR::__Chop2IR(CSyntaxNode *pTree)
 {
-	if (pTree = NULL)
+	if (pTree == NULL)
 	{
 		cout << "In function __Chop2IR, IRTree is NULL" << endl;
 		return;
@@ -111,5 +117,11 @@ void IR::__Chop2IR(CSyntaxNode *pTree)
 ///2015-4-7 add by wangmeng 
 void IR::__Ass2IR(CSyntaxNode* pTree)
 {
+	if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
+	{
+		cout << "__Ass2IR() syntax tree error!" << endl;
+		return;
+	}
 
+	StoreInst *store = builder->CreateStore(ConstantInt::get(module->getContext(), APInt(32, 4)), m_IRSTable[pTree->GetChild0()->GetNName()], false);
 }

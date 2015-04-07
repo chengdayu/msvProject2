@@ -49,7 +49,14 @@ public:
 	* @param 传入待分析的语法树
 	* @return void
 	*/
-	void IR::__Ass2IR(CSyntaxNode* pTree);
+	void __Ass2IR(CSyntaxNode* pTree);
+
+	/**
+	* 顺序语句转成对应的IR代码
+	* @param 传入待分析的语法树
+	* @return void
+	*/
+	void __Chop2IR(CSyntaxNode *pTree);
 
 
 private:
@@ -60,6 +67,7 @@ private:
 	///
 	Module* module;
 
-
+	///符号表
+	map<string, AllocaInst *> m_IRSTable;
 	
 };
