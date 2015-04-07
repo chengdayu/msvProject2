@@ -12,8 +12,9 @@ using namespace llvm;
 class IR
 {
 private:
-	Module* module;
-	llvm::IRBuilder<> *builder;
+	Module* m_module;
+	llvm::IRBuilder<> *m_builder;
+	map<string, AllocaInst *>m_IRSTable;
 
 public:
 	///¹¹Ôìº¯Êý

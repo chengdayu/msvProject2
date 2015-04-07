@@ -1,1 +1,1 @@
-int x and skip
+int x and float y and skip
