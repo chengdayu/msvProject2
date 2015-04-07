@@ -53,7 +53,11 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 	{
 		__Chop2IR(pTree);
 		break;
-		
+	}
+	    case ASS_EQU_EXP:
+	    {
+		    __Ass2IR(pTree);
+		    break;
 	}
 	}
 	
@@ -89,6 +93,7 @@ void IR::__Declr2IR(CSyntaxNode *pTree)
 
 }
 
+///
 void IR::__DeclrInt2IR(CSyntaxNode *pTree)
 {
 	if (pTree == NULL)
@@ -101,6 +106,7 @@ void IR::__DeclrInt2IR(CSyntaxNode *pTree)
 	m_IRSTable.insert(map<string, AllocaInst *>::value_type(pTree->GetNName(), allocDeclrInt));
 }
 
+///
 void IR::__Chop2IR(CSyntaxNode *pTree)
 {
 	if (pTree == NULL)
@@ -115,4 +121,21 @@ void IR::__Chop2IR(CSyntaxNode *pTree)
 	}
 	Stmt2IR(pTree->GetChild0());
 	Stmt2IR(pTree->GetChild1());
+}
+
+/**
+* 赋值语句转成对应的IR代码
+* @param 传入待分析的语法树
+* @return void
+*/
+///2015-4-7 add by wangmeng 
+void IR::__Ass2IR(CSyntaxNode* pTree)
+{
+	if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
+	{
+		cout << "__Ass2IR() syntax tree error!" << endl;
+		return;
+	}
+
+	StoreInst *store = builder->CreateStore(ConstantInt::get(module->getContext(), APInt(32, 4)), m_IRSTable[pTree->GetChild0()->GetNName()], false);
 }

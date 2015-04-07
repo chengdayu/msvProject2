@@ -28,13 +28,51 @@ public:
 	*/
 	void Trslt2IR(CSyntaxTree *IRTree);
 
-	void Stmt2IR(CSyntaxNode* pTree); //将每个结点转成对应的IR代码
+	/**
+	* 将每个结点转成对应的IR代码
+	* @param 传入待分析的语法树
+	* @return void
+	*/
+	void Stmt2IR(CSyntaxNode* pTree); //
 
+	/**
+	* 将声明转成对应的IR代码
+	* @param 传入待分析的语法树
+	* @return void
+	*/
 	void __Declr2IR(CSyntaxNode *pTree);
 
-	void __DeclrInt2IR(CSyntaxNode *pTree);//处理int类型的声明
+	/**
+	* 处理int类型的声明
+	* @param 传入待分析的语法树
+	* @return void
+	*/
+	void __DeclrInt2IR(CSyntaxNode *pTree);
 
-	void __Chop2IR(CSyntaxNode *pTree);//处理chop类型的声明
+	/**
+	* 赋值语句转成对应的IR代码
+	* @param 传入待分析的语法树
+	* @return void
+	*/
+	void __Ass2IR(CSyntaxNode* pTree);
 
+	/**
+	* 顺序语句转成对应的IR代码
+	* @param 传入待分析的语法树
+	* @return void
+	*/
+	void __Chop2IR(CSyntaxNode *pTree);
+
+
+private:
+
+	///
+	llvm::IRBuilder<> *builder;
+
+	///
+	Module* module;
+
+	///符号表
+	map<string, AllocaInst *> m_IRSTable;
 
 };
