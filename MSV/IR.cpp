@@ -136,18 +136,5 @@ void IR::__Ass2IR(CSyntaxNode* pTree)
 ///2015-4-7 add by wangmeng
 Value * IR::__Expr2IR(CSyntaxNode* pTree)
 {
-	if (pTree == NULL)
-	{
-		cout << "__Expr2IR error!" << endl;
-		return NULL;
-	}
-	switch (pTree->GetNType())
-	{
-	    case INTEGER_EXP: 
-	    {
-		    return ConstantInt::get(module->getContext(), APInt(32, pTree->GetChild1()->GetiValue()));
-			break;
-	    }
-	}
-	
+	return ConstantInt::get(module->getContext(), APInt(32, pTree->GetChild1()->GetiValue()));
 }
