@@ -7,16 +7,16 @@ IR::IR()
 
 void IR::Trslt2IR(CSyntaxTree *IRTree)
 {
-	Module* module = new Module("global", getGlobalContext());
+	module = new Module("global", getGlobalContext());
 
-	llvm::IRBuilder<> builder(module->getContext());
+	builder = new llvm::IRBuilder<>(module->getContext());
 
 	FunctionType *FuncTypeOfMain = FunctionType::get(IntegerType::get(module->getContext(), 32), false);
 	Function *MainFunc = Function::Create(FuncTypeOfMain, Function::ExternalLinkage, "main", module);
 
 	BasicBlock *entrymain = BasicBlock::Create(module->getContext(), "entry", MainFunc, 0);
 
-	builder.SetInsertPoint(entrymain);
+	builder->SetInsertPoint(entrymain);
 
 	Stmt2IR(IRTree->GetRoot());
 

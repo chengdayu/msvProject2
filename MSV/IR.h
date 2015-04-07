@@ -7,6 +7,8 @@
 #include "llvm/IR/Instructions.h"
 #include "llvm/IR/IRBuilder.h"
 #include "SyntaxTree.h"
+
+using namespace llvm;
 class IR
 {
 public:
@@ -24,8 +26,14 @@ public:
 
 	void __Declr2IR(CSyntaxNode *pTree);
 
+	//处理int类型的声明
 	void __DeclrInt2IR(CSyntaxNode *pTree);
 
-	//处理int类型的声明
-	void IntVarDecl();
+	//
+	llvm::IRBuilder<> *builder;
+
+	Module* module;
+
+
+	void 
 };
