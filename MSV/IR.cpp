@@ -44,21 +44,21 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 	
 	switch (pTree->GetNType())
 	{
-	case DECLARE_STA:
-	{
-		__Declr2IR(pTree);
-		break;
-	}
-	case CHOP_STA:
-	{
-		__Chop2IR(pTree);
-		break;
-	}
+	    case DECLARE_STA:
+	    {
+	    	__Declr2IR(pTree);
+	     	break;
+	    }
+	    case CHOP_STA:
+    	{
+		    __Chop2IR(pTree);
+		    break;
+	    }
 	    case ASS_EQU_EXP:
 	    {
 		    __Ass2IR(pTree);
 		    break;
-	}
+	    }
 	}
 	
 		
@@ -72,19 +72,21 @@ void IR::__Declr2IR(CSyntaxNode *pTree)
 		cout << "In function __Declr2IR, IRTree is NULL" << endl;
 		return;
 	}
+
+	CSyntaxNode* visit = pTree;
 	switch (pTree->GetRType())
 	{
+
 	case INTTYPE://如果是int类型
 	{
-		pTree = pTree->GetChild0();//类型是PARAMETER_EXP
-		while (pTree->GetChild0() != NULL)//左孩子不为空表示有变量声明
+		visit = visit->GetChild0();//类型是PARAMETER_EXP
+		do//左孩子不为空表示有变量声明
 		{
-			__DeclrInt2IR(pTree->GetChild0());//对变量声明进行转换
-			if (pTree->GetChild1() != NULL)//右孩子不为空表示还有同类型的变量声明
-			{
-				pTree = pTree->GetChild1();//获得右孩子
-			}
-		}
+			__DeclrInt2IR(visit->GetChild0());//对变量声明进行转换
+			
+		   visit = visit->GetChild1();//获得右孩子
+			
+		} while (visit != NULL);
 		break;
 		
 	}
@@ -138,7 +140,8 @@ void IR::__Ass2IR(CSyntaxNode* pTree)
 	}
 
 	Value *RightValue=__Expr2IR(pTree->GetChild1());
-	StoreInst *store = builder->CreateStore(RightValue, m_IRSTable[pTree->GetChild0()->GetNName()], false);
+	StoreInst *store = m_builder->CreateStore(RightValue, m_IRSTable[pTree->GetChild0()->GetNName()], false);
+	store->setAlignment(4);
 
 }
 
@@ -159,7 +162,7 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 	{
 	    case INTEGER_EXP: 
 	    {
-		    return ConstantInt::get(module->getContext(), APInt(32, pTree->GetChild1()->GetiValue()));
+		    return ConstantInt::get(m_module->getContext(), APInt(32, pTree->GetiValue()));
 			break;
 	    }
 	}

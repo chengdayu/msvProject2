@@ -1,1 +1,1 @@
-int x and float y and skip
+int x<==3 and skip

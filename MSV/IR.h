@@ -11,11 +11,6 @@
 using namespace llvm;
 class IR
 {
-private:
-	Module* m_module;
-	llvm::IRBuilder<> *m_builder;
-	map<string, AllocaInst *>m_IRSTable;
-
 public:
 	///构造函数
 	IR();
@@ -35,6 +30,7 @@ public:
 	*/
 	void Stmt2IR(CSyntaxNode* pTree); //
 
+private:
 	/**
 	* 将声明转成对应的IR代码
 	* @param 传入待分析的语法树
@@ -63,14 +59,21 @@ public:
 	*/
 	void __Chop2IR(CSyntaxNode *pTree);
 
+	/**
+	* 表达式转成对应的IR代码
+	* @param 传入待分析的语法树
+	* @return void
+	*/
+	///2015-4-7 add by wangmeng
+	Value * IR::__Expr2IR(CSyntaxNode* pTree);
 
 private:
 
 	///
-	llvm::IRBuilder<> *builder;
+	llvm::IRBuilder<> *m_builder;
 
 	///
-	Module* module;
+	Module* m_module;
 
 	///符号表
 	map<string, AllocaInst *> m_IRSTable;
