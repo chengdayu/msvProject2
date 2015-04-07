@@ -5,32 +5,32 @@ using namespace std;
 
 IR::IR()
 {
-	module = new Module("global", getGlobalContext());
-	builder=new llvm::IRBuilder<>(module->getContext());
+	m_module = new Module("global", getGlobalContext());
+	m_builder=new llvm::IRBuilder<>(m_module->getContext());
 }
 IR::~IR()
 {
-	delete module;
-	delete builder;
+	delete m_module;
+	delete m_builder;
 }
 void IR::Trslt2IR(CSyntaxTree *IRTree)
 {
-	if (IRTree== NULL)
+	if (IRTree == NULL)
 	{
 		cout << "In function Trslt2IR, IRTree is NULL" << endl;
 		return;
 	}
 
-	FunctionType *FuncTypeOfMain = FunctionType::get(IntegerType::get(module->getContext(), 32), false);
-	Function *MainFunc = Function::Create(FuncTypeOfMain, Function::ExternalLinkage, "main", module);
+	FunctionType *FuncTypeOfMain = FunctionType::get(IntegerType::get(m_module->getContext(), 32), false);
+	Function *MainFunc = Function::Create(FuncTypeOfMain, Function::ExternalLinkage, "main", m_module);
 
-	BasicBlock *entrymain = BasicBlock::Create(module->getContext(), "entry", MainFunc, 0);
+	BasicBlock *entrymain = BasicBlock::Create(m_module->getContext(), "entry", MainFunc, 0);
 
-	builder->SetInsertPoint(entrymain);
+	m_builder->SetInsertPoint(entrymain);
 
 	Stmt2IR(IRTree->GetRoot());
 
-	module->dump();
+	m_module->dump();
 
 }
 
@@ -44,24 +44,24 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 	
 	switch (pTree->GetNType())
 	{
-	    case DECLARE_STA:
-	    {
-			__Declr2IR(pTree);
-			break;
-	    }
-	    case CHOP_STA:
-	    {
-		    __Chop2IR(pTree);
-		    break;
-	    }
+	case DECLARE_STA:
+	{
+		__Declr2IR(pTree);
+		break;
+	}
+	case CHOP_STA:
+	{
+		__Chop2IR(pTree);
+		break;
+	}
 	    case ASS_EQU_EXP:
 	    {
 		    __Ass2IR(pTree);
 		    break;
-	    }
 	}
+	}
+	
 		
-
 
 }
 
@@ -74,7 +74,20 @@ void IR::__Declr2IR(CSyntaxNode *pTree)
 	}
 	switch (pTree->GetRType())
 	{
-	case INTTYPE: __DeclrInt2IR(pTree->GetChild0()->GetChild0());
+	case INTTYPE://如果是int类型
+	{
+		pTree = pTree->GetChild0();//类型是PARAMETER_EXP
+		while (pTree->GetChild0() != NULL)//左孩子不为空表示有变量声明
+		{
+			__DeclrInt2IR(pTree->GetChild0());//对变量声明进行转换
+			if (pTree->GetChild1() != NULL)//右孩子不为空表示还有同类型的变量声明
+			{
+				pTree = pTree->GetChild1();//获得右孩子
+			}
+		}
+		break;
+		
+	}
 	}
 
 
@@ -88,8 +101,9 @@ void IR::__DeclrInt2IR(CSyntaxNode *pTree)
 		cout << "In function __DeclrInt2IR, IRTree is NULL" << endl;
 		return;
 	}
-	AllocaInst *allo_a = builder->CreateAlloca(IntegerType::get(module->getContext(), 32), ConstantInt::get(module->getContext(), APInt(32, 4)), "b.addr");
-	allo_a->setAlignment(4);
+	AllocaInst *allocDeclrInt = m_builder->CreateAlloca(IntegerType::get(m_module->getContext(), 32), ConstantInt::get(m_module->getContext(), APInt(32, 4)), pTree->GetNName());
+	allocDeclrInt->setAlignment(4);
+	m_IRSTable.insert(map<string, AllocaInst *>::value_type(pTree->GetNName(), allocDeclrInt));
 }
 
 ///

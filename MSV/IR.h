@@ -11,6 +11,11 @@
 using namespace llvm;
 class IR
 {
+private:
+	Module* m_module;
+	llvm::IRBuilder<> *m_builder;
+	map<string, AllocaInst *>m_IRSTable;
+
 public:
 	///构造函数
 	IR();
@@ -69,5 +74,5 @@ private:
 
 	///符号表
 	map<string, AllocaInst *> m_IRSTable;
-	
+
 };
