@@ -295,6 +295,7 @@ $(ProjectDir)flex MSV.l</Command>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IR.cpp" />
     <ClCompile Include="lex.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MSVCompiler.cpp" />
@@ -307,6 +308,7 @@ $(ProjectDir)flex MSV.l</Command>
     <ClCompile Include="SyntaxTree.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IR.h" />
     <ClInclude Include="MSVCompiler.h" />
     <ClInclude Include="MyMap.h" />
     <ClInclude Include="function.h" />

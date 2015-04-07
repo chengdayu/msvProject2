@@ -166,6 +166,11 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "FILE"		{return FILEDECLARATION;}
 "system"   {return SYSTEM;}
 
+"switch"	{return SWITCH;}//add by yubin 2015-3-23
+"break"		{return BREAK;}//add by yubin 2015-3-23
+"case"		{return CASE;}//add by yubin 2015-3-23
+"default"		{return DEFAULT;}//add by yubin 2015-3-23
+
 "."        {return DOT;}
 "="        {return EQU;}     //比较相等符号 “=”
 "<=="      {return ASS_EQU;}   //赋值符号已修改为“<==”

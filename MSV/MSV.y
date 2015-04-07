@@ -56,6 +56,7 @@ extern int yylex (void);
 %token STRFUNCHEAD STRFUNCTAIL STRFUNCCAT STRFUNCCMP STRFUNCCPY STRFUNCLEN //added by Jane 2012-06-21
 %token SIZEOF
 %token SYSTEM
+%token SWITCH BREAK CASE DEFAULT//add by yubin 2015-3-23
 
 //add by YY 2013-6-6
 %token CEIL FLOOR ROUND
@@ -135,6 +136,8 @@ extern int yylex (void);
 %type<returntype>  type_define sign_type_define
 %type<returntype> all_type_define all_sizeof_type
 %type<tnode> gComplexProposition complexProposition poptional_projection file_statement
+
+%type<tnode> switch_statement case_par init_case_par //add by yubin 2015-3-23
 
 
 //%expect 1  /* shift/reduce conflict: dangling ELSE declaration */
@@ -1669,6 +1672,28 @@ while_statement
        :WHILE bool_par big_par			{$$=new CSyntaxNode(WHILE_DO_STA, $2, $3, VOIDTYPE);}
 	   ;
 
+//add by yubin 2015-3-23
+switch_statement
+       :SWITCH OPEN_PAR factor CLOSE_PAR OPEN_BPAR case_par CLOSE_BPAR 
+	   {$$=new CSyntaxNode(SWITCH_STA, $3, $6,VOIDTYPE);}
+	   ;   
+case_par
+       :CASE factor COLON OPEN_PAR statement CLOSE_PAR init_case_par 
+	   {
+	     $$=new CSyntaxNode(CASE_STA, $2, $5, $7, VOIDTYPE);
+	   }
+	   |DEFAULT COLON OPEN_PAR statement CLOSE_PAR init_case_par
+	   {
+	     $$=new CSyntaxNode(DEFAULT_STA, $4, $6, VOIDTYPE);
+	   }
+	//   |  {$$=NULL;}
+       ;
+init_case_par
+       :BREAK case_par
+	   {$$=new CSyntaxNode(INIT_CASE_STA, $2, BREAKTYPE);}
+	   |case_par    {$$=new CSyntaxNode(INIT_CASE_STA, $1, VOIDTYPE);}//modified by yubin
+	   |    {$$=NULL;}
+	   ;
 
 
 for_statement
