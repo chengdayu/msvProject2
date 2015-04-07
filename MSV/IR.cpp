@@ -28,7 +28,7 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 {
 	switch (pTree->GetNType())
 	{
-	case DECLARE_STA: __Declr2IR(pTree);
+		case DECLARE_STA: __Declr2IR(pTree);
 	}
 		
 
@@ -44,7 +44,7 @@ void IR::__Declr2IR(CSyntaxNode *pTree)
 
 }
 
-void IR::IntVarDecl()
+void IR::__DeclrInt2IR(CSyntaxNode *pTree)
 {
 
 }
