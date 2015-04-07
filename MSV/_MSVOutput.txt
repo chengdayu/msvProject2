@@ -1,5 +1,2 @@
 IRTree: 
-int #x_1;
-output();
-output()
-wangmengnihao
+int x

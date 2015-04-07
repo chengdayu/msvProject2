@@ -7,11 +7,18 @@
 #include "llvm/IR/Instructions.h"
 #include "llvm/IR/IRBuilder.h"
 #include "SyntaxTree.h"
+
+using namespace llvm;
 class IR
 {
+private:
+	Module* module;
+	llvm::IRBuilder<> *builder;
+
 public:
 	///构造函数
 	IR();
+	~IR();
 
 	/**add by yubin 2015-4-7
 	* 遍历m_IRTree,遇到每个结点，调用Stmt2IR函数
@@ -24,8 +31,9 @@ public:
 
 	void __Declr2IR(CSyntaxNode *pTree);
 
-	void __DeclrInt2IR(CSyntaxNode *pTree);
+	void __DeclrInt2IR(CSyntaxNode *pTree);//处理int类型的声明
 
-	//处理int类型的声明
-	void IntVarDecl();
+	void __Chop2IR(CSyntaxNode *pTree);//处理chop类型的声明
+
+
 };
