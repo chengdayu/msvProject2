@@ -48,3 +48,14 @@ void IR::__DeclrInt2IR(CSyntaxNode *pTree)
 {
 
 }
+
+/**
+* 赋值语句转成对应的IR代码
+* @param 传入待分析的语法树
+* @return void
+*/
+///2015-4-7 add by wangmeng 
+void IR::__Ass2IR(CSyntaxNode* pTree)
+{
+
+}
