@@ -1,1 +1,1 @@
-int x<==3 and skip
+int x and skip
