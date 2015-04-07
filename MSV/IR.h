@@ -14,6 +14,7 @@ class IR
 public:
 	///构造函数
 	IR();
+	~IR();
 
 	/**add by yubin 2015-4-7
 	* 遍历m_IRTree,遇到每个结点，调用Stmt2IR函数
