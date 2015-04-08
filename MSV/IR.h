@@ -26,27 +26,33 @@ public:
 	*/
 	void Trslt2IR(CSyntaxTree *IRTree);
 
-	/**
+	/**add by yubin 2015-4-7
 	* 将每个结点转成对应的IR代码
 	* @param 传入待分析的语法树
 	* @return void
 	*/
 	void Stmt2IR(CSyntaxNode* pTree); //
 
-private:
-	/**
+	/**add by yubin 2015-4-7
 	* 将声明转成对应的IR代码
 	* @param 传入待分析的语法树
 	* @return void
 	*/
 	void __Declr2IR(CSyntaxNode *pTree);
 
-	/**
+	/**add by yubin 2015-4-7
 	* 处理int类型的声明
 	* @param 传入待分析的语法树
 	* @return void
 	*/
 	void __DeclrInt2IR(CSyntaxNode *pTree);
+
+	/**add by yubin 2015-4-7
+	* 处理float类型的声明
+	* @param 传入待分析的语法树
+	* @return void
+	*/
+	void __DeclrFloat2IR(CSyntaxNode *pTree);
 
 	/**
 	* 赋值语句转成对应的IR代码
@@ -55,7 +61,7 @@ private:
 	*/
 	void __Ass2IR(CSyntaxNode* pTree);
 
-	/**
+	/**add by yubin 2015-4-7
 	* 顺序语句转成对应的IR代码
 	* @param 传入待分析的语法树
 	* @return void
