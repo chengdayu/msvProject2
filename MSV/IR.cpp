@@ -44,20 +44,24 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 	
 	switch (pTree->GetNType())
 	{
-	case DECLARE_STA:
-	{
+	    case DECLARE_STA:
+	    {
 		__Declr2IR(pTree);//处理声明语句
-		break;
-	}
-	case CHOP_STA:
-	{
-		__Chop2IR(pTree);
-		break;
-	}
+	     	break;
+	    }
+	    case CHOP_STA:
+    	{
+		    __Chop2IR(pTree);
+		    break;
+	    }
 	    case ASS_EQU_EXP:
 	    {
 		    __Ass2IR(pTree);
 		    break;
+	    }
+		case DISPLAY_STA:
+		{
+			__Out2IR(pTree);
 	}
 	}
 	
@@ -84,7 +88,7 @@ void IR::__Declr2IR(CSyntaxNode *pTree)
 		{
 			__DeclrInt2IR(visit->GetChild0());//对变量声明进行转换
 			visit = visit->GetChild1();//获得右孩子
-
+			
 		} while (visit != NULL);
 		break;
 
@@ -96,8 +100,8 @@ void IR::__Declr2IR(CSyntaxNode *pTree)
 		do//左孩子不为空表示有变量声明
 		{
 			__DeclrFloat2IR(visit->GetChild0());//对变量声明进行转换
-			visit = visit->GetChild1();//获得右孩子
-
+		   visit = visit->GetChild1();//获得右孩子
+			
 		} while (visit != NULL);
 		break;
 	}
@@ -188,6 +192,34 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 		    return ConstantInt::get(m_module->getContext(), APInt(32, pTree->GetiValue()));
 			break;
 	    }
+		case FLOATLITERAL_EXP:
+		{
+			return ConstantFP::get(getGlobalContext(), APFloat(pTree->GetfValue()));
+			break;
+	    }
+		case STR_EXP:
+		{
+			return m_builder->CreateGlobalStringPtr(pTree->GetsValue());
+		}
+		case ADD_EXP:
+		{
+		/*	AllocaInst* type_a = m_IRSTable[pTree->GetChild0()->GetNName()];
+			AllocaInst* type_b = m_IRSTable[pTree->GetChild1()->GetNName()];
+			LoadInst *a = m_builder->CreateLoad(type_a);
+			LoadInst *b = m_builder->CreateLoad(type_b);
+
+			if (type_a->getAllocatedType() == IntegerType::get(m_module->getContext(), 32) &&
+				type_b->getAllocatedType() == IntegerType::get(m_module->getContext(), 32))
+			{
+				return  m_builder->CreateAdd(a, b, "add", false, false);
+			}*/			
+		}
 	}
 	
+	}
+	
+
+void IR::__Out2IR(CSyntaxNode *pTree)
+{
+
 }
