@@ -87,5 +87,6 @@ private:
 
 	///·ûºÅ±í
 	map<string, AllocaInst *> m_IRSTable;
+}
 
 #endif 
