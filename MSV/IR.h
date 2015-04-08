@@ -1,3 +1,6 @@
+#ifndef IR_H_INCLUDED
+#define IR_H_INCLUDED
+
 #include "llvm/ADT/SmallVector.h"
 #include "llvm/Analysis/Verifier.h"
 #include "llvm/IR/BasicBlock.h"
@@ -65,7 +68,14 @@ private:
 	* @return void
 	*/
 	///2015-4-7 add by wangmeng
-	Value * IR::__Expr2IR(CSyntaxNode* pTree);
+	Value * __Expr2IR(CSyntaxNode* pTree);
+
+	/**
+	* 输出语句转成对应的IR代码
+	* @param 传入待分析的语法树
+	* @return void
+	*/
+	void __Out2IR(CSyntaxNode *pTree);
 
 private:
 
@@ -79,3 +89,5 @@ private:
 	map<string, AllocaInst *> m_IRSTable;
 
 };
+
+#endif

@@ -59,6 +59,10 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 		    __Ass2IR(pTree);
 		    break;
 	    }
+		case DISPLAY_STA:
+		{
+			__Out2IR(pTree);
+		}
 	}
 	
 		
@@ -165,6 +169,34 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 		    return ConstantInt::get(m_module->getContext(), APInt(32, pTree->GetiValue()));
 			break;
 	    }
+		case FLOATLITERAL_EXP:
+		{
+			return ConstantFP::get(getGlobalContext(), APFloat(pTree->GetfValue()));
+			break;
+		}
+		case STR_EXP:
+		{
+			return m_builder->CreateGlobalStringPtr(pTree->GetsValue());
+		}
+		case ADD_EXP:
+		{
+		/*	AllocaInst* type_a = m_IRSTable[pTree->GetChild0()->GetNName()];
+			AllocaInst* type_b = m_IRSTable[pTree->GetChild1()->GetNName()];
+			LoadInst *a = m_builder->CreateLoad(type_a);
+			LoadInst *b = m_builder->CreateLoad(type_b);
+
+			if (type_a->getAllocatedType() == IntegerType::get(m_module->getContext(), 32) &&
+				type_b->getAllocatedType() == IntegerType::get(m_module->getContext(), 32))
+			{
+				return  m_builder->CreateAdd(a, b, "add", false, false);
+			}*/			
+		}
 	}
 	
+}
+
+
+void IR::__Out2IR(CSyntaxNode *pTree)
+{
+
 }
