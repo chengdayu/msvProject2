@@ -34,8 +34,10 @@ void IR::Trslt2IR(CSyntaxTree *IRTree)
 	m_builder->SetInsertPoint(entrymain);
 
 	m_StNum = m_builder->CreateAlloca(IntegerType::get(m_module->getContext(), 32), NULL, "$state_num");
-
 	m_StNum->setAlignment(4);
+
+	StoreInst *store = m_builder->CreateStore(m_builder->getInt32(0), m_StNum, false);
+	store->setAlignment(4);
 
 	Stmt2IR(IRTree->GetRoot());
 
@@ -90,6 +92,12 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 		case DISPLAY_STA:
 		{
 			__Out2IR(pTree);
+			break;
+	}
+		case IF_STA:
+		{
+			__If2IR(pTree);
+			break;
 	}
 	}
 	
@@ -217,7 +225,7 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 	switch (pTree->GetNType())
 	{
 		///整数 例：3
-	    case INTEGER_EXP:  
+	    case INTEGER_EXP: 
 	    {
 		    return ConstantInt::get(m_module->getContext(), APInt(32, pTree->GetiValue()));
 			break;
@@ -237,7 +245,7 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 
 		///变量 例：x
 		case IDENT_EXP:
-		{			 
+		{
 			return m_builder->CreateLoad(m_IRSTable[pTree->GetNName()]);
 		}
 
@@ -250,7 +258,7 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 
 		///减 例：x-y
 		case SUB_EXP:
-		{
+			{
 			if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
 			{
 				cout << "__Expr2IR sub error!" << endl;
@@ -289,7 +297,7 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 				return NULL;
 			}
 			Value *Left = __Expr2IR(pTree->GetChild0());
-			Value* Right = __Expr2IR(pTree->GetChild1());		
+			Value* Right = __Expr2IR(pTree->GetChild1());
 			if (Left->getType() == IntegerType::get(m_module->getContext(), 32) &&
 				Right->getType() == IntegerType::get(m_module->getContext(), 32))
 			{
@@ -314,16 +322,54 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 			}*/
 		}
 	}
-	
 	}
 	
-
+//add by yubin 2015/4/9,调用printf输出变量的值
 void IR::__Out2IR(CSyntaxNode *pTree)
 {
+	//先声明printf函数，然后根据不同的变量类型，进行调用
+	std::vector<llvm::Type *> putsArgs;
+	putsArgs.push_back(m_builder->getInt8Ty()->getPointerTo());
+	llvm::ArrayRef<llvm::Type*>  argsRef(putsArgs);
+	llvm::FunctionType *putsType = llvm::FunctionType::get(m_builder->getInt32Ty(), argsRef, false);
+	llvm::Constant *putsFunc = m_module->getOrInsertFunction("printf", putsType);
 
+	//每次输出变量的值之前，先输出是第几个状态,如state 0：
+	m_builder->CreateCall(putsFunc, m_builder->CreateGlobalStringPtr("State "));
+	LoadInst *m_StNumVal = m_builder->CreateLoad(m_StNum);
+	m_builder->CreateCall2(putsFunc, m_builder->CreateGlobalStringPtr("%d"), m_StNumVal);
+	m_builder->CreateCall(putsFunc, m_builder->CreateGlobalStringPtr(":\n"));
 
+	if (pTree->GetST().size() != 0)//如果有变量的话，进行如下操作，否则什么也不做
+	{
+		vector<string> outPutSymTbl;//需要输出的变量，用vector存储
+		outPutSymTbl = pTree->GetST();
 
-	__AddOne2IR(m_StNum);
+		vector<string>::iterator iter;
+		for (iter = outPutSymTbl.begin(); iter != outPutSymTbl.end(); iter++)
+		{
+			//对于每一个变量，输出形式如下x=1
+			m_builder->CreateCall(putsFunc, m_builder->CreateGlobalStringPtr(*iter));
+			m_builder->CreateCall(putsFunc, m_builder->CreateGlobalStringPtr("="));
+
+			AllocaInst *outPutVar = m_IRSTable[*iter];//通过变量的名字在m_IRSTable中找到对应的AllocaInst类型指针
+			LoadInst *a = m_builder->CreateLoad(outPutVar);
+			if (outPutVar->getAllocatedType() == IntegerType::get(m_module->getContext(), 32))//如果是int类型的话
+			{
+				Value *intFormat = m_builder->CreateGlobalStringPtr("%d");
+				m_builder->CreateCall2(putsFunc, intFormat, a);
+			}
+			else if (outPutVar->getAllocatedType() == Type::getFloatTy(m_module->getContext()))//如果是float类型的话
+			{
+				Value *intFormat = m_builder->CreateGlobalStringPtr("%f");
+				m_builder->CreateCall2(putsFunc, intFormat, a);
+			}
+			m_builder->CreateCall(putsFunc, m_builder->CreateGlobalStringPtr("  "));//每个变量输出之后，输出两个空格，以便和下一个变量的输出隔开
+		}
+		m_builder->CreateCall(putsFunc, m_builder->CreateGlobalStringPtr("\n"));//每个状态输出之后，换行
+
+	}
+	__AddOne2IR(m_StNum);//将状态数加1
 }
 
 /**
@@ -338,6 +384,63 @@ void IR::__AddOne2IR(AllocaInst * alloc)
 	Value *One = m_builder->getInt32(1);
 	Value *result = m_builder->CreateNSWAdd(load, One, "inc");
 	StoreInst *store = m_builder->CreateStore(result, alloc, false);
+
+}
+
+
+void IR::__If2IR(CSyntaxNode *pTree)
+{
+	//Function *TheFunction = m_builder->GetInsertBlock()->getParent();
+	//BasicBlock *entry = BasicBlock::Create(m_module->getContext(), "entry");
+	BasicBlock *ThenBB= BasicBlock::Create(m_module->getContext(), "then");
+	BasicBlock *ElseBB = BasicBlock::Create(m_module->getContext(), "else");
+	//m_builder->SetInsertPoint(entry);
+
+	//条件跳转
+	Value *v = m_builder->CreateCondBr(__Cond2IR(pTree->GetChild0()), ThenBB, ElseBB, 0);
+
+	m_builder->SetInsertPoint(ThenBB);
+	Stmt2IR(pTree->GetChild1());
+
+	m_builder->SetInsertPoint(ElseBB);
+	Stmt2IR(pTree->GetChild2());
+
+}
+
+Value* IR::__Cond2IR(CSyntaxNode* pTree)
+{
+	if (pTree->GetNType() == IDENT_EXP)
+	{
+
+	}
+	else if (pTree->GetNType() == NEGATION_EXP)
+	{
+		
+	}
+	else
+	{
+		Value* LHS = __Expr2IR(pTree->GetChild0());
+		Value* RHS = __Expr2IR(pTree->GetChild1());
+
+        AllocaInst *int32_i = m_builder->CreateAlloca(Type::getInt32Ty(m_module->getContext()), 0, "i");
+		AllocaInst *int32_j = m_builder->CreateAlloca(Type::getInt32Ty(m_module->getContext()), 0, "j");
+		StoreInst *store_i = m_builder->CreateStore(LHS, int32_i, false);
+		StoreInst *store_j = m_builder->CreateStore(RHS, int32_j, false);
+		LoadInst *i = m_builder->CreateLoad(int32_i);
+		LoadInst *j = m_builder->CreateLoad(int32_j);
+		//判断关系运算符类型
+		switch (pTree->GetNType())
+		{
+		case EQU_EXP:
+		{
+			//条件跳转
+			return m_builder->CreateICmpEQ(i, j, "cond");
+		}
+
+		default:
+			break;
+		}
+	}
 }
 
 /**

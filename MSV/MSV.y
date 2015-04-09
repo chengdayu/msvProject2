@@ -68,7 +68,7 @@ extern int yylex(void);
 %token SEND RECEIVE PROCESS CHANNEL PUT GET ERROR_TOKEN
 %token STRFUNCHEAD STRFUNCTAIL STRFUNCCAT STRFUNCCMP STRFUNCCPY STRFUNCLEN 
 %token SIZEOF
-%token SYSTEM
+%token SYSTEM EXTERN
 
 
 %token CEIL FLOOR ROUND
@@ -480,6 +480,11 @@ function
 	   {
 	        // 暂时不考虑带成员函数 .的函数调用
 			$$=new CSyntaxNode(FUNCTION_STA, $1, $3, NULL, NULL, VOIDTYPE);//构造调用函数的程序语法树子树          
+	   }
+	   |EXTERN ID OPEN_PAR option_function_identifier CLOSE_PAR
+	   {
+	        // 暂时不考虑带成员函数 .的函数调用
+			$$=new CSyntaxNode(EXT_FUNCTION_STA, $2, $4, NULL, NULL, VOIDTYPE);//构造调用函数的程序语法树子树          
 	   }
 	   |array OPEN_PAR option_function_identifier CLOSE_PAR
 	   {
