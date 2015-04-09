@@ -5,8 +5,7 @@ using namespace std;
 
 IR::IR()
 {
-	//m_module = new Module("global", getGlobalContext());
-	m_builder=new llvm::IRBuilder<>(m_module->getContext());
+	
 }
 IR::~IR()
 {
@@ -25,6 +24,8 @@ void IR::Trslt2IR(CSyntaxTree *IRTree)
 	std::unique_ptr<Module> Owner = make_unique<Module>("test", Context);
 	m_module = Owner.get();
 
+	m_builder = new llvm::IRBuilder<>(m_module->getContext());
+
 	FunctionType *FuncTypeOfMain = FunctionType::get(IntegerType::get(m_module->getContext(), 32), false);
 	Function *MainFunc = Function::Create(FuncTypeOfMain, Function::ExternalLinkage, "main", m_module);
 
@@ -33,6 +34,8 @@ void IR::Trslt2IR(CSyntaxTree *IRTree)
 	m_builder->SetInsertPoint(entrymain);
 
 	m_StNum = m_builder->CreateAlloca(IntegerType::get(m_module->getContext(), 32), NULL, "$state_num");
+
+	m_StNum->setAlignment(4);
 
 	Stmt2IR(IRTree->GetRoot());
 
@@ -44,7 +47,7 @@ void IR::Trslt2IR(CSyntaxTree *IRTree)
 	outs() << "\n\nRunning foo: ";
 	outs().flush();
 
-	m_module->dump();
+	//m_module->dump();
 
 
 	std::vector<GenericValue> noargs;
@@ -192,14 +195,16 @@ void IR::__Ass2IR(CSyntaxNode* pTree)
 	}
 
 	Value *RightValue=__Expr2IR(pTree->GetChild1());
-	StoreInst *store = m_builder->CreateStore(RightValue, m_IRSTable[pTree->GetChild0()->GetNName()], false);
+	Value* LeftValue = m_IRSTable[pTree->GetChild0()->GetNName()];
+
+	StoreInst *store = m_builder->CreateStore(RightValue, LeftValue, false);
 	store->setAlignment(4);
 }
 
 /**
 * 表达式转成对应的IR代码
 * @param 传入待分析的语法树
-* @return void
+* @return 转换之后的结果
 */
 ///2015-4-7 add by wangmeng
 Value * IR::__Expr2IR(CSyntaxNode* pTree)
@@ -211,42 +216,102 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 	}
 	switch (pTree->GetNType())
 	{
-	    case INTEGER_EXP: 
+		///整数 例：3
+	    case INTEGER_EXP:  
 	    {
 		    return ConstantInt::get(m_module->getContext(), APInt(32, pTree->GetiValue()));
 			break;
 	    }
+		///浮点数 例：3.1
 		case FLOATLITERAL_EXP:
 		{
 			return ConstantFP::get(getGlobalContext(), APFloat(pTree->GetfValue()));
 			break;
 	    }
+
+		///字符串 例："good"
 		case STR_EXP:
 		{
 			return m_builder->CreateGlobalStringPtr(pTree->GetsValue());
 		}
+
+		///变量 例：x
 		case IDENT_EXP:
-		{
-			 
+		{			 
 			return m_builder->CreateLoad(m_IRSTable[pTree->GetNName()]);
 		}
+
+		///加 例：x+y
 		case ADD_EXP:
 		{
-			if (pTree->GetChild0()==NULL||pTree->GetChild1()==NULL)
+			return __Add2IR(pTree);
+			
+		}
+
+		///减 例：x-y
+		case SUB_EXP:
+		{
+			if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
+			{
+				cout << "__Expr2IR sub error!" << endl;
+				return NULL;
+			}
+			Value *Left = __Expr2IR(pTree->GetChild0());
+			Value* Right = __Expr2IR(pTree->GetChild1());
+			if (Left->getType() == IntegerType::get(m_module->getContext(), 32) &&
+				Right->getType() == IntegerType::get(m_module->getContext(), 32))
+			{
+				return  m_builder->CreateSub(Left, Right, "sub", false, false);
+			}
+		}
+		///乘 例：x*y
+		case MUL_EXP:
+		{
+			if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
+			{
+				cout << "__Expr2IR mul error!" << endl;
+				return NULL;
+			}
+			Value *Left = __Expr2IR(pTree->GetChild0());
+			Value* Right = __Expr2IR(pTree->GetChild1());
+			if (Left->getType() == IntegerType::get(m_module->getContext(), 32) &&
+				Right->getType() == IntegerType::get(m_module->getContext(), 32))
+			{
+				return  m_builder->CreateMul(Left, Right, "mul", false, false);
+			}
+		}
+		///除 例：x/y
+		case DIV_EXP:
+		{
+			if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
+			{
+				cout << "__Expr2IR add error!" << endl;
+				return NULL;
+			}
+			Value *Left = __Expr2IR(pTree->GetChild0());
+			Value* Right = __Expr2IR(pTree->GetChild1());		
+			if (Left->getType() == IntegerType::get(m_module->getContext(), 32) &&
+				Right->getType() == IntegerType::get(m_module->getContext(), 32))
+			{
+				//return  m_builder->CreateMul(Left, Right, "mul", false, false);
+			}
+		}
+
+		///取余 例：x%y
+		case MOD_EXP:
+		{
+			if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
 			{
 				cout << "__Expr2IR add error!" << endl;
 				return NULL;
 			}
 			Value *Left = __Expr2IR(pTree->GetChild0());
 			Value* Right = __Expr2IR(pTree->GetChild1());
-
-		/*	Left->
-
-			if (Left->getAllocatedType() == IntegerType::get(m_module->getContext(), 32) &&
-				Right->getAllocatedType() == IntegerType::get(m_module->getContext(), 32))
+			/*if (Left->getType() == IntegerType::get(m_module->getContext(), 32) &&
+				Right->getType() == IntegerType::get(m_module->getContext(), 32))
 			{
-				return  m_builder->CreateAdd(a, b, "add", false, false);
-			}		*/
+				//return  m_builder->CreateDiv(Left, Right, "sub", false, false);
+			}*/
 		}
 	}
 	
@@ -273,4 +338,59 @@ void IR::__AddOne2IR(AllocaInst * alloc)
 	Value *One = m_builder->getInt32(1);
 	Value *result = m_builder->CreateNSWAdd(load, One, "inc");
 	StoreInst *store = m_builder->CreateStore(result, alloc, false);
+}
+
+/**
+* 加法操作转成对应的IR代码
+* @param 待处理的语法树
+* @return 转之后的结果
+*/
+///2015-4-9 add by wangmeng
+Value * IR::__Add2IR(CSyntaxNode* pTree)
+{
+	if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
+	{
+		cout << "__Expr2IR add error!" << endl;
+		return NULL;
+	}
+	Value *Left = __Expr2IR(pTree->GetChild0());
+	Value* Right = __Expr2IR(pTree->GetChild1());
+
+	Type* LType = Left->getType();
+	Type* RType = Right->getType();
+
+	///整数相加
+	if (LType->isIntegerTy() &&
+		RType->isIntegerTy())
+	{
+		return  m_builder->CreateAdd(Left, Right, "add", false, false);
+	}
+
+	///浮点数相加
+	else if (LType->isFloatTy())
+	{
+		///浮点数与浮点数相加 3.1+4.2
+		if (RType->isFloatTy()) 
+		{
+			return m_builder->CreateFAdd(Left, Right, "fadd", 0);
+		}
+		///浮点数与整数相加 3.6+5
+		else if (RType->isIntegerTy())
+		{
+			Value* fRight = m_builder->CreateSIToFP(Right,
+				Type::getFloatTy(m_module->getContext()));
+			return m_builder->CreateFAdd(Left, fRight, "fadd", 0);
+		}
+	}
+	else if (RType->isFloatTy())
+	{
+		///整数与浮点数相加 4+3.6
+		if (LType->isIntegerTy())
+		{
+			Value*fLeft = m_builder->CreateSIToFP(Left,
+				Type::getFloatTy(m_module->getContext()));
+			return m_builder->CreateFAdd(fLeft, Right, "fadd", 0);
+		}
+
+	}
 }

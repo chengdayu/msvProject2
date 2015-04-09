@@ -15,6 +15,9 @@
 #include "llvm/Support/TargetSelect.h"
 #include "llvm/Support/raw_ostream.h"
 
+#include "llvm/IR/Value.h"
+#include "llvm/IR/Type.h"
+
 
 #include "SyntaxTree.h"
 
@@ -78,7 +81,7 @@ public:
 	/**
 	* 表达式转成对应的IR代码
 	* @param 传入待分析的语法树
-	* @return void
+	* @return 转换之后的结果
 	*/
 	///2015-4-7 add by wangmeng
 	Value * __Expr2IR(CSyntaxNode* pTree);
@@ -96,6 +99,14 @@ public:
 	* @return void
 	*/
 	void __AddOne2IR(AllocaInst * alloc);
+
+	/**
+	* 加法操作转成对应的IR代码
+	* @param 待处理的语法树
+	* @return 转之后的结果
+	*/
+	Value * __Add2IR(CSyntaxNode* pTree);
+
 
 private:
 
