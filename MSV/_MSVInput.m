@@ -1,2 +1,2 @@
-int x<==3 and int y<==x+3 and skip
+int x<==3 and int y<==5 and skip
 
