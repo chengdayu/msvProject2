@@ -62,6 +62,7 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 		case DISPLAY_STA:
 		{
 			__Out2IR(pTree);
+			break;
 	}
 	}
 	
@@ -219,7 +220,34 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 	}
 	
 
+//add by yubin 2015/4/9,调用printf输出变量的值
 void IR::__Out2IR(CSyntaxNode *pTree)
 {
+	vector<string> outPutSymTbl;//需要输出的变量，用vector存储
+	outPutSymTbl = pTree->GetST();
 
+	//先声明printf函数，然后根据不同的变量类型，进行调用
+	std::vector<llvm::Type *> putsArgs;
+	putsArgs.push_back(m_builder->getInt8Ty()->getPointerTo());
+	llvm::ArrayRef<llvm::Type*>  argsRef(putsArgs);
+	llvm::FunctionType *putsType = llvm::FunctionType::get(m_builder->getInt32Ty(), argsRef, false);
+	llvm::Constant *putsFunc = m_module->getOrInsertFunction("printf", putsType);
+
+	vector<string>::iterator iter;
+	for (iter = outPutSymTbl.begin(); iter != outPutSymTbl.end(); iter++)
+	{
+		AllocaInst *outPutVar = m_IRSTable[*iter];//通过变量的名字在m_IRSTable中找到对应的AllocaInst类型指针
+		LoadInst *a = m_builder->CreateLoad(outPutVar);
+		if (outPutVar->getAllocatedType() == IntegerType::get(m_module->getContext(), 32))//如果是int类型的话
+		{	
+			Value *intFormat = m_builder->CreateGlobalStringPtr("%d");
+			m_builder->CreateCall2(putsFunc, intFormat, a);
+		}
+		else if (outPutVar->getAllocatedType() == Type::getFloatTy(m_module->getContext()))//如果是float类型的话
+		{
+			Value *intFormat = m_builder->CreateGlobalStringPtr("%f");
+			m_builder->CreateCall2(putsFunc, intFormat, a);
+
+		}
+	}
 }
