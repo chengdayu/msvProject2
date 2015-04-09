@@ -83,7 +83,7 @@ public:
 	///2015-4-7 add by wangmeng
 	Value * __Expr2IR(CSyntaxNode* pTree);
 
-	/**add by yubin 2015-4-9
+	/**
 	* 输出语句转成对应的IR代码
 	* @param 传入待分析的语法树
 	* @return void
@@ -96,6 +96,20 @@ public:
 	* @return void
 	*/
 	void __AddOne2IR(AllocaInst * alloc);
+
+	/**
+	* if语句转成对应的IR代码
+	* @param 传入待分析的语法树
+	* @return void
+	*/
+	void __If2IR(CSyntaxNode* pTree);
+
+	/**
+	* 将if语句和while语句中的条件表达式转为IR代码
+	* @param 传入待分析的语法树
+	* @return void
+	*/
+	Value* __Cond2IR(CSyntaxNode* pTree);
 
 private:
 
