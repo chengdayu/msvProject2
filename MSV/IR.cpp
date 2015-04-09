@@ -62,7 +62,13 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 		case DISPLAY_STA:
 		{
 			__Out2IR(pTree);
-	}
+			break;
+	    }
+		case IF_STA:
+		{
+			__If2IR(pTree);
+			break;
+		}
 	}
 	
 		
@@ -222,4 +228,57 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 void IR::__Out2IR(CSyntaxNode *pTree)
 {
 
+}
+
+void IR::__If2IR(CSyntaxNode *pTree)
+{
+	//Function *TheFunction = m_builder->GetInsertBlock()->getParent();
+	//BasicBlock *entry = BasicBlock::Create(m_module->getContext(), "entry");
+	BasicBlock *ThenBB= BasicBlock::Create(m_module->getContext(), "then");
+	BasicBlock *ElseBB = BasicBlock::Create(m_module->getContext(), "else");
+	//m_builder->SetInsertPoint(entry);
+
+	//条件跳转
+	Value *v = m_builder->CreateCondBr(__Cond2IR(pTree->GetChild0()), ThenBB, ElseBB, 0);
+
+	m_builder->SetInsertPoint(ThenBB);
+	Stmt2IR(pTree->GetChild1());
+
+	m_builder->SetInsertPoint(ElseBB);
+	Stmt2IR(pTree->GetChild2());
+
+}
+
+Value* IR::__Cond2IR(CSyntaxNode* pTree)
+{
+	//判断关系运算符类型
+	switch (pTree->GetNType())
+	{
+	case EQU_EXP:
+	{
+		
+
+
+
+
+		break;
+	}
+
+	default:
+		break;
+	}
+	
+	
+	Value* LHS = __Expr2IR(pTree->GetChild0());
+	Value* RHS = __Expr2IR(pTree->GetChild1());
+
+	AllocaInst *int32_i = m_builder->CreateAlloca(Type::getInt32Ty(m_module->getContext()), 0, "i");
+	AllocaInst *int32_j = m_builder->CreateAlloca(Type::getInt32Ty(m_module->getContext()), 0, "j");
+	StoreInst *store_i = m_builder->CreateStore(LHS, int32_i, false);
+	StoreInst *store_j = m_builder->CreateStore(RHS, int32_j, false);
+	LoadInst *i = m_builder->CreateLoad(int32_i);
+	LoadInst *j = m_builder->CreateLoad(int32_j);
+
+	//条件跳转
+	return m_builder->CreateICmpEQ(i, j, "cond");
 }
