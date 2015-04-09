@@ -288,9 +288,9 @@ LLVMMCDisassembler.lib
       </Command>
     </PreBuildEvent>
     <CustomBuildStep>
-      <Command>$(ProjectDir)bison -d MSV.y 
-$(ProjectDir)flex MSV.l</Command>
-      <Outputs>parse.h;parse.cpp;lex.cpp;%(Outputs)</Outputs>
+      <Command>
+      </Command>
+      <Outputs>%(Outputs)</Outputs>
       <Inputs>%(Inputs)</Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>

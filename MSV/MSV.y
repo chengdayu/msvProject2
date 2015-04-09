@@ -1,43 +1,43 @@
 %{
-#include"function.h"
+#include "function.h"
 #include "MyMap.h"
 #include <malloc.h>
 #include <string.h>      // strcpy
-#include "Symbol.h"
-#include "SymbolTable.h"
+
+//#include "lex.h"
 #include "SyntaxNode.h"
 #include "SyntaxTree.h"
 //#include "inherit.h"
 //#include <afxtempl.h>
 CMAP g_StructNameMap;
 
-//ç±»çš„å±‚æ¬¡å…³ç³»
-//typedef CArray<Inherit,Inherit> ClassHier;//è¿™è¡Œä»£ç ç›¸å½“äºå®šä¹‰äº†ä¸€ä¸ªæ•°ç»„ï¼Œæ•°ç»„ä¸­çš„æ¯ä¸ªå…ƒç´ éƒ½æ˜¯ä¸€ä¸ªInheritå¯¹è±¡
-//ClassHier classarray;//å®šä¹‰ä¸€ä¸ªæ•°ç»„ç”¨æ¥ä¿å­˜Tempuraç¨‹åºä¸­ç±»å®šä¹‰çš„ç»§æ‰¿å…³ç³»
+//ÀàµÄ²ã´Î¹ØÏµ
+//typedef CArray<Inherit,Inherit> ClassHier;//ÕâĞĞ´úÂëÏàµ±ÓÚ¶¨ÒåÁËÒ»¸öÊı×é£¬Êı×éÖĞµÄÃ¿¸öÔªËØ¶¼ÊÇÒ»¸öInherit¶ÔÏó
+//ClassHier classarray;//¶¨ÒåÒ»¸öÊı×éÓÃÀ´±£´æTempura³ÌĞòÖĞÀà¶¨ÒåµÄ¼Ì³Ğ¹ØÏµ
 
-//******************  ç”¨æ¥å­˜å‚¨ç¨‹åºè¯­æ³•æ ‘ä»¥åŠæ€§è´¨æ ‘ *******************************/
+//******************  ÓÃÀ´´æ´¢³ÌĞòÓï·¨Ê÷ÒÔ¼°ĞÔÖÊÊ÷ *******************************/
 /***************************************************************************/
-//ç¨‹åºè¯­æ³•æ ‘èŠ‚ç‚¹æŒ‡é’ˆ
+//³ÌĞòÓï·¨Ê÷½ÚµãÖ¸Õë
 CSyntaxNode *g_syntaxTree = NULL;  
-//æ€§è´¨è¯­æ³•æ ‘èŠ‚ç‚¹æŒ‡é’ˆ
+//ĞÔÖÊÓï·¨Ê÷½ÚµãÖ¸Õë
 CSyntaxNode *g_propositionTree=NULL; 
 
 CSyntaxNode *function_tree=NULL, *propositionDefineTree=NULL;
 
-CSyntaxNode *struct_tree=NULL;//å­˜å‚¨ç»“æ„ä½“çš„å®šä¹‰
+CSyntaxNode *struct_tree=NULL;//´æ´¢½á¹¹ÌåµÄ¶¨Òå
 
 CSyntaxTree *g_tree=NULL, *g_proptree=NULL;     
 
-map<string, string> structName; //å­˜å‚¨å®šä¹‰çš„ç»“æ„ä½“çš„åå­—
+map<string, string> structName; //´æ´¢¶¨ÒåµÄ½á¹¹ÌåµÄÃû×Ö
 
 //g_tree=new CSyntaxTree(g_syntaxTree);  
 //g_proptree=new CSyntaxTree(g_propositionTree); 
 
 int g_nErrors=0;
-extern void yyerror(const char *msg);
 
-extern int yylex (void);
+extern void yyerror(const char *msg );
 
+extern int yylex(void);
 
 #define YYDEBUG 1	          // Generate debug code; needed for YYERROR_VERBOSE
 #define YYERROR_VERBOSE       // Give a more specific parse error message
@@ -81,16 +81,16 @@ extern int yylex (void);
 %left OR PARALLEL CYLINDER
 %left AND 
 %right ASS_P ASS_N 
-%left INTER_OR	//æŒ‰ä½å¼‚æˆ–	
+%left INTER_OR	//°´Î»Òì»ò	
 %left OVEREP	
-%left CON   //æŒ‰ä½å¼‚æˆ–
-%left ADDRESS //æŒ‰ä½ä¸
+%left CON   //°´Î»Òì»ò
+%left ADDRESS //°´Î»Óë
 %left NE EQ  
 %left GE LE  GT LT 
-%left LST RST  //å·¦ç§»å³ç§»
+%left LST RST  //×óÒÆÓÒÒÆ
 %left ADD SUB 
 %left MUL DIV MOD 
-%left BNE  //æŒ‰ä½å–å
+%left BNE  //°´Î»È¡·´
 
 
 
@@ -129,19 +129,19 @@ extern int yylex (void);
 %type<tnode> charliteral floatliteral 
 %type<tnode> size_of
 %type<tnode> struct_define_statement struct_identifier
-%type<tnode> option_struct_list_value //ç»“æ„ä½“çš„åˆå§‹åŒ–åˆ—è¡¨{{1,"hello"},{2,"hi"}}
-%type<tnode> sign_declaration//å¸¦æœ‰unsignedçš„å®šä¹‰è¯­å¥
+%type<tnode> option_struct_list_value //½á¹¹ÌåµÄ³õÊ¼»¯ÁĞ±í{{1,"hello"},{2,"hi"}}
+%type<tnode> sign_declaration//´øÓĞunsignedµÄ¶¨ÒåÓï¾ä
 
 %type<tnode> math_function //float_exp 
 //%type<tnode>array_exp option_array_exp 
 
-//å­—ç¬¦å¤„ç†å‡½æ•° begin  
+//×Ö·û´¦Àíº¯Êı begin  
 %type<tnode> String_Function String_Function_head String_Function_tail String_Function_cat String_Function_cpy String_Function_len
 %type<tnode> String_Function_cmp str_func_parameter
-//å­—ç¬¦å¤„ç†å‡½æ•° end  
+//×Ö·û´¦Àíº¯Êı end  
 %type<tnode> casted_element 
 
-//ç»“æ„ä½“ä¸²è”
+//½á¹¹Ìå´®Áª
 %type<tnode> struct_member_exp  option_struct_member_exp
 
 
@@ -159,13 +159,13 @@ program      //Annotation-Class
        :gComplexProposition /*---cdstatement---*/ statement 
 	   {
 			
-			//éªŒè¯éœ€è¦çš„è¯­å¥
+			//ÑéÖ¤ĞèÒªµÄÓï¾ä
 			g_propositionTree=$1;
 			g_proptree=new CSyntaxTree(g_propositionTree);    
 			
 			
 			
-			//$2æ˜¯ç±»ä¸­å®šä¹‰çš„æ–¹æ³•ï¼Œå°†å…¶åŠ å…¥function_treeä¸­ï¼Œå®è´¨æ˜¯åˆå¹¶ä¸¤ä¸ªé“¾
+			//$2ÊÇÀàÖĞ¶¨ÒåµÄ·½·¨£¬½«Æä¼ÓÈëfunction_treeÖĞ£¬ÊµÖÊÊÇºÏ²¢Á½¸öÁ´
 			//Annotation-Class   2013-5-6 add by YY[fixed]
 			/*---------------------------------------------------------------------
 			SyntaxTree  temp;
@@ -179,13 +179,13 @@ program      //Annotation-Class
 			---------------------------------------------------------------------*/
 
 			
-			//æ‰§è¡Œçš„åŸºæœ¬è¯­å¥
+			//Ö´ĞĞµÄ»ù±¾Óï¾ä
 			g_syntaxTree=$2;
 			g_tree=new CSyntaxTree(g_syntaxTree);          //2013-5-3 add by YY[fixed]
           
 		}
 	   ;
-//ä¸‹é¢æ˜¯éªŒè¯æ¡ä»¶çš„è¯­å¥çš„è¯­æ³•
+//ÏÂÃæÊÇÑéÖ¤Ìõ¼şµÄÓï¾äµÄÓï·¨
 gComplexProposition
 	   :PBEGIN complexProposition PEND  {$$=$2;}
 	   |								{$$=NULL;}
@@ -241,22 +241,22 @@ poptional_projection
 	   |								{$$=NULL;}
 	   ;
 
-//ä¸‹é¢æ˜¯å¯æ‰§è¡ŒåŸºæœ¬è¯­å¥çš„è¯­æ³•
+//ÏÂÃæÊÇ¿ÉÖ´ĞĞ»ù±¾Óï¾äµÄÓï·¨
 statement
 	   :statement  AND statement        {$$=new CSyntaxNode(AND_EXP, $1, $3, VOIDTYPE);}
 
 	   |statement  OR  statement        {$$=new CSyntaxNode(OR_EXP, $1, $3, VOIDTYPE);}
 	   
 	   //**********************************************************************************
-	   //   æŠŠå‡½æ•°å£°æ˜è¯­å¥æ”¾åˆ°function_treeä¸­è¿›è¡Œå­˜å‚¨  
-	   //   æŒ‰ç…§åŸå§‹çš„å®šä¹‰ï¼Œå‡½æ•°çš„å£°æ˜ç¡®å®è¦åœ¨æœ€å¼€å§‹è¿›è¡Œ 
-	   //   æˆ‘æ·»åŠ äº†ä¸‹é¢ä¸€å—ä»£ç  ä½¿å¾—çš„å‡½æ•°å¯ä»¥åœ¨ä»»ä½•åœ°æ–¹å£°æ˜
+	   //   °Ñº¯ÊıÉùÃ÷Óï¾ä·Åµ½function_treeÖĞ½øĞĞ´æ´¢  
+	   //   °´ÕÕÔ­Ê¼µÄ¶¨Òå£¬º¯ÊıµÄÉùÃ÷È·ÊµÒªÔÚ×î¿ªÊ¼½øĞĞ 
+	   //   ÎÒÌí¼ÓÁËÏÂÃæÒ»¿é´úÂë Ê¹µÃµÄº¯Êı¿ÉÒÔÔÚÈÎºÎµØ·½ÉùÃ÷
 	   //**********************************************************************************
 	   |statement CHOP statement        
 	   {
-			//ç»“æ„ä½“(struct)å®šä¹‰ æš‚æ—¶è§„å®šstructåªèƒ½åœ¨æœ€å¼€å§‹å®šä¹‰
+			//½á¹¹Ìå(struct)¶¨Òå ÔİÊ±¹æ¶¨structÖ»ÄÜÔÚ×î¿ªÊ¼¶¨Òå
 			
-			// ä¸¤ä¸ªéƒ½æ˜¯structå®šä¹‰è¯­å¥
+			// Á½¸ö¶¼ÊÇstruct¶¨ÒåÓï¾ä
 			if(NULL!=$1 && $1->GetNType()==STRUCT_DEFINE_STA && NULL!=$3 && $3->GetNType()==STRUCT_DEFINE_STA)
 			{
 			    if($1->FindSameName($3->GetNName()) )
@@ -269,13 +269,13 @@ statement
 					  $$=$3;
 					}
 			}
-			// ç¬¬ä¸€ä¸ªæ˜¯structå®šä¹‰è¯­å¥ï¼Œç¬¬äºŒä¸ªæ˜¯æ‰§è¡Œè¯­å¥
+			// µÚÒ»¸öÊÇstruct¶¨ÒåÓï¾ä£¬µÚ¶ş¸öÊÇÖ´ĞĞÓï¾ä
 			if(NULL!=$1 && $1->GetNType()==STRUCT_DEFINE_STA && NULL!=$3 && $3->GetNType()!=STRUCT_DEFINE_STA )
 			{
 				struct_tree=$1;
 				$$=$3;
 			}
-			// ç¬¬ä¸€ä¸ªæ˜¯æ‰§è¡Œè¯­å¥ï¼Œç¬¬äºŒä¸ªæ˜¯structå®šä¹‰è¯­å¥
+			// µÚÒ»¸öÊÇÖ´ĞĞÓï¾ä£¬µÚ¶ş¸öÊÇstruct¶¨ÒåÓï¾ä
 			if( NULL!=$1 && $1->GetNType()!=STRUCT_DEFINE_STA  && $1->GetNType()!=FUNCTION_DEFINE_STA &&  
 			    NULL!=$3 && $3->GetNType()==STRUCT_DEFINE_STA)
 			{
@@ -301,7 +301,7 @@ statement
 						}					
 			}
 			
-			//ä¸¤ä¸ªéƒ½æ˜¯å‡½æ•°å£°æ˜è¯­å¥
+			//Á½¸ö¶¼ÊÇº¯ÊıÉùÃ÷Óï¾ä
 			if(NULL!=$1 && $1->GetNType()==FUNCTION_DEFINE_STA && NULL!=$3 && $3->GetNType()==FUNCTION_DEFINE_STA )
 			{
 				if($1->FindSameName($3->GetNName()) )
@@ -314,22 +314,22 @@ statement
 					  $$=$3;
 					}
 			}
-			//ç¬¬ä¸€ä¸ªæ˜¯å‡½æ•°å£°æ˜è¯­å¥ï¼Œç¬¬äºŒä¸ªæ˜¯æ‰§è¡Œè¯­å¥
+			//µÚÒ»¸öÊÇº¯ÊıÉùÃ÷Óï¾ä£¬µÚ¶ş¸öÊÇÖ´ĞĞÓï¾ä
 			if(NULL!=$1 && $1->GetNType()==FUNCTION_DEFINE_STA && NULL!=$3 && $3->GetNType()!=FUNCTION_DEFINE_STA)
 			{
 				function_tree=$1;
                 $$=$3;
 			}
 
-			//ä¸¤ä¸ªéƒ½æ˜¯æ‰§è¡Œè¯­å¥
+			//Á½¸ö¶¼ÊÇÖ´ĞĞÓï¾ä
 			if( NULL!=$1 && $1->GetNType()!=FUNCTION_DEFINE_STA &&  $1->GetNType()!=STRUCT_DEFINE_STA && 
 			    NULL!=$3 && $3->GetNType()!=FUNCTION_DEFINE_STA &&  $3->GetNType()!=STRUCT_DEFINE_STA)
 			{
 				$$=new CSyntaxNode(CHOP_STA, $1, $3, VOIDTYPE);
 			}
 
-			//ç¬¬ä¸€ä¸ªæ˜¯æ‰§è¡Œè¯­å¥ï¼Œç¬¬äºŒä¸ªæ˜¯å£°æ˜è¯­å¥  
-			//problem: æ•´ä¸ªç¨‹åºçš„ç¬¬ä¸€å¥å¿…é¡»æ˜¯å£°æ˜è¯­å¥æ‰å¯ä»¥    
+			//µÚÒ»¸öÊÇÖ´ĞĞÓï¾ä£¬µÚ¶ş¸öÊÇÉùÃ÷Óï¾ä  
+			//problem: Õû¸ö³ÌĞòµÄµÚÒ»¾ä±ØĞëÊÇÉùÃ÷Óï¾ä²Å¿ÉÒÔ    
 			if( NULL!=$1 && $1->GetNType()!=FUNCTION_DEFINE_STA   &&  $1->GetNType()!=STRUCT_DEFINE_STA &&
 			    NULL!=$3 && $3->GetNType()==FUNCTION_DEFINE_STA)
 				{
@@ -359,14 +359,14 @@ statement
 	   
 	  // |PREFIX OPEN_PAR statement CLOSE_PAR   {$$=new CSyntaxNode(PREFIX_STA, $3, VOIDTYPE);}
        |ass_statement                   {$$=$1;}
-//2015-3-7	   |file_statement                  {$$=$1;}//add by yubin 2014/3/3 æ–‡ä»¶çš„ç›¸å…³æ“ä½œ
+//2015-3-7	   |file_statement                  {$$=$1;}//add by yubin 2014/3/3 ÎÄ¼şµÄÏà¹Ø²Ù×÷
 	   |sign_declaration                    {$$=$1;}
 	   
 	   |switch_statement              {$$=$1;}   //add 2015-3-18
 	   |if_statement                    {$$=$1;}
 	   |while_statement                 {$$=$1;}
 	   |for_statement                   {$$=$1;}
-	   |extend_for_statement            {$$=$1;}//ç±»ä¼¼äºCè¯­è¨€ä¸­çš„forè¯­å¥
+	   |extend_for_statement            {$$=$1;}//ÀàËÆÓÚCÓïÑÔÖĞµÄforÓï¾ä
 	   |NEXT OPEN_PAR statement CLOSE_PAR    {$$=new CSyntaxNode(NEXT_STA, $3, VOIDTYPE);}
 //2015-3-7	   |W_NEXT OPEN_PAR statement CLOSE_PAR    {$$=new CSyntaxNode(W_NEXT_STA, $3, VOIDTYPE);}
 	   |KEEP OPEN_PAR statement CLOSE_PAR       {$$=new CSyntaxNode(KEEP_STA, $3, VOIDTYPE);}
@@ -410,7 +410,7 @@ statement
 
 	   	   
 	   //***********************************************************************
-	      //æ— è¿”å›å€¼çš„å‡½æ•°è°ƒç”¨      è¿‡ç¨‹ï¼ï¼ï¼ï¼ï¼  
+	      //ÎŞ·µ»ØÖµµÄº¯Êıµ÷ÓÃ      ¹ı³Ì£¡£¡£¡£¡£¡  
 	   //***********************************************************************
 	   |DEFINE ID OPEN_PAR option_function_parameter_list CLOSE_PAR ASS_P OPEN_BPAR empty_statement CLOSE_BPAR 
 	   { 
@@ -418,7 +418,8 @@ statement
 	   }
 	   
 	   //*******************************************************************************************
-	       //æœ‰è¿”å›å€¼çš„å‡½æ•°è°ƒç”¨function, å‡½æ•°ä½“ä¸ºå¯ä»¥èµ‹å€¼çš„ç®—æœ¯å¼ari_exp   
+	       //ÓĞ·µ»ØÖµµÄº¯Êıµ÷ÓÃfunction, º¯ÊıÌåÎª¿ÉÒÔ¸³ÖµµÄËãÊõÊ½
+		      
 	   //*******************************************************************************************
 	   |FUNCTION ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR
 	   {
@@ -428,12 +429,12 @@ statement
 	   { 
 			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $2, $4, $8, NULL, VOIDTYPE);
 	   }//add by mdp
-       |struct_define_statement//ç»“æ„ä½“å®šä¹‰è¯­å¥
-	   |FREE OPEN_PAR identifier CLOSE_PAR//ç›¸å…³
+       |struct_define_statement//½á¹¹Ìå¶¨ÒåÓï¾ä
+	   |FREE OPEN_PAR identifier CLOSE_PAR//Ïà¹Ø
 	   {
             $$=new CSyntaxNode(FREE_STA, $3, VOIDTYPE);
 	   }
-	   |SYSTEM OPEN_PAR str_func_parameter CLOSE_PAR//è°ƒç”¨å¯æ‰§è¡Œæ–‡ä»¶
+	   |SYSTEM OPEN_PAR str_func_parameter CLOSE_PAR//µ÷ÓÃ¿ÉÖ´ĞĞÎÄ¼ş
 	   {
 	        $$=new CSyntaxNode(SYSTEM_STA, $3, VOIDTYPE);
 	   }
@@ -473,17 +474,17 @@ empty_statement
 	   |                                {$$=NULL;}
 	   ;
 
-//è°ƒç”¨è°“è¯å’Œå‡½æ•°æ—¶çš„è¯­æ³•
+//µ÷ÓÃÎ½´ÊºÍº¯ÊıÊ±µÄÓï·¨
 function
        :ID OPEN_PAR option_function_identifier CLOSE_PAR
 	   {
-	        // æš‚æ—¶ä¸è€ƒè™‘å¸¦æˆå‘˜å‡½æ•° .çš„å‡½æ•°è°ƒç”¨
-			$$=new CSyntaxNode(FUNCTION_STA, $1, $3, NULL, NULL, VOIDTYPE);//æ„é€ è°ƒç”¨å‡½æ•°çš„ç¨‹åºè¯­æ³•æ ‘å­æ ‘          
+	        // ÔİÊ±²»¿¼ÂÇ´ø³ÉÔ±º¯Êı .µÄº¯Êıµ÷ÓÃ
+			$$=new CSyntaxNode(FUNCTION_STA, $1, $3, NULL, NULL, VOIDTYPE);//¹¹Ôìµ÷ÓÃº¯ÊıµÄ³ÌĞòÓï·¨Ê÷×ÓÊ÷          
 	   }
 	   |array OPEN_PAR option_function_identifier CLOSE_PAR
 	   {
-	        //Annotate by YY 2013/11/20 æš‚æ—¶ä¸è€ƒè™‘å¸¦æˆå‘˜å‡½æ•° .çš„å‡½æ•°è°ƒç”¨
-			$$=new CSyntaxNode(FUNCTION_STA, $1, $3, NULL, FUNCPTYPE);//é€šè¿‡å‡½æ•°æŒ‡é’ˆæ•°ç»„è°ƒç”¨å‡½æ•°
+	        //Annotate by YY 2013/11/20 ÔİÊ±²»¿¼ÂÇ´ø³ÉÔ±º¯Êı .µÄº¯Êıµ÷ÓÃ
+			$$=new CSyntaxNode(FUNCTION_STA, $1, $3, NULL, FUNCPTYPE);//Í¨¹ıº¯ÊıÖ¸ÕëÊı×éµ÷ÓÃº¯Êı
 	   }
 	   |file_statement		{ $$=$1; }
 	   |String_Function		{ $$=$1; }
@@ -522,9 +523,9 @@ struct_identifier
 			}
 	   }
 	   ;
-//å¤„ç†unsignedå’Œsignedçš„é—®é¢˜ï¼Œæœ€ç»ˆçš„å®šä¹‰è¯­å¥
+//´¦ÀíunsignedºÍsignedµÄÎÊÌâ£¬×îÖÕµÄ¶¨ÒåÓï¾ä
 sign_declaration
-	   :SIGNED declaration   {$$=$2;} //é»˜è®¤ä¸ºsigned
+	   :SIGNED declaration   {$$=$2;} //Ä¬ÈÏÎªsigned
 	   |UNSIGNED declaration {$$=new CSyntaxNode(UNSIGN_DECLARATION_STA, $2, VOIDTYPE); }
 	   |declaration          {$$=$1;}
 	   ;
@@ -537,30 +538,30 @@ declaration
        |STRUCT_TYPE option_identifier_array_declaration 	 
 	   {
 	     $$=new CSyntaxNode(DECLARE_STA,$1,$2,STRUCTTYPE);
-		} //ç»“æ„ä½“å£°æ˜ yangkai
+		} //½á¹¹ÌåÉùÃ÷ yangkai
 	   |STRUCT ID option_identifier_array_declaration
 	   {
 	     $$=new CSyntaxNode(DECLARE_STA,$2,$3,STRUCTTYPE);
-	   }//ç»“æ„ä½“å£°æ˜
+	   }//½á¹¹ÌåÉùÃ÷
        |UNION ID option_identifier_array_declaration
 	   {
 	     $$=new CSyntaxNode(DECLARE_STA,$2,$3,STRUCTTYPE);
-	   }//è”åˆä½“å£°æ˜
+	   }//ÁªºÏÌåÉùÃ÷
 	   |STRUCT STRUCT_TYPE option_identifier_array_declaration
 	   {
 	     $$=new CSyntaxNode(DECLARE_STA,$2,$3,STRUCTTYPE);
-	   }//ç»“æ„ä½“å£°æ˜
+	   }//½á¹¹ÌåÉùÃ÷
        |UNION STRUCT_TYPE option_identifier_array_declaration
 	   {
 	     $$=new CSyntaxNode(DECLARE_STA,$2,$3,STRUCTTYPE);
-	   }//è”åˆä½“å£°æ˜
+	   }//ÁªºÏÌåÉùÃ÷
 	//2015-3-20    |POINTERDECLARATION   option_function_parameter_list {$$=new CSyntaxNode(DECLARE_STA, $2, POINTERTYPE);}  
 	  //2015-3-20 |LISTDECLARATION   option_array_declaration		{$$=new CSyntaxNode(DECLARE_STA, $2, LISTTYPE);}
-	    // å‡½æ•°æŒ‡é’ˆ 
+	    // º¯ÊıÖ¸Õë 
 	   |OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR	{$$=new CSyntaxNode(DECLARE_STA, $3, FUNCPTYPE);}
-	   //å‡½æ•°æŒ‡é’ˆçš„æŒ‡é’ˆ
+	   //º¯ÊıÖ¸ÕëµÄÖ¸Õë
 	   |OPEN_PAR MUL MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR {$$=new CSyntaxNode(DECLARE_STA, $4, FUNCPPTYPE);}
-	   	//å‡½æ•°æŒ‡é’ˆæ•°ç»„ 
+	   	//º¯ÊıÖ¸ÕëÊı×é 
 	   |OPEN_PAR MUL ID OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR	
 	   {
 	       CSyntaxNode *pChild0=new CSyntaxNode(PARAMETER_EXP,new CSyntaxNode(ARRAY_DECLARE_STA, $3, $5, $6, NULL, LISTTYPE), VOIDTYPE);
@@ -590,7 +591,7 @@ type_define
 
 
 
-//å°†option_declarationæ”¹ä¸ºoption_identifier_array_declaration      
+//½«option_declaration¸ÄÎªoption_identifier_array_declaration      
 option_identifier_array_declaration
 		:identifier inner_option_identifier_array_declaration
 		{
@@ -645,14 +646,14 @@ inner_option_identifier_array_declaration
 	   |COMMA error   {$$=NULL;}
 	   |{$$=NULL;}
 	   ;
-//å°†list_option_declarationä¿®æ”¹ä¸ºoption_array_declaration 
+//½«list_option_declarationĞŞ¸ÄÎªoption_array_declaration 
 option_array_declaration
 	   :ID OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR inner_option_array_declaration
 	   {
 	        $$=new CSyntaxNode(PARAMETER_EXP, new CSyntaxNode(LIST_DECLARE_STA, $1, $3, $4, NULL, LISTTYPE), $6, VOIDTYPE);
 	   }
 	   ;
-//å°†list_inner_option_declarationä¿®æ”¹ä¸ºinner_option_array_declaration
+//½«list_inner_option_declarationĞŞ¸ÄÎªinner_option_array_declaration
 inner_option_array_declaration
 	   :COMMA ID OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR inner_option_array_declaration
 	   {
@@ -662,12 +663,12 @@ inner_option_array_declaration
 	   |COMMA error                     {$$=NULL;}
 	   ;
 
-//å˜é‡ç±»å‹å£°æ˜ end Jane
+//±äÁ¿ÀàĞÍÉùÃ÷ end Jane
 
-// æ–‡ä»¶æ“ä½œ
+// ÎÄ¼ş²Ù×÷
 file_statement
 	   :FOPEN OPEN_PAR ass_left COMMA strliteral CLOSE_PAR 
-										{$$=new CSyntaxNode(FOPEN_EXP, $3, $5, VOIDTYPE);}  //add by yubin 2014/3/4æ–‡ä»¶æ‰“å¼€æ“ä½œ
+										{$$=new CSyntaxNode(FOPEN_EXP, $3, $5, VOIDTYPE);}  //add by yubin 2014/3/4ÎÄ¼ş´ò¿ª²Ù×÷
        |FGETS OPEN_PAR identifier COMMA intliteral COMMA identifier CLOSE_PAR       
 										{$$=new CSyntaxNode(FGETS_EXP,$3,$5,$7,VOIDTYPE);}
 	   |FGETC OPEN_PAR identifier CLOSE_PAR       
@@ -687,7 +688,7 @@ file_statement
 
 
 
-//å˜èµ‹å€¼è¯­å¥  
+//±ä¸³ÖµÓï¾ä  
 
 ass_statement
        :ass_left assign_operator ass_right       
@@ -737,9 +738,9 @@ assign_operator
 	   ;                
 ass_right
 	   :ari_exp                         {$$=$1;}
-	   |array_exp                        {$$=$1;}   // [2,3,5,9] æˆ–è€…[1,3]^[2,4]
+	   |array_exp                        {$$=$1;}   // [2,3,5,9] »òÕß[1,3]^[2,4]
 	   |strliteral                          {$$=$1;}     
-//2015-3-9	   |bool_exp                  {$$=$1;} //boolè¡¨è¾¾å¼       
+//2015-3-9	   |bool_exp                  {$$=$1;} //bool±í´ïÊ½       
 //2015-3-7	   |struct_member_exp               {$$=$1;}
 //2015-3-7	   |file_statement                  {$$=$1;}  
 	   |OPEN_PAR strliteral CLOSE_PAR OPEN_PAR type_define CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR function {$$=new CSyntaxNode(DLL_CALL_STA, $2, $10, $5);}
@@ -753,7 +754,7 @@ rightaddrshift
 array  
        :ID OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR  {$$=new CSyntaxNode(LIST_SYMBOL_STA, $1, $3, $4, NULL, VOIDTYPE);}
 		
-	   // å¢åŠ ((unsigned char*)a)[2]='b',å¯ä½œä¸ºå·¦å€¼æˆ–è€…å³å€¼
+	   // Ôö¼Ó((unsigned char*)a)[2]='b',¿É×÷Îª×óÖµ»òÕßÓÒÖµ
 	   //|casted_element OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR {$$=new CSyntaxNode(LIST_SYMBOL_STA, $1, $3, $4, NULL, VOIDTYPE);}
 
 	   | OPEN_PAR OPEN_PAR INTDECLARATION MUL CLOSE_PAR ID CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
@@ -777,7 +778,7 @@ option_ari_exp
 	   ;
 
 
-//å®é™…ä¸Šæ˜¯æŒ‡é’ˆï¼ˆ*pï¼‰
+//Êµ¼ÊÉÏÊÇÖ¸Õë£¨*p£©
 point_exp
 	   :MUL identifier                  {$$=new CSyntaxNode(VALUE_EXP, $2, UNKNOWNTYPE);}    //*x
 	   |MUL point_exp 					{$$=new CSyntaxNode(VALUE_EXP, $2, UNKNOWNTYPE);}    //**x
@@ -789,15 +790,16 @@ point_exp
 	   		{$$=new CSyntaxNode(ADDR_VAR, $6, $3);} //  *(char*)0x01=5
 	   |MUL OPEN_PAR ari_exp CLOSE_PAR	                                    
 	        {$$=new CSyntaxNode(VALUE_EXP, $3, UNKNOWNTYPE);}
-	   |OPEN_PAR point_exp CLOSE_PAR    {$$=$2;}   // ä½¿å¾—a<==(*p)+
+	   |OPEN_PAR point_exp CLOSE_PAR    {$$=$2;}   // Ê¹µÃa<==(*p)+
 	   //|MUL error                       {$$=NULL;}
        ;
 
-//ç®—æœ¯è¡¨è¾¾å¼
+//ËãÊõ±í´ïÊ½
 ari_exp     
 	   :simple_ari_exp                  {$$=$1;}
-	   |simple_ari_exp relation_operator ari_exp {$$=new CSyntaxNode($2, $1, $3, BOOLTYPE);} //ç®—æœ¯è¡¨è¾¾å¼ä¸­å¯ä»¥æœ‰boolè¡¨è¾¾å¼ï¼Œå¦‚a+(b>c)
-	   |ari_exp bi_operator simple_ari_exp    {$$=new CSyntaxNode($2, $1, $3, ARITHMETICTYPE);}   // +|-
+	   |simple_ari_exp relation_operator ari_exp {$$=new CSyntaxNode($2, $1, $3, BOOLTYPE);} //ËãÊõ±í´ïÊ½ÖĞ¿ÉÒÔÓĞbool±í´ïÊ½£¬Èça+(b>c)
+	 //  |simple_ari_exp bi_operator ari_exp    {$$=new CSyntaxNode($2, $1, $3, ARITHMETICTYPE);}   
+       |ari_exp ari_operator simple_ari_exp    {$$=new CSyntaxNode($2, $1, $3, ARITHMETICTYPE);}   // +|-
 	   |IF bool_exp THEN  ari_exp option_exp_else_statement 
 	   {
             $$ = new CSyntaxNode(IF_ELSE_EXP, $2, $4, $5, ARITHMETICTYPE);
@@ -833,23 +835,23 @@ member_in_exp
 	   |OPEN_PAR ari_exp CLOSE_PAR      {$$=$2;}   
 	   |math_function                  {$$=$1}
 	   |charliteral						{$$=$1;}
-	   |address_exp						{$$=$1;} // åˆå§‹åŒ–æŒ‡é’ˆæ•°ç»„ç”¨åˆ°	   
-	   |type_cast                       {$$=$1;} //  å¼ºåˆ¶è½¬æ¢å¯ä»¥å‚ä¸ç®—æ•°è¿ç®—	  	   	   
-	   |struct_member_exp               {$$=$1;} //  ç»“æ„ä½“ä¸²è”
+	   |address_exp						{$$=$1;} // ³õÊ¼»¯Ö¸ÕëÊı×éÓÃµ½	   
+	   |type_cast                       {$$=$1;} //  Ç¿ÖÆ×ª»»¿ÉÒÔ²ÎÓëËãÊıÔËËã	  	   	   
+	   |struct_member_exp               {$$=$1;} //  ½á¹¹Ìå´®Áª
 	   |size_of							{$$=$1;}
 	   ;
 
 
 
-bi_operator
+bi_operator      
 	   :MUL								{$$=MUL_EXP;}
 	   |DIV								{$$=DIV_EXP;}
 	   |MOD								{$$=MOD_EXP;}
-	   |LST						     	{$$=LST_EXP;}//  å·¦ç§» left shift
-	   |RST	 						    {$$=RST_EXP;}//  å³ç§» right shift
-	   |ADDRESS 	 					{$$=BAN_EXP;}//  æŒ‰ä½ä¸
-	   |INTER_OR	 					{$$=BOR_EXP;}//  æŒ‰ä½æˆ–
-	   |CON	 		         			{$$=XOR_EXP;}//  å¼‚æˆ–	
+	   |LST						     	{$$=LST_EXP;}//  ×óÒÆ left shift
+	   |RST	 						    {$$=RST_EXP;}//  ÓÒÒÆ right shift
+	   |ADDRESS 	 					{$$=BAN_EXP;}//  °´Î»Óë
+	   |INTER_OR	 					{$$=BOR_EXP;}//  °´Î»»ò
+	   |CON	 		         			{$$=XOR_EXP;}//  Òì»ò	
 	   ;
 ari_operator:
 		ADD								{$$=ADD_EXP;}
@@ -864,7 +866,7 @@ array_exp
 	   ;
 
 
-//å¯èƒ½æ˜¯å¯¹äºæ•°ç»„èµ‹å€¼[1,2,4]çš„å½¢å¼  ã€int float str char arrayã€‘ 
+//¿ÉÄÜÊÇ¶ÔÓÚÊı×é¸³Öµ[1,2,4]µÄĞÎÊ½  ¡¾int float str char array¡¿ 
 option_list_value
 	   :OPEN_MPAR ari_exp inner_option_list_value CLOSE_MPAR
 	   {
@@ -888,7 +890,7 @@ option_list_value
    	   }*/
 	   ;     
 
-// ç»“æ„ä½“çš„åˆå§‹åŒ–åˆ—è¡¨{{1,"hello"},{2,"hi"}}
+// ½á¹¹ÌåµÄ³õÊ¼»¯ÁĞ±í{{1,"hello"},{2,"hi"}}
 option_struct_list_value
 	   :OPEN_BPAR ari_exp inner_option_list_value CLOSE_BPAR
 	   {
@@ -913,7 +915,7 @@ option_struct_list_value
    	   }*/
 	   ;  
 
-//æ­¤å¤„å«æœ‰STR_EXP,CHARLITERAL_EXPçš„ä¸åŒå«ä¹‰å®šä¹‰ è¿”å›å€¼ç±»å‹ä¸ºLISTTYPE 
+//´Ë´¦º¬ÓĞSTR_EXP,CHARLITERAL_EXPµÄ²»Í¬º¬Òå¶¨Òå ·µ»ØÖµÀàĞÍÎªLISTTYPE 
 inner_option_list_value
 	   :COMMA ari_exp inner_option_list_value
 	   {
@@ -948,7 +950,7 @@ address_exp:
 			{
 			   $$=new CSyntaxNode(ADDRESS_EXP, $2, VOIDTYPE );
 			}
-			//add by YY 2013/11/28 å¤šé‡åœ°å€å¼•ç”¨æš‚æ—¶ä¸è€ƒè™‘
+			//add by YY 2013/11/28 ¶àÖØµØÖ·ÒıÓÃÔİÊ±²»¿¼ÂÇ
 		    |ADDRESS address_exp 
 			{
 			   $$=new CSyntaxNode(ADDRESS_EXP, $2, VOIDTYPE);
@@ -959,22 +961,22 @@ address_exp:
  
 
 
-//åŠ å…¥å¼ºåˆ¶ç±»å‹è½¬æ¢è¯­å¥ 
+//¼ÓÈëÇ¿ÖÆÀàĞÍ×ª»»Óï¾ä 
 type_cast:
-			//add by YY 2014/01/07 10:57 å¼ºåˆ¶è½¬æ¢ (int) (float) (char)		
+			//add by YY 2014/01/07 10:57 Ç¿ÖÆ×ª»» (int) (float) (char)		
 		      OPEN_PAR INTDECLARATION CLOSE_PAR type_cast_alg_exp     {$$=new CSyntaxNode(TYPE_CAST_STA, $4, INTTYPE);}      //char->int   float->int   
 			| OPEN_PAR FLOATDECLARATION CLOSE_PAR type_cast_alg_exp {$$=new CSyntaxNode(TYPE_CAST_STA, $4, FLOATTYPE);}    //int->float   //char->float  
 			| OPEN_PAR CHARDECLARATION CLOSE_PAR type_cast_alg_exp   {$$=new CSyntaxNode(TYPE_CAST_STA, $4, CHARTYPE);}     //int->char float->char
 			
-			//add by YY 2014/01/07 10:57 å¼ºåˆ¶è½¬æ¢ (signed int) (signed char)	
+			//add by YY 2014/01/07 10:57 Ç¿ÖÆ×ª»» (signed int) (signed char)	
 			| OPEN_PAR SIGNED INTDECLARATION CLOSE_PAR type_cast_alg_exp     {$$=new CSyntaxNode(TYPE_CAST_STA, $5, INTTYPE);}      //char->int   float->int   
 			| OPEN_PAR SIGNED CHARDECLARATION CLOSE_PAR type_cast_alg_exp   {$$=new CSyntaxNode(TYPE_CAST_STA, $5, CHARTYPE);}     //int->char float->char
 			
-			//add by YY 2014/01/07 10:57 å¼ºåˆ¶è½¬æ¢ (unsigned int) (unsigned char)		
+			//add by YY 2014/01/07 10:57 Ç¿ÖÆ×ª»» (unsigned int) (unsigned char)		
 			| OPEN_PAR UNSIGNED INTDECLARATION CLOSE_PAR type_cast_alg_exp     {$$=new CSyntaxNode(TYPE_CAST_STA, $5, UINTTYPE);}      //char->int   float->int  
 			| OPEN_PAR UNSIGNED CHARDECLARATION CLOSE_PAR type_cast_alg_exp   {$$=new CSyntaxNode(TYPE_CAST_STA, $5, UCHARTYPE);}     //int->char float->char						
 			
-			//add by YY 2014/01/07 10:57 å¼ºåˆ¶è½¬æ¢ (int*) (unsigned int*) (float*) (char*) (unsigned char*)			
+			//add by YY 2014/01/07 10:57 Ç¿ÖÆ×ª»» (int*) (unsigned int*) (float*) (char*) (unsigned char*)			
 			| OPEN_PAR INTDECLARATION MUL CLOSE_PAR casted_element   {$$=new CSyntaxNode(TYPE_CAST_STA, $5, INTPTYPE);}  
 			| OPEN_PAR UNSIGNED INTDECLARATION MUL CLOSE_PAR casted_element   {$$=new CSyntaxNode(TYPE_CAST_STA, $6, UINTPTYPE);}  
 			| OPEN_PAR FLOATDECLARATION MUL CLOSE_PAR casted_element   {$$=new CSyntaxNode(TYPE_CAST_STA, $5, FLOATPTYPE);}  
@@ -982,24 +984,24 @@ type_cast:
 			| OPEN_PAR UNSIGNED CHARDECLARATION MUL CLOSE_PAR casted_element   {$$=new CSyntaxNode(TYPE_CAST_STA, $6, UCHARPTYPE);}   
 			| OPEN_PAR VOIDDECLARATION MUL CLOSE_PAR casted_element {$$=new CSyntaxNode(TYPE_CAST_STA, $5, VOIDPTYPE);}
 
-			//äºŒé‡æŒ‡é’ˆå¼ºåˆ¶ç±»å‹è½¬æ¢			
+			//¶şÖØÖ¸ÕëÇ¿ÖÆÀàĞÍ×ª»»			
 			| OPEN_PAR INTDECLARATION MUL MUL CLOSE_PAR casted_element   {$$=new CSyntaxNode(DOUBLE_TYPE_CAST_STA, $6, DOUBLEINTPTYPE);}  
 			| OPEN_PAR UNSIGNED INTDECLARATION MUL MUL CLOSE_PAR casted_element   {$$=new CSyntaxNode(DOUBLE_TYPE_CAST_STA, $7, DOUBLEUINTPTYPE);}  
 			| OPEN_PAR FLOATDECLARATION MUL MUL CLOSE_PAR casted_element   {$$=new CSyntaxNode(DOUBLE_TYPE_CAST_STA, $6, DOUBLEFLOATPTYPE);}  
 			| OPEN_PAR CHARDECLARATION MUL MUL CLOSE_PAR casted_element   {$$=new CSyntaxNode(DOUBLE_TYPE_CAST_STA, $6, DOUBLECHARPTYPE);}  
 			| OPEN_PAR UNSIGNED CHARDECLARATION MUL MUL CLOSE_PAR casted_element   {$$=new CSyntaxNode(DOUBLE_TYPE_CAST_STA, $7, DOUBLEUCHARPTYPE);}   
 			| OPEN_PAR VOIDDECLARATION MUL MUL CLOSE_PAR casted_element {$$=new CSyntaxNode(DOUBLE_TYPE_CAST_STA, $6, VOIDPTYPE);}
-			//yangkai mallocç›¸å…³
+			//yangkai mallocÏà¹Ø
 			| OPEN_PAR STRUCT STRUCT_TYPE MUL CLOSE_PAR casted_element   {$$=new CSyntaxNode(TYPE_CAST_STA, $3, $6, STRUCTPTYPE);} 
 			| OPEN_PAR STRUCT_TYPE MUL CLOSE_PAR casted_element  {$$=new CSyntaxNode(TYPE_CAST_STA, $2, $5, STRUCTPTYPE);} 
-            //ç»“æ„ä½“ç±»å‹äºŒé‡æŒ‡é’ˆè½¬æ¢
+            //½á¹¹ÌåÀàĞÍ¶şÖØÖ¸Õë×ª»»
 			| OPEN_PAR STRUCT STRUCT_TYPE MUL MUL CLOSE_PAR casted_element   {$$=new CSyntaxNode(DOUBLE_TYPE_CAST_STA, $3, $7, DOUBLESTRUCTPTYPE);} 
 			| OPEN_PAR STRUCT_TYPE MUL MUL CLOSE_PAR casted_element  {$$=new CSyntaxNode(DOUBLE_TYPE_CAST_STA, $2, $6, DOUBLESTRUCTPTYPE);} 
 			;
-casted_element:	type_cast_alg_exp	{$$=$1;}   // mallocç›¸å…³			  
+casted_element:	type_cast_alg_exp	{$$=$1;}   // mallocÏà¹Ø			  
 			  | MALLOC OPEN_PAR ari_exp CLOSE_PAR {$$=new CSyntaxNode(MALLOC_STA, $3, VOIDTYPE);} 
 			  ;		
-//åŠ å…¥å¼ºåˆ¶ç±»å‹è½¬æ¢è¯­å¥ end Jane
+//¼ÓÈëÇ¿ÖÆÀàĞÍ×ª»»Óï¾ä end Jane
  
 all_sizeof_type:
 			all_type_define{$$=$1;}
@@ -1020,7 +1022,7 @@ size_of :
 		   |SIZEOF OPEN_PAR strliteral CLOSE_PAR {$$=new CSyntaxNode(SIZEOF_EXP, $3, STRTYPE);}
 		   ;
 
-//åŠ å…¥å¯¹å­—ç¬¦ä¸²æ“ä½œçš„å‡½æ•°  
+//¼ÓÈë¶Ô×Ö·û´®²Ù×÷µÄº¯Êı  
 
 String_Function: 
                  String_Function_head   {$$=$1;}
@@ -1084,14 +1086,14 @@ str_func_parameter:  identifier					{$$=$1;}
 
  
 
-//  math.håº“ä¸­çš„å‡½æ•°
-math_function: //å››èˆäº”å…¥æ•´æ•°å€¼
+//  math.h¿âÖĞµÄº¯Êı
+math_function: //ËÄÉáÎåÈëÕûÊıÖµ
 				 ROUND ari_exp   {$$=new CSyntaxNode(ROUND_EXP, $2, FLOATTYPE);}
 
-				 //å‘ä¸Šå–æ•´
+				 //ÏòÉÏÈ¡Õû
 				|CEIL ari_exp     {$$=new CSyntaxNode(CEIL_EXP, $2, FLOATTYPE);}
 
-				//å‘ä¸‹å–æ•´
+				//ÏòÏÂÈ¡Õû
 				|FLOOR ari_exp    {$$=new CSyntaxNode(FLOOR_EXP, $2, FLOATTYPE);}
 			
 				
@@ -1102,26 +1104,26 @@ math_function: //å››èˆäº”å…¥æ•´æ•°å€¼
 				|ACOS ari_exp     {$$=new CSyntaxNode(ACOS_EXP, $2, FLOATTYPE);}
 				|ATAN ari_exp     {$$=new CSyntaxNode(ATAN_EXP, $2, FLOATTYPE);}
 
-				//åŒæ›²æ­£å¼¦å‡½æ•°
+				//Ë«ÇúÕıÏÒº¯Êı
 				|SINH ari_exp     {$$=new CSyntaxNode(SINH_EXP, $2, FLOATTYPE);}
 				|COSH ari_exp     {$$=new CSyntaxNode(COSH_EXP, $2, FLOATTYPE);}
 				|TANH ari_exp     {$$=new CSyntaxNode(TANH_EXP, $2, FLOATTYPE);}
 
-				//ä»¥eä¸ºåº•çš„æŒ‡æ•°
+				//ÒÔeÎªµ×µÄÖ¸Êı
 				|EXP ari_exp      {$$=new CSyntaxNode(EXP_EXP, $2, FLOATTYPE);}
 				|LOG ari_exp      {$$=new CSyntaxNode(LOG_EXP, $2, FLOATTYPE);}
 				|LOG10 ari_exp    {$$=new CSyntaxNode(LOG10_EXP, $2, FLOATTYPE);}
 				|SQRT ari_exp     {$$=new CSyntaxNode(SQRT_EXP, $2, FLOATTYPE);}
 				
-				//atan2(y,x) åæ­£åˆ‡
+				//atan2(y,x) ·´ÕıÇĞ
 				|ATAN2 OPEN_PAR ari_exp COMMA ari_exp CLOSE_PAR {$$=new CSyntaxNode(ATAN2_EXP, $3, $5, FLOATTYPE);}
 				|POW OPEN_PAR ari_exp COMMA ari_exp CLOSE_PAR   {$$=new CSyntaxNode(POW_EXP, $3, $5, FLOATTYPE);}
 			    
-				//doubleå‹æ±‚æ¨¡
+				//doubleĞÍÇóÄ£
 				|FMOD OPEN_PAR ari_exp COMMA ari_exp CLOSE_PAR   {$$=new CSyntaxNode(FMOD_EXP, $3, $5, FLOATTYPE);}
-				|MODF OPEN_PAR ari_exp COMMA ari_exp CLOSE_PAR   {$$=new CSyntaxNode(MODF_EXP, $3, $5, FLOATTYPE);}  // æœªå®Œå…¨å®ç°
+				|MODF OPEN_PAR ari_exp COMMA ari_exp CLOSE_PAR   {$$=new CSyntaxNode(MODF_EXP, $3, $5, FLOATTYPE);}  // Î´ÍêÈ«ÊµÏÖ
 				
-				//ldexp(x,exp)   xä¹˜ä»¥2çš„expæ¬¡æ–¹
+				//ldexp(x,exp)   x³ËÒÔ2µÄexp´Î·½
 				|LDEXP OPEN_PAR ari_exp COMMA ari_exp CLOSE_PAR   {$$=new CSyntaxNode(LDEXP_EXP, $3, $5, FLOATTYPE);} 
 
 				|ABS ari_exp     {$$=new CSyntaxNode(ABS_EXP, $2, INTTYPE);}
@@ -1150,7 +1152,7 @@ prime_bool_exp
 //2015-3-7	   |EMPTY                           {$$=new CSyntaxNode(EMPTY_EXP, BOOLTYPE);}
 	   |ari_exp                         {$$=$1;}
 //2015-3-7	   |String_Function_cmp				{$$=$1;}
-//2015-3-7	   |file_statement			     	{$$=$1;} // æ–‡ä»¶ç›¸å…³å‡½æ•°å¯ä»¥ä½œä¸ºå¸ƒå°”è¡¨è¾¾å¼
+//2015-3-7	   |file_statement			     	{$$=$1;} // ÎÄ¼şÏà¹Øº¯Êı¿ÉÒÔ×÷Îª²¼¶û±í´ïÊ½
 		 |ari_exp EQ strliteral          {$$=new CSyntaxNode(EQU_EXP, $1, $3, BOOLTYPE);}       
 	   |ari_exp NE strliteral			{$$=new CSyntaxNode(NE_EXP, $1, $3, BOOLTYPE);}
 
@@ -1182,50 +1184,50 @@ relation_operator
 	   ;
 
 
-//æ·»åŠ ç±»å‹éœ€è¦æ”¹åŠ¨çš„åœ°æ–¹ 
+//Ìí¼ÓÀàĞÍĞèÒª¸Ä¶¯µÄµØ·½ 
 
  
 sign_type_define:
 	    UNSIGNED INTDECLARATION					{$$=UINTTYPE;} 
 	   |UNSIGNED CHARDECLARATION				{$$=UCHARTYPE;}
 	   ;
-//  ç”¨äºå‡½æ•°å½¢å‚åˆ—è¡¨option_function_parameter_listï¼Œä½¿å¾—å¯ä»¥ä¼ é€’unsignedä¿®é¥°å‚æ•°
+//  ÓÃÓÚº¯ÊıĞÎ²ÎÁĞ±íoption_function_parameter_list£¬Ê¹µÃ¿ÉÒÔ´«µİunsignedĞŞÊÎ²ÎÊı
 all_type_define:
 		sign_type_define  {$$=$1;}
 	   |type_define       {$$=$1;}
 	   ;
 
 
-//å®šä¹‰è°“è¯å’Œå‡½æ•°æ—¶ä½¿ç”¨çš„å½¢å‚åˆ—è¡¨
+//¶¨ÒåÎ½´ÊºÍº¯ÊıÊ±Ê¹ÓÃµÄĞÎ²ÎÁĞ±í
 option_function_parameter_list
 	   :all_type_define identifier inner_option_define_identifier
 	   {
 			$$ = new CSyntaxNode(PARAMETER_EXP, $2, $3, $1);
 	   }
-	   |all_type_define inner_option_define_identifier //  å‡½æ•°æŒ‡é’ˆçš„å½¢å‚åˆ—è¡¨å¯ä»¥æ²¡æœ‰å‚æ•°åå­—
+	   |all_type_define inner_option_define_identifier //  º¯ÊıÖ¸ÕëµÄĞÎ²ÎÁĞ±í¿ÉÒÔÃ»ÓĞ²ÎÊıÃû×Ö
 	   {
 			$$=NULL;
 	   }
 	   
-	   |STRUCT_TYPE identifier inner_option_define_identifier //ç»“æ„ä½“ S s	 
+	   |STRUCT_TYPE identifier inner_option_define_identifier //½á¹¹Ìå S s	 
 	   {
 	        CSyntaxNode* pChild0=new CSyntaxNode(STRUCT_PARAMETER_EXP, $1, $2, VOIDTYPE);
 			$$=new CSyntaxNode(PARAMETER_EXP, pChild0, $3, STRUCTTYPE);
 			pChild0=NULL;
 		}
-       |STRUCT_TYPE MUL identifier inner_option_define_identifier//ç»“æ„ä½“æŒ‡é’ˆç±»å‹çš„å‚æ•°S *s
+       |STRUCT_TYPE MUL identifier inner_option_define_identifier//½á¹¹ÌåÖ¸ÕëÀàĞÍµÄ²ÎÊıS *s
 	   {
 	        CSyntaxNode* pChild0= new CSyntaxNode(STRUCTP_PARAMETER_EXP, $1, $3, VOIDTYPE);
             $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $4, STRUCTPTYPE);
             pChild0=NULL;
 	   }
-       |STRUCT_TYPE MUL MUL identifier inner_option_define_identifier//ç»“æ„ä½“æŒ‡é’ˆç±»å‹çš„å‚æ•°S **s //äºŒé‡ç»“æ„ä½“æŒ‡é’ˆ
+       |STRUCT_TYPE MUL MUL identifier inner_option_define_identifier//½á¹¹ÌåÖ¸ÕëÀàĞÍµÄ²ÎÊıS **s //¶şÖØ½á¹¹ÌåÖ¸Õë
 	   {
 	        CSyntaxNode* pChild0= new CSyntaxNode(DOUBLESTRUCTP_PARAMETER_EXP, $1, $4, VOIDTYPE);
             $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $5, STRUCTPTYPE);
             pChild0=NULL;
 	   }
-	   |STRUCT_TYPE identifier ARRAY inner_option_define_identifier //ç»“æ„ä½“æ•°ç»„ S a[]	 
+	   |STRUCT_TYPE identifier ARRAY inner_option_define_identifier //½á¹¹ÌåÊı×é S a[]	 
 	   {
 
 			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $2, VOIDTYPE);
@@ -1235,25 +1237,25 @@ option_function_parameter_list
 	   
 		
 		
-	   |ID identifier inner_option_define_identifier //ç»“æ„ä½“ S s	 
+	   |ID identifier inner_option_define_identifier //½á¹¹Ìå S s	 
 	   {
 	        CSyntaxNode* pChild0=new CSyntaxNode(STRUCT_PARAMETER_EXP, $1, $2, VOIDTYPE);
 			$$=new CSyntaxNode(PARAMETER_EXP, pChild0, $3, STRUCTTYPE);
 			pChild0=NULL;
 		}
-	   |ID MUL identifier inner_option_define_identifier//ç»“æ„ä½“æŒ‡é’ˆç±»å‹çš„å‚æ•°S *s
+	   |ID MUL identifier inner_option_define_identifier//½á¹¹ÌåÖ¸ÕëÀàĞÍµÄ²ÎÊıS *s
 	   {
 	        CSyntaxNode* pChild0= new CSyntaxNode(STRUCTP_PARAMETER_EXP, $1, $3, VOIDTYPE);
             $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $4, STRUCTPTYPE);
             pChild0=NULL;
 	   }
-       |ID MUL MUL identifier inner_option_define_identifier//ç»“æ„ä½“æŒ‡é’ˆç±»å‹çš„å‚æ•°S **s //äºŒé‡ç»“æ„ä½“æŒ‡é’ˆ
+       |ID MUL MUL identifier inner_option_define_identifier//½á¹¹ÌåÖ¸ÕëÀàĞÍµÄ²ÎÊıS **s //¶şÖØ½á¹¹ÌåÖ¸Õë
 	   {
 	        CSyntaxNode* pChild0= new CSyntaxNode(DOUBLESTRUCTP_PARAMETER_EXP, $1, $4, VOIDTYPE);
             $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $5, STRUCTPTYPE);
             pChild0=NULL;
 	   }
-	   |ID identifier ARRAY inner_option_define_identifier //ç»“æ„ä½“æ•°ç»„ S a[]	 
+	   |ID identifier ARRAY inner_option_define_identifier //½á¹¹ÌåÊı×é S a[]	 
 	   {
 
 			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $2, VOIDTYPE);
@@ -1262,47 +1264,47 @@ option_function_parameter_list
 		}
 
 	   
-	   |STRUCT_TYPE  inner_option_define_identifier //ç»“æ„ä½“ S s	 
+	   |STRUCT_TYPE  inner_option_define_identifier //½á¹¹Ìå S s	 
 	   {
 	        $$=NULL;
 		}
-       |STRUCT_TYPE MUL  inner_option_define_identifier//ç»“æ„ä½“æŒ‡é’ˆç±»å‹çš„å‚æ•°S *s
+       |STRUCT_TYPE MUL  inner_option_define_identifier//½á¹¹ÌåÖ¸ÕëÀàĞÍµÄ²ÎÊıS *s
 	   {
 	        $$=NULL;
 	   }
-       |STRUCT_TYPE MUL MUL  inner_option_define_identifier//ç»“æ„ä½“æŒ‡é’ˆç±»å‹çš„å‚æ•°S **s //äºŒé‡ç»“æ„ä½“æŒ‡é’ˆ
+       |STRUCT_TYPE MUL MUL  inner_option_define_identifier//½á¹¹ÌåÖ¸ÕëÀàĞÍµÄ²ÎÊıS **s //¶şÖØ½á¹¹ÌåÖ¸Õë
 	   {
 			$$=NULL;
 	   }
 	  
        
-	   |ID  inner_option_define_identifier //ç»“æ„ä½“ S s	 
+	   |ID  inner_option_define_identifier //½á¹¹Ìå S s	 
 	   {
 	        $$=NULL;
 		}
-       |ID MUL  inner_option_define_identifier//ç»“æ„ä½“æŒ‡é’ˆç±»å‹çš„å‚æ•°S *s
+       |ID MUL  inner_option_define_identifier//½á¹¹ÌåÖ¸ÕëÀàĞÍµÄ²ÎÊıS *s
 	   {
 	        $$=NULL;
 	   }
-       |ID MUL MUL  inner_option_define_identifier//ç»“æ„ä½“æŒ‡é’ˆç±»å‹çš„å‚æ•°S **s //äºŒé‡ç»“æ„ä½“æŒ‡é’ˆ
+       |ID MUL MUL  inner_option_define_identifier//½á¹¹ÌåÖ¸ÕëÀàĞÍµÄ²ÎÊıS **s //¶şÖØ½á¹¹ÌåÖ¸Õë
 	   {
 			$$=NULL;
 	   }
 
 	   
-	   |all_type_define identifier ARRAY inner_option_define_identifier//æ•°ç»„ç±»å‹çš„å‚æ•°int a[]
+	   |all_type_define identifier ARRAY inner_option_define_identifier//Êı×éÀàĞÍµÄ²ÎÊıint a[]
 	   {
 			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $2, VOIDTYPE);
 			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $4, $1);
             pChild0=NULL;
 	   }
-	   |all_type_define MUL identifier ARRAY inner_option_define_identifier //æŒ‡é’ˆæ•°ç»„int *a[]
+	   |all_type_define MUL identifier ARRAY inner_option_define_identifier //Ö¸ÕëÊı×éint *a[]
 	   {
             CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $3, VOIDTYPE);
 			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $5, $1);
             pChild0=NULL;
 	   }
-	   	 //æ•°ç»„ç±»å‹çš„å‚æ•°a[4]
+	   	 //Êı×éÀàĞÍµÄ²ÎÊıa[4]
 	   |all_type_define identifier OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier  
 	   
 	   {
@@ -1310,7 +1312,7 @@ option_function_parameter_list
 			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $6, $1);
             pChild0=NULL;
 	   }
-	     //æ•°ç»„ç±»å‹çš„å‚æ•°a[3,2]
+	     //Êı×éÀàĞÍµÄ²ÎÊıa[3,2]
 	   |all_type_define identifier OPEN_MPAR ari_exp COMMA ari_exp CLOSE_MPAR inner_option_define_identifier
 	   
 	   {
@@ -1318,31 +1320,31 @@ option_function_parameter_list
 			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $8, $1);
             pChild0=NULL;
 	   }
-	    //æ•°ç»„ç±»å‹çš„å‚æ•°a[][100]
+	    //Êı×éÀàĞÍµÄ²ÎÊıa[][100]
 	   |all_type_define identifier ARRAY OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier
 	   {
 			CSyntaxNode* pChild0=new CSyntaxNode(DOUBLEARRAY_PARAMETER_EXP, $2, VOIDTYPE);
 			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $7, $1);
             pChild0=NULL;
 	   }
-	   |all_type_define MUL identifier inner_option_define_identifier//æŒ‡é’ˆç±»å‹çš„å‚æ•°*p
+	   |all_type_define MUL identifier inner_option_define_identifier//Ö¸ÕëÀàĞÍµÄ²ÎÊı*p
 	   {
 	      CSyntaxNode* pChild0= new CSyntaxNode(POINT_PARAMETER_EXP, $3, VOIDTYPE);
           $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $4, $1);
           pChild0=NULL;
 		}
-	   |all_type_define MUL inner_option_define_identifier//æŒ‡é’ˆç±»å‹çš„å‚æ•°*p
+	   |all_type_define MUL inner_option_define_identifier//Ö¸ÕëÀàĞÍµÄ²ÎÊı*p
 	   {
 	      $$=NULL;
 		}
-	   |all_type_define MUL MUL identifier inner_option_define_identifier//æŒ‡é’ˆç±»å‹çš„å‚æ•°**p
+	   |all_type_define MUL MUL identifier inner_option_define_identifier//Ö¸ÕëÀàĞÍµÄ²ÎÊı**p
 	   {
 	      CSyntaxNode* pChild0= new CSyntaxNode(DOUBLEPOINT_PARAMETER_EXP, $4, VOIDTYPE);
           $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $5, $1);
           pChild0=NULL;
 		}
-		// å‡½æ•°çš„å‚æ•°å¯ä»¥æ˜¯å‡½æ•°æŒ‡é’ˆ
-	   |OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier//å‡½æ•°æŒ‡é’ˆç±»å‹çš„å‚æ•°
+		// º¯ÊıµÄ²ÎÊı¿ÉÒÔÊÇº¯ÊıÖ¸Õë
+	   |OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier//º¯ÊıÖ¸ÕëÀàĞÍµÄ²ÎÊı
 	   {
 	      CSyntaxNode* pChild0= new CSyntaxNode(FUNCP_PARAMETER_EXP, $3, VOIDTYPE);
           $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $8, FUNCPTYPE);
@@ -1355,7 +1357,7 @@ inner_option_define_identifier
 	    { 
 		   $$ = new CSyntaxNode(PARAMETER_EXP, $3, $4, $2);
 		}
-		|COMMA all_type_define inner_option_define_identifier  // å‡½æ•°æŒ‡é’ˆçš„å½¢å‚åˆ—è¡¨å¯ä»¥æ²¡æœ‰å‚æ•°åå­—       
+		|COMMA all_type_define inner_option_define_identifier  // º¯ÊıÖ¸ÕëµÄĞÎ²ÎÁĞ±í¿ÉÒÔÃ»ÓĞ²ÎÊıÃû×Ö       
 	    { 
 		   $$ = NULL;
 		}
@@ -1371,20 +1373,20 @@ inner_option_define_identifier
 			$$=new CSyntaxNode(PARAMETER_EXP, pChild0, $4, STRUCTTYPE);
 			pChild0=NULL;
 	   }
-	   |COMMA STRUCT_TYPE MUL identifier inner_option_define_identifier//ç»“æ„ä½“æŒ‡é’ˆç±»å‹çš„å‚æ•°
+	   |COMMA STRUCT_TYPE MUL identifier inner_option_define_identifier//½á¹¹ÌåÖ¸ÕëÀàĞÍµÄ²ÎÊı
 	   {
 	        CSyntaxNode* pChild0= new CSyntaxNode(STRUCTP_PARAMETER_EXP, $2, $4, VOIDTYPE);
             $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $5, STRUCTPTYPE);
             pChild0=NULL;
 	   }
-	   |COMMA ID identifier ARRAY inner_option_define_identifier //ç»“æ„ä½“æ•°ç»„ S a[]	 
+	   |COMMA ID identifier ARRAY inner_option_define_identifier //½á¹¹ÌåÊı×é S a[]	 
 	   {
 
 			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $3, VOIDTYPE);
 			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $5, STRUCTTYPE);
             pChild0=NULL;
 		}
-	   |COMMA STRUCT_TYPE identifier ARRAY inner_option_define_identifier //ç»“æ„ä½“æ•°ç»„ S a[]	 
+	   |COMMA STRUCT_TYPE identifier ARRAY inner_option_define_identifier //½á¹¹ÌåÊı×é S a[]	 
 	   {
 
 			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $3, VOIDTYPE);
@@ -1398,7 +1400,7 @@ inner_option_define_identifier
 		    $$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $5, $2);
             pChild0=NULL;
 		}
-		|COMMA all_type_define MUL identifier ARRAY inner_option_define_identifier  //æŒ‡é’ˆæ•°ç»„ int *a[]
+		|COMMA all_type_define MUL identifier ARRAY inner_option_define_identifier  //Ö¸ÕëÊı×é int *a[]
 	    { 
 		    CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $4, VOIDTYPE);
 		    $$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $6, $2);
@@ -1412,8 +1414,8 @@ inner_option_define_identifier
 
 		  pChild0=NULL;
 		} 2015-3-7*/
-		//  å‡½æ•°çš„å‚æ•°å¯ä»¥æ˜¯å‡½æ•°æŒ‡é’ˆ
-	   |COMMA OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier//å‡½æ•°æŒ‡é’ˆç±»å‹çš„å‚æ•°
+		//  º¯ÊıµÄ²ÎÊı¿ÉÒÔÊÇº¯ÊıÖ¸Õë
+	   |COMMA OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier//º¯ÊıÖ¸ÕëÀàĞÍµÄ²ÎÊı
 	   {
 	      CSyntaxNode* pChild0= new CSyntaxNode(FUNCP_PARAMETER_EXP, $4, VOIDTYPE);
           $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $9, FUNCPTYPE);
@@ -1421,7 +1423,7 @@ inner_option_define_identifier
 		}
 	   | /* empty */                                       {$$ = NULL;}
 	   
-	    //æ•°ç»„ç±»å‹çš„å‚æ•°a[4]
+	    //Êı×éÀàĞÍµÄ²ÎÊıa[4]
 	   |COMMA all_type_define identifier OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier  
 	   
 	   {
@@ -1429,7 +1431,7 @@ inner_option_define_identifier
 			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $7, $2);
             pChild0=NULL;
 	   }
-	   	 //æ•°ç»„ç±»å‹çš„å‚æ•°a[3,2]
+	   	 //Êı×éÀàĞÍµÄ²ÎÊıa[3,2]
 	   |COMMA all_type_define identifier OPEN_MPAR ari_exp COMMA ari_exp CLOSE_MPAR inner_option_define_identifier
 	   
 	   {
@@ -1437,20 +1439,20 @@ inner_option_define_identifier
 			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $9, $2);
             pChild0=NULL;
 	   }
-	    //æ•°ç»„ç±»å‹çš„å‚æ•°a[][100]
+	    //Êı×éÀàĞÍµÄ²ÎÊıa[][100]
 	   |COMMA all_type_define identifier ARRAY OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier
 	   {
 			CSyntaxNode* pChild0=new CSyntaxNode(DOUBLEARRAY_PARAMETER_EXP, $3, VOIDTYPE);
 			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $8, $2);
             pChild0=NULL;
 	   }
-	   |COMMA all_type_define MUL identifier inner_option_define_identifier//æŒ‡é’ˆç±»å‹çš„å‚æ•°*p
+	   |COMMA all_type_define MUL identifier inner_option_define_identifier//Ö¸ÕëÀàĞÍµÄ²ÎÊı*p
 	   {
 	      CSyntaxNode* pChild0= new CSyntaxNode(POINT_PARAMETER_EXP, $4, VOIDTYPE);
           $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $5, $2);
           pChild0=NULL;
 		}
-	   |COMMA all_type_define MUL inner_option_define_identifier//æŒ‡é’ˆç±»å‹çš„å‚æ•°*p
+	   |COMMA all_type_define MUL inner_option_define_identifier//Ö¸ÕëÀàĞÍµÄ²ÎÊı*p
 	   {
 	      $$=NULL;
 		}
@@ -1461,7 +1463,7 @@ inner_option_define_identifier
 
 
 
-//è°ƒç”¨å‡½æ•°å’Œè°“è¯çš„å®å‚åˆ—è¡¨ï¼ŒåŠ å…¥å­—ç¬¦ä¸²  
+//µ÷ÓÃº¯ÊıºÍÎ½´ÊµÄÊµ²ÎÁĞ±í£¬¼ÓÈë×Ö·û´®  
 option_function_identifier
        :ass_right inner_option_function_identifier           
 	   {
@@ -1500,7 +1502,7 @@ inner_option_function_identifier
 	   |COMMA error                                        {$$=NULL;}
 	   ;
 
-//è°ƒç”¨å‡½æ•°å’Œè°“è¯çš„å®å‚åˆ—è¡¨ï¼ŒåŠ å…¥å­—ç¬¦ä¸² end
+//µ÷ÓÃº¯ÊıºÍÎ½´ÊµÄÊµ²ÎÁĞ±í£¬¼ÓÈë×Ö·û´® end
 
 
 
@@ -1614,7 +1616,7 @@ extend_for_statement
 		 pchild0=NULL;
 	   }
        ;
-for_sta_init//forè¯­å¥æ‹¬å·ä¸­çš„åˆå§‹åŒ–è¯­å¥,å¯ä»¥æ˜¯èµ‹å€¼è¯­å¥ï¼Œä¹Ÿå¯ä»¥æ˜¯å£°æ˜è¯­å¥,ä¹Ÿå¯ä»¥ä¸å†™
+for_sta_init//forÓï¾äÀ¨ºÅÖĞµÄ³õÊ¼»¯Óï¾ä,¿ÉÒÔÊÇ¸³ÖµÓï¾ä£¬Ò²¿ÉÒÔÊÇÉùÃ÷Óï¾ä,Ò²¿ÉÒÔ²»Ğ´
        :ass_statement 
 	   {
 	      $$=$1;
@@ -1628,7 +1630,7 @@ for_sta_init//forè¯­å¥æ‹¬å·ä¸­çš„åˆå§‹åŒ–è¯­å¥,å¯ä»¥æ˜¯èµ‹å€¼è¯­å¥ï¼Œä¹Ÿå
 	      $$=NULL;
 	   }
        ;
-for_sta_condition//forè¯­å¥æ‹¬å·ä¸­çš„æ¡ä»¶è¯­å¥ï¼Œæ˜¯ä¸€ä¸ªå¸ƒå°”è¡¨è¾¾å¼ä¹Ÿå¯ä»¥ä¸å†™
+for_sta_condition//forÓï¾äÀ¨ºÅÖĞµÄÌõ¼şÓï¾ä£¬ÊÇÒ»¸ö²¼¶û±í´ïÊ½Ò²¿ÉÒÔ²»Ğ´
       :bool_exp
 	  {
 	      $$=$1;
@@ -1638,7 +1640,7 @@ for_sta_condition//forè¯­å¥æ‹¬å·ä¸­çš„æ¡ä»¶è¯­å¥ï¼Œæ˜¯ä¸€ä¸ªå¸ƒå°”è¡¨è¾¾å¼ä
 	      $$=NULL;
 	  }
 	  ;
-for_sta_control//forè¯­å¥æ‹¬å·ä¸­çš„æ§åˆ¶è¯­å¥ï¼Œæ˜¯ä¸€ä¸ªèµ‹å€¼è¯­å¥ä¹Ÿå¯ä»¥ä¸å†™
+for_sta_control//forÓï¾äÀ¨ºÅÖĞµÄ¿ØÖÆÓï¾ä£¬ÊÇÒ»¸ö¸³ÖµÓï¾äÒ²¿ÉÒÔ²»Ğ´
       :ass_statement
 	  {
 	     $$=$1;
@@ -1707,7 +1709,7 @@ option_input
 		;
 
 
-// s.a->b[2].a   ç»“æ„ä½“ä¸²è”
+// s.a->b[2].a   ½á¹¹Ìå´®Áª
 struct_member_exp 
 		:identifier	 DOT identifier option_struct_member_exp						{$$=new CSyntaxNode(STRUCT_IDENT_EXP, $1, $3, $4, VOIDTYPE);}
 		|array        DOT identifier option_struct_member_exp						{$$=new CSyntaxNode(STRUCT_IDENT_EXP, $1, $3, $4, VOIDTYPE);}
@@ -1725,8 +1727,8 @@ struct_member_exp
 		|identifier	 IMPLY array option_struct_member_exp						{$$=new CSyntaxNode(STRUCTP_LIST_EXP, $1, $3, $4, VOIDTYPE);}
 		|array        IMPLY array option_struct_member_exp						{$$=new CSyntaxNode(STRUCTP_LIST_EXP, $1, $3, $4, VOIDTYPE);}
 		|OPEN_PAR address_exp CLOSE_PAR  IMPLY array option_struct_member_exp     {$$=new CSyntaxNode(STRUCTP_LIST_EXP, $2, $5, $6, VOIDTYPE);}
-		|identifier DOT function {$$=new CSyntaxNode(STRUCT_FUNC_EXP, $1, $3, VOIDTYPE);} //ç»“æ„ä½“æˆå‘˜æ˜¯å‡½æ•°æŒ‡é’ˆ
-		|identifier IMPLY function {$$=new CSyntaxNode(STRUCTP_FUNC_EXP, $1, $3, VOIDTYPE);} //ç»“æ„ä½“æˆå‘˜æ˜¯å‡½æ•°æŒ‡é’ˆ
+		|identifier DOT function {$$=new CSyntaxNode(STRUCT_FUNC_EXP, $1, $3, VOIDTYPE);} //½á¹¹Ìå³ÉÔ±ÊÇº¯ÊıÖ¸Õë
+		|identifier IMPLY function {$$=new CSyntaxNode(STRUCTP_FUNC_EXP, $1, $3, VOIDTYPE);} //½á¹¹Ìå³ÉÔ±ÊÇº¯ÊıÖ¸Õë
 		|point_exp   IMPLY array option_struct_member_exp                {$$=new CSyntaxNode(STRUCTP_LIST_EXP, $1, $3, $4, VOIDTYPE);}
 		|OPEN_PAR struct_member_exp CLOSE_PAR {$$=$2;}
 		;
@@ -1737,6 +1739,6 @@ option_struct_member_exp
 		|DOT array			option_struct_member_exp            {$$=new CSyntaxNode(STRUCT_LIST_EXP, $2, $3, VOIDTYPE);}
 		|IMPLY identifier   option_struct_member_exp    {$$=new CSyntaxNode(STRUCTP_IDENT_EXP, $2, $3, VOIDTYPE);}
 		|IMPLY array			option_struct_member_exp		  {$$=new CSyntaxNode(STRUCTP_LIST_EXP, $2, $3, VOIDTYPE);}
-		|DOT function {$$=new CSyntaxNode(STRUCT_FUNC_EXP, $2, NULL, VOIDTYPE);}    //ç»“æ„ä½“æˆå‘˜æ˜¯å‡½æ•°æŒ‡é’ˆ
-		|IMPLY function {$$=new CSyntaxNode(STRUCTP_FUNC_EXP, $2, NULL, VOIDTYPE);}  //ç»“æ„ä½“æˆå‘˜æ˜¯å‡½æ•°æŒ‡é’ˆ
+		|DOT function {$$=new CSyntaxNode(STRUCT_FUNC_EXP, $2, NULL, VOIDTYPE);}    //½á¹¹Ìå³ÉÔ±ÊÇº¯ÊıÖ¸Õë
+		|IMPLY function {$$=new CSyntaxNode(STRUCTP_FUNC_EXP, $2, NULL, VOIDTYPE);}  //½á¹¹Ìå³ÉÔ±ÊÇº¯ÊıÖ¸Õë
 		;
