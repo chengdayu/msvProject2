@@ -2,6 +2,8 @@
 #define IR_H_INCLUDED
 
 #include "llvm/ADT/SmallVector.h"
+#include "llvm/ExecutionEngine/GenericValue.h"
+#include "llvm/ExecutionEngine/Interpreter.h"
 #include "llvm/Analysis/Verifier.h"
 #include "llvm/IR/BasicBlock.h"
 #include "llvm/IR/CallingConv.h"
@@ -9,6 +11,11 @@
 #include "llvm/IR/Module.h"
 #include "llvm/IR/Instructions.h"
 #include "llvm/IR/IRBuilder.h"
+#include "llvm/Support/ManagedStatic.h"
+#include "llvm/Support/TargetSelect.h"
+#include "llvm/Support/raw_ostream.h"
+
+
 #include "SyntaxTree.h"
 
 using namespace llvm;
@@ -84,6 +91,13 @@ public:
 	void __Out2IR(CSyntaxNode *pTree);
 
 	/**
+	* 变量自加操作转成对应的IR代码
+	* @param 待处理的变量
+	* @return void
+	*/
+	void __AddOne2IR(AllocaInst * alloc);
+
+	/**
 	* if语句转成对应的IR代码
 	* @param 传入待分析的语法树
 	* @return void
@@ -107,6 +121,9 @@ private:
 
 	///符号表
 	map<string, AllocaInst *> m_IRSTable;
+
+	///状态数
+	AllocaInst *m_StNum;
 
 };
 

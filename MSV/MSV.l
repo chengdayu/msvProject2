@@ -4,8 +4,11 @@
 #include <math.h>
 #include <io.h>     // isatty.h>
 #include "MyMap.h"
-
 #include "SyntaxNode.h"
+
+
+
+
 extern CMAP g_StructNameMap;
 int lineno=1;
 
@@ -21,8 +24,9 @@ class SymbolTable;
 
 // Make sure our variables get created
 #define  _LEX_CPP_
+//#include "lex.h"
+//#include "lexSymbol.h"
 #include "parse.cpp.h"
-
 
 // The yywrap and error functions are declared by the caller
 extern "C" int yywrap();
@@ -51,14 +55,14 @@ STR      \"([^\"]|{ESCAPECHAR})*\"
 RCHAR     \'([^\']|{ESCAPECHAR})\'
 
 /*
-\b é€€æ ¼
-\f èµ°çº¸æ¢é¡µ
-\n æ¢è¡Œ
-\r å›è½¦
-\t æ¨ªå‘è·³æ ¼ (Ctrl-I)
-\' å•å¼•å·
-\" åŒå¼•å·
-\\åæ–œæ 
+\b ÍË¸ñ
+\f ×ßÖ½»»Ò³
+\n »»ĞĞ
+\r »Ø³µ
+\t ºáÏòÌø¸ñ (Ctrl-I)
+\' µ¥ÒıºÅ
+\" Ë«ÒıºÅ
+\\·´Ğ±¸Ü
 */
 
 %%
@@ -109,17 +113,18 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "switch"   {return SWITCH;}
 "case"     {return CASE;}
 "break"    {return BREAK;}
+
 ":"        {return COLON;}
 
 ";"        {return CHOP;}
 "&"        {return ADDRESS;}
 
-"int"      {return INTDECLARATION;}
-"string"   {return STRDECLARATION;}
-"pointer"  {return POINTERDECLARATION;}
-"char"	   {return CHARDECLARATION;}//CHARVARIABLE  
-"float"    {return FLOATDECLARATION;}//FLOATVARIABLE  
-"list"		{return LISTDECLARATION;}//LISTVARIABLE  
+"int"      {return INTDECLARATION;}//  added by Jane 2012-05-21
+"string"   {return STRDECLARATION;}//STRVARIABLE  added by Jane 2012-05-21
+"pointer"  {return POINTERDECLARATION;}//POINTER  added by Jane 2012-05-21
+"char"	   {return CHARDECLARATION;}//CHARVARIABLE  added by Jane 2012-05-21 
+"float"    {return FLOATDECLARATION;}//FLOATVARIABLE  added by Jane 2012-05-21
+"list"		{return LISTDECLARATION;}//LISTVARIABLE  added by Jane 2012-05-21
 "void"     {return VOIDDECLARATION;}
 
 "head"		{return		STRFUNCHEAD;}
@@ -171,8 +176,8 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "system"   {return SYSTEM;}
 
 "."        {return DOT;}
-"="        {return EQ;}     
-"<=="      {return ASS_P;}   
+"="        {return EQ;}     //±È½ÏÏàµÈ·ûºÅ ¡°=¡±
+"<=="      {return ASS_P;}   //¸³Öµ·ûºÅÒÑĞŞ¸ÄÎª¡°<==¡±
 
 ":="       {return ASS_N;}
 
@@ -191,9 +196,9 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "/"	       {return DIV;}
 "%"        {return MOD;}
 "^"        {return CON;}
-"<<"       {return LST;}//å·¦ç§» left shift
-">>"       {return RST;}//å³ç§» right shift
-"~"        {return BNE;}//æŒ‰ä½é bit negation
+"<<"       {return LST;}//×óÒÆ left shift
+">>"       {return RST;}//ÓÒÒÆ right shift
+"~"        {return BNE;}//°´Î»·Ç bit negation
 
 "=>"	   {return PROPIMPLY;}
 "->"       {return IMPLY;}
@@ -229,7 +234,7 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "signed"    {return SIGNED;}
 "unsigned"  {return UNSIGNED;}
 
-"malloc"    {return MALLOC;}//mallocç›¸å…³
+"malloc"    {return MALLOC;}//mallocÏà¹Ø
 "free"      {return FREE;}
 
 
@@ -251,9 +256,9 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
                return INTLITERAL;
 		 }
 {HEXDIGIT}  {    
-               int decValue;//intï¼Œä¿å­˜16è¿›åˆ¶å¯¹åº”çš„åè¿›åˆ¶æ•°
-			   sscanf(yytext,"%x",&decValue);//å°†16è¿›åˆ¶å­—ç¬¦ä¸²è½¬æˆ10è¿›åˆ¶æ•°
-			   yylval.nInteger=decValue;//å°†10è¿›åˆ¶æ•°èµ‹ç»™yytext
+               int decValue;//int£¬±£´æ16½øÖÆ¶ÔÓ¦µÄÊ®½øÖÆÊı
+			   sscanf(yytext,"%x",&decValue);//½«16½øÖÆ×Ö·û´®×ª³É10½øÖÆÊı
+			   yylval.nInteger=decValue;//½«10½øÖÆÊı¸³¸øyytext
                return INTLITERAL;
 			}
 {EXPONENT} {
@@ -280,7 +285,7 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 				yylval. floatval = atof(yytext); 
 				return FLOATLITERAL; 
 		 }//Added by Jane 2012-05-21 
-{RCHAR}		{//modified by yubin 2014/2/25ï¼Œç¬¬ä¸€ä¸ªifåˆ†æ”¯å¤„ç†æ²¡æœ‰è½¬ä¹‰å­—ç¬¦çš„æƒ…å†µï¼Œä¸‹é¢çš„åˆ†æ”¯å¤„ç†æœ‰è½¬ä¹‰å­—ç¬¦çš„æƒ…å†µ
+{RCHAR}		{//modified by yubin 2014/2/25£¬µÚÒ»¸öif·ÖÖ§´¦ÀíÃ»ÓĞ×ªÒå×Ö·ûµÄÇé¿ö£¬ÏÂÃæµÄ·ÖÖ§´¦ÀíÓĞ×ªÒå×Ö·ûµÄÇé¿ö
 				if(yytext[1]!='\\')
 				{
 					yylval.character=yytext[1];
@@ -359,12 +364,12 @@ void DeleteSingleLineComment(void)
 }
 
 void passStringConstant (void)
-{//å¤„ç†char*å­—ç¬¦ä¸²ä¸­çš„è½¬ä¹‰å­—ç¬¦ï¼Œç¬¬ä¸€ä¸ªifåˆ†æ”¯å¤„ç†æ²¡æœ‰è½¬ä¹‰å­—ç¬¦çš„æƒ…å†µï¼Œä¸‹é¢çš„åˆ†æ”¯å¤„ç†æœ‰è½¬ä¹‰å­—ç¬¦çš„æƒ…å†µ
+{//modified by yubin 2014/2/25£¬´¦Àíchar*×Ö·û´®ÖĞµÄ×ªÒå×Ö·û£¬µÚÒ»¸öif·ÖÖ§´¦ÀíÃ»ÓĞ×ªÒå×Ö·ûµÄÇé¿ö£¬ÏÂÃæµÄ·ÖÖ§´¦ÀíÓĞ×ªÒå×Ö·ûµÄÇé¿ö
 	int l = ( strlen( yytext ) - 2 );
 	yylval.cString = new char[l+1];
 	strncpy( yylval.cString, &yytext[1], l );
-	int j=0;//jç”¨æ¥è®°å½•è½¬ä¹‰å­—ç¬¦çš„ä¸ªæ•°
-	int i=0;
+	int i;
+	int j=0;//jÓÃÀ´¼ÇÂ¼×ªÒå×Ö·ûµÄ¸öÊı
 	for(i=0;i+j<l;i=i+1)
 	{
 		if(yylval.cString[i+j]!='\\')
@@ -416,7 +421,7 @@ void passStringConstant (void)
 			yylval.cString[i]='\0';
 			j=j+1;
 		}
-		else//æ˜¯è½¬ä¹‰å­—ç¬¦ï¼Œä½†æ˜¯ä¸æ˜¯ä¸Šé¢çš„ä¸€äº›è½¬ä¹‰å­—ç¬¦ï¼Œæš‚æ—¶ä»€ä¹ˆä¹Ÿä¸åš
+		else//ÊÇ×ªÒå×Ö·û£¬µ«ÊÇ²»ÊÇÉÏÃæµÄÒ»Ğ©×ªÒå×Ö·û£¬ÔİÊ±Ê²Ã´Ò²²»×ö
 		{
 		
 		}	
