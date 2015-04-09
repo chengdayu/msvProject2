@@ -85,6 +85,7 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 		    break;
 	    }
 	    case ASS_EQU_EXP:
+		case EX_ASS_EXP:
 	    {
 		    __Ass2IR(pTree);
 		    break;
@@ -94,7 +95,7 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 			__Out2IR(pTree);
 			break;
 	    }
-		case IF_STA:
+		case IF_ELSE_STA:
 		{
 			__If2IR(pTree);
 			break;
@@ -328,10 +329,10 @@ void IR::__AddOne2IR(AllocaInst * alloc)
 
 void IR::__If2IR(CSyntaxNode *pTree)
 {
-	//Function *TheFunction = m_builder->GetInsertBlock()->getParent();
-	//BasicBlock *entry = BasicBlock::Create(m_module->getContext(), "entry");
-	BasicBlock *ThenBB= BasicBlock::Create(m_module->getContext(), "then");
-	BasicBlock *ElseBB = BasicBlock::Create(m_module->getContext(), "else");
+	Function *TheFunction = m_builder->GetInsertBlock()->getParent();
+	//BasicBlock *entry = BasicBlock::Create(m_module->getContext(), "entry", TheFunction);
+	BasicBlock *ThenBB= BasicBlock::Create(m_module->getContext(), "then", TheFunction);
+	BasicBlock *ElseBB = BasicBlock::Create(m_module->getContext(), "else", TheFunction);
 	//m_builder->SetInsertPoint(entry);
 
 	//Ìõ¼şÌø×ª

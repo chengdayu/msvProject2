@@ -1,7 +1,12 @@
 IRTree: 
 int x;
-int y;
 x<==3;
-y<==5;
 output();
+if (x=1) then {output();
+x<==10} else {output();
+x<==11;
+output();
+x<==12;
+output();
+x<==13};
 output()
