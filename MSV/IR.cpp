@@ -44,7 +44,7 @@ void IR::Trslt2IR(CSyntaxTree *IRTree)
 	outs() << "\n\nRunning foo: ";
 	outs().flush();
 
-	m_module->dump();
+	//m_module->dump();
 
 
 	std::vector<GenericValue> noargs;
@@ -256,8 +256,8 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 		}
 	}
 	
-	}
-	
+}
+
 
 //add by yubin 2015/4/9,调用printf输出变量的值
 void IR::__Out2IR(CSyntaxNode *pTree)
@@ -272,20 +272,20 @@ void IR::__Out2IR(CSyntaxNode *pTree)
 	llvm::FunctionType *putsType = llvm::FunctionType::get(m_builder->getInt32Ty(), argsRef, false);
 	llvm::Constant *putsFunc = m_module->getOrInsertFunction("printf", putsType);
 
-	vector<string>::iterator iter;
-	for (iter = outPutSymTbl.begin(); iter != outPutSymTbl.end(); iter++)
-	{
-		AllocaInst *outPutVar = m_IRSTable[*iter];//通过变量的名字在m_IRSTable中找到对应的AllocaInst类型指针
-		LoadInst *a = m_builder->CreateLoad(outPutVar);
-		if (outPutVar->getAllocatedType() == IntegerType::get(m_module->getContext(), 32))//如果是int类型的话
+		vector<string>::iterator iter;
+		for (iter = outPutSymTbl.begin(); iter != outPutSymTbl.end(); iter++)
 		{
-			Value *intFormat = m_builder->CreateGlobalStringPtr("%d");
-			m_builder->CreateCall2(putsFunc, intFormat, a);
-		}
-		else if (outPutVar->getAllocatedType() == Type::getFloatTy(m_module->getContext()))//如果是float类型的话
-		{
-			Value *intFormat = m_builder->CreateGlobalStringPtr("%f");
-			m_builder->CreateCall2(putsFunc, intFormat, a);
+			AllocaInst *outPutVar = m_IRSTable[*iter];//通过变量的名字在m_IRSTable中找到对应的AllocaInst类型指针
+			LoadInst *a = m_builder->CreateLoad(outPutVar);
+			if (outPutVar->getAllocatedType() == IntegerType::get(m_module->getContext(), 32))//如果是int类型的话
+			{
+				Value *intFormat = m_builder->CreateGlobalStringPtr("%d");
+				m_builder->CreateCall2(putsFunc, intFormat, a);
+			}
+			else if (outPutVar->getAllocatedType() == Type::getFloatTy(m_module->getContext()))//如果是float类型的话
+			{
+				Value *intFormat = m_builder->CreateGlobalStringPtr("%f");
+				m_builder->CreateCall2(putsFunc, intFormat, a);
 
 		}
 
