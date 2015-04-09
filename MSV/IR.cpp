@@ -293,6 +293,21 @@ void IR::__Out2IR(CSyntaxNode *pTree)
 	}
 }
 
+/**
+* 变量自加操作转成对应的IR代码
+* @param 待处理的变量
+* @return void
+*/
+///2015-4-8 add by wangmeng
+void IR::__AddOne2IR(AllocaInst * alloc)
+{
+	LoadInst *load = m_builder->CreateLoad(alloc);
+	Value *One = m_builder->getInt32(1);
+	Value *result = m_builder->CreateNSWAdd(load, One, "inc");
+	StoreInst *store = m_builder->CreateStore(result, alloc, false);
+
+}
+
 
 void IR::__If2IR(CSyntaxNode *pTree)
 {
