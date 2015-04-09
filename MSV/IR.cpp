@@ -24,6 +24,7 @@ void IR::Trslt2IR(CSyntaxTree *IRTree)
 	LLVMContext Context;
 	std::unique_ptr<Module> Owner = make_unique<Module>("test", Context);
 	m_module = Owner.get();
+	m_builder = new llvm::IRBuilder<>(m_module->getContext());
 
 	FunctionType *FuncTypeOfMain = FunctionType::get(IntegerType::get(m_module->getContext(), 32), false);
 	Function *MainFunc = Function::Create(FuncTypeOfMain, Function::ExternalLinkage, "main", m_module);

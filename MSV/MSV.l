@@ -174,6 +174,7 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "fclose"	{return FCLOSE;}
 "FILE"		{return FILEDECLARATION;}
 "system"   {return SYSTEM;}
+"extern"   {return EXTERN;}
 
 "."        {return DOT;}
 "="        {return EQ;}     //比较相等符号 “=”
