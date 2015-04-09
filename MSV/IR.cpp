@@ -53,7 +53,7 @@ void IR::Trslt2IR(CSyntaxTree *IRTree)
 	outs() << "\n\nRunning foo: ";
 	outs().flush();
 
-	m_module->dump();
+	//m_module->dump();
 
 
 	std::vector<GenericValue> noargs;
