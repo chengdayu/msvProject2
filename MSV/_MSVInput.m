@@ -1,1 +1,2 @@
-float x<==3.4 and skip
+int x<==3 and int y<==x+3 and skip
+

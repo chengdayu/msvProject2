@@ -5,7 +5,7 @@ using namespace std;
 
 IR::IR()
 {
-	m_module = new Module("global", getGlobalContext());
+	//m_module = new Module("global", getGlobalContext());
 	m_builder=new llvm::IRBuilder<>(m_module->getContext());
 }
 IR::~IR()
@@ -21,6 +21,10 @@ void IR::Trslt2IR(CSyntaxTree *IRTree)
 		return;
 	}
 
+	LLVMContext Context;
+	std::unique_ptr<Module> Owner = make_unique<Module>("test", Context);
+	m_module = Owner.get();
+
 	FunctionType *FuncTypeOfMain = FunctionType::get(IntegerType::get(m_module->getContext(), 32), false);
 	Function *MainFunc = Function::Create(FuncTypeOfMain, Function::ExternalLinkage, "main", m_module);
 
@@ -28,9 +32,30 @@ void IR::Trslt2IR(CSyntaxTree *IRTree)
 
 	m_builder->SetInsertPoint(entrymain);
 
+	m_StNum = m_builder->CreateAlloca(IntegerType::get(m_module->getContext(), 32), NULL, "$state_num");
+
 	Stmt2IR(IRTree->GetRoot());
 
+	m_builder->CreateRetVoid();
+
+	ExecutionEngine* EE = EngineBuilder(std::move(Owner)).create();
+
+	outs() << "We just constructed this LLVM module:\n\n" << *m_module;
+	outs() << "\n\nRunning foo: ";
+	outs().flush();
+
 	m_module->dump();
+
+
+	std::vector<GenericValue> noargs;
+	//EE->runFunction(FooF, noargs);
+	GenericValue gv = EE->runFunction(MainFunc, noargs);
+
+	//outs() << "Result: " << gv.IntVal << "\n";
+
+	outs().flush();
+	delete EE;
+	llvm_shutdown();
 
 }
 
@@ -170,7 +195,6 @@ void IR::__Ass2IR(CSyntaxNode* pTree)
 	Value *RightValue=__Expr2IR(pTree->GetChild1());
 	StoreInst *store = m_builder->CreateStore(RightValue, m_IRSTable[pTree->GetChild0()->GetNName()], false);
 	store->setAlignment(4);
-
 }
 
 /**
@@ -202,18 +226,28 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 		{
 			return m_builder->CreateGlobalStringPtr(pTree->GetsValue());
 		}
+		case IDENT_EXP:
+		{
+			 
+			return m_builder->CreateLoad(m_IRSTable[pTree->GetNName()]);
+		}
 		case ADD_EXP:
 		{
-		/*	AllocaInst* type_a = m_IRSTable[pTree->GetChild0()->GetNName()];
-			AllocaInst* type_b = m_IRSTable[pTree->GetChild1()->GetNName()];
-			LoadInst *a = m_builder->CreateLoad(type_a);
-			LoadInst *b = m_builder->CreateLoad(type_b);
+			if (pTree->GetChild0()==NULL||pTree->GetChild1()==NULL)
+			{
+				cout << "__Expr2IR add error!" << endl;
+				return NULL;
+			}
+			Value *Left = __Expr2IR(pTree->GetChild0());
+			Value* Right = __Expr2IR(pTree->GetChild1());
 
-			if (type_a->getAllocatedType() == IntegerType::get(m_module->getContext(), 32) &&
-				type_b->getAllocatedType() == IntegerType::get(m_module->getContext(), 32))
+		/*	Left->
+
+			if (Left->getAllocatedType() == IntegerType::get(m_module->getContext(), 32) &&
+				Right->getAllocatedType() == IntegerType::get(m_module->getContext(), 32))
 			{
 				return  m_builder->CreateAdd(a, b, "add", false, false);
-			}*/			
+			}		*/
 		}
 	}
 	
@@ -248,6 +282,23 @@ void IR::__Out2IR(CSyntaxNode *pTree)
 			Value *intFormat = m_builder->CreateGlobalStringPtr("%f");
 			m_builder->CreateCall2(putsFunc, intFormat, a);
 
-		}
+
+
+	__AddOne2IR(m_StNum);
+}
+
+/**
+* 变量自加操作转成对应的IR代码
+* @param 待处理的变量
+* @return void
+*/
+///2015-4-8 add by wangmeng
+void IR::__AddOne2IR(AllocaInst * alloc)
+{
+	LoadInst *load = m_builder->CreateLoad(alloc);
+	Value *One = m_builder->getInt32(1);
+	Value *result = m_builder->CreateNSWAdd(load, One, "inc");
+	StoreInst *store = m_builder->CreateStore(result, alloc, false);
+}
 	}
 }
