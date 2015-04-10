@@ -85,6 +85,7 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 		    break;
 	    }
 	    case ASS_EQU_EXP:
+		case EX_ASS_EXP:
 	    {
 		    __Ass2IR(pTree);
 		    break;
@@ -94,7 +95,7 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 			__Out2IR(pTree);
 			break;
 	}
-		case IF_STA:
+		case IF_ELSE_STA:
 		{
 			__If2IR(pTree);
 			break;
@@ -168,10 +169,11 @@ void IR::__DeclrFloat2IR(CSyntaxNode *pTree)
 		return;
 	}
 	AllocaInst *allocDeclrFloat = m_builder->CreateAlloca(Type::getFloatTy(m_module->getContext()), NULL, pTree->GetNName());
+	allocDeclrFloat->setAlignment(4);
 	m_IRSTable.insert(map<string, AllocaInst *>::value_type(pTree->GetNName(), allocDeclrFloat));
 }
 
-///
+///add by yubin 2015/4/7,处理chop类型的结点
 void IR::__Chop2IR(CSyntaxNode *pTree)
 {
 	if (pTree == NULL)
@@ -260,7 +262,7 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 		///加 例：x+y
 		case ADD_EXP:
 		{
-			return __Add2IR(pTree);			
+			return __Add2IR(pTree);
 		}
 
 		///减 例：x-y
@@ -314,9 +316,9 @@ void IR::__Out2IR(CSyntaxNode *pTree)
 {
 	//先声明printf函数，然后根据不同的变量类型，进行调用
 	std::vector<llvm::Type *> putsArgs;
-	putsArgs.push_back(m_builder->getInt8Ty()->getPointerTo());
+	putsArgs.push_back(m_builder->getInt8PtrTy());
 	llvm::ArrayRef<llvm::Type*>  argsRef(putsArgs);
-	llvm::FunctionType *putsType = llvm::FunctionType::get(m_builder->getInt32Ty(), argsRef, false);
+	llvm::FunctionType *putsType = llvm::FunctionType::get(m_builder->getInt32Ty(), argsRef, true);
 	llvm::Constant *putsFunc = m_module->getOrInsertFunction("printf", putsType);
 
 	//每次输出变量的值之前，先输出是第几个状态,如state 0：
@@ -339,6 +341,8 @@ void IR::__Out2IR(CSyntaxNode *pTree)
 
 			AllocaInst *outPutVar = m_IRSTable[*iter];//通过变量的名字在m_IRSTable中找到对应的AllocaInst类型指针
 			LoadInst *a = m_builder->CreateLoad(outPutVar);
+			a->setAlignment(4);
+
 			if (outPutVar->getAllocatedType() == IntegerType::get(m_module->getContext(), 32))//如果是int类型的话
 			{
 				Value *intFormat = m_builder->CreateGlobalStringPtr("%d");
@@ -346,8 +350,10 @@ void IR::__Out2IR(CSyntaxNode *pTree)
 			}
 			else if (outPutVar->getAllocatedType() == Type::getFloatTy(m_module->getContext()))//如果是float类型的话
 			{
-				Value *intFormat = m_builder->CreateGlobalStringPtr("%f");
-				m_builder->CreateCall2(putsFunc, intFormat, a);
+				//强制类型转换，将float类型转换成double类型，否则输出时会崩溃
+				Value* floatTyToDoubleTy = m_builder->CreateFPExt(a, Type::getDoubleTy(m_module->getContext()));
+				Value *floatFormat = m_builder->CreateGlobalStringPtr("%f");
+				m_builder->CreateCall2(putsFunc, floatFormat, floatTyToDoubleTy);
 			}
 			m_builder->CreateCall(putsFunc, m_builder->CreateGlobalStringPtr("  "));//每个变量输出之后，输出两个空格，以便和下一个变量的输出隔开
 		}
@@ -375,10 +381,10 @@ void IR::__AddOne2IR(AllocaInst * alloc)
 
 void IR::__If2IR(CSyntaxNode *pTree)
 {
-	//Function *TheFunction = m_builder->GetInsertBlock()->getParent();
-	//BasicBlock *entry = BasicBlock::Create(m_module->getContext(), "entry");
-	BasicBlock *ThenBB= BasicBlock::Create(m_module->getContext(), "then");
-	BasicBlock *ElseBB = BasicBlock::Create(m_module->getContext(), "else");
+	Function *TheFunction = m_builder->GetInsertBlock()->getParent();
+	//BasicBlock *entry = BasicBlock::Create(m_module->getContext(), "entry", TheFunction);
+	BasicBlock *ThenBB= BasicBlock::Create(m_module->getContext(), "then", TheFunction);
+	BasicBlock *ElseBB = BasicBlock::Create(m_module->getContext(), "else", TheFunction);
 	//m_builder->SetInsertPoint(entry);
 
 	//条件跳转
@@ -454,7 +460,7 @@ Value * IR::__Add2IR(CSyntaxNode* pTree)
 		return  m_builder->CreateAdd(Left, Right, "add", false, false);
 	}
 
-	///浮点数相加 
+	///浮点数相加
 	else if (LType->isFloatTy())
 	{
 		///浮点数与浮点数相加 3.1+4.2
