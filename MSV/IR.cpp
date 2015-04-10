@@ -207,11 +207,18 @@ void IR::__Ass2IR(CSyntaxNode* pTree)
 	AllocaInst *LeftValue = m_IRSTable[pTree->GetChild0()->GetNName()];
 	Type*LType = LeftValue->getAllocatedType();
 
-	Value *RightValue=__Cast2IR(__Expr2IR(pTree->GetChild1()), LType);
+	Value *tmpRtValue = __Expr2IR(pTree->GetChild1());
+	if (tmpRtValue == NULL)
+	{
+		cout << "__Ass2IR() handle right error1!" << endl;
+		return;
+	}
+
+	Value *RightValue = __Cast2IR(tmpRtValue, LType);
 
 	if (RightValue == NULL)
 	{
-		cout << "__Ass2IR() handle right error!" << endl;
+		cout << "__Ass2IR() handle right error2!" << endl;
 		return;
 	}
 
@@ -278,38 +285,18 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 		///除 例：x/y
 		case DIV_EXP:
 		{
-			if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
-			{
-				cout << "__Expr2IR add error!" << endl;
-				return NULL;
-			}
-			Value *Left = __Expr2IR(pTree->GetChild0());
-			Value* Right = __Expr2IR(pTree->GetChild1());
-			if (Left->getType() == IntegerType::get(m_module->getContext(), 32) &&
-				Right->getType() == IntegerType::get(m_module->getContext(), 32))
-			{
-				//return  m_builder->CreateMul(Left, Right, "mul", false, false);
-			}
+			return __Div2IR(pTree);
 		}
 
 		///取余 例：x%y
 		case MOD_EXP:
 		{
-			if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
-			{
-				cout << "__Expr2IR add error!" << endl;
-				return NULL;
-			}
-			Value *Left = __Expr2IR(pTree->GetChild0());
-			Value* Right = __Expr2IR(pTree->GetChild1());
-			/*if (Left->getType() == IntegerType::get(m_module->getContext(), 32) &&
-				Right->getType() == IntegerType::get(m_module->getContext(), 32))
-			{
-				//return  m_builder->CreateDiv(Left, Right, "sub", false, false);
-			}*/
+			return __Mod2IR(pTree);
 		}
+
+
 	}
-	}
+}
 	
 //add by yubin 2015/4/9,调用printf输出变量的值
 void IR::__Out2IR(CSyntaxNode *pTree)
@@ -448,7 +435,19 @@ Value * IR::__Add2IR(CSyntaxNode* pTree)
 		return NULL;
 	}
 	Value *Left = __Expr2IR(pTree->GetChild0());
+
+	if (Left == NULL)
+	{
+		cout << "__Add2IR() handle left error!" << endl;
+		return NULL;
+	}
 	Value* Right = __Expr2IR(pTree->GetChild1());
+
+	if (Right == NULL)
+	{
+		cout << "__Add2IR() handle right error!" << endl;
+		return NULL;
+	}
 
 	Type* LType = Left->getType();
 	Type* RType = Right->getType();
@@ -503,7 +502,20 @@ Value * IR::__Sub2IR(CSyntaxNode* pTree)
 		return NULL;
 	}
 	Value *Left = __Expr2IR(pTree->GetChild0());
+
+	if (Left == NULL)
+	{
+		cout << "__Sub2IR() handle left error!" << endl;
+		return NULL;
+	}
+
 	Value* Right = __Expr2IR(pTree->GetChild1());
+
+	if (Right == NULL)
+	{
+		cout << "__Sub2IR() handle right error!" << endl;
+		return NULL;
+	}
 
 	Type* LType = Left->getType();
 	Type* RType = Right->getType();
@@ -558,7 +570,20 @@ Value * IR::__Mul2IR(CSyntaxNode* pTree)
 		return NULL;
 	}
 	Value *Left = __Expr2IR(pTree->GetChild0());
+
+	if (Left == NULL)
+	{
+		cout << "__Mul2IR() handle left error!" << endl;
+		return NULL;
+	}
+
 	Value* Right = __Expr2IR(pTree->GetChild1());
+
+	if (Right == NULL)
+	{
+		cout << "__Mul2IR() handle right error!" << endl;
+		return NULL;
+	}
 
 	Type* LType = Left->getType();
 	Type* RType = Right->getType();
@@ -573,12 +598,12 @@ Value * IR::__Mul2IR(CSyntaxNode* pTree)
 	///浮点数相乘
 	else if (LType->isFloatTy())
 	{
-		///浮点数与浮点数相减 4.3*3.5
+		///浮点数与浮点数相乘 4.3*3.5
 		if (RType->isFloatTy())
 		{
 			return m_builder->CreateFMul(Left, Right, "fmul", 0);
 		}
-		///浮点数与整数相减 5*3.6
+		///浮点数与整数相乘 5*3.6
 		else if (RType->isIntegerTy())
 		{
 			Value* fRight = m_builder->CreateSIToFP(Right,
@@ -588,15 +613,126 @@ Value * IR::__Mul2IR(CSyntaxNode* pTree)
 	}
 	else if (RType->isFloatTy())
 	{
-		///整数与浮点数相减 4*3.6
+		///整数与浮点数相乘 4*3.6
 		if (LType->isIntegerTy())
 		{
 			Value*fLeft = m_builder->CreateSIToFP(Left,
 				Type::getFloatTy(m_module->getContext()));
 			return m_builder->CreateFMul(fLeft, Right, "fmul", 0);
 		}
-
 	}
+}
+
+
+/**
+* 除法操作转成对应的IR代码
+* @param 待处理的语法树
+* @return 转之后的结果
+*/
+///2015-4-9 add by wangmeng
+Value * IR::__Div2IR(CSyntaxNode* pTree)
+{
+	if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
+	{
+		cout << "__Expr2IR add error!" << endl;
+		return NULL;
+	}
+	Value *Left = __Expr2IR(pTree->GetChild0());
+	if (Left == NULL)
+	{
+		cout << "__Div2IR() handle left error!" << endl;
+		return NULL;
+	}
+	Value* Right = __Expr2IR(pTree->GetChild1());
+
+	if (Right == NULL)
+	{
+		cout << "__Div2IR() handle right error!" << endl;
+		return NULL;
+	}
+
+	Type* LType = Left->getType();
+	Type* RType = Right->getType();
+
+	///整数相除 5/6
+	if (LType->isIntegerTy() &&
+		RType->isIntegerTy())
+	{
+		return  m_builder->CreateSDiv(Left, Right, "div", false);
+	}
+
+	///浮点数相除
+	else if (LType->isFloatTy())
+	{
+		///浮点数与浮点数相除 4.3/3.5
+		if (RType->isFloatTy())
+		{
+			return m_builder->CreateFDiv(Left, Right, "fdiv", 0);
+		}
+		///浮点数与整数相除 5/3.6
+		else if (RType->isIntegerTy())
+		{
+			Value* fRight = m_builder->CreateSIToFP(Right,
+				Type::getFloatTy(m_module->getContext()));
+			return m_builder->CreateFDiv(Left, fRight, "fdiv", 0);
+		}
+	}
+	else if (RType->isFloatTy())
+	{
+		///整数与浮点数相除 4/3.6
+		if (LType->isIntegerTy())
+		{
+			Value*fLeft = m_builder->CreateSIToFP(Left,
+				Type::getFloatTy(m_module->getContext()));
+			return m_builder->CreateFDiv(fLeft, Right, "fdiv", 0);
+		}
+	}
+}
+
+/**
+* 取余操作转成对应的IR代码
+* @param 待处理的语法树
+* @return 转之后的结果
+*/
+///2015-4-9 add by wangmeng
+Value * IR::__Mod2IR(CSyntaxNode* pTree)
+{
+	if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
+	{
+		cout << "__Expr2IR add error!" << endl;
+		return NULL;
+	}
+	Value *Left = __Expr2IR(pTree->GetChild0());
+
+	if (Left == NULL)
+	{
+		cout << "__Mod2IR() handle left error!" << endl;
+		return NULL;
+	}
+	Value* Right = __Expr2IR(pTree->GetChild1());
+
+	if (Right == NULL)
+	{
+		cout << "__Mod2IR() handle right error!" << endl;
+		return NULL;
+	}
+
+	Type* LType = Left->getType();
+	Type* RType = Right->getType();
+
+	///整数取余
+	if (LType->isIntegerTy() &&
+		RType->isIntegerTy())
+	{
+		return  m_builder->CreateSRem(Left, Right, "rem");
+	}
+	else
+	{
+		cout << "__Mod2IR() error: cannot from float to float !" << endl;
+		return NULL;
+	}
+
+
 }
 
 /**

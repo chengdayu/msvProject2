@@ -122,6 +122,20 @@ public:
 	Value * __Mul2IR(CSyntaxNode* pTree);
 
 	/**
+	* 除法操作转成对应的IR代码
+	* @param 待处理的语法树
+	* @return 转之后的结果
+	*/
+	Value * __Div2IR(CSyntaxNode* pTree);
+
+	/**
+	* 取余操作转成对应的IR代码
+	* @param 待处理的语法树
+	* @return 转之后的结果
+	*/
+	Value * __Mod2IR(CSyntaxNode* pTree);
+
+	/**
 	* if语句转成对应的IR代码
 	* @param 传入待分析的语法树
 	* @return void
