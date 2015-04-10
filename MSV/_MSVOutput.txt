@@ -1,7 +1,4 @@
 IRTree: 
 int x;
-int y;
-x<==3;
-y<==5;
-output();
+x<==3*6.6;
 output()

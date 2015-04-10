@@ -1,2 +1,3 @@
-int x<==3 and int y<==5 and skip
-
+int x and 
+x<==3*6.6 and 
+empty

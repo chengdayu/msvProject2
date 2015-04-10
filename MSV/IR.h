@@ -107,6 +107,19 @@ public:
 	*/
 	Value * __Add2IR(CSyntaxNode* pTree);
 
+	/**
+	* 减法操作转成对应的IR代码
+	* @param 待处理的语法树
+	* @return 转之后的结果
+	*/
+	Value * __Sub2IR(CSyntaxNode* pTree);
+
+	/**
+	* 乘法操作转成对应的IR代码
+	* @param 待处理的语法树
+	* @return 转之后的结果
+	*/
+	Value * __Mul2IR(CSyntaxNode* pTree);
 
 	/**
 	* if语句转成对应的IR代码
@@ -121,6 +134,13 @@ public:
 	* @return void
 	*/
 	Value* __Cond2IR(CSyntaxNode* pTree);
+
+	/**
+	* 强制转换语句转为IR代码
+	* @param 传入待分析的语法树
+	* @return 转换后的IR代码
+	*/
+	Value* __Cast2IR(Value *value, Type *type);
 
 private:
 

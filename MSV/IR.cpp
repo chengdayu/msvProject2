@@ -45,8 +45,8 @@ void IR::Trslt2IR(CSyntaxTree *IRTree)
 
 	ExecutionEngine* EE = EngineBuilder(std::move(Owner)).create();
 
-	outs() << "We just constructed this LLVM module:\n\n" << *m_module;
-	outs() << "\n\nRunning foo: ";
+	outs() << *m_module;
+	outs() << "\n\nResult: \n";
 	outs().flush();
 
 	//m_module->dump();
@@ -202,8 +202,16 @@ void IR::__Ass2IR(CSyntaxNode* pTree)
 		return;
 	}
 
-	Value *RightValue=__Expr2IR(pTree->GetChild1());
-	Value* LeftValue = m_IRSTable[pTree->GetChild0()->GetNName()];
+	AllocaInst *LeftValue = m_IRSTable[pTree->GetChild0()->GetNName()];
+	Type*LType = LeftValue->getAllocatedType();
+
+	Value *RightValue=__Cast2IR(__Expr2IR(pTree->GetChild1()), LType);
+
+	if (RightValue == NULL)
+	{
+		cout << "__Ass2IR() handle right error!" << endl;
+		return;
+	}
 
 	StoreInst *store = m_builder->CreateStore(RightValue, LeftValue, false);
 	store->setAlignment(4);
@@ -252,41 +260,18 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 		///加 例：x+y
 		case ADD_EXP:
 		{
-			return __Add2IR(pTree);
-			
+			return __Add2IR(pTree);			
 		}
 
 		///减 例：x-y
 		case SUB_EXP:
-			{
-			if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
-			{
-				cout << "__Expr2IR sub error!" << endl;
-				return NULL;
-			}
-			Value *Left = __Expr2IR(pTree->GetChild0());
-			Value* Right = __Expr2IR(pTree->GetChild1());
-			if (Left->getType() == IntegerType::get(m_module->getContext(), 32) &&
-				Right->getType() == IntegerType::get(m_module->getContext(), 32))
-			{
-				return  m_builder->CreateSub(Left, Right, "sub", false, false);
-			}
+		{
+			return __Sub2IR(pTree);
 		}
 		///乘 例：x*y
 		case MUL_EXP:
 		{
-			if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
-			{
-				cout << "__Expr2IR mul error!" << endl;
-				return NULL;
-			}
-			Value *Left = __Expr2IR(pTree->GetChild0());
-			Value* Right = __Expr2IR(pTree->GetChild1());
-			if (Left->getType() == IntegerType::get(m_module->getContext(), 32) &&
-				Right->getType() == IntegerType::get(m_module->getContext(), 32))
-			{
-				return  m_builder->CreateMul(Left, Right, "mul", false, false);
-			}
+			return __Mul2IR(pTree);
 		}
 		///除 例：x/y
 		case DIV_EXP:
@@ -462,14 +447,14 @@ Value * IR::__Add2IR(CSyntaxNode* pTree)
 	Type* LType = Left->getType();
 	Type* RType = Right->getType();
 
-	///整数相加
+	///整数相加 3+4
 	if (LType->isIntegerTy() &&
 		RType->isIntegerTy())
 	{
 		return  m_builder->CreateAdd(Left, Right, "add", false, false);
 	}
 
-	///浮点数相加
+	///浮点数相加 
 	else if (LType->isFloatTy())
 	{
 		///浮点数与浮点数相加 3.1+4.2
@@ -495,5 +480,151 @@ Value * IR::__Add2IR(CSyntaxNode* pTree)
 			return m_builder->CreateFAdd(fLeft, Right, "fadd", 0);
 		}
 
+	}
+}
+
+/**
+* 减法操作转成对应的IR代码
+* @param 待处理的语法树
+* @return 转之后的结果
+*/
+///2015-4-9 add by wangmeng
+Value * IR::__Sub2IR(CSyntaxNode* pTree)
+{
+	if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
+	{
+		cout << "__Expr2IR add error!" << endl;
+		return NULL;
+	}
+	Value *Left = __Expr2IR(pTree->GetChild0());
+	Value* Right = __Expr2IR(pTree->GetChild1());
+
+	Type* LType = Left->getType();
+	Type* RType = Right->getType();
+
+	///整数相减 4-2
+	if (LType->isIntegerTy() &&
+		RType->isIntegerTy())
+	{
+		return  m_builder->CreateSub(Left, Right, "sub", false, false);
+	}
+
+	///浮点数相减
+	else if (LType->isFloatTy())
+	{
+		///浮点数与浮点数相减 4.3-3.5
+		if (RType->isFloatTy())
+		{
+			return m_builder->CreateFSub(Left, Right, "fsub", 0);
+		}
+		///浮点数与整数相减 5-3.6
+		else if (RType->isIntegerTy())
+		{
+			Value* fRight = m_builder->CreateSIToFP(Right,
+				Type::getFloatTy(m_module->getContext()));
+			return m_builder->CreateFSub(Left, fRight, "fsub", 0);
+		}
+	}
+	else if (RType->isFloatTy())
+	{
+		///整数与浮点数相减 4-3.6
+		if (LType->isIntegerTy())
+		{
+			Value*fLeft = m_builder->CreateSIToFP(Left,
+				Type::getFloatTy(m_module->getContext()));
+			return m_builder->CreateFSub(fLeft, Right, "fsub", 0);
+		}
+
+	}
+}
+
+/**
+* 乘法操作转成对应的IR代码
+* @param 待处理的语法树
+* @return 转之后的结果
+*/
+///2015-4-9 add by wangmeng
+Value * IR::__Mul2IR(CSyntaxNode* pTree)
+{
+	if (pTree->GetChild0() == NULL || pTree->GetChild1() == NULL)
+	{
+		cout << "__Expr2IR add error!" << endl;
+		return NULL;
+	}
+	Value *Left = __Expr2IR(pTree->GetChild0());
+	Value* Right = __Expr2IR(pTree->GetChild1());
+
+	Type* LType = Left->getType();
+	Type* RType = Right->getType();
+
+	///整数相乘 5*6
+	if (LType->isIntegerTy() &&
+		RType->isIntegerTy())
+	{
+		return  m_builder->CreateMul(Left, Right, "mul", false, false);
+	}
+
+	///浮点数相乘
+	else if (LType->isFloatTy())
+	{
+		///浮点数与浮点数相减 4.3*3.5
+		if (RType->isFloatTy())
+		{
+			return m_builder->CreateFMul(Left, Right, "fmul", 0);
+		}
+		///浮点数与整数相减 5*3.6
+		else if (RType->isIntegerTy())
+		{
+			Value* fRight = m_builder->CreateSIToFP(Right,
+				Type::getFloatTy(m_module->getContext()));
+			return m_builder->CreateFMul(Left, fRight, "fmul", 0);
+		}
+	}
+	else if (RType->isFloatTy())
+	{
+		///整数与浮点数相减 4*3.6
+		if (LType->isIntegerTy())
+		{
+			Value*fLeft = m_builder->CreateSIToFP(Left,
+				Type::getFloatTy(m_module->getContext()));
+			return m_builder->CreateFMul(fLeft, Right, "fmul", 0);
+		}
+
+	}
+}
+
+/**
+* 强制转换语句转为IR代码
+* @param 传入待分析的语法树
+* @return 转换后的IR代码
+*/
+///2015-4-9 add by wangmeng
+Value* IR::__Cast2IR(Value *value, Type *type)
+{
+	Type *valType = value->getType();
+	if (valType == type)
+	{
+		return value;
+	}
+	else if (type->isFloatTy() && valType->isFloatTy())
+	{
+		return value;
+	}
+	else if (type->isIntegerTy() && valType->isIntegerTy())
+	{
+		return value;
+	}
+	else if (type->isFloatTy() && valType->isIntegerTy())
+	{
+		return m_builder->CreateSIToFP(value, type);
+	}
+	else if (type->isIntegerTy() && valType->isFloatTy())
+	{
+		return m_builder->CreateFPToSI(value, type);
+	}
+	else
+	{
+		cout << "cast error!"<<endl;
+		return NULL;
 	}
 }
