@@ -54,7 +54,7 @@ extern int yylex(void);
    enum RETURNTYPE  returntype;
 } 
 
-%token SWITCH CASE BREAK  //add 2015-3-19
+%token SWITCH CASE BREAK DEFAULT//add by yubin 2015-3-23
 %token IF ELSE EMPTY AWAIT PROJECTION  PBEGIN PEND POINTERNULL ARRAY STRUCT DOT UNION FOPEN FCLOSE FILEDECLARATION FGETS FPUTS FGETC FPUTC
 %token MORE DEFINE MY_TRUE MY_FALSE EXIST FRAME FOR WHILE DO 
 %token TRUE FALSE
@@ -115,7 +115,6 @@ extern int yylex(void);
 %type<tnode> type_cast  /*--------cdstatement mdstatement new atrbstatement-----*/ //Annotation-Class   
 %type<tnode> statement identifier strliteral intliteral ass_statement bool_exp option_exp_else_statement leftaddrshift rightaddrshift
 %type<tnode> if_statement option_else_statement while_statement extend_for_statement ass_left imply_pre for_sta_init for_sta_condition for_sta_control
-%type<tnode> switch_statement    case_par    option_case_par  //add 2015-3-18
 %type<tnode> ari_exp for_statement option_frame_identifier option_projection type_cast_alg_exp
 %type<tnode> prime_bool_exp option_function_parameter_list inner_option_define_identifier
 %type<tnode> option_function_identifier inner_option_function_identifier empty_statement
@@ -150,6 +149,7 @@ extern int yylex(void);
 %type<returntype> all_type_define all_sizeof_type
 %type<tnode> program gComplexProposition complexProposition poptional_projection 
 %type<tnode> file_statement
+%type<tnode> switch_statement case_par init_case_par //add by yubin 2015-3-23
 
 
 //%expect 1  /* shift/reduce conflict: dangling ELSE declaration */
@@ -1655,23 +1655,34 @@ for_sta_control//for语句括号中的控制语句，是一个赋值语句也可以不写
 	      $$=NULL;
 	  }
 	  ;
+//add by yubin 2015-3-23
 switch_statement
-	   :SWITCH OPEN_PAR member_in_exp CLOSE_PAR OPEN_BPAR case_par CLOSE_BPAR
-	   {
-			$$=new CSyntaxNode(SWITCH_STA, $3, $6, VOIDTYPE);
-	   }
-	   ;
+       :SWITCH OPEN_PAR member_in_exp CLOSE_PAR OPEN_BPAR case_par CLOSE_BPAR 
+	   {$$=new CSyntaxNode(SWITCH_STA, $3, $6,VOIDTYPE);}
+	   ;   
 case_par
-	   :CASE member_in_exp COLON OPEN_PAR statement CLOSE_PAR option_case_par
+       :CASE member_in_exp COLON OPEN_PAR statement CLOSE_PAR init_case_par 
 	   {
-			$$=new CSyntaxNode(CASE_STA, $2, $5, $7, VOIDTYPE);
+	     $$=new CSyntaxNode(CASE_STA, $2, $5, $7, VOIDTYPE);
 	   }
+	   |DEFAULT COLON OPEN_PAR statement CLOSE_PAR //default语句只能写在最后一条,且后面不能加break语句
+	   {
+	     $$=new CSyntaxNode(DEFAULT_STA, $4, VOIDTYPE);
+	   }
+	   //|  {$$=NULL;}
+       ;
+init_case_par
+       :BREAK case_par
+	   {
+			$$=new CSyntaxNode(INIT_CASE_STA, $2, BREAKTYPE);
+		}
+	   |case_par  //modified by yubin  
+	   {
+			$$=new CSyntaxNode(INIT_CASE_STA, $1, VOIDTYPE);
+	    }
+	   |{$$=NULL;}
 	   ;
-option_case_par
-	   :BREAK case_par        {$$=$2;}
-	   |case_par			  {$$=$1;}
-	   |                      {$$=NULL;}
-	   ;
+
 if_statement
        : IF bool_exp THEN  statement_bpar option_else_statement
         {

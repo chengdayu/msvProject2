@@ -76,7 +76,7 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 	{
 	    case DECLARE_STA:
 	    {
-		__Declr2IR(pTree);//处理声明语句
+			__Declr2IR(pTree);//处理声明语句
 	     	break;
 	    }
 	    case CHOP_STA:
@@ -99,7 +99,7 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 		{
 			__If2IR(pTree);
 			break;
-	}
+		}
 	}
 	
 		
@@ -397,21 +397,28 @@ void IR::__AddOne2IR(AllocaInst * alloc)
 void IR::__If2IR(CSyntaxNode *pTree)
 {
 	Function *TheFunction = m_builder->GetInsertBlock()->getParent();
-	//BasicBlock *entry = BasicBlock::Create(m_module->getContext(), "entry", TheFunction);
-	BasicBlock *ThenBB= BasicBlock::Create(m_module->getContext(), "then", TheFunction);
+
+	BasicBlock *ThenBB = BasicBlock::Create(m_module->getContext(), "then", TheFunction);
 	BasicBlock *ElseBB = BasicBlock::Create(m_module->getContext(), "else", TheFunction);
+	BasicBlock *IfEnd = BasicBlock::Create(m_module->getContext(), "ifend", TheFunction);
 	//m_builder->SetInsertPoint(entry);
 
 	//条件跳转
 	Value *v = m_builder->CreateCondBr(__Cond2IR(pTree->GetChild0()), ThenBB, ElseBB, 0);
 
+
 	m_builder->SetInsertPoint(ThenBB);
 	Stmt2IR(pTree->GetChild1());
+	m_builder->CreateBr(IfEnd);
+
 
 	m_builder->SetInsertPoint(ElseBB);
 	Stmt2IR(pTree->GetChild2());
+	m_builder->CreateBr(IfEnd);
 
+	m_builder->SetInsertPoint(IfEnd);
 }
+
 
 Value* IR::__Cond2IR(CSyntaxNode* pTree)
 {

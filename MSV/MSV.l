@@ -175,6 +175,10 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "FILE"		{return FILEDECLARATION;}
 "system"   {return SYSTEM;}
 "extern"   {return EXTERN;}
+"switch"	{return SWITCH;}//add by yubin 2015-3-23
+"break"		{return BREAK;}//add by yubin 2015-3-23
+"case"		{return CASE;}//add by yubin 2015-3-23
+"default"		{return DEFAULT;}//add by yubin 2015-3-23
 
 "."        {return DOT;}
 "="        {return EQ;}     //比较相等符号 “=”

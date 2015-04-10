@@ -1,2 +1,4 @@
-float x<==5.2 and skip
-
+frame(x) and
+(
+unsigned int x and skip
+)

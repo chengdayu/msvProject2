@@ -1,5 +1,0 @@
-IRTree: 
-float x;
-x<==5.2;
-output();
-output()
