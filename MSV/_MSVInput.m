@@ -1,4 +1,13 @@
+int f(int x)
+{frame(x) and
+(
+ x:=x+1;
+ return x
+ )
+};
 frame(x) and
 (
-unsigned int x and skip
+int x and skip;
+extern f(x)
+
 )

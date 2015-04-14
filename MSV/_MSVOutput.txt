@@ -1,2 +1,2 @@
-IRTree: 
-output()
+IRFunctionTree: IRTree: 
+int $state_num=0;
