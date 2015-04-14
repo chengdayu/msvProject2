@@ -54,7 +54,7 @@ extern int yylex(void);
    enum RETURNTYPE  returntype;
 } 
 
-%token SWITCH CASE BREAK DEFAULT//add by yubin 2015-3-23
+%token SWITCH CASE BREAK DEFAULT RETURN//add by yubin 2015-3-23
 %token IF ELSE EMPTY AWAIT PROJECTION  PBEGIN PEND POINTERNULL ARRAY STRUCT DOT UNION FOPEN FCLOSE FILEDECLARATION FGETS FPUTS FGETC FPUTC
 %token MORE DEFINE MY_TRUE MY_FALSE EXIST FRAME FOR WHILE DO 
 %token TRUE FALSE
@@ -363,6 +363,7 @@ statement
 	   |sign_declaration                    {$$=$1;}
 	   
 	   |switch_statement              {$$=$1;}   //add 2015-3-18
+	   |RETURN ID					  {$$=new CSyntaxNode(RETURN_STA, $2,NULL,VOIDTYPE);}   //add by yubin,2015-4-13
 	   |if_statement                    {$$=$1;}
 	   |while_statement                 {$$=$1;}
 	   |for_statement                   {$$=$1;}
@@ -421,7 +422,7 @@ statement
 	       //有返回值的函数调用function, 函数体为可以赋值的算术式
 		      
 	   //*******************************************************************************************
-	   |FUNCTION ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR
+	  |type_define ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
 	   {
 			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $2, $4, $7, NULL, VOIDTYPE);
 	   }
