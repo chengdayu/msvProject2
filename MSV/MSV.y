@@ -107,7 +107,7 @@ extern int yylex(void);
 %type<tnode> address_exp//added by Jane
 %type<tnode> option_array_declaration inner_option_array_declaration//added by Jane
 
-%type<tnode> statement_bpar bool_par option_output option_input output_statement input_statement function     
+%type<tnode> statement_bpar bool_par option_output option_input output_statement input_statement function function_define//add by yubin 2015/4/15    
 %type<tnode> member_in_exp simple_ari_exp  
 %type<tnode> charliteral floatliteral 
 %type<tnode> struct_define_statement struct_identifier
@@ -378,15 +378,10 @@ statement
 	       //有返回值的函数调用function, 函数体为可以赋值的算术式
 		      
 	   //*******************************************************************************************
-	   |type_define ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
-	   {
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $2, $4, $7, NULL, $1);
-	   }
-	   |PROCESS ID OPEN_PAR option_function_parameter_list CLOSE_PAR ASS_P OPEN_BPAR empty_statement CLOSE_BPAR
-	   { 
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $2, $4, $8, NULL, VOIDTYPE);
-	   }//add by mdp
+	    
        |struct_define_statement//结构体定义语句
+	   
+	   |function_define                  {$$=$1;}
 	   |function                         {$$=$1;}
 	   |EXIST identifier inner_option_define_identifier COLON OPEN_BPAR statement CLOSE_BPAR
 	   {
@@ -416,6 +411,45 @@ option_struct_declaration
 empty_statement
 	   :statement                       {$$=$1;}
 	   |                                {$$=NULL;}
+	   ;
+
+
+function_define//add by yubin 2015/4/15,函数定义
+       :all_type_define ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
+	   {
+			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE,$4, VOIDTYPE);
+			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $2, pChild0, $7, NULL,$1);
+	   }
+	   |all_type_define MUL ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
+	   {
+
+			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE,$5, POINTERTYPE);
+			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $3, pChild0, $8, NULL,$1);
+	   }
+	   |all_type_define MUL MUL ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
+	   {
+
+			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE,$6, DOUBLEPOINTERTYPE);
+			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $4, pChild0, $9, NULL,$1);
+	   }
+	   |STRUCT STRUCT_TYPE ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
+	   {
+
+			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE, $2, $5, VOIDTYPE);
+			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $3, pChild0, $8, NULL,STRUCTTYPE);
+	   }
+	   |STRUCT STRUCT_TYPE MUL ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
+	   {
+
+			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE, $2, $6, POINTERTYPE);
+			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $4, pChild0, $9, NULL,STRUCTTYPE);
+	   }
+	   |STRUCT STRUCT_TYPE MUL MUL ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
+	   {
+
+			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE, $2, $7, DOUBLEPOINTERTYPE);
+			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $5, pChild0, $10, NULL,STRUCTTYPE);
+	   }
 	   ;
 
 //调用谓词和函数时的语法
@@ -906,8 +940,8 @@ type_cast:
 casted_element:	type_cast_alg_exp	{$$=$1;}   // malloc相关			  
 			  ;		
 //加入强制类型转换语句 end Jane
-
  
+
 
 
 bool_exp
@@ -928,7 +962,7 @@ prime_bool_exp
 //2015-3-7	   |MORE                            {$$=new CSyntaxNode(MORE_STA, BOOLTYPE);}
 //2015-3-7	   |EMPTY                           {$$=new CSyntaxNode(EMPTY_EXP, BOOLTYPE);}
 	   |ari_exp                         {$$=$1;}
-	   |ari_exp EQ strliteral          {$$=new CSyntaxNode(EQU_EXP, $1, $3, BOOLTYPE);}       
+		 |ari_exp EQ strliteral          {$$=new CSyntaxNode(EQU_EXP, $1, $3, BOOLTYPE);}       
 	   |ari_exp NE strliteral			{$$=new CSyntaxNode(NE_EXP, $1, $3, BOOLTYPE);}
 
 	    
