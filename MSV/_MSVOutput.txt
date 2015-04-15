@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 IRTree: 
 int $state_num=0;
 int x;
@@ -27,3 +28,16 @@ printf("x=%d ",x);
 printf("y=%d ",y);
 printf("\n");
 $state_num++;
+=======
+#include<stdio.h>
+#include<stdlib.h>
+int $state_num=0;
+int main() {
+int x;
+printf("state %d:", $state_num);
+printf("x=%d ",x);
+printf("\n");
+$state_num++;
+return 0;
+}
+>>>>>>> c7006a97d3ea4c7cf74b3454279e96b7f30fe1d6
