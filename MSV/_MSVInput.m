@@ -8,6 +8,6 @@ int f(int x)
 frame(x) and
 (
 int x and skip;
-extern f(x)
+f(x)
 
 )
