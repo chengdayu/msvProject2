@@ -989,22 +989,21 @@ option_function_parameter_list
 	        CSyntaxNode* pChild0=new CSyntaxNode(STRUCT_PARAMETER_EXP, $1, $2, VOIDTYPE);
 			$$=new CSyntaxNode(PARAMETER_EXP, pChild0, $3, STRUCTTYPE);
 			pChild0=NULL;
-		}
+	   }
        |STRUCT_TYPE MUL identifier inner_option_define_identifier//结构体指针类型的参数S *s
 	   {
-	        CSyntaxNode* pChild0= new CSyntaxNode(POINT_PARAMETER_EXP, $1, $3, VOIDTYPE);
+	        CSyntaxNode* pChild0= new CSyntaxNode(STRUCTP_PARAMETER_EXP, $1, $3, VOIDTYPE);
             $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $4, STRUCTTYPE);
             pChild0=NULL;
 	   }
        |STRUCT_TYPE MUL MUL identifier inner_option_define_identifier//结构体指针类型的参数S **s //二重结构体指针
 	   {
-	        CSyntaxNode* pChild0= new CSyntaxNode(DOUBLEPOINT_PARAMETER_EXP, $1, $4, VOIDTYPE);
+	        CSyntaxNode* pChild0= new CSyntaxNode(DOUBLESTRUCTP_PARAMETER_EXP, $1, $4, VOIDTYPE);
             $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $5, STRUCTTYPE);
             pChild0=NULL;
 	   }
 	   |STRUCT_TYPE identifier ARRAY inner_option_define_identifier //结构体数组 S a[]	 
 	   {
-
 			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $2, VOIDTYPE);
 			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $4, STRUCTTYPE);
             pChild0=NULL;
@@ -1020,13 +1019,13 @@ option_function_parameter_list
 		}
 	   |ID MUL identifier inner_option_define_identifier//结构体指针类型的参数S *s
 	   {
-	        CSyntaxNode* pChild0= new CSyntaxNode(POINT_PARAMETER_EXP, $1, $3, VOIDTYPE);
+	        CSyntaxNode* pChild0= new CSyntaxNode(STRUCTP_PARAMETER_EXP, $1, $3, VOIDTYPE);
             $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $4, STRUCTTYPE);
             pChild0=NULL;
 	   }
        |ID MUL MUL identifier inner_option_define_identifier//结构体指针类型的参数S **s //二重结构体指针
 	   {
-	        CSyntaxNode* pChild0= new CSyntaxNode(DOUBLEPOINT_PARAMETER_EXP, $1, $4, VOIDTYPE);
+	        CSyntaxNode* pChild0= new CSyntaxNode(DOUBLESTRUCTP_PARAMETER_EXP, $1, $4, VOIDTYPE);
             $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $5, STRUCTTYPE);
             pChild0=NULL;
 	   }
