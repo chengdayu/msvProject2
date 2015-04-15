@@ -1,13 +1,9 @@
-int f(int x)
-{frame(x) and
-(
- x:=x+1;
- return x
- )
+float * f(float* a)
+{
+   return a
 };
 frame(x) and
 (
-int x and skip;
-extern f(x)
-
+  int x and skip;
+  x:=x+2
 )
