@@ -1,13 +1,6 @@
-int f(int x)
-{frame(x) and
+frame(x,y) and 
 (
- x:=x+1;
- return x
- )
-};
-frame(x) and
-(
-int x and skip;
-extern f(x)
-
+int x<==0 and skip;
+await(x=0);
+int y<==2 and skip
 )

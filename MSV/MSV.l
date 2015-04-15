@@ -110,10 +110,6 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "request"  {return REQUEST;}
 "prefix"   {return PREFIX;}
 
-"switch"   {return SWITCH;}
-"case"     {return CASE;}
-"break"    {return BREAK;}
-
 ":"        {return COLON;}
 
 ";"        {return CHOP;}

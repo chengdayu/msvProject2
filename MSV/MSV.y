@@ -123,7 +123,7 @@ extern int yylex(void);
 %type<tnode> address_exp//added by Jane
 %type<tnode> option_array_declaration inner_option_array_declaration//added by Jane
 
-%type<tnode> statement_bpar bool_par option_output option_input output_statement input_statement function     
+%type<tnode> statement_bpar bool_par option_output option_input output_statement input_statement function function_define//add by yubin 2015/4/15    
 %type<tnode> member_in_exp simple_ari_exp  
 %type<tnode> charliteral floatliteral 
 %type<tnode> size_of
@@ -422,14 +422,7 @@ statement
 	       //有返回值的函数调用function, 函数体为可以赋值的算术式
 		      
 	   //*******************************************************************************************
-	  |type_define ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
-	   {
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $2, $4, $7, NULL, VOIDTYPE);
-	   }
-	   |PROCESS ID OPEN_PAR option_function_parameter_list CLOSE_PAR ASS_P OPEN_BPAR empty_statement CLOSE_BPAR
-	   { 
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $2, $4, $8, NULL, VOIDTYPE);
-	   }//add by mdp
+	    
        |struct_define_statement//结构体定义语句
 	   |FREE OPEN_PAR identifier CLOSE_PAR//相关
 	   {
@@ -440,6 +433,7 @@ statement
 	        $$=new CSyntaxNode(SYSTEM_STA, $3, VOIDTYPE);
 	   }
 //2015-3-7	   |String_Function		{ $$=$1; } 
+	   |function_define
 	   |function                         {$$=$1;}
 //	   |new                              {$$=$1;}    //Annotation-Class   
 	   |EXIST identifier inner_option_define_identifier COLON OPEN_BPAR statement CLOSE_BPAR
@@ -474,6 +468,23 @@ empty_statement
 	   :statement                       {$$=$1;}
 	   |                                {$$=NULL;}
 	   ;
+
+
+function_define//add by yubin 2015/4/15,函数定义
+       :all_type_define ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
+	   {
+			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $2, $4, $7, NULL, $1);
+	   }
+	   /*|all_type_define MUL ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
+	   {
+		 CSyntaxNode* pChild0= new CSyntaxNode(POINT_PARAMETER_EXP, $4, POINTERTYPE);
+          $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $5, $2);
+          pChild0=NULL;
+
+			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $2, $4, $7, NULL, );
+	   }*/
+	   ;
+
 
 //调用谓词和函数时的语法
 function

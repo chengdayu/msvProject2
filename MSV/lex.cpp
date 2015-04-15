@@ -282,56 +282,56 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 	*yy_cp = '\0'; \
 	yy_c_buf_p = yy_cp;
 
-#define YY_NUM_RULES 164
-#define YY_END_OF_BUFFER 165
+#define YY_NUM_RULES 161
+#define YY_END_OF_BUFFER 162
 static yyconst short int yy_accept[421] =
     {   0,
-        0,    0,    0,    0,  165,  159,  158,  157,  109,  159,
-      131,  116,   46,  159,  124,  125,  114,  112,  130,  113,
-      100,  115,  150,  150,   17,   45,  104,  101,  105,  149,
-      149,  149,  126,  127,  117,  149,  149,  149,  149,  149,
-      149,  149,  149,  149,  149,  149,  149,  149,  149,  149,
-      149,  149,  149,  149,  149,  149,  128,  135,  129,  120,
-      160,  161,  160,  160,  158,  108,    0,  153,    0,    0,
-        0,  122,    1,  156,  111,  154,  150,    0,    0,  103,
-        0,  110,  118,  106,  121,  107,  119,  149,  149,  149,
-      149,  144,  149,  149,  149,  149,  149,  149,  149,  149,
+        0,    0,    0,    0,  162,  156,  155,  154,  106,  156,
+      128,  113,   43,  156,  121,  122,  111,  109,  127,  110,
+       97,  112,  147,  147,   17,   42,  101,   98,  102,  146,
+      146,  146,  123,  124,  114,  146,  146,  146,  146,  146,
+      146,  146,  146,  146,  146,  146,  146,  146,  146,  146,
+      146,  146,  146,  146,  146,  146,  125,  132,  126,  117,
+      157,  158,  157,  157,  155,  105,    0,  150,    0,    0,
+        0,  119,    1,  153,  108,  151,  147,    0,    0,  100,
+        0,  107,  115,  103,  118,  104,  116,  146,  146,  146,
+      146,  141,  146,  146,  146,  146,  146,  146,  146,  146,
 
-      149,  149,  149,  149,  149,  149,   33,  149,  149,  149,
-      149,  149,  149,  149,  149,  149,  149,  149,  149,  149,
-      149,  149,  149,   27,  149,  149,  149,  149,  149,  149,
-      149,  149,  149,  136,  149,    3,  149,  132,  149,  149,
-      149,  149,  149,  134,  149,  149,  149,  149,  149,  149,
-      149,  149,  149,  149,  149,  149,  149,  149,  149,  149,
-        9,  163,    0,  153,    0,    0,  155,  155,  154,  151,
-        0,  152,  123,  102,  149,  149,   79,  149,   15,    2,
-      149,  149,  149,  149,  149,  149,  149,  138,   65,  149,
-      149,  149,  149,  149,   73,  149,  149,  149,  149,  149,
+      146,  146,  146,  146,  146,  146,   33,  146,  146,  146,
+      146,  146,  146,  146,  146,  146,  146,  146,  146,  146,
+      146,  146,  146,   27,  146,  146,  146,  146,  146,  146,
+      146,  146,  146,  133,  146,    3,  146,  129,  146,  146,
+      146,  146,  146,  131,  146,  146,  146,  146,  146,  146,
+      146,  146,  146,  146,  146,  146,  146,  146,  146,  146,
+        9,  160,    0,  150,    0,    0,  152,  152,  151,  148,
+        0,  149,  120,   99,  146,  146,   76,  146,   15,    2,
+      146,  146,  146,  146,  146,  146,  146,  135,   62,  146,
+      146,  146,  146,  146,   70,  146,  146,  146,  146,  146,
 
-        5,  149,  149,  149,   30,  149,  149,  149,  149,  142,
-      149,  149,  149,   47,  149,  149,  149,   25,  149,   74,
-      149,  149,  149,  149,  149,  149,   78,  149,   10,  149,
-      141,  149,  149,  149,  149,  149,  149,  149,   64,  149,
-      149,   16,  149,  149,  149,  149,  149,   66,  149,  149,
-      149,  149,  149,  149,  149,  149,  149,  133,  162,   92,
-      143,   68,   67,   69,  149,  149,   42,   62,   50,   71,
-      149,  149,  149,   29,  149,  149,  149,   80,  149,  149,
-      149,  149,  149,   82,  149,  149,  149,  148,  149,  149,
-        7,   54,  149,   14,   81,  149,   52,  149,  149,   83,
+        5,  146,  146,  146,   30,  146,  146,  146,  146,  139,
+      146,  146,  146,   44,  146,  146,  146,   25,  146,   71,
+      146,  146,  146,  146,  146,  146,   75,  146,   10,  146,
+      138,  146,  146,  146,  146,  146,  146,  146,   61,  146,
+      146,   16,  146,  146,  146,  146,  146,   63,  146,  146,
+      146,  146,  146,  146,  146,  146,  146,  130,  159,   89,
+      140,   65,   64,   66,  146,  146,   94,   59,   47,   68,
+      146,  146,  146,   29,  146,  146,  146,   77,  146,  146,
+      146,  146,  146,   79,  146,  146,  146,  145,  146,  146,
+        7,   51,  146,   14,   78,  146,   49,  146,  146,   80,
 
-       13,   11,  149,  149,  149,  137,  149,  149,  149,  149,
-      149,  139,  149,   70,  149,    4,   76,  149,  149,  149,
-      149,  149,  149,   55,   72,   28,  149,   23,  149,  149,
-      149,   53,  149,  149,   77,    8,   43,  149,  149,  149,
-        6,  149,  149,   24,  149,   88,   87,   51,   63,   86,
-       90,   89,   26,   85,  149,   38,   84,   75,  149,  149,
-      149,  149,  149,  149,  149,  149,   61,  149,  149,  149,
-      149,  149,  149,  149,  149,  149,  149,   31,   22,  149,
-       35,  149,   32,  149,   19,  149,   18,   94,   91,  149,
-      147,   37,  149,   40,  149,   34,  149,   99,  145,   60,
+       13,   11,  146,  146,  146,  134,  146,  146,  146,  146,
+      146,  136,  146,   67,  146,    4,   73,  146,  146,  146,
+      146,  146,  146,   52,   69,   28,  146,   23,  146,  146,
+      146,   50,  146,  146,   74,    8,   93,  146,  146,  146,
+        6,  146,  146,   24,  146,   85,   84,   48,   60,   83,
+       87,   86,   26,   82,  146,   38,   81,   72,  146,  146,
+      146,  146,  146,  146,  146,  146,   58,  146,  146,  146,
+      146,  146,  146,  146,  146,  146,  146,   31,   22,  146,
+       35,  146,   32,  146,   19,  146,   18,   91,   88,  146,
+      144,   37,  146,   40,  146,   34,  146,   96,  142,   57,
 
-       56,   57,   59,   48,   58,   21,   41,   93,  149,   12,
-       98,   36,  149,   49,  140,   39,  149,   20,  146,    0
+       53,   54,   56,   45,   55,   21,   92,   90,  146,   12,
+       95,   36,  146,   46,  137,   39,  146,   20,  143,    0
     } ;
 
 static yyconst int yy_ec[256] =
@@ -1506,546 +1506,531 @@ YY_RULE_SETUP
 case 41:
 YY_RULE_SETUP
 #line 113 "MSV.l"
-{return SWITCH;}
+{return COLON;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 114 "MSV.l"
-{return CASE;}
+#line 115 "MSV.l"
+{return CHOP;}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 115 "MSV.l"
-{return BREAK;}
+#line 116 "MSV.l"
+{return ADDRESS;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 117 "MSV.l"
-{return COLON;}
+#line 118 "MSV.l"
+{return INTDECLARATION;}//  added by Jane 2012-05-21
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 119 "MSV.l"
-{return CHOP;}
+{return STRDECLARATION;}//STRVARIABLE  added by Jane 2012-05-21
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
 #line 120 "MSV.l"
-{return ADDRESS;}
+{return POINTERDECLARATION;}//POINTER  added by Jane 2012-05-21
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 122 "MSV.l"
-{return INTDECLARATION;}//  added by Jane 2012-05-21
+#line 121 "MSV.l"
+{return CHARDECLARATION;}//CHARVARIABLE  added by Jane 2012-05-21 
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 123 "MSV.l"
-{return STRDECLARATION;}//STRVARIABLE  added by Jane 2012-05-21
+#line 122 "MSV.l"
+{return FLOATDECLARATION;}//FLOATVARIABLE  added by Jane 2012-05-21
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 124 "MSV.l"
-{return POINTERDECLARATION;}//POINTER  added by Jane 2012-05-21
+#line 123 "MSV.l"
+{return LISTDECLARATION;}//LISTVARIABLE  added by Jane 2012-05-21
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 125 "MSV.l"
-{return CHARDECLARATION;}//CHARVARIABLE  added by Jane 2012-05-21 
+#line 124 "MSV.l"
+{return VOIDDECLARATION;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
 #line 126 "MSV.l"
-{return FLOATDECLARATION;}//FLOATVARIABLE  added by Jane 2012-05-21
+{return		STRFUNCHEAD;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
 #line 127 "MSV.l"
-{return LISTDECLARATION;}//LISTVARIABLE  added by Jane 2012-05-21
+{return		STRFUNCTAIL;}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
 #line 128 "MSV.l"
-{return VOIDDECLARATION;}
+{return		STRFUNCCAT;}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 130 "MSV.l"
-{return		STRFUNCHEAD;}
+#line 129 "MSV.l"
+{return		STRFUNCCMP;}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 131 "MSV.l"
-{return		STRFUNCTAIL;}
+#line 130 "MSV.l"
+{return		STRFUNCLEN;}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 132 "MSV.l"
-{return		STRFUNCCAT;}
+#line 131 "MSV.l"
+{return		STRFUNCCPY;}
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 133 "MSV.l"
-{return		STRFUNCCMP;}
+#line 132 "MSV.l"
+{return     SIZEOF;}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 134 "MSV.l"
-{return		STRFUNCLEN;}
+#line 135 "MSV.l"
+{return ROUND;}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 135 "MSV.l"
-{return		STRFUNCCPY;}
+#line 136 "MSV.l"
+{return CEIL;}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 136 "MSV.l"
-{return     SIZEOF;}
+#line 137 "MSV.l"
+{return FLOOR;}
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
 #line 139 "MSV.l"
-{return ROUND;}
+{return SIN;}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
 #line 140 "MSV.l"
-{return CEIL;}
+{return COS;}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
 #line 141 "MSV.l"
-{return FLOOR;}
+{return TAN;}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 143 "MSV.l"
-{return SIN;}
+#line 142 "MSV.l"
+{return ASIN;}
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 144 "MSV.l"
-{return COS;}
+#line 143 "MSV.l"
+{return ACOS;}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 145 "MSV.l"
-{return TAN;}
+#line 144 "MSV.l"
+{return ATAN;}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 146 "MSV.l"
-{return ASIN;}
+#line 145 "MSV.l"
+{return SINH;}
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 147 "MSV.l"
-{return ACOS;}
+#line 146 "MSV.l"
+{return COSH;}
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 148 "MSV.l"
-{return ATAN;}
+#line 147 "MSV.l"
+{return TANH;}
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 149 "MSV.l"
-{return SINH;}
+#line 148 "MSV.l"
+{return EXP;}
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 150 "MSV.l"
-{return COSH;}
+#line 149 "MSV.l"
+{return LOG;}
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 151 "MSV.l"
-{return TANH;}
+#line 150 "MSV.l"
+{return LOG10;}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 152 "MSV.l"
-{return EXP;}
+#line 151 "MSV.l"
+{return SQRT;}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
 #line 153 "MSV.l"
-{return LOG;}
+{return ATAN2;}
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
 #line 154 "MSV.l"
-{return LOG10;}
+{return POW;}
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 155 "MSV.l"
-{return SQRT;}
+#line 156 "MSV.l"
+{return ABS;}
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
 #line 157 "MSV.l"
-{return ATAN2;}
+{return FABS;}
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
 #line 158 "MSV.l"
-{return POW;}
+{return LABS;}
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
 #line 160 "MSV.l"
-{return ABS;}
+{return FMOD;}
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
 #line 161 "MSV.l"
-{return FABS;}
+{return MODF;}
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
 #line 162 "MSV.l"
-{return LABS;}
+{return LDEXP;}
 	YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 164 "MSV.l"
-{return FMOD;}
+#line 163 "MSV.l"
+{return FREXP;}
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
 #line 165 "MSV.l"
-{return MODF;}
+{return FOPEN;}
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
 #line 166 "MSV.l"
-{return LDEXP;}
+{return FGETS;} 
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
 #line 167 "MSV.l"
-{return FREXP;}
+{return FGETC;} 
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 169 "MSV.l"
-{return FOPEN;}
+#line 168 "MSV.l"
+{return FPUTS;} 
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
-#line 170 "MSV.l"
-{return FGETS;} 
+#line 169 "MSV.l"
+{return FPUTC;} 
 	YY_BREAK
 case 88:
 YY_RULE_SETUP
-#line 171 "MSV.l"
-{return FGETC;} 
+#line 170 "MSV.l"
+{return FCLOSE;}
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 172 "MSV.l"
-{return FPUTS;} 
+#line 171 "MSV.l"
+{return FILEDECLARATION;}
 	YY_BREAK
 case 90:
 YY_RULE_SETUP
-#line 173 "MSV.l"
-{return FPUTC;} 
+#line 172 "MSV.l"
+{return SYSTEM;}
 	YY_BREAK
 case 91:
 YY_RULE_SETUP
-#line 174 "MSV.l"
-{return FCLOSE;}
+#line 173 "MSV.l"
+{return EXTERN;}
 	YY_BREAK
 case 92:
 YY_RULE_SETUP
-#line 175 "MSV.l"
-{return FILEDECLARATION;}
+#line 174 "MSV.l"
+{return SWITCH;}//add by yubin 2015-3-23
 	YY_BREAK
 case 93:
 YY_RULE_SETUP
-#line 176 "MSV.l"
-{return SYSTEM;}
+#line 175 "MSV.l"
+{return BREAK;}//add by yubin 2015-3-23
 	YY_BREAK
 case 94:
 YY_RULE_SETUP
-#line 177 "MSV.l"
-{return EXTERN;}
+#line 176 "MSV.l"
+{return CASE;}//add by yubin 2015-3-23
 	YY_BREAK
 case 95:
 YY_RULE_SETUP
-#line 178 "MSV.l"
-{return SWITCH;}//add by yubin 2015-3-23
+#line 177 "MSV.l"
+{return DEFAULT;}//add by yubin 2015-3-23
 	YY_BREAK
 case 96:
 YY_RULE_SETUP
-#line 179 "MSV.l"
-{return BREAK;}//add by yubin 2015-3-23
+#line 178 "MSV.l"
+{return RETURN;}//2015-4-13,add by yubin
 	YY_BREAK
 case 97:
 YY_RULE_SETUP
 #line 180 "MSV.l"
-{return CASE;}//add by yubin 2015-3-23
+{return DOT;}
 	YY_BREAK
 case 98:
 YY_RULE_SETUP
 #line 181 "MSV.l"
-{return DEFAULT;}//add by yubin 2015-3-23
+{return EQ;}     //比较相等符号 “=”
 	YY_BREAK
 case 99:
 YY_RULE_SETUP
 #line 182 "MSV.l"
-{return RETURN;}//2015-4-13,add by yubin
+{return ASS_P;}   //赋值符号已修改为“<==”
 	YY_BREAK
 case 100:
 YY_RULE_SETUP
 #line 184 "MSV.l"
-{return DOT;}
+{return ASS_N;}
 	YY_BREAK
 case 101:
 YY_RULE_SETUP
-#line 185 "MSV.l"
-{return EQ;}     //比较相等符号 “=”
+#line 186 "MSV.l"
+{return LT;}
 	YY_BREAK
 case 102:
 YY_RULE_SETUP
-#line 186 "MSV.l"
-{return ASS_P;}   //赋值符号已修改为“<==”
+#line 187 "MSV.l"
+{return GT;}
 	YY_BREAK
 case 103:
 YY_RULE_SETUP
 #line 188 "MSV.l"
-{return ASS_N;}
+{return LE;}
 	YY_BREAK
 case 104:
 YY_RULE_SETUP
-#line 190 "MSV.l"
-{return LT;}
+#line 189 "MSV.l"
+{return GE;}
 	YY_BREAK
 case 105:
 YY_RULE_SETUP
-#line 191 "MSV.l"
-{return GT;}
+#line 190 "MSV.l"
+{return NE;}
 	YY_BREAK
 case 106:
 YY_RULE_SETUP
-#line 192 "MSV.l"
-{return LE;}
+#line 191 "MSV.l"
+{return NEGATION;}
 	YY_BREAK
 case 107:
 YY_RULE_SETUP
-#line 193 "MSV.l"
-{return GE;}
+#line 192 "MSV.l"
+{return PBEGIN;}
 	YY_BREAK
 case 108:
 YY_RULE_SETUP
-#line 194 "MSV.l"
-{return NE;}
+#line 193 "MSV.l"
+{return PEND;}
 	YY_BREAK
 case 109:
 YY_RULE_SETUP
 #line 195 "MSV.l"
-{return NEGATION;}
+{return ADD;}
 	YY_BREAK
 case 110:
 YY_RULE_SETUP
 #line 196 "MSV.l"
-{return PBEGIN;}
+{return SUB;}
 	YY_BREAK
 case 111:
 YY_RULE_SETUP
 #line 197 "MSV.l"
-{return PEND;}
+{return MUL;}
 	YY_BREAK
 case 112:
 YY_RULE_SETUP
-#line 199 "MSV.l"
-{return ADD;}
+#line 198 "MSV.l"
+{return DIV;}
 	YY_BREAK
 case 113:
 YY_RULE_SETUP
-#line 200 "MSV.l"
-{return SUB;}
+#line 199 "MSV.l"
+{return MOD;}
 	YY_BREAK
 case 114:
 YY_RULE_SETUP
-#line 201 "MSV.l"
-{return MUL;}
+#line 200 "MSV.l"
+{return CON;}
 	YY_BREAK
 case 115:
 YY_RULE_SETUP
-#line 202 "MSV.l"
-{return DIV;}
+#line 201 "MSV.l"
+{return LST;}//左移 left shift
 	YY_BREAK
 case 116:
 YY_RULE_SETUP
-#line 203 "MSV.l"
-{return MOD;}
+#line 202 "MSV.l"
+{return RST;}//右移 right shift
 	YY_BREAK
 case 117:
 YY_RULE_SETUP
-#line 204 "MSV.l"
-{return CON;}
+#line 203 "MSV.l"
+{return BNE;}//按位非 bit negation
 	YY_BREAK
 case 118:
 YY_RULE_SETUP
 #line 205 "MSV.l"
-{return LST;}//左移 left shift
+{return PROPIMPLY;}
 	YY_BREAK
 case 119:
 YY_RULE_SETUP
 #line 206 "MSV.l"
-{return RST;}//右移 right shift
+{return IMPLY;}
 	YY_BREAK
 case 120:
 YY_RULE_SETUP
 #line 207 "MSV.l"
-{return BNE;}//按位非 bit negation
+{return IFF;}
 	YY_BREAK
 case 121:
 YY_RULE_SETUP
 #line 209 "MSV.l"
-{return PROPIMPLY;}
+{return OPEN_PAR;}
 	YY_BREAK
 case 122:
 YY_RULE_SETUP
 #line 210 "MSV.l"
-{return IMPLY;}
+{return CLOSE_PAR;}
 	YY_BREAK
 case 123:
 YY_RULE_SETUP
 #line 211 "MSV.l"
-{return IFF;}
+{return OPEN_MPAR;}
 	YY_BREAK
 case 124:
 YY_RULE_SETUP
-#line 213 "MSV.l"
-{return OPEN_PAR;}
+#line 212 "MSV.l"
+{return CLOSE_MPAR;}
 	YY_BREAK
 case 125:
 YY_RULE_SETUP
-#line 214 "MSV.l"
-{return CLOSE_PAR;}
+#line 213 "MSV.l"
+{return OPEN_BPAR;}
 	YY_BREAK
 case 126:
 YY_RULE_SETUP
-#line 215 "MSV.l"
-{return OPEN_MPAR;}
+#line 214 "MSV.l"
+{return CLOSE_BPAR;}
 	YY_BREAK
 case 127:
 YY_RULE_SETUP
-#line 216 "MSV.l"
-{return CLOSE_MPAR;}
+#line 215 "MSV.l"
+{return COMMA;}
 	YY_BREAK
 case 128:
 YY_RULE_SETUP
-#line 217 "MSV.l"
-{return OPEN_BPAR;}
+#line 216 "MSV.l"
+{return CHOPSTAR;}
 	YY_BREAK
 case 129:
 YY_RULE_SETUP
-#line 218 "MSV.l"
-{return CLOSE_BPAR;}
+#line 219 "MSV.l"
+{return OVER;}
 	YY_BREAK
 case 130:
 YY_RULE_SETUP
-#line 219 "MSV.l"
-{return COMMA;}
+#line 220 "MSV.l"
+{return CYLINDER;}
 	YY_BREAK
 case 131:
 YY_RULE_SETUP
-#line 220 "MSV.l"
-{return CHOPSTAR;}
+#line 221 "MSV.l"
+{return OVEREP;}
 	YY_BREAK
 case 132:
 YY_RULE_SETUP
 #line 223 "MSV.l"
-{return OVER;}
+{return	INTER_OR;}
 	YY_BREAK
 case 133:
 YY_RULE_SETUP
 #line 224 "MSV.l"
-{return CYLINDER;}
+{return NON_DETERMINED;}
 	YY_BREAK
 case 134:
 YY_RULE_SETUP
-#line 225 "MSV.l"
-{return OVEREP;}
+#line 226 "MSV.l"
+{return PROCESS;}
 	YY_BREAK
 case 135:
 YY_RULE_SETUP
 #line 227 "MSV.l"
-{return	INTER_OR;}
+{return CHANNEL;}
 	YY_BREAK
 case 136:
 YY_RULE_SETUP
 #line 228 "MSV.l"
-{return NON_DETERMINED;}
+{return SEND;}
 	YY_BREAK
 case 137:
 YY_RULE_SETUP
-#line 230 "MSV.l"
-{return PROCESS;}
+#line 229 "MSV.l"
+{return RECEIVE;}
 	YY_BREAK
 case 138:
 YY_RULE_SETUP
-#line 231 "MSV.l"
-{return CHANNEL;}
+#line 230 "MSV.l"
+{return PUT;}
 	YY_BREAK
 case 139:
 YY_RULE_SETUP
-#line 232 "MSV.l"
-{return SEND;}
+#line 231 "MSV.l"
+{return GET;}
 	YY_BREAK
 case 140:
 YY_RULE_SETUP
 #line 233 "MSV.l"
-{return RECEIVE;}
+{return POINTERNULL;}
 	YY_BREAK
 case 141:
 YY_RULE_SETUP
 #line 234 "MSV.l"
-{return PUT;}
+{return ARRAY;}
 	YY_BREAK
 case 142:
 YY_RULE_SETUP
-#line 235 "MSV.l"
-{return GET;}
+#line 236 "MSV.l"
+{return SIGNED;}
 	YY_BREAK
 case 143:
 YY_RULE_SETUP
 #line 237 "MSV.l"
-{return POINTERNULL;}
+{return UNSIGNED;}
 	YY_BREAK
 case 144:
 YY_RULE_SETUP
-#line 238 "MSV.l"
-{return ARRAY;}
+#line 239 "MSV.l"
+{return MALLOC;}//malloc相关
 	YY_BREAK
 case 145:
 YY_RULE_SETUP
 #line 240 "MSV.l"
-{return SIGNED;}
+{return FREE;}
 	YY_BREAK
 case 146:
 YY_RULE_SETUP
-#line 241 "MSV.l"
-{return UNSIGNED;}
-	YY_BREAK
-case 147:
-YY_RULE_SETUP
 #line 243 "MSV.l"
-{return MALLOC;}//malloc相关
-	YY_BREAK
-case 148:
-YY_RULE_SETUP
-#line 244 "MSV.l"
-{return FREE;}
-	YY_BREAK
-case 149:
-YY_RULE_SETUP
-#line 247 "MSV.l"
 {
 			   yylval.cString=new char[strlen(yytext)+1];
 			   strcpy(yylval.cString,yytext);
@@ -2060,17 +2045,17 @@ YY_RULE_SETUP
 			   }
 		}
 	YY_BREAK
-case 150:
+case 147:
 YY_RULE_SETUP
-#line 260 "MSV.l"
+#line 256 "MSV.l"
 {    
                yylval.nInteger=atoi(yytext);
                return INTLITERAL;
 		 }
 	YY_BREAK
-case 151:
+case 148:
 YY_RULE_SETUP
-#line 264 "MSV.l"
+#line 260 "MSV.l"
 {    
                int decValue;//int，保存16进制对应的十进制数
 			   sscanf(yytext,"%x",&decValue);//将16进制字符串转成10进制数
@@ -2078,9 +2063,9 @@ YY_RULE_SETUP
                return INTLITERAL;
 			}
 	YY_BREAK
-case 152:
+case 149:
 YY_RULE_SETUP
-#line 270 "MSV.l"
+#line 266 "MSV.l"
 {
                char* result=NULL;
 			   result=strtok(yytext, "e");
@@ -2097,25 +2082,25 @@ YY_RULE_SETUP
 			   return FLOATLITERAL;
 			}
 	YY_BREAK
-case 153:
+case 150:
 YY_RULE_SETUP
-#line 285 "MSV.l"
+#line 281 "MSV.l"
 {
                passStringConstant ();
 			   return STRLITERAL;
          }
 	YY_BREAK
-case 154:
+case 151:
 YY_RULE_SETUP
-#line 290 "MSV.l"
+#line 286 "MSV.l"
 {		
 				yylval. floatval = atof(yytext); 
 				return FLOATLITERAL; 
 		 }//Added by Jane 2012-05-21 
 	YY_BREAK
-case 155:
+case 152:
 YY_RULE_SETUP
-#line 294 "MSV.l"
+#line 290 "MSV.l"
 {//modified by yubin 2014/2/25，第一个if分支处理没有转义字符的情况，下面的分支处理有转义字符的情况
 				if(yytext[1]!='\\')
 				{
@@ -2169,52 +2154,52 @@ YY_RULE_SETUP
 				}
 		}   //2013-4-22 add by YY[fixed]
 	YY_BREAK
+case 153:
+YY_RULE_SETUP
+#line 345 "MSV.l"
+{DeleteSingleLineComment();}
+	YY_BREAK
+case 154:
+YY_RULE_SETUP
+#line 346 "MSV.l"
+{++lineno;}
+	YY_BREAK
+case 155:
+YY_RULE_SETUP
+#line 347 "MSV.l"
+{}
+	YY_BREAK
 case 156:
 YY_RULE_SETUP
-#line 349 "MSV.l"
-{DeleteSingleLineComment();}
+#line 348 "MSV.l"
+{return ERROR_TOKEN;}
 	YY_BREAK
 case 157:
 YY_RULE_SETUP
 #line 350 "MSV.l"
-{++lineno;}
+{}
 	YY_BREAK
 case 158:
 YY_RULE_SETUP
 #line 351 "MSV.l"
-{}
+{++lineno;}
 	YY_BREAK
 case 159:
 YY_RULE_SETUP
 #line 352 "MSV.l"
-{return ERROR_TOKEN;}
+{error("EOF in comment");}
 	YY_BREAK
 case 160:
 YY_RULE_SETUP
-#line 354 "MSV.l"
-{}
+#line 353 "MSV.l"
+{BEGIN 0;}
 	YY_BREAK
 case 161:
 YY_RULE_SETUP
 #line 355 "MSV.l"
-{++lineno;}
-	YY_BREAK
-case 162:
-YY_RULE_SETUP
-#line 356 "MSV.l"
-{error("EOF in comment");}
-	YY_BREAK
-case 163:
-YY_RULE_SETUP
-#line 357 "MSV.l"
-{BEGIN 0;}
-	YY_BREAK
-case 164:
-YY_RULE_SETUP
-#line 359 "MSV.l"
 ECHO;
 	YY_BREAK
-#line 2218 "lex.cpp"
+#line 2203 "lex.cpp"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(comment):
 	yyterminate();
@@ -3075,7 +3060,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 359 "MSV.l"
+#line 355 "MSV.l"
 
 
 void DeleteSingleLineComment(void)

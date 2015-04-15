@@ -1,2 +1,29 @@
-IRFunctionTree: IRTree: 
+IRTree: 
 int $state_num=0;
+int x;
+x<==0;
+printf("state %d:", $state_num);
+printf("x=%d ",x);
+printf();
+printf("\n");
+$state_num++;
+;
+while(~(x=0)){printf("state %d:", $state_num);
+printf("x=%d ",x);
+printf();
+printf("\n");
+$state_num++;
+};
+int y;
+y<==2;
+printf("state %d:", $state_num);
+printf("x=%d ",x);
+printf("y=%d ",y);
+printf("\n");
+$state_num++;
+;
+printf("state %d:", $state_num);
+printf("x=%d ",x);
+printf("y=%d ",y);
+printf("\n");
+$state_num++;
