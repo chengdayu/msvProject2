@@ -1091,7 +1091,7 @@ option_function_parameter_list
 	   |STRUCT_TYPE identifier ARRAY inner_option_define_identifier //结构体数组 S a[]	 
 	   {
 
-			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $2, VOIDTYPE);
+			CSyntaxNode* pChild0=new CSyntaxNode(STRUCT_ARRAY_PARAMETER_EXP, $1, $2, VOIDTYPE);
 			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $4, STRUCTTYPE);
             pChild0=NULL;
 		}
@@ -1118,8 +1118,7 @@ option_function_parameter_list
 	   }
 	   |ID identifier ARRAY inner_option_define_identifier //结构体数组 S a[]	 
 	   {
-
-			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $2, VOIDTYPE);
+			CSyntaxNode* pChild0=new CSyntaxNode(STRUCT_ARRAY_PARAMETER_EXP, $1, $2, VOIDTYPE);
 			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $4, STRUCTTYPE);
             pChild0=NULL;
 		}
@@ -1161,24 +1160,8 @@ option_function_parameter_list
 	   }
 	   |all_type_define MUL identifier ARRAY inner_option_define_identifier //指针数组int *a[]
 	   {
-            CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $3, VOIDTYPE);
+            CSyntaxNode* pChild0=new CSyntaxNode(POINTER_ARRAY_PARAMETER_EXP, $3, VOIDTYPE);
 			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $5, $1);
-            pChild0=NULL;
-	   }
-	   	 //数组类型的参数a[4]
-	   |all_type_define identifier OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier  
-	   
-	   {
-			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $2, VOIDTYPE);
-			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $6, $1);
-            pChild0=NULL;
-	   }
-	     //数组类型的参数a[3,2]
-	   |all_type_define identifier OPEN_MPAR ari_exp COMMA ari_exp CLOSE_MPAR inner_option_define_identifier
-	   
-	   {
-			CSyntaxNode* pChild0=new CSyntaxNode(DOUBLEARRAY_PARAMETER_EXP, $2, VOIDTYPE);
-			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $8, $1);
             pChild0=NULL;
 	   }
 	    //数组类型的参数a[][100]
