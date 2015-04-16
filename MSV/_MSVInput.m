@@ -1,7 +1,7 @@
 function int f(int x)
 {
-frame(x) and
-(
+ frame(x) and
+ (
   x:=0;
   return x
   )
