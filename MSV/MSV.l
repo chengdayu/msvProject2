@@ -85,7 +85,7 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "alw"      {return ALWAYS;}
 "som"      {return SOMETIMES;}
 ":"        {return COLON;}
-"exists"   {return EXIST;}
+"local"   {return EXIST;}
 "define"   {return DEFINE;}
 "function" {return FUNCTION;}
 "struct"   {return STRUCT;}
