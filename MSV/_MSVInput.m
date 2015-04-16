@@ -1,19 +1,11 @@
-frame(x,y) and 
-(
-<<<<<<< HEAD
-int x<==0 and skip;
-await(x=0);
-int y<==2 and skip
-)
-=======
- x:=x+1;
+function int f(int x,int y)
+{
  return x
- )
 };
-frame(x) and
+frame(x,y) and
 (
 int x and skip;
-f(x)
+int y and skip;
+x<== extern f(x,y) and skip
 
 )
->>>>>>> c7006a97d3ea4c7cf74b3454279e96b7f30fe1d6
