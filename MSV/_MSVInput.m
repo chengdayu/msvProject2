@@ -1,4 +1,4 @@
-function int f(int x)
+function void f(int x)
 {frame(x) and
 (
  x:=x+1;
@@ -9,7 +9,5 @@ function int f(int x)
 frame(x) and
 (
 int x<==0 and skip;
-x:= f(x) and skip
-
+f(x)
 )
-
