@@ -1,13 +1,13 @@
-function int f(int x)
+
+function int f(int x,int y)
 {
- frame(x) and
- (
-  x:=0;
-  return x
-  )
+ x:=x+1;
+ return x
 };
-frame(x) and 
+frame(x,y) and
 (
-  int x and skip;
-  x:=f(x)
+int x and skip;
+int y and skip;
+x<== extern f(x,y) and skip
+
 )
