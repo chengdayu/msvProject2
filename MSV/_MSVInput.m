@@ -1,12 +1,15 @@
-function int f(int x,int y)
-{
-x:=x+1;
- return x
-};
-frame(x,y) and
+function int f(int x)
+{frame(x) and
 (
-int x and skip;
-int y and skip;
-x<== extern f(x,y) and skip
+ x:=x+1;
+ x:=x+1;
+ return x
+ )
+};
+frame(x) and
+(
+int x<==0 and skip;
+x:= f(x) and skip
 
 )
+
