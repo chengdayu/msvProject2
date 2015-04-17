@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<stdlib.h>
+int $$state_num=0;
+int main() {
+int x;
+int y;
+x=3;
+y=0;
+printf("state %d:", $$state_num);
+printf("x=%d ",x);
+printf("y=%d ",y);
+printf("\n");
+$$state_num++;
+if (x=2){printf("state %d:", $$state_num);
+printf("x=%d ",x);
+printf("y=%d ",y);
+printf("\n");
+$$state_num++;
+y=2;
+} else {if (x=3){printf("state %d:", $$state_num);
+printf("x=%d ",x);
+printf("y=%d ",y);
+printf("\n");
+$$state_num++;
+y=3;
+printf("state %d:", $$state_num);
+printf("x=%d ",x);
+printf("y=%d ",y);
+printf("\n");
+$$state_num++;
+y=4;
+} else {if (x=4){printf("state %d:", $$state_num);
+printf("x=%d ",x);
+printf("y=%d ",y);
+printf("\n");
+$$state_num++;
+y=4;
+} else {printf("state %d:", $$state_num);
+printf("x=%d ",x);
+printf("y=%d ",y);
+printf("\n");
+$$state_num++;
+y=5;
+}}}printf("state %d:", $$state_num);
+printf("x=%d ",x);
+printf("y=%d ",y);
+printf("\n");
+$$state_num++;
+x=5;
+printf("state %d:", $$state_num);
+printf("x=%d ",x);
+printf("y=%d ",y);
+printf("\n");
+$$state_num++;
+return 0;
+}
