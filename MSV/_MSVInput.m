@@ -1,13 +1,5 @@
-
-function int f(int x,int y)
-{
- x:=x+1;
- return x
-};
-frame(x,y) and
+frame(p) and
 (
-int x and skip;
-int y and skip;
-x<== extern f(x,y) and skip
-
+  int *p and skip;
+  p<==(int *)malloc(4)
 )
