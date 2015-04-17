@@ -1,13 +1,14 @@
-function void f(int x)
-{frame(x) and
+frame(x,y,z) and
 (
- x:=x+1;
- x:=x+1;
- return x
- )
-};
-frame(x) and
-(
-int x<==0 and skip;
-f(x)
+ int x<==1 and skip;
+ local(y):
+ {
+   frame(y) and 
+   (
+	int y<==3 and skip;
+	x<==y and skip
+   )
+ };
+ int z<==4 and skip;
+ z<==5 and skip
 )
