@@ -384,7 +384,6 @@ statement
 	   {
 			$$=new CSyntaxNode(FRAME_STA, $3, $4, $8, VOIDTYPE);
 	   }
-
 //prj 
 	   |OPEN_BPAR statement option_projection CLOSE_BPAR PROJECTION statement_bpar
 	   {
