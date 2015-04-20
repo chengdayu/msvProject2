@@ -1311,18 +1311,19 @@ inner_option_define_identifier
 option_function_identifier
        :ass_right inner_option_function_identifier           
 	   {
-			$$ = new CSyntaxNode(PARAMETER_EXP, $1, $2, VOIDTYPE);
+			$$ = new CSyntaxNode(ACTUAL_PARAMETER_EXP, $1, $2, VOIDTYPE);
 	   }
 	   |ID OPEN_PAR option_function_identifier CLOSE_PAR  inner_option_function_identifier
 	   {
 	        CSyntaxNode* child0=new CSyntaxNode(FUNCTION_STA, $1, $3, NULL, NULL, VOIDTYPE);
 			$$=new CSyntaxNode(PARAMETER_EXP, child0, $5, VOIDTYPE);
 			child0=NULL;
+	   } 
+	   //函数参数可以是int, float, char等，这种情况用于sizeof函数
+	   |all_type_define                            
+	   {
+	       $$ = new CSyntaxNode(ACTUAL_PARAMETER_EXP, $1);
 	   }
-       //|ADDRESS identifier inner_option_function_identifier
-	   //{
-	   //		$$ = new CSyntaxNode(PARAMETER_EXP, new CSyntaxNode(ADDRESS_EXP, $2, VOIDTYPE), $3, VOIDTYPE);
-	   //}                                
 	   | /* empty */                                       {$$=NULL;}
 	   |ADDRESS error                                      {$$=NULL;}
 	   ;
@@ -1330,7 +1331,7 @@ option_function_identifier
 inner_option_function_identifier
        :COMMA ass_right inner_option_function_identifier
 	   {
-			$$ = new CSyntaxNode(PARAMETER_EXP, $2, $3, VOIDTYPE);
+			$$ = new CSyntaxNode(ACTUAL_PARAMETER_EXP, $2, $3, VOIDTYPE);
 	   }
 	   |COMMA ID OPEN_PAR option_function_identifier CLOSE_PAR  inner_option_function_identifier
 	   {
