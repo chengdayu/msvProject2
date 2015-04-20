@@ -51,7 +51,7 @@ void IR::Trslt2IR(CSyntaxTree *IRTree)
 
 	m_builder->SetInsertPoint(entrymain);
 
-	m_StNum = m_builder->CreateAlloca(IntegerType::get(m_module->getContext(), 32), NULL, "$state_num");
+	m_StNum = m_builder->CreateAlloca(IntegerType::get(m_module->getContext(), 32), NULL, "$$state_num");
 	m_StNum->setAlignment(4);
 
 	StoreInst *store = m_builder->CreateStore(m_builder->getInt32(0), m_StNum, false);
