@@ -379,7 +379,6 @@ statement
 
 	   |OPEN_PAR imply_pre CLOSE_PAR IMPLY OPEN_MPAR statement CLOSE_MPAR       
 			{$$=new CSyntaxNode(IMPLY_STA, $2, $6, VOIDTYPE);}     	   	   
-	   
 	   |FRAME OPEN_PAR identifier option_frame_identifier CLOSE_PAR AND OPEN_PAR statement CLOSE_PAR
 	   {
 			$$=new CSyntaxNode(FRAME_STA, $3, $4, $8, VOIDTYPE);
