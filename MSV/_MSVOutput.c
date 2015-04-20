@@ -1,5 +1,17 @@
 #include<stdio.h>
 #include<stdlib.h>
+<<<<<<< HEAD
+int $state_num=0;
+int  f(int $Ext,int f_x){
+return f_x;
+}
+int main() {
+int x;
+x=f(1,x);
++4;
+printf("state %d:", $state_num);
+printf("x=%d ",x);
+=======
 int $$state_num=0;
 int main() {
 int x;
@@ -38,6 +50,7 @@ $$state_num++;
 printf("state %d:", $$state_num);
 printf("x=%d ",x);
 printf("z=%d ",z);
+>>>>>>> c2d8e9faa831b931f2a158e360bae6652ee5fde5
 printf("\n");
 $$state_num++;
 return 0;
