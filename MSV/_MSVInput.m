@@ -1,25 +1,14 @@
-<<<<<<< HEAD
-function int f(int f_x)
-{
-   frame(f_x) and 
-   (
-	  return f_x
-   )
-};
-frame(x) and
-(
-  int x<==extern f(x)+4 and empty
-=======
-frame(x,y) and 
-(
-int x<==3 and int y<==0 and skip;
-if(x=1) then
-{
-  x:=2
-}
-else
-{
-  x:=3
-}
->>>>>>> c2d8e9faa831b931f2a158e360bae6652ee5fde5
-)
+function float* fsz ( int n)
+ {
+     frame(return_1, fp) and ( 
+     int return_1<==0 and skip;
+	 float* fp<==(float *)malloc(n*sizeof(float)) and skip;
+     return fp
+     )
+ };
+ frame(x) and
+ (
+    frame(main_s,main_shu,main_i,main_j,main_1_s0) and ( 
+     float main_s[4]<==[3,3,3,3] and skip;
+     float main_shu[4]<==[0] and skip;
+ )
