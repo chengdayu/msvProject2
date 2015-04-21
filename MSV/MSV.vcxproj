@@ -296,6 +296,7 @@ LLVMMCDisassembler.lib
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="IR.cpp" />
+    <ClCompile Include="IRStruct.cpp" />
     <ClCompile Include="lex.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MSVCompiler.cpp" />
@@ -309,6 +310,7 @@ LLVMMCDisassembler.lib
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IR.h" />
+    <ClInclude Include="IRStruct.h" />
     <ClInclude Include="MSVCompiler.h" />
     <ClInclude Include="MyMap.h" />
     <ClInclude Include="function.h" />
