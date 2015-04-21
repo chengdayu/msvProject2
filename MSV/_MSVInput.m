@@ -1,4 +1,1 @@
-frame(x) and
-(
-unsigned int x and skip
-)
+int x<==1 and skip

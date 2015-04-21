@@ -113,6 +113,8 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "switch"   {return SWITCH;}
 "case"     {return CASE;}
 "break"    {return BREAK;}
+"return"    {return RETURN;}
+
 
 ":"        {return COLON;}
 
