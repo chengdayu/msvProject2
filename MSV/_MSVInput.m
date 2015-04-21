@@ -1,8 +1,13 @@
-<<<<<<< HEAD
-frame(p) and
+function  f(int x, int RValue)
+{
+   frame(x) and
+   (
+   x:=0
+   )
+};
+frame(x) and
 (
-  int *p<==(int*)malloc(sizeof(int)) and skip
+  int x and skip;
+  //x:=f(x, y)
+  x:=f(extern f(extern f(x)))
 )
-=======
-float i and float *p<==&i and skip
->>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
