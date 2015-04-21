@@ -119,43 +119,6 @@ public:
 	*/
 	void __DeclrArray(Type *type, CSyntaxNode *pTree, int alignment, bool sign);
 
-	/**add by yubin 2015-4-7
-	* 将有符号变量的声明转成对应的IR代码
-	* @param 传入待分析的语法树
-	* @return void
-	*/
-	void __Declr2IR(CSyntaxNode *pTree);
-
-
-
-	/**add by yubin 2015-4-7
-	* 处理int类型的声明
-	* @param 传入待分析的语法树
-	* @return void
-	*/
-	void __DeclrInt2IR(CSyntaxNode *pTree);
-
-	/**add by yubin 2015-4-7
-	* 处理float类型的声明
-	* @param 传入待分析的语法树
-	* @return void
-	*/
-	void __DeclrFloat2IR(CSyntaxNode *pTree);
-
-	/**add by yubin 2015-4-10
-	* 将无符号变量的声明转成对应的IR代码
-	* @param 传入待分析的语法树
-	* @return void
-	*/
-	void __UnDeclr2IR(CSyntaxNode *pTree);
-
-	/**add by yubin 2015-4-7
-	* 处理int类型的声明
-	* @param 传入待分析的语法树
-	* @return void
-	*/
-	void __DeclrUnInt2IR(CSyntaxNode *pTree);
-
 	/**
 	* 赋值语句转成对应的IR代码
 	* @param 传入待分析的语法树

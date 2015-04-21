@@ -127,17 +127,12 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 	{
 
 		__Declr2IR(pTree, false);//处理signed类型的声明语句
-
-		__Declr2IR(pTree);//处理signed类型的声明语句
-
 		break;
 	}
 	case UNSIGN_DECLARATION_STA:
 	{
 
 		__Declr2IR(pTree, true);//处理unsigned类型的声明语句
-
-		__UnDeclr2IR(pTree);//处理unsigned类型的声明语句
 
 	}
 	case CHOP_STA:
@@ -320,118 +315,6 @@ void IR::__DeclrArray(Type *type, CSyntaxNode *pTree, int alignment, bool sign)
 }
 
 
-//add by yubin 2015/4/7，处理有符号类型变量的声明语句
-void IR::__Declr2IR(CSyntaxNode *pTree)
-{
-	if (pTree == NULL)
-	{
-		cout << "In function __Declr2IR, IRTree is NULL" << endl;
-		return;
-	}
-	CSyntaxNode* visit = pTree;
-	switch (visit->GetRType())
-	{
-
-	case INTTYPE://如果是int类型
-	{
-		visit = visit->GetChild0();//类型是PARAMETER_EXP
-		do//左孩子不为空表示有变量声明
-		{
-			__DeclrInt2IR(visit->GetChild0());//对变量声明进行转换
-			visit = visit->GetChild1();//获得右孩子
-
-		} while (visit != NULL);
-		break;
-
-	}
-
-	case FLOATTYPE://如果是int类型
-	{
-		visit = visit->GetChild0();//类型是PARAMETER_EXP
-		do//左孩子不为空表示有变量声明
-		{
-			__DeclrFloat2IR(visit->GetChild0());//对变量声明进行转换
-			visit = visit->GetChild1();//获得右孩子
-
-		} while (visit != NULL);
-		break;
-	}
-	}
-
-
-}
-
-///add by yubin 2015/4/7,处理int类型变量的声明
-void IR::__DeclrInt2IR(CSyntaxNode *pTree)
-{
-	if (pTree == NULL)
-	{
-		cout << "In function __DeclrInt2IR, IRTree is NULL" << endl;
-		return;
-	}
-	AllocaInst *allocDeclrInt = m_builder->CreateAlloca(IntegerType::get(m_module->getContext(), 32), NULL, pTree->GetNName());
-	allocDeclrInt->setAlignment(4);
-
-	//m_IRSTable.insert(map<string, AllocaInst *>::value_type(pTree->GetNName(), allocDeclrInt));
-	InstIRSymbol(pTree->GetNName(), allocDeclrInt, true);
-}
-
-///add by yubin 2015/4/7,处理float类型变量的声明
-void IR::__DeclrFloat2IR(CSyntaxNode *pTree)
-{
-	if (pTree == NULL)
-	{
-		cout << "In function __DeclrInt2IR, IRTree is NULL" << endl;
-		return;
-	}
-	AllocaInst *allocDeclrFloat = m_builder->CreateAlloca(Type::getFloatTy(m_module->getContext()), NULL, pTree->GetNName());
-	allocDeclrFloat->setAlignment(4);
-	//m_IRSTable.insert(map<string, AllocaInst *>::value_type(pTree->GetNName(), allocDeclrFloat));
-	InstIRSymbol(pTree->GetNName(), allocDeclrFloat, true);
-}
-
-//add by yubin 2015/4/10，处理无符号变量的声明语句
-void IR::__UnDeclr2IR(CSyntaxNode *pTree)
-{
-	if (pTree == NULL)
-	{
-		cout << "In function __Declr2IR, IRTree is NULL" << endl;
-		return;
-	}
-	CSyntaxNode* visit = pTree->GetChild0();
-	switch (visit->GetRType())
-	{
-
-	case INTTYPE://如果是int类型
-	{
-		visit = visit->GetChild0();//类型是PARAMETER_EXP
-		do//左孩子不为空表示有变量声明
-		{
-			__DeclrUnInt2IR(visit->GetChild0());//对变量声明进行转换
-			visit = visit->GetChild1();//获得右孩子
-
-		} while (visit != NULL);
-		break;
-
-	}
-
-	}
-}
-
-
-///add by yubin 2015/4/7,处理int类型变量的声明
-void IR::__DeclrUnInt2IR(CSyntaxNode *pTree)
-{
-	if (pTree == NULL)
-	{
-		cout << "In function __DeclrInt2IR, IRTree is NULL" << endl;
-		return;
-	}
-	AllocaInst *allocDeclrInt = m_builder->CreateAlloca(IntegerType::get(m_module->getContext(), 32), NULL, pTree->GetNName());
-	allocDeclrInt->setAlignment(4);
-	//m_IRSTable.insert(map<string, AllocaInst *>::value_type(pTree->GetNName(), allocDeclrInt));
-	InstIRSymbol(pTree->GetNName(), allocDeclrInt, false);
-}
 
 
 ///add by yubin 2015/4/7,处理chop类型的结点

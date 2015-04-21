@@ -1132,7 +1132,7 @@ option_function_parameter_list
 	   }
 	   |all_type_define MUL identifier inner_option_define_identifier//指针类型的参数*p
 	   {
-	      CSyntaxNode* pChild0= new CSyntaxNode(POINT_PARAMETER_EXP, $3, VOIDTYPE);
+	      CSyntaxNode* pChild0= new CSyntaxNode(ADDRESS_DECLARE_STA, $3, VOIDTYPE);
           $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $4, $1);
           pChild0=NULL;
 		}
@@ -1142,7 +1142,8 @@ option_function_parameter_list
 		}
 	   |all_type_define MUL MUL identifier inner_option_define_identifier//指针类型的参数**p
 	   {
-	      CSyntaxNode* pChild0= new CSyntaxNode(DOUBLEPOINT_PARAMETER_EXP, $4, VOIDTYPE);
+		  CSyntaxNode* pChild00=new CSyntaxNode(ADDRESS_DECLARE_STA, $4, VOIDTYPE);
+		  CSyntaxNode* pChild0= new CSyntaxNode(ADDRESS_DECLARE_STA, pChild00, VOIDTYPE);
           $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $5, $1);
           pChild0=NULL;
 		}
