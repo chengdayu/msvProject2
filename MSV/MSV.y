@@ -349,7 +349,7 @@ statement
 	   |sign_declaration                    {$$=$1;}
 	   
 	   |switch_statement              {$$=$1;}   //add 2015-3-18
-	   |RETURN ID					  {$$=new CSyntaxNode(RETURN_STA, $2,NULL,VOIDTYPE);}   //add by yubin,2015-4-13
+	   |RETURN ass_right			  {$$=new CSyntaxNode(RETURN_STA, $2,VOIDTYPE);}   //add by yubin,2015-4-13,return右边的形式和赋值号右边的形式相同
 	   |if_statement                    {$$=$1;}
 	   |while_statement                 {$$=$1;}
 	   |for_statement                   {$$=$1;}
@@ -379,12 +379,10 @@ statement
 
 	   |OPEN_PAR imply_pre CLOSE_PAR IMPLY OPEN_MPAR statement CLOSE_MPAR       
 			{$$=new CSyntaxNode(IMPLY_STA, $2, $6, VOIDTYPE);}     	   	   
-	   
 	   |FRAME OPEN_PAR identifier option_frame_identifier CLOSE_PAR AND OPEN_PAR statement CLOSE_PAR
 	   {
 			$$=new CSyntaxNode(FRAME_STA, $3, $4, $8, VOIDTYPE);
 	   }
-
 //prj 
 	   |OPEN_BPAR statement option_projection CLOSE_BPAR PROJECTION statement_bpar
 	   {
@@ -455,40 +453,9 @@ empty_statement
 
 
 function_define//add by yubin 2015/4/15,函数定义
-       :FUNCTION all_type_define ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
+       :FUNCTION ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
 	   {
-			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE,$5, VOIDTYPE);
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $3, pChild0, $8, NULL,$2);
-	   }
-	   |FUNCTION all_type_define MUL ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
-	   {
-
-			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE,$6, POINTERTYPE);
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $4, pChild0, $9, NULL,$2);
-	   }
-	   |FUNCTION all_type_define MUL MUL ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
-	   {
-
-			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE,$7, DOUBLEPOINTERTYPE);
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $5, pChild0, $10, NULL,$2);
-	   }
-	   |FUNCTION STRUCT STRUCT_TYPE ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
-	   {
-
-			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE, $3, $6, VOIDTYPE);
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $4, pChild0, $9, NULL,STRUCTTYPE);
-	   }
-	   |FUNCTION STRUCT STRUCT_TYPE MUL ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
-	   {
-
-			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE, $3, $7, POINTERTYPE);
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $5, pChild0, $10, NULL,STRUCTTYPE);
-	   }
-	   |FUNCTION STRUCT STRUCT_TYPE MUL MUL ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
-	   {
-
-			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE, $3, $8, DOUBLEPOINTERTYPE);
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $6, pChild0, $11, NULL,STRUCTTYPE);
+			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $2, $4, $7, NULL, VOIDTYPE);
 	   }
 	   ;
 
