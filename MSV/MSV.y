@@ -117,7 +117,7 @@ extern int yylex(void);
 %type<tnode> address_exp//added by Jane
 %type<tnode> option_array_declaration inner_option_array_declaration//added by Jane
 
-%type<tnode> statement_bpar bool_par option_output option_input output_statement input_statement function function_define//add by yubin 2015/4/15    
+%type<tnode> statement_bpar bool_par option_output option_input output_statement input_statement function//add by yubin 2015/4/15    
 %type<tnode> member_in_exp simple_ari_exp  
 %type<tnode> charliteral floatliteral 
 %type<tnode> struct_define_statement struct_identifier
@@ -396,11 +396,10 @@ statement
 	   }
 
 	   	   
-/*		|FUNCTION all_type_define ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
+	  |FUNCTION ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
 	   {
-			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE,$5, VOIDTYPE);
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $3, pChild0, $8, NULL,$2);
-	   }*/
+			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $2, $4, $7, NULL, VOIDTYPE);
+	   }
 
 	   //***********************************************************************
 	      //无返回值的函数调用      过程！！！！！  
@@ -417,7 +416,6 @@ statement
 	    
        |struct_define_statement//结构体定义语句
 	   
-	   |function_define                  {$$=$1;}
 	   |function                         {$$=$1;}
 //	   |new                              {$$=$1;}    //Annotation-Class   
 	   |EXIST identifier inner_option_define_identifier COLON OPEN_BPAR statement CLOSE_BPAR
@@ -451,45 +449,6 @@ option_struct_declaration
 empty_statement
 	   :statement                       {$$=$1;}
 	   |                                {$$=NULL;}
-	   ;
-
-
-function_define//add by yubin 2015/4/15,函数定义
-       :FUNCTION all_type_define ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
-	   {
-			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE,$5, VOIDTYPE);
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $3, pChild0, $8, NULL,$2);
-	   }
-	   |FUNCTION all_type_define MUL ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
-	   {
-
-			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE,$6, POINTERTYPE);
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $4, pChild0, $9, NULL,$2);
-	   }
-	   |FUNCTION all_type_define MUL MUL ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
-	   {
-
-			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE,$7, DOUBLEPOINTERTYPE);
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $5, pChild0, $10, NULL,$2);
-	   }
-	   |FUNCTION STRUCT STRUCT_TYPE ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
-	   {
-
-			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE, $3, $6, VOIDTYPE);
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $4, pChild0, $9, NULL,STRUCTTYPE);
-	   }
-	   |FUNCTION STRUCT STRUCT_TYPE MUL ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
-	   {
-
-			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE, $3, $7, POINTERTYPE);
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $5, pChild0, $10, NULL,STRUCTTYPE);
-	   }
-	   |FUNCTION STRUCT STRUCT_TYPE MUL MUL ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,于斌修改
-	   {
-
-			CSyntaxNode* pChild0= new CSyntaxNode(FUNC_RETURN_TYPE, $3, $8, DOUBLEPOINTERTYPE);
-			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $6, pChild0, $11, NULL,STRUCTTYPE);
-	   }
 	   ;
 
 //调用谓词和函数时的语法
@@ -1313,12 +1272,12 @@ option_function_identifier
 	   {
 			$$ = new CSyntaxNode(ACTUAL_PARAMETER_EXP, $1, $2, VOIDTYPE);
 	   }
-	   |ID OPEN_PAR option_function_identifier CLOSE_PAR  inner_option_function_identifier
+	   /*|ID OPEN_PAR option_function_identifier CLOSE_PAR  inner_option_function_identifier
 	   {
 	        CSyntaxNode* child0=new CSyntaxNode(FUNCTION_STA, $1, $3, NULL, NULL, VOIDTYPE);
-			$$=new CSyntaxNode(PARAMETER_EXP, child0, $5, VOIDTYPE);
+			$$=new CSyntaxNode(ACTUAL_PARAMETER_EXP, child0, $5, VOIDTYPE);
 			child0=NULL;
-	   } 
+	   }*/
 	   //函数参数可以是int, float, char等，这种情况用于sizeof函数
 	   |all_type_define                            
 	   {
@@ -1336,7 +1295,7 @@ inner_option_function_identifier
 	   |COMMA ID OPEN_PAR option_function_identifier CLOSE_PAR  inner_option_function_identifier
 	   {
 	        CSyntaxNode* child0=new CSyntaxNode(FUNCTION_STA, $2, $4, NULL, NULL, VOIDTYPE);
-			$$=new CSyntaxNode(PARAMETER_EXP, child0, $6, VOIDTYPE);
+			$$=new CSyntaxNode(ACTUAL_PARAMETER_EXP, child0, $6, VOIDTYPE);
 			child0=NULL;
 	   }
 	   //|COMMA ADDRESS identifier inner_option_function_identifier
