@@ -27,13 +27,12 @@ using namespace llvm;
 
 static map<string, IRStruct*> m_IRStruct;///结构体名 到 IRStruct的映射
 
-=======
+
 
 #include "SyntaxTree.h"
 
 using namespace llvm;
 
->>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 class IRSymbol
 {
 public:
