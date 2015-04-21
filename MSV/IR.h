@@ -18,7 +18,7 @@
 #include "llvm/IR/Value.h"
 #include "llvm/IR/Type.h"
 
-<<<<<<< HEAD
+
 #include "IRStruct.h"
 #include "SyntaxTree.h"
 
