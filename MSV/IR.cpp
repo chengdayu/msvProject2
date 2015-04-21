@@ -1,10 +1,23 @@
 #include"IR.h"
 #include<iostream>
+<<<<<<< HEAD
+#include<map>
+
+using namespace llvm;
+using namespace std;
+
+extern CSyntaxNode *struct_tree;
+
+IRSymbol::IRSymbol()
+{
+	
+=======
 using namespace llvm;
 using namespace std;
 
 IRSymbol::IRSymbol()
 {
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 }
 IRSymbol::IRSymbol(AllocaInst* InstVar, bool sign)
 {
@@ -23,7 +36,12 @@ bool IR::InstIRSymbol(string name, AllocaInst* InstVar, bool sign)
 
 IR::IR()
 {
+<<<<<<< HEAD
+	m_IRStruct = map<string, IRStruct*>();
+	m_SVtable = map<string, string>();
+=======
 	
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 }
 IR::~IR()
 {
@@ -51,12 +69,40 @@ void IR::Trslt2IR(CSyntaxTree *IRTree)
 
 	m_builder->SetInsertPoint(entrymain);
 
+<<<<<<< HEAD
+	m_StNum = m_builder->CreateAlloca(IntegerType::get(m_module->getContext(), 32), NULL, "$state_num");
+=======
 	m_StNum = m_builder->CreateAlloca(IntegerType::get(m_module->getContext(), 32), NULL, "$$state_num");
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 	m_StNum->setAlignment(4);
 
 	StoreInst *store = m_builder->CreateStore(m_builder->getInt32(0), m_StNum, false);
 	store->setAlignment(4);
 
+<<<<<<< HEAD
+	//结构体定义
+	CSyntaxNode *visit = struct_tree;
+	vector<CSyntaxNode*> tree;
+	vector<string> name;
+	//逆置语法树
+	while (visit != NULL){
+		name.push_back(visit->GetNName());
+		tree.push_back(visit->GetChild0());
+		visit = visit->GetChild1();
+	}
+	//生成定义
+	for (int i = tree.size() - 1; i >= 0; i--)
+	{
+		IRStruct* s = new IRStruct(m_module, name.at(i), tree.at(i));
+		if (!s->IsDefined() || m_IRStruct.insert(make_pair(s->GetStructName(), s)).second == false)
+		{
+			cout << "failed to define struct " << endl;
+			break;
+		}
+		//m_builder->CreateAlloca(s->GetStructType());
+	}
+=======
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 	Stmt2IR(IRTree->GetRoot());
 
 	m_builder->CreateRetVoid();
@@ -94,12 +140,20 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 	{
 	    case DECLARE_STA:
 	    {
+<<<<<<< HEAD
+			__Declr2IR(pTree, false);//处理signed类型的声明语句
+=======
 			__Declr2IR(pTree);//处理signed类型的声明语句
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 	     	break;
 	    }
 		case UNSIGN_DECLARATION_STA:
 		{
+<<<<<<< HEAD
+			__Declr2IR(pTree, true);//处理unsigned类型的声明语句
+=======
 			__UnDeclr2IR(pTree);//处理unsigned类型的声明语句
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 		}
 	    case CHOP_STA:
     	{
@@ -112,15 +166,173 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 		    __Ass2IR(pTree);
 		    break;
 	    }
+<<<<<<< HEAD
+		/*case DISPLAY_STA:
+		{
+			__Out2IR(pTree);
+			break;
+	    }*/
+=======
 		case DISPLAY_STA:
 		{
 			__Out2IR(pTree);
 			break;
 	    }
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 		case IF_ELSE_STA:
 		{
 			__If2IR(pTree);
 			break;
+<<<<<<< HEAD
+		}
+		//函数调用语句
+		case FUNCTION_STA:
+		{
+			__Call2IR(pTree);
+			break;
+		}
+		//外部函数调用语句
+		case EXT_FUNCTION_STA:
+		{
+			__Call2IR(pTree);
+			break;
+		}
+		
+	}
+
+}
+
+
+/**add by yubin 2015-4-7
+* 将声明转成对应的IR代码
+* @param 传入待分析的语法树
+* @return void
+*/             
+///changed by shiyifang 2015-04-17
+void IR::__Declr2IR(CSyntaxNode *pTree, bool sign)
+{
+	//获得待声明的类型
+	Type* type = IR::GetType(m_module, pTree);
+	if (type == NULL)
+	{
+		cout << "__Declr : struct define failed";
+		return;
+	}
+
+	int alignment = type->getPrimitiveSizeInBits() / 8;
+
+	CSyntaxNode* visit = pTree->GetChild0();
+	while (visit != NULL)
+	{
+
+		switch (visit->GetChild0()->GetNType())
+		{
+		case IDENT_EXP:{
+			__DeclrIdent(type, visit->GetChild0()->GetNName(), alignment, sign);
+			break;
+		}
+
+		case ADDRESS_DECLARE_STA:{
+			__DeclrPtr(type, visit->GetChild0(), alignment, sign);
+			break;
+		}
+
+		case ARRAY_DECLARE_STA:{
+			__DeclrArray(type, visit->GetChild0(), alignment, sign);
+			break;
+		}
+
+		default: {
+			cout << "__Declr2IR : Type " << visit->GetChild0()->GetNType() << "has not considered " << endl;
+			break;
+		}
+
+		}
+
+		visit = visit->GetChild1();
+	}
+
+}
+
+/*
+*声明一个单纯的变量
+*@param  type(变量类型)  name(变量名)  alignment(对齐方式)
+*/
+///add by shiyifang 2015-04-17
+void IR::__DeclrIdent(Type *type, string name, int alignment, bool sign)
+{
+	AllocaInst *allocDeclr = m_builder->CreateAlloca(type);
+	allocDeclr->setName(name);
+	if (alignment > 0)
+		allocDeclr->setAlignment(alignment);
+
+	IRSymbol *symbol = new IRSymbol(allocDeclr, sign);
+
+	if (m_IRSTable.insert(map<string, IRSymbol *>::value_type(name, symbol)).second == false)
+	{
+		cout << "__DeclrIdent : variable " << name << "has already defined" << endl;
+	}
+}
+
+/*
+*声明一个指针类型变量
+*@param  type(变量类型)  name(变量名)  alignment(对齐方式)
+*/
+///add by shiyifang 2015-04-17
+void IR::__DeclrPtr(Type *type, CSyntaxNode *pTree, int alignment, bool sign)
+{
+	while (pTree != NULL)
+	{
+		if (pTree->GetNType() == ADDRESS_DECLARE_STA)
+			type = PointerType::get(type, 0);//ADDRESS_SAPCE_GENERIC ??
+
+		else if (pTree->GetNType() == ARRAY_DECLARE_STA)
+		{
+			__DeclrArray(type, pTree, alignment, sign);
+			return;
+		}
+
+		else if (pTree->GetNType() == IDENT_EXP)
+		{
+			__DeclrIdent(type, pTree->GetNName(), alignment, sign);
+			return;
+		}
+
+		pTree = pTree->GetChild0();
+	}
+}
+
+/*
+*声明一个数组类型变量
+*@param  type(变量类型)  name(变量名)  alignment(对齐方式)
+*/
+///add by shiyifang 2015-04-17
+void IR::__DeclrArray(Type *type, CSyntaxNode *pTree, int alignment, bool sign)
+{
+	string name = pTree->GetNName();
+
+	vector<int> subscript;
+	while (pTree != NULL)
+	{
+		if (pTree->GetChild0()->GetNType() == INTEGER_EXP)
+			subscript.push_back(pTree->GetChild0()->GetiValue());
+		else if (pTree->GetChild0()->GetChild0() != NULL)
+		{
+			//算术表达式的情况暂时不考虑
+		}
+		else
+		{
+			cout << "__DeclrArray: invalid array subscript " << endl;
+		}
+
+		pTree = pTree->GetChild1();
+	}
+
+	for (int i = subscript.size() - 1; i >= 0; i--)
+		type = ArrayType::get(type, subscript.at(i));
+
+	__DeclrIdent(type, name, alignment, sign);
+=======
 	}
 	}
 	
@@ -239,6 +451,7 @@ void IR::__DeclrUnInt2IR(CSyntaxNode *pTree)
 	allocDeclrInt->setAlignment(4);
 	//m_IRSTable.insert(map<string, AllocaInst *>::value_type(pTree->GetNName(), allocDeclrInt));
 	InstIRSymbol(pTree->GetNName(), allocDeclrInt, false);
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 }
 
 
@@ -322,6 +535,14 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 			return ConstantFP::get(getGlobalContext(), APFloat(pTree->GetfValue()));
 			break;
 	    }
+<<<<<<< HEAD
+		case CHARLITERAL_EXP:
+		{
+			return ConstantInt::get(m_module->getContext(), APInt(8, pTree->GetcValue()));
+			break;
+			}
+=======
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 
 		///字符串 例："good"
 		case STR_EXP:
@@ -363,7 +584,21 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 			return __Mod2IR(pTree);
 			}
 
+<<<<<<< HEAD
+		///函数调用表达式
+		case FUNCTION_STA:
+		{
+			return __Call2IR(pTree);
+		}
+		//外部函数调用表达式
+		case EXT_FUNCTION_STA:
+		{
+			return __Call2IR(pTree);
+			}
+		
+=======
 
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 	}
 }
 
@@ -411,6 +646,14 @@ void IR::__Out2IR(CSyntaxNode *pTree)
 				Value *floatFormat = m_builder->CreateGlobalStringPtr("%f");
 				m_builder->CreateCall2(putsFunc, floatFormat, floatTyToDoubleTy);
 			}
+<<<<<<< HEAD
+			else if (outPutVar->getAllocatedType() == Type::getInt8Ty(m_module->getContext()))//如果是float类型的话
+			{
+				Value *charFormat = m_builder->CreateGlobalStringPtr("%c");
+				m_builder->CreateCall2(putsFunc, charFormat, a);
+			}
+=======
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 			m_builder->CreateCall(putsFunc, m_builder->CreateGlobalStringPtr("  "));//每个变量输出之后，输出两个空格，以便和下一个变量的输出隔开
 		}
 		m_builder->CreateCall(putsFunc, m_builder->CreateGlobalStringPtr("\n"));//每个状态输出之后，换行
@@ -560,7 +803,10 @@ Value * IR::__Add2IR(CSyntaxNode* pTree)
 				Type::getFloatTy(m_module->getContext()));
 			return m_builder->CreateFAdd(fLeft, Right, "fadd", 0);
 		}
+<<<<<<< HEAD
+=======
 
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 	}
 }
 
@@ -845,4 +1091,216 @@ Value* IR::__Cast2IR(Value *value, Type *type)
 		cout << "cast error!"<<endl;
 		return NULL;
 	}
+<<<<<<< HEAD
 }
+
+
+/**
+* 函数调用语句转为IR代码
+* @param 传入待分析的语法树
+* @return 转换后的IR代码
+*/
+///2015-4-14 add by daichunchun
+Value* IR::__Call2IR(CSyntaxNode *pTree)
+{
+	//由于函数构造代码尚未完成，这里构造函数用于测试 dai
+
+	//无参函数add1
+	/*
+	SmallVector<Type*, 0> Params;
+
+	//函数构造
+	FunctionType *funcType = FunctionType::get(IntegerType::get(m_module->getContext(), 32), Params, false);
+	Function *ASSFUNCTION = Function::Create(funcType, Function::ExternalLinkage, "ASSFUNCTION", m_module);
+	
+	//函数体构造
+	llvm::IRBuilder<> builder(m_module->getContext());
+	BasicBlock *entryASSIGNFUNCTION = BasicBlock::Create(m_module->getContext(), "entry", ASSFUNCTION, 0);
+	builder.SetInsertPoint(entryASSIGNFUNCTION);
+	AllocaInst *allo_addr = builder.CreateAlloca(IntegerType::get(m_module->getContext(), 32), 0, "a.addr");
+	builder.CreateStore(ConstantInt::get(m_module->getContext(), APInt(32, 6666)), allo_addr);
+	LoadInst * load_addr = builder.CreateLoad(allo_addr);
+	builder.CreateRet(load_addr);
+	*/
+	
+	//单参数函数add1
+	/*
+	//参数构造
+	SmallVector<Type*, 1> Params;
+	Params.push_back(IntegerType::get(m_module->getContext(), 32));
+
+	//函数构造
+	FunctionType *funcType = FunctionType::get(IntegerType::get(m_module->getContext(), 32), Params, false);
+	Function *add1Func = Function::Create(funcType, Function::ExternalLinkage, "add1", m_module);
+	Function::arg_iterator args = add1Func->arg_begin();
+
+	//形参命名
+	Value *int32_a = args++;
+	int32_a->setName("a");
+	
+	//函数体构造
+	llvm::IRBuilder<> builder(m_module->getContext());
+	BasicBlock *entrymain = BasicBlock::Create(m_module->getContext(), "entry", add1Func, 0);
+	builder.SetInsertPoint(entrymain);
+	AllocaInst *allo_addr = builder.CreateAlloca(IntegerType::get(m_module->getContext(), 32), 0, "a.addr");
+	builder.CreateStore(int32_a,allo_addr);
+	LoadInst* load_addr=builder.CreateLoad(allo_addr);
+	Value* addresult = builder.CreateAdd(load_addr,ConstantInt::get(m_module->getContext(), APInt(32, 1)));
+	builder.CreateRet(addresult);
+	*/
+	
+	//四参数函数add1
+	/*
+	//参数构造
+	SmallVector<Type*, 4> Params;
+	Params.push_back(IntegerType::get(m_module->getContext(), 32));
+	Params.push_back(IntegerType::get(m_module->getContext(), 32));
+	Params.push_back(IntegerType::get(m_module->getContext(), 32));
+	Params.push_back(IntegerType::get(m_module->getContext(), 32));
+
+	//函数构造
+	FunctionType *funcType = FunctionType::get(Type::getVoidTy(m_module->getContext()), Params, false);
+	Function *add4Func = Function::Create(funcType, Function::ExternalLinkage, "add4", m_module);
+	Function::arg_iterator args = add4Func->arg_begin();
+
+	//形参命名
+	Value *int32_a = args++;
+	int32_a->setName("a");
+	Value *int32_b = args++;
+	int32_b->setName("b");
+	Value *int32_c = args++;
+	int32_c->setName("c");
+	Value *int32_d = args++;
+	int32_d->setName("d");
+
+	//函数体构造
+	llvm::IRBuilder<> builder(m_module->getContext());
+	BasicBlock *entrymain = BasicBlock::Create(m_module->getContext(), "entry", add4Func, 0);
+	builder.SetInsertPoint(entrymain);
+	AllocaInst *allo_addr = builder.CreateAlloca(IntegerType::get(m_module->getContext(), 32), 0, "a.addr");
+	builder.CreateStore(int32_a,allo_addr);
+	LoadInst * load_addr = builder.CreateLoad(allo_addr);
+	AllocaInst *allo_bddr = builder.CreateAlloca(IntegerType::get(m_module->getContext(), 32), 0, "b.addr");
+	builder.CreateStore(int32_b, allo_bddr);
+	LoadInst * load_bddr = builder.CreateLoad(allo_bddr);
+	Value *addresult1=builder.CreateNSWAdd(load_addr, load_bddr,"add");
+	AllocaInst *allo_cddr = builder.CreateAlloca(IntegerType::get(m_module->getContext(), 32), 0, "c.addr");
+	builder.CreateStore(int32_c, allo_cddr);
+	LoadInst * load_cddr = builder.CreateLoad(allo_cddr);
+	Value *addresult2 = builder.CreateNSmWAdd(addresult1, load_cddr, "add");
+	AllocaInst *allo_dddr = builder.CreateAlloca(IntegerType::get(m_module->getContext(), 32), 0, "c.dddr");
+	builder.CreateStore(int32_d, allo_dddr);
+	LoadInst * load_dddr = builder.CreateLoad(allo_dddr);
+	Value *addresult3 = builder.CreateNSWAdd(addresult2, load_dddr, "add");
+	builder.CreateRet(addresult3);
+	
+		*/
+	//获取调用函数名
+	std::string Callee = pTree->GetNName();
+	//获取模块中函数定义
+	Function *CalleeF = m_module->getFunction(Callee);
+	//判断函数是否在该模块中存在
+	if (CalleeF==0)
+	{
+		cout << "__Call2IR Unknown function referenced" << endl;
+		return NULL;
+	}
+	//获取参数列表
+	std::vector<Value*> vecvalue;                                             
+	CSyntaxNode *ParameterLeader = pTree->GetChild0();
+	while (ParameterLeader != NULL)
+	{
+	CSyntaxNode *ParameterNode = ParameterLeader->GetChild0();
+	if (ParameterNode->GetNName()!="")
+	{
+		AllocaInst* parameter = m_IRSTable[ParameterNode->GetNName()]->GetAllocaInstVar();
+		LoadInst* parameter_load = m_builder->CreateLoad(parameter);
+		vecvalue.push_back(parameter_load);
+		}
+	ParameterLeader = ParameterLeader->GetChild1();
+	}
+	//判断传入的参数个数是否与调用函数的参数个数相符合
+	if (CalleeF->arg_size() != vecvalue.size())
+	{
+		cout << "__Call2IR Incorrect arguments number" << endl;
+		return NULL;
+		}
+	//构造函数调用
+	llvm::ArrayRef<Value*>  Idx(vecvalue);
+	return m_builder->CreateCall(CalleeF, Idx);
+	}
+
+	/*
+	*根据结构体定义的模块和declare树得到对应的llvm type
+	*@param module (声明结构体的模块) pTree(声明语句)
+	*@return 与声明对应的llvm type
+	*/
+	//add by shiyifang 2015-04-16
+	Type* IR::GetType(Module* m_module, CSyntaxNode *pTree)
+	{
+		if (pTree->GetNType() != DECLARE_STA && pTree->GetNType() != UNSIGN_DECLARATION_STA)
+		{
+			cout << "In function GetType : pTree is not a DECLARE CSyntaxNode !";
+			return NULL;
+		}
+
+		if (pTree->GetNType() == UNSIGN_DECLARATION_STA)
+		{
+			cout << "In function GetType : Unsigned declaration is not considered !";
+			return NULL;
+		}
+
+		RETURNTYPE type = pTree->GetRType();
+
+		switch (type)
+		{
+		case INTTYPE:     		{ return IntegerType::get(m_module->getContext(), 32); }     //return integer type
+								//case STRTYPE:     		{ return SYMBOLSTR; }   	//return string type
+								//case FILETYPE:	 		{ return SYMBOLFILE; }		//add by yubin, return file type
+
+		case FLOATTYPE:   		{ return Type::getFloatTy(m_module->getContext()); }     //2013-4-26 add by YY[fixed]
+		case CHARTYPE:    		{ return Type::getInt8Ty(m_module->getContext()); }     //2013-4-26 add by YY[fixed]
+								//case ARITHMETICTYPE:  	{ return ;} 	//2013-4-26 add by YY[fixed]
+
+								//case LISTTYPE:		 	{ return SYMBOLLIST; }		// return list value
+		case BOOLTYPE:        	{ return Type::getInt8Ty(m_module->getContext()); }		//return bool type
+								//case POINTERTYPE:    	{ return SYMBOLPOINTER;} 	//return pointer value
+								//case SYMBOLTYPE:		{ return ;}		// return symbol value
+								//case CHANNELRTYPE:		{ return ;}		//add by mdp 2010-07-09
+
+
+		case INTPTYPE:         	{ return Type::getInt8PtrTy(m_module->getContext()); }		//return integer pointer type
+								//case UINTPTYPE:		   	{ return SYMBOLUINT; }
+		case FLOATPTYPE:		{ return Type::getFloatPtrTy(m_module->getContext()); }
+								//case UCHARPTYPE:		{ return SYMBOLCHAR; }
+		case STRUCTTYPE:		{
+			map<string, IRStruct*>::iterator it = m_IRStruct.find(pTree->GetNName());
+			if (it == m_IRStruct.end())
+				return NULL;
+			return ((*it).second)->GetStructType();
+		}
+								//case STRUCTPTYPE:		{ return SYMBOLSTRUCTP; }
+
+								//case DOUBLEINTPTYPE:	{ return ;}
+								//case DOUBLEUINTPTYPE:	{ return ;}
+								//case DOUBLEFLOATPTYPE:	{ return ;}
+								//case DOUBLEUCHARPTYPE:	{ return ;}
+								//case DOUBLESTRUCTPTYPE:	{ return ;}
+		case VOIDTYPE:			{ return Type::getVoidTy(m_module->getContext()); }
+		case VOIDPTYPE:			{ return Type::getInt8PtrTy(m_module->getContext()); }
+								//add by yubin 2013-12-23 15:31 函数指针
+								//case FUNCPTYPE:			{ return SYMBOLFUNCP;}
+
+								//add by YY 2014/01/07 10:57 强制转换
+		case CHARPTYPE:			{ return Type::getInt8PtrTy(m_module->getContext()); }
+								//case DOUBLECHARPTYPE:	{ return ;}
+								//case UINTTYPE:			{ return SYMBOLUINTP; }
+								//case UCHARTYPE:			{ return SYMBOLUCHARP; }
+								//case STRUCT_NAME_TYPE:	{ return ;}
+								//case FUNCPPTYPE:		{ return ;}
+		default:   			{ cout << "In function GetType() : Type is not considered !"; return NULL; }
+		}
+	}
+=======
+}
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
