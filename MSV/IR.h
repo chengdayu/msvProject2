@@ -18,6 +18,7 @@
 #include "llvm/IR/Value.h"
 #include "llvm/IR/Type.h"
 
+<<<<<<< HEAD
 #include "IRStruct.h"
 #include "SyntaxTree.h"
 
@@ -26,6 +27,13 @@ using namespace llvm;
 
 static map<string, IRStruct*> m_IRStruct;///结构体名 到 IRStruct的映射
 
+=======
+
+#include "SyntaxTree.h"
+
+using namespace llvm;
+
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 class IRSymbol
 {
 public:
@@ -77,6 +85,7 @@ public:
 	*/
 	void Stmt2IR(CSyntaxNode* pTree); //
 
+<<<<<<< HEAD
 	/*
 	*根据结构体定义的模块和declare树得到对应的llvm type
 	*@param module (声明结构体的模块) pTree(声明语句)
@@ -110,6 +119,30 @@ public:
 	*@param  type(变量类型)  name(变量名)  alignment(对齐方式)
 	*/
 	void __DeclrArray(Type *type, CSyntaxNode *pTree, int alignment, bool sign);
+=======
+	/**add by yubin 2015-4-7
+	* 将有符号变量的声明转成对应的IR代码
+	* @param 传入待分析的语法树
+	* @return void
+	*/
+	void __Declr2IR(CSyntaxNode *pTree);
+
+	
+
+	/**add by yubin 2015-4-7
+	* 处理int类型的声明
+	* @param 传入待分析的语法树
+	* @return void
+	*/
+	void __DeclrInt2IR(CSyntaxNode *pTree);
+
+	/**add by yubin 2015-4-7
+	* 处理float类型的声明
+	* @param 传入待分析的语法树
+	* @return void
+	*/
+	void __DeclrFloat2IR(CSyntaxNode *pTree);
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 
 	/**add by yubin 2015-4-10
 	* 将无符号变量的声明转成对应的IR代码
@@ -217,6 +250,7 @@ public:
 	*/
 	Value* __Cast2IR(Value *value, Type *type);
 
+<<<<<<< HEAD
 	/**
 	* 函数调用语句转为IR代码
 	* @param 传入待分析的语法树
@@ -226,6 +260,8 @@ public:
 	Value* IR::__Call2IR(CSyntaxNode *pTree);
 
 
+=======
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 	bool InstIRSymbol(string name, AllocaInst* InstVar, bool sign);
 
 private:
@@ -242,9 +278,12 @@ private:
 	//map<string, AllocaInst *> m_IRSTable;
 	map<string, IRSymbol *> m_IRSTable;
 
+<<<<<<< HEAD
 	///add by syf 2015-04-16
 	map<string, string> m_SVtable;//结构体变量名到结构体名的映射
 
+=======
+>>>>>>> 13d38610e489529e7c37773832b25d05ba23aecd
 	///状态数
 	AllocaInst *m_StNum;
 

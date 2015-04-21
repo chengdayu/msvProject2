@@ -1,1 +1,1 @@
-int x<==1 and skip
+float i and float *p<==&i and skip

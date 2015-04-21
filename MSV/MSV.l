@@ -85,7 +85,7 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "alw"      {return ALWAYS;}
 "som"      {return SOMETIMES;}
 ":"        {return COLON;}
-"exists"   {return EXIST;}
+"local"   {return EXIST;}
 "define"   {return DEFINE;}
 "function" {return FUNCTION;}
 "struct"   {return STRUCT;}
@@ -110,12 +110,6 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "request"  {return REQUEST;}
 "prefix"   {return PREFIX;}
 
-"switch"   {return SWITCH;}
-"case"     {return CASE;}
-"break"    {return BREAK;}
-"return"    {return RETURN;}
-
-
 ":"        {return COLON;}
 
 ";"        {return CHOP;}
@@ -129,58 +123,14 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "list"		{return LISTDECLARATION;}//LISTVARIABLE  added by Jane 2012-05-21
 "void"     {return VOIDDECLARATION;}
 
-"head"		{return		STRFUNCHEAD;}
-"tail"		{return		STRFUNCTAIL;}
-"strcat"	{return		STRFUNCCAT;}
-"strcmp"	{return		STRFUNCCMP;}
-"strlen"	{return		STRFUNCLEN;}
-"strcpy"	{return		STRFUNCCPY;}
-"sizeof"     {return     SIZEOF;}
 
-
-"round"    {return ROUND;}
-"ceil"     {return CEIL;}
-"floor"    {return FLOOR;}
-
-"sin"      {return SIN;}
-"cos"      {return COS;}
-"tan"      {return TAN;}
-"asin"     {return ASIN;}
-"acos"		{return ACOS;}
-"atan"		{return ATAN;}
-"sinh"		{return SINH;}
-"cosh"		{return COSH;}
-"tanh"		{return TANH;}
-"exp"		{return EXP;}
-"log"		{return LOG;}
-"log10"		{return LOG10;}
-"sqrt"		{return SQRT;}
-
-"atan2"		{return ATAN2;}
-"pow"		{return POW;}
-
-"abs"		{return ABS;}
-"fabs"		{return FABS;}
-"labs"		{return LABS;}
-
-"fmod"		{return FMOD;}
-"modf"		{return MODF;}
-"ldexp"		{return LDEXP;}
-"frexp"		{return FREXP;}
-
-"fopen"		{return FOPEN;}
-"fgets"    	{return FGETS;} 
-"fgetc"    	{return FGETC;} 
-"fputs"    	{return FPUTS;} 
-"fputc"    	{return FPUTC;} 
-"fclose"	{return FCLOSE;}
 "FILE"		{return FILEDECLARATION;}
-"system"   {return SYSTEM;}
 "extern"   {return EXTERN;}
 "switch"	{return SWITCH;}//add by yubin 2015-3-23
 "break"		{return BREAK;}//add by yubin 2015-3-23
 "case"		{return CASE;}//add by yubin 2015-3-23
 "default"		{return DEFAULT;}//add by yubin 2015-3-23
+"return"    {return RETURN;}//2015-4-13,add by yubin
 
 "."        {return DOT;}
 "="        {return EQ;}     //比较相等符号 “=”
@@ -241,8 +191,6 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "signed"    {return SIGNED;}
 "unsigned"  {return UNSIGNED;}
 
-"malloc"    {return MALLOC;}//malloc相关
-"free"      {return FREE;}
 
 
 {IDENT}  {

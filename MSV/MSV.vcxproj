@@ -43,8 +43,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <IncludePath>D:\Program Files\software\LLVM\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Program Files\software\LLVM\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\LLVM\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\LLVM\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -296,7 +296,6 @@ LLVMMCDisassembler.lib
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="IR.cpp" />
-    <ClCompile Include="IRStruct.cpp" />
     <ClCompile Include="lex.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MSVCompiler.cpp" />
@@ -310,7 +309,6 @@ LLVMMCDisassembler.lib
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IR.h" />
-    <ClInclude Include="IRStruct.h" />
     <ClInclude Include="MSVCompiler.h" />
     <ClInclude Include="MyMap.h" />
     <ClInclude Include="function.h" />
