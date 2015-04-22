@@ -74,7 +74,7 @@ void IR::Trslt2IR(CSyntaxTree *IRTree)
 	while (visit != NULL){
 		name.push_back(visit->GetNName());
 		tree.push_back(visit->GetChild0());
-		visit = visit->GetChild1();
+		visit       = visit->GetChild1();
 	}
 	//生成定义
 	for (int i = tree.size() - 1; i >= 0; i--)
@@ -120,64 +120,64 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 		cout << "In function Stmt2IR, IRTree is NULL" << endl;
 		return;
 	}
-
+	
 	switch (pTree->GetNType())
 	{
-	case DECLARE_STA:
-	{
+	    case DECLARE_STA:
+	    {
 
-		__Declr2IR(pTree, false);//处理signed类型的声明语句
-		break;
-	}
-	case UNSIGN_DECLARATION_STA:
-	{
+			__Declr2IR(pTree, false);//处理signed类型的声明语句
+	     	break;
+	    }
+		case UNSIGN_DECLARATION_STA:
+		{
 
-		__Declr2IR(pTree, true);//处理unsigned类型的声明语句
+			__Declr2IR(pTree, true);//处理unsigned类型的声明语句
 
-	}
-	case CHOP_STA:
-	{
-		__Chop2IR(pTree);
-		break;
-	}
-	case ASS_EQU_EXP:
-	case EX_ASS_EXP:
-	{
-		__Ass2IR(pTree);
-		break;
-	}
+		}
+	    case CHOP_STA:
+    	{
+		    __Chop2IR(pTree);
+		    break;
+	    }
+	    case ASS_EQU_EXP:
+		case EX_ASS_EXP:
+	    {
+		    __Ass2IR(pTree);
+		    break;
+	    }
 
-	/*case DISPLAY_STA:
-	{
-	__Out2IR(pTree);
-	break;
-	}*/
+		/*case DISPLAY_STA:
+		{
+			__Out2IR(pTree);
+			break;
+	    }*/
 
-	case DISPLAY_STA:
-	{
-		__Out2IR(pTree);
-		break;
-	}
+		case DISPLAY_STA:
+		{
+			__Out2IR(pTree);
+			break;
+	    }
 
-	case IF_ELSE_STA:
-	{
-		__If2IR(pTree);
-		break;
+		case IF_ELSE_STA:
+		{
+			__If2IR(pTree);
+			break;
 
-	}
-	//函数调用语句
-	case FUNCTION_STA:
-	{
-		__Call2IR(pTree);
-		break;
-	}
-	//外部函数调用语句
-	case EXT_FUNCTION_STA:
-	{
-		__Call2IR(pTree);
-		break;
-	}
-
+		}
+		//函数调用语句
+		case FUNCTION_STA:
+		{
+			__Call2IR(pTree);
+			break;
+		}
+		//外部函数调用语句
+		case EXT_FUNCTION_STA:
+		{
+			__Call2IR(pTree);
+			break;
+		}
+		
 	}
 
 }
@@ -187,7 +187,7 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 * 将声明转成对应的IR代码
 * @param 传入待分析的语法树
 * @return void
-*/
+*/             
 ///changed by shiyifang 2015-04-17
 void IR::__Declr2IR(CSyntaxNode *pTree, bool sign)
 {
@@ -316,7 +316,6 @@ void IR::__DeclrArray(Type *type, CSyntaxNode *pTree, int alignment, bool sign)
 
 
 
-
 ///add by yubin 2015/4/7,处理chop类型的结点
 void IR::__Chop2IR(CSyntaxNode *pTree)
 {
@@ -386,73 +385,73 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 	switch (pTree->GetNType())
 	{
 		///整数 例：3
-	case INTEGER_EXP:
-	{
-		return ConstantInt::get(m_module->getContext(), APInt(32, pTree->GetiValue()));
-		break;
-	}
-	///浮点数 例：3.1
-	case FLOATLITERAL_EXP:
-	{
-		return ConstantFP::get(getGlobalContext(), APFloat(pTree->GetfValue()));
-		break;
-	}
+	    case INTEGER_EXP: 
+	    {
+		    return ConstantInt::get(m_module->getContext(), APInt(32, pTree->GetiValue()));
+			break;
+	    }
+		///浮点数 例：3.1
+		case FLOATLITERAL_EXP:
+		{
+			return ConstantFP::get(getGlobalContext(), APFloat(pTree->GetfValue()));
+			break;
+	    }
 
-	case CHARLITERAL_EXP:
-	{
-		return ConstantInt::get(m_module->getContext(), APInt(8, pTree->GetcValue()));
-		break;
-	}
+		case CHARLITERAL_EXP:
+		{
+			return ConstantInt::get(m_module->getContext(), APInt(8, pTree->GetcValue()));
+			break;
+			}
 
-	///字符串 例："good"
-	case STR_EXP:
-	{
-		return m_builder->CreateGlobalStringPtr(pTree->GetsValue());
-	}
+		///字符串 例："good"
+		case STR_EXP:
+		{
+			return m_builder->CreateGlobalStringPtr(pTree->GetsValue());
+		}
 
-	///变量 例：x
-	case IDENT_EXP:
-	{
-		return m_builder->CreateLoad(m_IRSTable[pTree->GetNName()]->GetAllocaInstVar());
-	}
+		///变量 例：x
+		case IDENT_EXP:
+		{
+			return m_builder->CreateLoad(m_IRSTable[pTree->GetNName()]->GetAllocaInstVar());
+		}
 
-	///加 例：x+y
-	case ADD_EXP:
-	{
-		return __Add2IR(pTree);
-	}
+		///加 例：x+y
+		case ADD_EXP:
+		{
+			return __Add2IR(pTree);
+		}
 
-	///减 例：x-y
-	case SUB_EXP:
-	{
-		return __Sub2IR(pTree);
-	}
-	///乘 例：x*y
-	case MUL_EXP:
-	{
-		return __Mul2IR(pTree);
-	}
-	///除 例：x/y
-	case DIV_EXP:
-	{
-		return __Div2IR(pTree);
-	}
+		///减 例：x-y
+		case SUB_EXP:
+			{
+			return __Sub2IR(pTree);
+		}
+		///乘 例：x*y
+		case MUL_EXP:
+		{
+			return __Mul2IR(pTree);
+			}
+		///除 例：x/y
+		case DIV_EXP:
+		{
+			return __Div2IR(pTree);
+			}
 
-	///取余 例：x%y
-	case MOD_EXP:
-	{
-		return __Mod2IR(pTree);
-	}
-	///函数调用表达式
-	case FUNCTION_STA:
-	{
-		return __Call2IR(pTree);
-	}
-	//外部函数调用表达式
-	case EXT_FUNCTION_STA:
-	{
-		return __Call2IR(pTree);
-	}
+		///取余 例：x%y
+		case MOD_EXP:
+		{
+			return __Mod2IR(pTree);
+			}
+		///函数调用表达式
+		case FUNCTION_STA:
+		{
+			return __Call2IR(pTree);
+		}
+		//外部函数调用表达式
+		case EXT_FUNCTION_STA:
+		{
+			return __Call2IR(pTree);
+			}
 	}
 }
 
@@ -565,14 +564,14 @@ Value* IR::__Cond2IR(CSyntaxNode* pTree)
 	}
 	else if (pTree->GetNType() == NEGATION_EXP)
 	{
-
+		
 	}
 	else
 	{
 		Value* LHS = __Expr2IR(pTree->GetChild0());
 		Value* RHS = __Expr2IR(pTree->GetChild1());
 
-		AllocaInst *int32_i = m_builder->CreateAlloca(Type::getInt32Ty(m_module->getContext()), 0, "i");
+        AllocaInst *int32_i = m_builder->CreateAlloca(Type::getInt32Ty(m_module->getContext()), 0, "i");
 		AllocaInst *int32_j = m_builder->CreateAlloca(Type::getInt32Ty(m_module->getContext()), 0, "j");
 		StoreInst *store_i = m_builder->CreateStore(LHS, int32_i, false);
 		StoreInst *store_j = m_builder->CreateStore(RHS, int32_j, false);
@@ -635,7 +634,7 @@ Value * IR::__Add2IR(CSyntaxNode* pTree)
 	else if (LType->isFloatTy())
 	{
 		///浮点数与浮点数相加 3.1+4.2
-		if (RType->isFloatTy())
+		if (RType->isFloatTy()) 
 		{
 			return m_builder->CreateFAdd(Left, Right, "fadd", 0);
 		}
@@ -961,7 +960,7 @@ Value* IR::__Call2IR(CSyntaxNode *pTree)
 	//函数构造
 	FunctionType *funcType = FunctionType::get(IntegerType::get(m_module->getContext(), 32), Params, false);
 	Function *ASSFUNCTION = Function::Create(funcType, Function::ExternalLinkage, "ASSFUNCTION", m_module);
-
+	
 	//函数体构造
 	llvm::IRBuilder<> builder(m_module->getContext());
 	BasicBlock *entryASSIGNFUNCTION = BasicBlock::Create(m_module->getContext(), "entry", ASSFUNCTION, 0);
@@ -971,7 +970,7 @@ Value* IR::__Call2IR(CSyntaxNode *pTree)
 	LoadInst * load_addr = builder.CreateLoad(allo_addr);
 	builder.CreateRet(load_addr);
 	*/
-
+	
 	//单参数函数add1
 	/*
 	//参数构造
@@ -986,7 +985,7 @@ Value* IR::__Call2IR(CSyntaxNode *pTree)
 	//形参命名
 	Value *int32_a = args++;
 	int32_a->setName("a");
-
+	
 	//函数体构造
 	llvm::IRBuilder<> builder(m_module->getContext());
 	BasicBlock *entrymain = BasicBlock::Create(m_module->getContext(), "entry", add1Func, 0);
@@ -997,7 +996,7 @@ Value* IR::__Call2IR(CSyntaxNode *pTree)
 	Value* addresult = builder.CreateAdd(load_addr,ConstantInt::get(m_module->getContext(), APInt(32, 1)));
 	builder.CreateRet(addresult);
 	*/
-
+	
 	//四参数函数add1
 	/*
 	//参数构造
@@ -1042,8 +1041,8 @@ Value* IR::__Call2IR(CSyntaxNode *pTree)
 	LoadInst * load_dddr = builder.CreateLoad(allo_dddr);
 	Value *addresult3 = builder.CreateNSWAdd(addresult2, load_dddr, "add");
 	builder.CreateRet(addresult3);
-
-	*/
+	
+		*/
 	//获取调用函数名
 	std::string Callee = pTree->GetNName();
 	//获取模块中函数定义
@@ -1055,100 +1054,100 @@ Value* IR::__Call2IR(CSyntaxNode *pTree)
 		return NULL;
 	}
 	//获取参数列表
-	std::vector<Value*> vecvalue;
+	std::vector<Value*> vecvalue;                                             
 	CSyntaxNode *ParameterLeader = pTree->GetChild0();
 	while (ParameterLeader != NULL)
 	{
-		CSyntaxNode *ParameterNode = ParameterLeader->GetChild0();
+	CSyntaxNode *ParameterNode = ParameterLeader->GetChild0();
 		if (ParameterNode->GetNName() != "")
-		{
-			AllocaInst* parameter = m_IRSTable[ParameterNode->GetNName()]->GetAllocaInstVar();
-			LoadInst* parameter_load = m_builder->CreateLoad(parameter);
-			vecvalue.push_back(parameter_load);
+	{
+		AllocaInst* parameter = m_IRSTable[ParameterNode->GetNName()]->GetAllocaInstVar();
+		LoadInst* parameter_load = m_builder->CreateLoad(parameter);
+		vecvalue.push_back(parameter_load);
 		}
-		ParameterLeader = ParameterLeader->GetChild1();
+	ParameterLeader = ParameterLeader->GetChild1();
 	}
 	//判断传入的参数个数是否与调用函数的参数个数相符合
 	if (CalleeF->arg_size() != vecvalue.size())
 	{
 		cout << "__Call2IR Incorrect arguments number" << endl;
 		return NULL;
-	}
+		}
 	//构造函数调用
 	llvm::ArrayRef<Value*>  Idx(vecvalue);
 	return m_builder->CreateCall(CalleeF, Idx);
-}
-
-/*
-*根据结构体定义的模块和declare树得到对应的llvm type
-*@param module (声明结构体的模块) pTree(声明语句)
-*@return 与声明对应的llvm type
-*/
-//add by shiyifang 2015-04-16
-Type* IR::GetType(Module* m_module, CSyntaxNode *pTree)
-{
-	if (pTree->GetNType() != DECLARE_STA && pTree->GetNType() != UNSIGN_DECLARATION_STA)
-	{
-		cout << "In function GetType : pTree is not a DECLARE CSyntaxNode !";
-		return NULL;
 	}
 
-	if (pTree->GetNType() == UNSIGN_DECLARATION_STA)
+	/*
+	*根据结构体定义的模块和declare树得到对应的llvm type
+	*@param module (声明结构体的模块) pTree(声明语句)
+	*@return 与声明对应的llvm type
+	*/
+	//add by shiyifang 2015-04-16
+	Type* IR::GetType(Module* m_module, CSyntaxNode *pTree)
 	{
-		cout << "In function GetType : Unsigned declaration is not considered !";
-		return NULL;
-	}
-
-	RETURNTYPE type = pTree->GetRType();
-
-	switch (type)
-	{
-	case INTTYPE:     		{ return IntegerType::get(m_module->getContext(), 32); }     //return integer type
-							//case STRTYPE:     		{ return SYMBOLSTR; }   	//return string type
-							//case FILETYPE:	 		{ return SYMBOLFILE; }		//add by yubin, return file type
-
-	case FLOATTYPE:   		{ return Type::getFloatTy(m_module->getContext()); }     //2013-4-26 add by YY[fixed]
-	case CHARTYPE:    		{ return Type::getInt8Ty(m_module->getContext()); }     //2013-4-26 add by YY[fixed]
-							//case ARITHMETICTYPE:  	{ return ;} 	//2013-4-26 add by YY[fixed]
-
-							//case LISTTYPE:		 	{ return SYMBOLLIST; }		// return list value
-	case BOOLTYPE:        	{ return Type::getInt8Ty(m_module->getContext()); }		//return bool type
-							//case POINTERTYPE:    	{ return SYMBOLPOINTER;} 	//return pointer value
-							//case SYMBOLTYPE:		{ return ;}		// return symbol value
-							//case CHANNELRTYPE:		{ return ;}		//add by mdp 2010-07-09
-
-
-	case INTPTYPE:         	{ return Type::getInt8PtrTy(m_module->getContext()); }		//return integer pointer type
-							//case UINTPTYPE:		   	{ return SYMBOLUINT; }
-	case FLOATPTYPE:		{ return Type::getFloatPtrTy(m_module->getContext()); }
-							//case UCHARPTYPE:		{ return SYMBOLCHAR; }
-	case STRUCTTYPE:		{
-		map<string, IRStruct*>::iterator it = m_IRStruct.find(pTree->GetNName());
-		if (it == m_IRStruct.end())
+		if (pTree->GetNType() != DECLARE_STA && pTree->GetNType() != UNSIGN_DECLARATION_STA)
+		{
+			cout << "In function GetType : pTree is not a DECLARE CSyntaxNode !";
 			return NULL;
-		return ((*it).second)->GetStructType();
-	}
-							//case STRUCTPTYPE:		{ return SYMBOLSTRUCTP; }
+		}
 
-							//case DOUBLEINTPTYPE:	{ return ;}
-							//case DOUBLEUINTPTYPE:	{ return ;}
-							//case DOUBLEFLOATPTYPE:	{ return ;}
-							//case DOUBLEUCHARPTYPE:	{ return ;}
-							//case DOUBLESTRUCTPTYPE:	{ return ;}
-	case VOIDTYPE:			{ return Type::getVoidTy(m_module->getContext()); }
-	case VOIDPTYPE:			{ return Type::getInt8PtrTy(m_module->getContext()); }
-							//add by yubin 2013-12-23 15:31 函数指针
-							//case FUNCPTYPE:			{ return SYMBOLFUNCP;}
+		if (pTree->GetNType() == UNSIGN_DECLARATION_STA)
+		{
+			cout << "In function GetType : Unsigned declaration is not considered !";
+			return NULL;
+		}
 
-							//add by YY 2014/01/07 10:57 强制转换
-	case CHARPTYPE:			{ return Type::getInt8PtrTy(m_module->getContext()); }
-							//case DOUBLECHARPTYPE:	{ return ;}
-							//case UINTTYPE:			{ return SYMBOLUINTP; }
-							//case UCHARTYPE:			{ return SYMBOLUCHARP; }
-							//case STRUCT_NAME_TYPE:	{ return ;}
-							//case FUNCPPTYPE:		{ return ;}
-	default:   			{ cout << "In function GetType() : Type is not considered !"; return NULL; }
-	}
+		RETURNTYPE type = pTree->GetRType();
+
+		switch (type)
+		{
+		case INTTYPE:     		{ return IntegerType::get(m_module->getContext(), 32); }     //return integer type
+								//case STRTYPE:     		{ return SYMBOLSTR; }   	//return string type
+								//case FILETYPE:	 		{ return SYMBOLFILE; }		//add by yubin, return file type
+
+		case FLOATTYPE:   		{ return Type::getFloatTy(m_module->getContext()); }     //2013-4-26 add by YY[fixed]
+		case CHARTYPE:    		{ return Type::getInt8Ty(m_module->getContext()); }     //2013-4-26 add by YY[fixed]
+								//case ARITHMETICTYPE:  	{ return ;} 	//2013-4-26 add by YY[fixed]
+
+								//case LISTTYPE:		 	{ return SYMBOLLIST; }		// return list value
+		case BOOLTYPE:        	{ return Type::getInt8Ty(m_module->getContext()); }		//return bool type
+								//case POINTERTYPE:    	{ return SYMBOLPOINTER;} 	//return pointer value
+								//case SYMBOLTYPE:		{ return ;}		// return symbol value
+								//case CHANNELRTYPE:		{ return ;}		//add by mdp 2010-07-09
+
+
+		case INTPTYPE:         	{ return Type::getInt8PtrTy(m_module->getContext()); }		//return integer pointer type
+								//case UINTPTYPE:		   	{ return SYMBOLUINT; }
+		case FLOATPTYPE:		{ return Type::getFloatPtrTy(m_module->getContext()); }
+								//case UCHARPTYPE:		{ return SYMBOLCHAR; }
+		case STRUCTTYPE:		{
+			map<string, IRStruct*>::iterator it = m_IRStruct.find(pTree->GetNName());
+			if (it == m_IRStruct.end())
+				return NULL;
+			return ((*it).second)->GetStructType();
+		}
+								//case STRUCTPTYPE:		{ return SYMBOLSTRUCTP; }
+
+								//case DOUBLEINTPTYPE:	{ return ;}
+								//case DOUBLEUINTPTYPE:	{ return ;}
+								//case DOUBLEFLOATPTYPE:	{ return ;}
+								//case DOUBLEUCHARPTYPE:	{ return ;}
+								//case DOUBLESTRUCTPTYPE:	{ return ;}
+		case VOIDTYPE:			{ return Type::getVoidTy(m_module->getContext()); }
+		case VOIDPTYPE:			{ return Type::getInt8PtrTy(m_module->getContext()); }
+								//add by yubin 2013-12-23 15:31 函数指针
+								//case FUNCPTYPE:			{ return SYMBOLFUNCP;}
+
+								//add by YY 2014/01/07 10:57 强制转换
+		case CHARPTYPE:			{ return Type::getInt8PtrTy(m_module->getContext()); }
+								//case DOUBLECHARPTYPE:	{ return ;}
+								//case UINTTYPE:			{ return SYMBOLUINTP; }
+								//case UCHARTYPE:			{ return SYMBOLUCHARP; }
+								//case STRUCT_NAME_TYPE:	{ return ;}
+								//case FUNCPPTYPE:		{ return ;}
+		default:   			{ cout << "In function GetType() : Type is not considered !"; return NULL; }
+		}
 }
 
 
