@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
     function fsz ( int n,float* RValue )
  {
      frame(return_1) and ( 
