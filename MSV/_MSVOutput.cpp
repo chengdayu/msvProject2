@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 int $$state_num=0;
+<<<<<<< HEAD
 int a[20,4];
 int b[20];
 char name[4]={空手"空手",带狼"带狼",带羊"带羊",带菜"带菜"};
@@ -8,6 +9,22 @@ char *  memcpy(int $$Ext,char *des,char * src,int num){
 char *  RValue;
 int i;
 i=0;
+=======
+<<<<<<< HEAD
+
+int main() {
+x=1;
+printf("state %d:", $$state_num);
+printf("x=%d ",x);
+printf("\n");
+$$state_num++;
+free(y);
+=======
+int y;
+int z;
+ f1(int $$Ext,int x){
+int z;
+>>>>>>> 7e5305bec42a53d51d57949f0c5e2674a02f321b
 if(!$$Ext){printf("state %d:", $$state_num);
 printf("a[20]= [%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d]",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19]);
 printf("b[20]= [%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d]",b[0],b[1],b[2],b[3],b[4],b[5],b[6],b[7],b[8],b[9],b[10],b[11],b[12],b[13],b[14],b[15],b[16],b[17],b[18],b[19]);
@@ -597,6 +614,12 @@ $$state_num++;
 }
 
 int main() {
+<<<<<<< HEAD
+=======
+y=3;
+z=4;
+>>>>>>> 7119a5846c60973a53919e31cdc99369cbc48da9
+>>>>>>> 7e5305bec42a53d51d57949f0c5e2674a02f321b
 printf("state %d:", $$state_num);
 printf("a[20]= [%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d]",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19]);
 printf("\n");
@@ -613,8 +636,17 @@ printf("\n");
 $$state_num++;
 main_1(0);
 printf("state %d:", $$state_num);
+<<<<<<< HEAD
 printf("a[20]= [%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d]",a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19]);
 printf("b[20]= [%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d]",b[0],b[1],b[2],b[3],b[4],b[5],b[6],b[7],b[8],b[9],b[10],b[11],b[12],b[13],b[14],b[15],b[16],b[17],b[18],b[19]);
+=======
+<<<<<<< HEAD
+printf("x=%d ",x);
+=======
+printf("y=%d ",y);
+printf("z=%d ",z);
+>>>>>>> 7119a5846c60973a53919e31cdc99369cbc48da9
+>>>>>>> 7e5305bec42a53d51d57949f0c5e2674a02f321b
 printf("\n");
 $$state_num++;
 return 0;
