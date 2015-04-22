@@ -130,7 +130,6 @@ RCHAR     \'([^\']|{ESCAPECHAR})\'
 "break"		{return BREAK;}//add by yubin 2015-3-23
 "case"		{return CASE;}//add by yubin 2015-3-23
 "default"		{return DEFAULT;}//add by yubin 2015-3-23
-"return"    {return RETURN;}//2015-4-13,add by yubin
 
 "."        {return DOT;}
 "="        {return EQ;}     //比较相等符号 “=”
