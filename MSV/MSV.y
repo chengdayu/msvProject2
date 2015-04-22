@@ -54,7 +54,7 @@ extern int yylex(void);
    enum RETURNTYPE  returntype;
 } 
 
-%token SWITCH CASE BREAK DEFAULT RETURN//add by yubin 2015-3-23
+%token SWITCH CASE BREAK DEFAULT//add by yubin 2015-3-23
 %token IF ELSE EMPTY AWAIT PROJECTION  PBEGIN PEND POINTERNULL ARRAY STRUCT DOT UNION FILEDECLARATION
 %token MORE DEFINE MY_TRUE MY_FALSE EXIST FRAME FOR WHILE DO 
 %token TRUE FALSE
@@ -349,7 +349,6 @@ statement
 	   |sign_declaration                    {$$=$1;}
 	   
 	   |switch_statement              {$$=$1;}   //add 2015-3-18
-	   |RETURN ID					  {$$=new CSyntaxNode(RETURN_STA, $2,NULL,VOIDTYPE);}   //add by yubin,2015-4-13
 	   |if_statement                    {$$=$1;}
 	   |while_statement                 {$$=$1;}
 	   |for_statement                   {$$=$1;}
