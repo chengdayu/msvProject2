@@ -312,8 +312,7 @@ void IR::__DeclrArray(Type *type, CSyntaxNode *pTree, int alignment, bool sign)
 		type = ArrayType::get(type, subscript.at(i));
 
 	__DeclrIdent(type, name, alignment, sign);
-	}
-	
+}
 
 
 
@@ -386,73 +385,73 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 	switch (pTree->GetNType())
 	{
 		///整数 例：3
-	case INTEGER_EXP:
-	{
-		return ConstantInt::get(m_module->getContext(), APInt(32, pTree->GetiValue()));
-		break;
-	}
-	///浮点数 例：3.1
-	case FLOATLITERAL_EXP:
-	{
-		return ConstantFP::get(getGlobalContext(), APFloat(pTree->GetfValue()));
-		break;
-	}
+	    case INTEGER_EXP: 
+	    {
+		    return ConstantInt::get(m_module->getContext(), APInt(32, pTree->GetiValue()));
+			break;
+	    }
+		///浮点数 例：3.1
+		case FLOATLITERAL_EXP:
+		{
+			return ConstantFP::get(getGlobalContext(), APFloat(pTree->GetfValue()));
+			break;
+	    }
 
-	case CHARLITERAL_EXP:
-	{
-		return ConstantInt::get(m_module->getContext(), APInt(8, pTree->GetcValue()));
-		break;
-	}
+		case CHARLITERAL_EXP:
+		{
+			return ConstantInt::get(m_module->getContext(), APInt(8, pTree->GetcValue()));
+			break;
+			}
 
-	///字符串 例："good"
-	case STR_EXP:
-	{
-		return m_builder->CreateGlobalStringPtr(pTree->GetsValue());
-	}
+		///字符串 例："good"
+		case STR_EXP:
+		{
+			return m_builder->CreateGlobalStringPtr(pTree->GetsValue());
+		}
 
-	///变量 例：x
-	case IDENT_EXP:
-	{
-		return m_builder->CreateLoad(m_IRSTable[pTree->GetNName()]->GetAllocaInstVar());
-	}
+		///变量 例：x
+		case IDENT_EXP:
+		{
+			return m_builder->CreateLoad(m_IRSTable[pTree->GetNName()]->GetAllocaInstVar());
+		}
 
-	///加 例：x+y
-	case ADD_EXP:
-	{
-		return __Add2IR(pTree);
-	}
+		///加 例：x+y
+		case ADD_EXP:
+		{
+			return __Add2IR(pTree);
+		}
 
-	///减 例：x-y
-	case SUB_EXP:
-	{
-		return __Sub2IR(pTree);
-	}
-	///乘 例：x*y
-	case MUL_EXP:
-	{
-		return __Mul2IR(pTree);
-	}
-	///除 例：x/y
-	case DIV_EXP:
-	{
-		return __Div2IR(pTree);
-	}
+		///减 例：x-y
+		case SUB_EXP:
+			{
+			return __Sub2IR(pTree);
+		}
+		///乘 例：x*y
+		case MUL_EXP:
+		{
+			return __Mul2IR(pTree);
+			}
+		///除 例：x/y
+		case DIV_EXP:
+		{
+			return __Div2IR(pTree);
+			}
 
-	///取余 例：x%y
-	case MOD_EXP:
-	{
-		return __Mod2IR(pTree);
-	}
-	///函数调用表达式
-	case FUNCTION_STA:
-	{
-		return __Call2IR(pTree);
-	}
-	//外部函数调用表达式
-	case EXT_FUNCTION_STA:
-	{
-		return __Call2IR(pTree);
-	}
+		///取余 例：x%y
+		case MOD_EXP:
+		{
+			return __Mod2IR(pTree);
+			}
+		///函数调用表达式
+		case FUNCTION_STA:
+		{
+			return __Call2IR(pTree);
+		}
+		//外部函数调用表达式
+		case EXT_FUNCTION_STA:
+		{
+			return __Call2IR(pTree);
+			}
 	}
 }
 
@@ -937,7 +936,7 @@ Value* IR::__Cast2IR(Value *value, Type *type)
 	}
 	else
 	{
-		cout << "cast error!"<<endl;
+		cout << "cast error!" << endl;
 		return NULL;
 	}
 
@@ -1049,7 +1048,7 @@ Value* IR::__Call2IR(CSyntaxNode *pTree)
 	//获取模块中函数定义
 	Function *CalleeF = m_module->getFunction(Callee);
 	//判断函数是否在该模块中存在
-	if (CalleeF==0)
+	if (CalleeF == 0)
 	{
 		cout << "__Call2IR Unknown function referenced" << endl;
 		return NULL;
@@ -1060,7 +1059,7 @@ Value* IR::__Call2IR(CSyntaxNode *pTree)
 	while (ParameterLeader != NULL)
 	{
 	CSyntaxNode *ParameterNode = ParameterLeader->GetChild0();
-	if (ParameterNode->GetNName()!="")
+		if (ParameterNode->GetNName() != "")
 	{
 		AllocaInst* parameter = m_IRSTable[ParameterNode->GetNName()]->GetAllocaInstVar();
 		LoadInst* parameter_load = m_builder->CreateLoad(parameter);
@@ -1149,6 +1148,6 @@ Value* IR::__Call2IR(CSyntaxNode *pTree)
 								//case FUNCPPTYPE:		{ return ;}
 		default:   			{ cout << "In function GetType() : Type is not considered !"; return NULL; }
 		}
-	}
+}
 
 

@@ -394,10 +394,9 @@ statement
 	   {
 			$$=new CSyntaxNode(PROJECTION_STA, $2, NULL, $5, VOIDTYPE);
 	   }
+
 	   	   
-
 	  |FUNCTION ID OPEN_PAR option_function_parameter_list CLOSE_PAR  OPEN_BPAR statement CLOSE_BPAR//2015-4-13,ÓÚ±óÐÞ¸Ä
-
 	   {
 			$$=new CSyntaxNode(FUNCTION_DEFINE_STA, $2, $4, $7, NULL, VOIDTYPE);
 	   }
@@ -1294,12 +1293,12 @@ inner_option_function_identifier
 	   {
 			$$ = new CSyntaxNode(ACTUAL_PARAMETER_EXP, $2, $3, VOIDTYPE);
 	   }
-	   |COMMA ID OPEN_PAR option_function_identifier CLOSE_PAR  inner_option_function_identifier
+	   /*|COMMA ID OPEN_PAR option_function_identifier CLOSE_PAR  inner_option_function_identifier
 	   {
 	        CSyntaxNode* child0=new CSyntaxNode(FUNCTION_STA, $2, $4, NULL, NULL, VOIDTYPE);
 			$$=new CSyntaxNode(ACTUAL_PARAMETER_EXP, child0, $6, VOIDTYPE);
 			child0=NULL;
-	   }
+	   }*/
 	   //|COMMA ADDRESS identifier inner_option_function_identifier
 	   //{
 	   //		$$ = new CSyntaxNode(PARAMETER_EXP, new CSyntaxNode(ADDRESS_EXP, $3, VOIDTYPE), $4, VOIDTYPE);
