@@ -503,17 +503,17 @@ static const short yyrline[] = { 0,
    989,   992,   993,   998,   999,  1000,  1001,  1002,  1003,  1010,
   1012,  1015,  1017,  1023,  1027,  1032,  1038,  1044,  1050,  1060,
   1066,  1072,  1078,  1086,  1090,  1094,  1100,  1104,  1108,  1114,
-  1120,  1127,  1133,  1139,  1143,  1150,  1156,  1159,  1163,  1167,
-  1173,  1179,  1185,  1192,  1200,  1206,  1221,  1227,  1230,  1238,
-  1246,  1252,  1258,  1262,  1271,  1282,  1286,  1287,  1291,  1305,
-  1306,  1314,  1316,  1323,  1325,  1331,  1332,  1336,  1341,  1346,
-  1351,  1357,  1361,  1362,  1368,  1369,  1380,  1391,  1392,  1394,
-  1396,  1402,  1408,  1416,  1424,  1428,  1432,  1438,  1442,  1448,
-  1452,  1459,  1463,  1467,  1474,  1478,  1482,  1486,  1496,  1497,
-  1503,  1504,  1508,  1509,  1514,  1515,  1516,  1517,  1518,  1521,
-  1522,  1523,  1529,  1530,  1531,  1533,  1534,  1535,  1537,  1538,
-  1539,  1540,  1542,  1543,  1544,  1545,  1546,  1547,  1548,  1552,
-  1553,  1554,  1555,  1556,  1557,  1558
+  1120,  1127,  1133,  1139,  1143,  1151,  1157,  1160,  1164,  1168,
+  1174,  1180,  1186,  1193,  1201,  1207,  1222,  1228,  1231,  1239,
+  1247,  1253,  1259,  1263,  1272,  1283,  1287,  1288,  1292,  1306,
+  1307,  1315,  1317,  1324,  1326,  1332,  1333,  1337,  1342,  1347,
+  1352,  1358,  1362,  1363,  1369,  1370,  1381,  1392,  1393,  1395,
+  1397,  1403,  1409,  1417,  1425,  1429,  1433,  1439,  1443,  1449,
+  1453,  1460,  1464,  1468,  1475,  1479,  1483,  1487,  1497,  1498,
+  1504,  1505,  1509,  1510,  1515,  1516,  1517,  1518,  1519,  1522,
+  1523,  1524,  1530,  1531,  1532,  1534,  1535,  1536,  1538,  1539,
+  1540,  1541,  1543,  1544,  1545,  1546,  1547,  1548,  1549,  1553,
+  1554,  1555,  1556,  1557,  1558,  1559
 };
 
 static const char * const yytname[] = {   "$","error","$undefined.","SWITCH",
@@ -3688,7 +3688,7 @@ case 282:
 case 283:
 #line 1134 "msv.y"
 {
-	      CSyntaxNode* pChild0= new CSyntaxNode(POINT_PARAMETER_EXP, yyvsp[-1].tnode, VOIDTYPE);
+	      CSyntaxNode* pChild0= new CSyntaxNode(ADDRESS_DECLARE_STA, yyvsp[-1].tnode, VOIDTYPE);
           yyval.tnode=new CSyntaxNode(PARAMETER_EXP, pChild0, yyvsp[0].tnode, yyvsp[-3].returntype);
           pChild0=NULL;
 		;
@@ -3702,13 +3702,14 @@ case 284:
 case 285:
 #line 1144 "msv.y"
 {
-	      CSyntaxNode* pChild0= new CSyntaxNode(DOUBLEPOINT_PARAMETER_EXP, yyvsp[-1].tnode, VOIDTYPE);
+		  CSyntaxNode* pChild00=new CSyntaxNode(ADDRESS_DECLARE_STA, yyvsp[-1].tnode, VOIDTYPE);
+		  CSyntaxNode* pChild0= new CSyntaxNode(ADDRESS_DECLARE_STA, pChild00, VOIDTYPE);
           yyval.tnode=new CSyntaxNode(PARAMETER_EXP, pChild0, yyvsp[0].tnode, yyvsp[-4].returntype);
           pChild0=NULL;
 		;
     break;}
 case 286:
-#line 1151 "msv.y"
+#line 1152 "msv.y"
 {
 	      CSyntaxNode* pChild0= new CSyntaxNode(FUNCP_PARAMETER_EXP, yyvsp[-5].tnode, VOIDTYPE);
           yyval.tnode=new CSyntaxNode(PARAMETER_EXP, pChild0, yyvsp[0].tnode, FUNCPTYPE);
@@ -3716,23 +3717,23 @@ case 286:
 		;
     break;}
 case 287:
-#line 1156 "msv.y"
+#line 1157 "msv.y"
 {yyval.tnode = NULL;;
     break;}
 case 288:
-#line 1160 "msv.y"
+#line 1161 "msv.y"
 { 
 		   yyval.tnode = new CSyntaxNode(PARAMETER_EXP, yyvsp[-1].tnode, yyvsp[0].tnode, yyvsp[-2].returntype);
 		;
     break;}
 case 289:
-#line 1164 "msv.y"
+#line 1165 "msv.y"
 { 
 		   yyval.tnode = NULL;
 		;
     break;}
 case 290:
-#line 1168 "msv.y"
+#line 1169 "msv.y"
 {
 	        CSyntaxNode* pChild0=new CSyntaxNode(STRUCT_PARAMETER_EXP, yyvsp[-2].cString, yyvsp[-1].tnode, VOIDTYPE);
 			yyval.tnode=new CSyntaxNode(PARAMETER_EXP, pChild0, yyvsp[0].tnode, STRUCTTYPE);
@@ -3740,7 +3741,7 @@ case 290:
 	   ;
     break;}
 case 291:
-#line 1174 "msv.y"
+#line 1175 "msv.y"
 {
 	        CSyntaxNode* pChild0=new CSyntaxNode(STRUCT_PARAMETER_EXP, yyvsp[-2].cString, yyvsp[-1].tnode, VOIDTYPE);
 			yyval.tnode=new CSyntaxNode(PARAMETER_EXP, pChild0, yyvsp[0].tnode, STRUCTTYPE);
@@ -3748,7 +3749,7 @@ case 291:
 	   ;
     break;}
 case 292:
-#line 1180 "msv.y"
+#line 1181 "msv.y"
 {
 	        CSyntaxNode* pChild0= new CSyntaxNode(STRUCTP_PARAMETER_EXP, yyvsp[-3].cString, yyvsp[-1].tnode, VOIDTYPE);
             yyval.tnode=new CSyntaxNode(PARAMETER_EXP, pChild0, yyvsp[0].tnode, STRUCTPTYPE);
@@ -3756,7 +3757,7 @@ case 292:
 	   ;
     break;}
 case 293:
-#line 1186 "msv.y"
+#line 1187 "msv.y"
 {
 
 			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, yyvsp[-2].tnode, VOIDTYPE);
@@ -3765,7 +3766,7 @@ case 293:
 		;
     break;}
 case 294:
-#line 1193 "msv.y"
+#line 1194 "msv.y"
 {
 
 			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, yyvsp[-2].tnode, VOIDTYPE);
@@ -3774,7 +3775,7 @@ case 294:
 		;
     break;}
 case 295:
-#line 1201 "msv.y"
+#line 1202 "msv.y"
 { 
 		    CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, yyvsp[-2].tnode, VOIDTYPE);
 		    yyval.tnode = new CSyntaxNode(PARAMETER_EXP, pChild0, yyvsp[0].tnode, yyvsp[-3].returntype);
@@ -3782,7 +3783,7 @@ case 295:
 		;
     break;}
 case 296:
-#line 1207 "msv.y"
+#line 1208 "msv.y"
 { 
 		    CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, yyvsp[-2].tnode, VOIDTYPE);
 		    yyval.tnode = new CSyntaxNode(PARAMETER_EXP, pChild0, yyvsp[0].tnode, yyvsp[-4].returntype);
@@ -3790,7 +3791,7 @@ case 296:
 		;
     break;}
 case 297:
-#line 1222 "msv.y"
+#line 1223 "msv.y"
 {
 	      CSyntaxNode* pChild0= new CSyntaxNode(FUNCP_PARAMETER_EXP, yyvsp[-5].tnode, VOIDTYPE);
           yyval.tnode=new CSyntaxNode(PARAMETER_EXP, pChild0, yyvsp[0].tnode, FUNCPTYPE);
@@ -3798,11 +3799,11 @@ case 297:
 		;
     break;}
 case 298:
-#line 1227 "msv.y"
+#line 1228 "msv.y"
 {yyval.tnode = NULL;;
     break;}
 case 299:
-#line 1232 "msv.y"
+#line 1233 "msv.y"
 {
 			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, yyvsp[-4].tnode, VOIDTYPE);
 			yyval.tnode = new CSyntaxNode(PARAMETER_EXP, pChild0, yyvsp[0].tnode, yyvsp[-5].returntype);
@@ -3810,7 +3811,7 @@ case 299:
 	   ;
     break;}
 case 300:
-#line 1240 "msv.y"
+#line 1241 "msv.y"
 {
 			CSyntaxNode* pChild0=new CSyntaxNode(DOUBLEARRAY_PARAMETER_EXP, yyvsp[-6].tnode, VOIDTYPE);
 			yyval.tnode = new CSyntaxNode(PARAMETER_EXP, pChild0, yyvsp[0].tnode, yyvsp[-7].returntype);
@@ -3818,7 +3819,7 @@ case 300:
 	   ;
     break;}
 case 301:
-#line 1247 "msv.y"
+#line 1248 "msv.y"
 {
 			CSyntaxNode* pChild0=new CSyntaxNode(DOUBLEARRAY_PARAMETER_EXP, yyvsp[-5].tnode, VOIDTYPE);
 			yyval.tnode = new CSyntaxNode(PARAMETER_EXP, pChild0, yyvsp[0].tnode, yyvsp[-6].returntype);
@@ -3826,7 +3827,7 @@ case 301:
 	   ;
     break;}
 case 302:
-#line 1253 "msv.y"
+#line 1254 "msv.y"
 {
 	      CSyntaxNode* pChild0= new CSyntaxNode(POINT_PARAMETER_EXP, yyvsp[-1].tnode, VOIDTYPE);
           yyval.tnode=new CSyntaxNode(PARAMETER_EXP, pChild0, yyvsp[0].tnode, yyvsp[-3].returntype);
@@ -3834,143 +3835,143 @@ case 302:
 		;
     break;}
 case 303:
-#line 1259 "msv.y"
+#line 1260 "msv.y"
 {
 	      yyval.tnode=NULL;
 		;
     break;}
 case 304:
-#line 1262 "msv.y"
+#line 1263 "msv.y"
 {yyval.tnode=NULL;;
     break;}
 case 305:
-#line 1272 "msv.y"
+#line 1273 "msv.y"
 {
 			yyval.tnode = new CSyntaxNode(ACTUAL_PARAMETER_EXP, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);
 	   ;
     break;}
 case 306:
-#line 1283 "msv.y"
+#line 1284 "msv.y"
 {
 	       yyval.tnode = new CSyntaxNode(ACTUAL_PARAMETER_EXP, yyvsp[0].returntype);
 	   ;
     break;}
 case 307:
-#line 1286 "msv.y"
-{yyval.tnode=NULL;;
-    break;}
-case 308:
 #line 1287 "msv.y"
 {yyval.tnode=NULL;;
     break;}
+case 308:
+#line 1288 "msv.y"
+{yyval.tnode=NULL;;
+    break;}
 case 309:
-#line 1292 "msv.y"
+#line 1293 "msv.y"
 {
 			yyval.tnode = new CSyntaxNode(ACTUAL_PARAMETER_EXP, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);
 	   ;
     break;}
 case 310:
-#line 1305 "msv.y"
-{yyval.tnode=NULL;;
-    break;}
-case 311:
 #line 1306 "msv.y"
 {yyval.tnode=NULL;;
     break;}
+case 311:
+#line 1307 "msv.y"
+{yyval.tnode=NULL;;
+    break;}
 case 312:
-#line 1314 "msv.y"
+#line 1315 "msv.y"
 {yyval.tnode=yyvsp[-1].tnode;;
     break;}
 case 313:
-#line 1316 "msv.y"
+#line 1317 "msv.y"
 {yyval.tnode=NULL;;
     break;}
 case 314:
-#line 1323 "msv.y"
+#line 1324 "msv.y"
 {yyval.tnode=yyvsp[-1].tnode;;
     break;}
 case 315:
-#line 1325 "msv.y"
+#line 1326 "msv.y"
 {yyval.tnode=NULL;;
     break;}
 case 316:
-#line 1331 "msv.y"
+#line 1332 "msv.y"
 {yyval.tnode=new CSyntaxNode(IDENT_EXP, yyvsp[0].cString, NULL, VOIDTYPE);;
     break;}
 case 317:
-#line 1332 "msv.y"
+#line 1333 "msv.y"
 {yyval.tnode=yyvsp[-1].tnode;;
     break;}
 case 318:
-#line 1336 "msv.y"
+#line 1337 "msv.y"
 {yyval.tnode=new CSyntaxNode(STR_EXP, yyvsp[0].cString, STRTYPE);;
     break;}
 case 319:
-#line 1341 "msv.y"
+#line 1342 "msv.y"
 {yyval.tnode=new CSyntaxNode(INTEGER_EXP, yyvsp[0].nInteger, INTTYPE);;
     break;}
 case 320:
-#line 1346 "msv.y"
+#line 1347 "msv.y"
 {yyval.tnode=new CSyntaxNode(CHARLITERAL_EXP, yyvsp[0].character, CHARTYPE);;
     break;}
 case 321:
-#line 1351 "msv.y"
+#line 1352 "msv.y"
 {yyval.tnode=new CSyntaxNode(FLOATLITERAL_EXP, yyvsp[0].floatval, FLOATTYPE);;
     break;}
 case 322:
-#line 1358 "msv.y"
+#line 1359 "msv.y"
 {
 			yyval.tnode = new CSyntaxNode( FRAME_STA, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);
 		;
     break;}
 case 323:
-#line 1361 "msv.y"
+#line 1362 "msv.y"
 {yyval.tnode = NULL;;
     break;}
 case 324:
-#line 1362 "msv.y"
+#line 1363 "msv.y"
 {yyval.tnode=NULL;;
     break;}
 case 325:
-#line 1368 "msv.y"
+#line 1369 "msv.y"
 {yyval.tnode=NULL;;
     break;}
 case 326:
-#line 1370 "msv.y"
+#line 1371 "msv.y"
 {
 			yyval.tnode = new CSyntaxNode( PROJECTION_STA, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);
 	   ;
     break;}
 case 327:
-#line 1390 "msv.y"
+#line 1391 "msv.y"
 {yyval.tnode=yyvsp[0].tnode;;
     break;}
 case 328:
-#line 1391 "msv.y"
+#line 1392 "msv.y"
 {yyval.tnode=new CSyntaxNode(NEGATION_EXP, yyvsp[0].tnode, BOOLTYPE);;
     break;}
 case 329:
-#line 1393 "msv.y"
+#line 1394 "msv.y"
 {yyval.tnode=new CSyntaxNode(AND_EXP, yyvsp[-2].tnode, yyvsp[0].tnode, BOOLTYPE);;
     break;}
 case 330:
-#line 1395 "msv.y"
+#line 1396 "msv.y"
 {yyval.tnode=new CSyntaxNode(OR_EXP, yyvsp[-2].tnode, yyvsp[0].tnode, BOOLTYPE);;
     break;}
 case 331:
-#line 1396 "msv.y"
+#line 1397 "msv.y"
 {yyval.tnode=yyvsp[-1].tnode;;
     break;}
 case 332:
-#line 1402 "msv.y"
+#line 1403 "msv.y"
 {yyval.tnode=new CSyntaxNode(WHILE_DO_STA, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
 case 333:
-#line 1409 "msv.y"
+#line 1410 "msv.y"
 {yyval.tnode=new CSyntaxNode(FOR_TIMES_STA, yyvsp[-3].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
 case 334:
-#line 1417 "msv.y"
+#line 1418 "msv.y"
 {
 	     CSyntaxNode* pchild0=new CSyntaxNode(FOR_STA_CON, yyvsp[-6].tnode, yyvsp[-4].tnode, yyvsp[-2].tnode, VOIDTYPE); 
 		 yyval.tnode=new CSyntaxNode(FOR_STA, pchild0, yyvsp[0].tnode, VOIDTYPE);
@@ -3978,235 +3979,235 @@ case 334:
 	   ;
     break;}
 case 335:
-#line 1425 "msv.y"
+#line 1426 "msv.y"
 {
 	      yyval.tnode=yyvsp[0].tnode;
 	   ;
     break;}
 case 336:
-#line 1429 "msv.y"
+#line 1430 "msv.y"
 {
 	      yyval.tnode=yyvsp[0].tnode;
 	   ;
     break;}
 case 337:
-#line 1433 "msv.y"
+#line 1434 "msv.y"
 {
 	      yyval.tnode=NULL;
 	   ;
     break;}
 case 338:
-#line 1439 "msv.y"
+#line 1440 "msv.y"
 {
 	      yyval.tnode=yyvsp[0].tnode;
 	  ;
     break;}
 case 339:
-#line 1443 "msv.y"
+#line 1444 "msv.y"
 {
 	      yyval.tnode=NULL;
 	  ;
     break;}
 case 340:
-#line 1449 "msv.y"
+#line 1450 "msv.y"
 {
 	     yyval.tnode=yyvsp[0].tnode;
 	  ;
     break;}
 case 341:
-#line 1453 "msv.y"
+#line 1454 "msv.y"
 {
 	      yyval.tnode=NULL;
 	  ;
     break;}
 case 342:
-#line 1460 "msv.y"
+#line 1461 "msv.y"
 {yyval.tnode=new CSyntaxNode(SWITCH_STA, yyvsp[-4].tnode, yyvsp[-1].tnode,VOIDTYPE);;
     break;}
 case 343:
-#line 1464 "msv.y"
+#line 1465 "msv.y"
 {
 	     yyval.tnode=new CSyntaxNode(CASE_STA, yyvsp[-5].tnode, yyvsp[-2].tnode, yyvsp[0].tnode, VOIDTYPE);
 	   ;
     break;}
 case 344:
-#line 1468 "msv.y"
+#line 1469 "msv.y"
 {
 	     yyval.tnode=new CSyntaxNode(DEFAULT_STA, yyvsp[-1].tnode, VOIDTYPE);
 	   ;
     break;}
 case 345:
-#line 1475 "msv.y"
+#line 1476 "msv.y"
 {
 			yyval.tnode=new CSyntaxNode(INIT_CASE_STA, yyvsp[0].tnode, BREAKTYPE);
 		;
     break;}
 case 346:
-#line 1479 "msv.y"
+#line 1480 "msv.y"
 {
 			yyval.tnode=new CSyntaxNode(INIT_CASE_STA, yyvsp[0].tnode, VOIDTYPE);
 	    ;
     break;}
 case 347:
-#line 1482 "msv.y"
+#line 1483 "msv.y"
 {yyval.tnode=NULL;;
     break;}
 case 348:
-#line 1487 "msv.y"
+#line 1488 "msv.y"
 {
             yyval.tnode = new CSyntaxNode( IF_ELSE_STA, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);
         ;
     break;}
 case 349:
-#line 1496 "msv.y"
+#line 1497 "msv.y"
 {yyval.tnode=yyvsp[0].tnode;;
     break;}
 case 350:
-#line 1497 "msv.y"
+#line 1498 "msv.y"
 {yyval.tnode=NULL;;
     break;}
 case 351:
-#line 1503 "msv.y"
+#line 1504 "msv.y"
 {yyval.tnode=new CSyntaxNode(DISPLAY_STA, yyvsp[-1].tnode, UNKNOWNTYPE);;
     break;}
 case 352:
-#line 1504 "msv.y"
+#line 1505 "msv.y"
 {yyval.tnode=new CSyntaxNode(DISPLAY_STA, yyvsp[-2].tnode, yyvsp[-1].tnode, UNKNOWNTYPE);;
     break;}
 case 353:
-#line 1508 "msv.y"
+#line 1509 "msv.y"
 {yyval.tnode=NULL;;
     break;}
 case 354:
-#line 1509 "msv.y"
+#line 1510 "msv.y"
 {yyval.tnode=new CSyntaxNode(DISPLAY_STA, yyvsp[-1].tnode, yyvsp[0].tnode, UNKNOWNTYPE);;
     break;}
 case 355:
-#line 1514 "msv.y"
+#line 1515 "msv.y"
 {yyval.tnode=new CSyntaxNode(REQUEST_STA, yyvsp[-1].tnode, UNKNOWNTYPE);;
     break;}
 case 356:
-#line 1515 "msv.y"
+#line 1516 "msv.y"
 {yyval.tnode=new CSyntaxNode(REQUEST_STA, yyvsp[-2].tnode, yyvsp[-1].tnode, UNKNOWNTYPE);;
     break;}
 case 357:
-#line 1516 "msv.y"
+#line 1517 "msv.y"
 {yyval.tnode=new CSyntaxNode(REQUEST_STA, yyvsp[-1].tnode, UNKNOWNTYPE);;
     break;}
 case 358:
-#line 1517 "msv.y"
+#line 1518 "msv.y"
 {yyval.tnode=new CSyntaxNode(REQUEST_STA, yyvsp[-2].tnode, yyvsp[-1].tnode, UNKNOWNTYPE);;
     break;}
 case 359:
-#line 1518 "msv.y"
+#line 1519 "msv.y"
 {yyval.tnode=new CSyntaxNode(REQUEST_STA, yyvsp[-1].tnode, UNKNOWNTYPE);;
     break;}
 case 360:
-#line 1521 "msv.y"
+#line 1522 "msv.y"
 {yyval.tnode=NULL;;
     break;}
 case 361:
-#line 1522 "msv.y"
-{yyval.tnode=new CSyntaxNode(REQUEST_STA, yyvsp[-1].tnode, yyvsp[0].tnode, UNKNOWNTYPE);;
-    break;}
-case 362:
 #line 1523 "msv.y"
 {yyval.tnode=new CSyntaxNode(REQUEST_STA, yyvsp[-1].tnode, yyvsp[0].tnode, UNKNOWNTYPE);;
     break;}
-case 363:
-#line 1529 "msv.y"
-{yyval.tnode=new CSyntaxNode(STRUCT_IDENT_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
+case 362:
+#line 1524 "msv.y"
+{yyval.tnode=new CSyntaxNode(REQUEST_STA, yyvsp[-1].tnode, yyvsp[0].tnode, UNKNOWNTYPE);;
     break;}
-case 364:
+case 363:
 #line 1530 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCT_IDENT_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
-case 365:
+case 364:
 #line 1531 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCT_IDENT_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
-case 366:
-#line 1533 "msv.y"
-{yyval.tnode=new CSyntaxNode(STRUCT_LIST_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
+case 365:
+#line 1532 "msv.y"
+{yyval.tnode=new CSyntaxNode(STRUCT_IDENT_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
-case 367:
+case 366:
 #line 1534 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCT_LIST_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
-case 368:
+case 367:
 #line 1535 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCT_LIST_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
-case 369:
-#line 1537 "msv.y"
-{yyval.tnode=new CSyntaxNode(STRUCTP_IDENT_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
+case 368:
+#line 1536 "msv.y"
+{yyval.tnode=new CSyntaxNode(STRUCT_LIST_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
-case 370:
+case 369:
 #line 1538 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCTP_IDENT_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
-case 371:
+case 370:
 #line 1539 "msv.y"
+{yyval.tnode=new CSyntaxNode(STRUCTP_IDENT_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
+    break;}
+case 371:
+#line 1540 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCTP_IDENT_EXP, yyvsp[-4].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
 case 372:
-#line 1540 "msv.y"
+#line 1541 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCTP_IDENT_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
 case 373:
-#line 1542 "msv.y"
-{yyval.tnode=new CSyntaxNode(STRUCTP_LIST_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
-    break;}
-case 374:
 #line 1543 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCTP_LIST_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
-case 375:
+case 374:
 #line 1544 "msv.y"
+{yyval.tnode=new CSyntaxNode(STRUCTP_LIST_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
+    break;}
+case 375:
+#line 1545 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCTP_LIST_EXP, yyvsp[-4].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
 case 376:
-#line 1545 "msv.y"
+#line 1546 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCT_FUNC_EXP, yyvsp[-2].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
 case 377:
-#line 1546 "msv.y"
+#line 1547 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCTP_FUNC_EXP, yyvsp[-2].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
 case 378:
-#line 1547 "msv.y"
+#line 1548 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCTP_LIST_EXP, yyvsp[-3].tnode, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
 case 379:
-#line 1548 "msv.y"
+#line 1549 "msv.y"
 {yyval.tnode=yyvsp[-1].tnode;;
     break;}
 case 380:
-#line 1552 "msv.y"
+#line 1553 "msv.y"
 {yyval.tnode=NULL;;
     break;}
 case 381:
-#line 1553 "msv.y"
+#line 1554 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCT_IDENT_EXP, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
 case 382:
-#line 1554 "msv.y"
+#line 1555 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCT_LIST_EXP, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
 case 383:
-#line 1555 "msv.y"
+#line 1556 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCTP_IDENT_EXP, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
 case 384:
-#line 1556 "msv.y"
+#line 1557 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCTP_LIST_EXP, yyvsp[-1].tnode, yyvsp[0].tnode, VOIDTYPE);;
     break;}
 case 385:
-#line 1557 "msv.y"
+#line 1558 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCT_FUNC_EXP, yyvsp[0].tnode, NULL, VOIDTYPE);;
     break;}
 case 386:
-#line 1558 "msv.y"
+#line 1559 "msv.y"
 {yyval.tnode=new CSyntaxNode(STRUCTP_FUNC_EXP, yyvsp[0].tnode, NULL, VOIDTYPE);;
     break;}
 }
@@ -4407,4 +4408,4 @@ yyerrhandle:
   yystate = yyn;
   goto yynewstate;
 }
-#line 1560 "msv.y"
+#line 1561 "msv.y"
