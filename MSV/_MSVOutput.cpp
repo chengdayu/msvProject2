@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include<stdio.h>
 #include<stdlib.h>
 int $$state_num=0;
@@ -57,3 +58,7 @@ printf("\n");
 $$state_num++;
 return 0;
 }
+=======
+Line 1: parse error
+1 error(s) were found.
+>>>>>>> bf832fa8d141d283108527c70bfd73010e0cb1c2
