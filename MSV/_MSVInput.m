@@ -1,9 +1,11 @@
-
+frame(zuhe,sum,fuhe) and (
+float zuhe[4]<==[0] and skip;
+int sum<==0 and skip;
     function fsz ( int n,float* RValue )
  {
      frame(return_1) and ( 
      int return_1<==0 and skip;
-     return_1<==1 and skip;// RValue:=(float *)malloc(n*sizeof(float));
+     return_1<==1 and RValue:=(float *)malloc(n*sizeof(float));
      skip
      )
 }; 
@@ -11,7 +13,7 @@
  {
      frame(main_s,main_shu,main_i,main_j,main_1_s0) and ( 
      float main_s[4]<==[3,3,3,3],main_shu[4]<==[0] and skip;
-     output ("请输入四个数(0-9):\n") and skip;
+     output ("请输入四个数(0-9):") and skip;
      int main_i<==0 and skip;
      
      while(main_i<4)
@@ -145,8 +147,8 @@
      }; 
   function zuhefu ( int RValue )
  {
-     frame(zuhefu_opter,zuhefu_h,zuhefu_i,zuhefu_j,zuhefu_op,zuhefu_khzh,zuhefu_k,nm_1$,break_1$,switch_1,zuhefu_1_m,zuhefu_1_n,return_1,continue) and ( 
-     int continue<==0 and skip;
+     frame(zuhefu_opter,zuhefu_h,zuhefu_i,zuhefu_j,zuhefu_op,zuhefu_khzh,zuhefu_k,nm_1$,break_1$,switch_1,zuhefu_1_m,zuhefu_1_n,return_1,continue_1) and ( 
+     int continue_1<==0 and skip;
      int return_1<==0 and skip;
      char zuhefu_opter[4]<==['+','-','*','/'] and skip;
      int zuhefu_h<==0 and skip;
@@ -194,21 +196,21 @@
                          
                          while(zuhefu_1_m<=3)
                          {
-                             continue<==0 and skip;
+                             continue_1<==0 and skip;
                              int zuhefu_1_n<==1 and skip;
                              
                              while(zuhefu_1_n<=3)
                              {
-                                  continue<==0 and skip;
+                                  continue_1<==0 and skip;
                                  if((zuhefu_1_m=2 and zuhefu_1_n=3) or (zuhefu_1_m=1 and zuhefu_1_n=2) or (zuhefu_1_m=3 and zuhefu_1_n=1) or (zuhefu_1_m=1 and zuhefu_1_n=3)) then 
                                  {
-                                     continue<==1 and skip;
+                                     continue_1<==1 and skip;
                                       zuhefu_1_n:=zuhefu_1_n+1}
                                      else 
                                      {
                                           skip 
                                      };
-                                     if(continue=0)   then 
+                                     if(continue_1=0)   then 
                                      {
                                          yunsuan(zuhe,zuhefu_op,zuhefu_khzh[zuhefu_1_m],zuhefu_khzh[zuhefu_1_n],RValue);
                                          zuhefu_1_n:=zuhefu_1_n+1
@@ -219,7 +221,7 @@
                                      }
                                      
                                  };
-                                 continue<==0 and skip;
+                                 continue_1<==0 and skip;
                                  zuhefu_1_m:=zuhefu_1_m+1
                                  
                              };
@@ -1307,40 +1309,6 @@
          skip
      }
      )
- };
-frame(x) and
-(
-   int x<==1 and skip
-)
-=======
-<<<<<<< HEAD
-char name[4]={"空手","带狼","带羊","带菜"}
-=======
-<<<<<<< HEAD
-frame(x) and
-(
-   int x<==1 and skip;
-   free(y) and skip
-)
-=======
-function f(int x)
-{
-   frame(z) and
-   (
-      int z and skip
-   )
-};
-function f1(int x)
-{
-   frame(z) and
-   (
-      int z and skip
-   )
-};
-frame(y,z) and
-(
-  int y<==3 and int z<==4 and skip
-)
->>>>>>> 7119a5846c60973a53919e31cdc99369cbc48da9
->>>>>>> 7e5305bec42a53d51d57949f0c5e2674a02f321b
->>>>>>> 3661c5691144e16e2e42eeffbefc0de8a1b29d70
+ }
+ )
+
