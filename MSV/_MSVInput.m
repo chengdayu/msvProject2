@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 frame(mDecodeVar) and (
  function memcpy(char *des, char *src, int num,char *RValue)
  {
@@ -345,7 +344,7 @@ frame(mDecodeVar) and (
      
      while( break_1=0 and  DecodeLenUpdate_i<winSize)
      {
-         if(lastIdx>32) then
+         if(lastIdx>32) then 
          {
              newLen[winPos+DecodeLenUpdate_i]:=32;
              lastIdx:=lastIdx-32
@@ -464,19 +463,19 @@ frame(mDecodeVar) and (
      }; 
   function DecodeEntry (  )
  {
-     frame(DecodeEntry_i,DecodeEntry_winRemoveNum,nm_1$,break_1$,switch,return_1) and ( 
+     frame(DecodeEntry_i,DecodeEntry_winRemoveNum,nm_1$,break_1$,switch_1,return_1) and ( 
      int return_1<==0 and skip;
      int DecodeEntry_i and skip;
      int DecodeEntry_winRemoveNum and skip;
-     int switch and skip;
+     int switch_1 and skip;
      int break_1$ and skip;
      break_1$<==0 and skip;
-      switch<==0 and skip;
+      switch_1<==0 and skip;
       int nm_1$ and skip;
      nm_1$ := mDecodeVar.decodeSt;
-     if (nm_1$=13107 or (switch=1 and break_1$=0 and return_1=0) ) then 
+     if (nm_1$=13107 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
      {
-         switch<==1 and skip;
+         switch_1<==1 and skip;
          mDecodeVar.decodeSt:=21845;
          break_1$<==1 and skip
           
@@ -485,9 +484,9 @@ frame(mDecodeVar) and (
      {
          skip
      };
-     if (nm_1$=21845 or (switch=1 and break_1$=0 and return_1=0) ) then 
+     if (nm_1$=21845 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
      {
-         switch<==1 and skip;
+         switch_1<==1 and skip;
          DecodeEntry_i:=0;
          
          while(((mDecodeVar.blkIdx<mDecodeVar.blkNum) and (DecodeEntry_i<4)))
@@ -512,9 +511,9 @@ frame(mDecodeVar) and (
      {
          skip
      };
-     if (nm_1$=43690 or (switch=1 and break_1$=0 and return_1=0) ) then 
+     if (nm_1$=43690 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
      {
-         switch<==1 and skip;
+         switch_1<==1 and skip;
          DecodeEntry_i:=0;
          
          while(((mDecodeVar.winPos<mDecodeVar.blkNum) and (DecodeEntry_i<4)))
@@ -649,22 +648,3 @@ frame(mDecodeVar) and (
      )
  }
   )
-=======
-frame(x, y) and
-(
-   int x and skip;
-   int y and skip;
-
-   while(true)
-   {
-      x:=x+1
-   }
-   ||
-
-      await(x<y);
-	 
-	  x:=x+y
-
-
-)
->>>>>>> a8cbfe59d4594fe33538833fe3e05e9201de509e
