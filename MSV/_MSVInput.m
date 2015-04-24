@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 frame(mDecodeVar) and (
  function memcpy(char *des, char *src, int num,char *RValue)
  {
@@ -648,3 +649,22 @@ frame(mDecodeVar) and (
      )
  }
   )
+=======
+frame(x, y) and
+(
+   int x and skip;
+   int y and skip;
+
+   while(true)
+   {
+      x:=x+1
+   }
+   ||
+
+      await(x<y);
+	 
+	  x:=x+y
+
+
+)
+>>>>>>> a8cbfe59d4594fe33538833fe3e05e9201de509e
