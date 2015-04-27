@@ -647,6 +647,10 @@ frame(mDecodeVar) and (
       return_1<==1 and skip
      )
  };
+<<<<<<< HEAD
 TestCmdE2DataMerge (  )
 
+=======
+ DecodeEntry()
+>>>>>>> 15554ea7db1f6f0b26b9a362b3577dc7e08a654a
   )
