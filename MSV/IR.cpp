@@ -125,13 +125,24 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 	{
 	    case DECLARE_STA:
 	    {
+<<<<<<< HEAD
 			__Declr2IR(pTree, true);//处理signed类型的声明语句
+=======
+
+			__Declr2IR(pTree, false);//处理signed类型的声明语句
+>>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 	     	break;
 	    }
 		case UNSIGN_DECLARATION_STA:
 		{
+<<<<<<< HEAD
 			__Declr2IR(pTree->GetChild0(), false);//处理unsigned类型的声明语句
 			break;
+=======
+
+			__Declr2IR(pTree, true);//处理unsigned类型的声明语句
+
+>>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 		}
 	    case CHOP_STA:
     	{
@@ -144,17 +155,35 @@ void IR::Stmt2IR(CSyntaxNode *pTree)
 		    __Ass2IR(pTree);
 		    break;
 	    }
+<<<<<<< HEAD
 		//2015/4/22 修改 daichunchun.原因：词法分析的IR树输出标识修改
 	/*	case STATE_OUTPUT_STA:
+=======
+
+		/*case DISPLAY_STA:
+>>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 		{
 			__Out2IR(pTree);
 			break;
 	    }*/
 
+<<<<<<< HEAD
+=======
+		case DISPLAY_STA:
+		{
+			__Out2IR(pTree);
+			break;
+	    }
+
+>>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 		case IF_ELSE_STA:
 		{
 			__If2IR(pTree);
 			break;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 		}
 		//函数调用语句
 		case FUNCTION_STA:
@@ -336,10 +365,15 @@ void IR::__DeclrArray(Type *type, CSyntaxNode *pTree, int alignment, bool sign)
 	for (int i = subscript.size() - 1; i >= 0; i--)
 		type = ArrayType::get(type, subscript.at(i));
 
+<<<<<<< HEAD
 	__DeclrIdent(type, pTree, alignment, sign);
 
 	}
 	
+=======
+	__DeclrIdent(type, name, alignment, sign);
+}
+>>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 
 
 
@@ -413,6 +447,7 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 	switch (pTree->GetNType())
 	{
 		///整数 例：3
+<<<<<<< HEAD
 	case INTEGER_EXP:
 	{
 		return ConstantInt::get(m_module->getContext(), APInt(32, pTree->GetiValue()));
@@ -436,6 +471,37 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 		return m_IRSTable[pTree->GetChild0()->GetNName()]->GetAllocaInstVar();
 		break;
 	}
+=======
+	    case INTEGER_EXP: 
+	    {
+		    return ConstantInt::get(m_module->getContext(), APInt(32, pTree->GetiValue()));
+			break;
+	    }
+		///浮点数 例：3.1
+		case FLOATLITERAL_EXP:
+		{
+			return ConstantFP::get(getGlobalContext(), APFloat(pTree->GetfValue()));
+			break;
+	    }
+
+		case CHARLITERAL_EXP:
+		{
+			return ConstantInt::get(m_module->getContext(), APInt(8, pTree->GetcValue()));
+			break;
+			}
+
+		///字符串 例："good"
+		case STR_EXP:
+		{
+			return m_builder->CreateGlobalStringPtr(pTree->GetsValue());
+		}
+
+		///变量 例：x
+		case IDENT_EXP:
+		{
+			return m_builder->CreateLoad(m_IRSTable[pTree->GetNName()]->GetAllocaInstVar());
+		}
+>>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 
 	///字符串 例："good"
 	case STR_EXP:
@@ -449,6 +515,7 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 		return m_builder->CreateLoad(m_IRSTable[pTree->GetNName()]->GetAllocaInstVar());
 	}
 
+<<<<<<< HEAD
 	///加 例：x+y
 	case ADD_EXP:
 	{
@@ -486,6 +553,23 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 	{
 		return __Call2IR(pTree);
 	}
+=======
+		///取余 例：x%y
+		case MOD_EXP:
+		{
+			return __Mod2IR(pTree);
+			}
+		///函数调用表达式
+		case FUNCTION_STA:
+		{
+			return __Call2IR(pTree);
+		}
+		//外部函数调用表达式
+		case EXT_FUNCTION_STA:
+		{
+			return __Call2IR(pTree);
+			}
+>>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 	}
 }
 
@@ -534,12 +618,18 @@ void IR::__Out2IR(CSyntaxNode *pTree)
 				Value *floatFormat = m_builder->CreateGlobalStringPtr("%f");
 				m_builder->CreateCall2(putsFunc, floatFormat, floatTyToDoubleTy);
 			}
+<<<<<<< HEAD
 			//字符输出, add by daichunchun 2015/4/21
 			else if (outPutVar->getAllocatedType() == Type::getInt8Ty(m_module->getContext()))//如果是char类型的话
+=======
+
+			else if (outPutVar->getAllocatedType() == Type::getInt8Ty(m_module->getContext()))//如果是float类型的话
+>>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 			{
 				Value *charFormat = m_builder->CreateGlobalStringPtr("%c");
 				m_builder->CreateCall2(putsFunc, charFormat, a);
 			}
+<<<<<<< HEAD
 			//指针输出, add by daichunchun 2015/4/22
 			else if (outPutVar->getAllocatedType()->isPointerTy())
 			{
@@ -548,6 +638,9 @@ void IR::__Out2IR(CSyntaxNode *pTree)
 				m_builder->CreateCall2(putsFunc, intFormat, m_builder->CreatePtrToInt(a, IntegerType::get(m_module->getContext(),
 					32)));
 				}
+=======
+
+>>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 			m_builder->CreateCall(putsFunc, m_builder->CreateGlobalStringPtr("  "));//每个变量输出之后，输出两个空格，以便和下一个变量的输出隔开
 		}
 		m_builder->CreateCall(putsFunc, m_builder->CreateGlobalStringPtr("\n"));//每个状态输出之后，换行
@@ -978,7 +1071,7 @@ Value* IR::__Cast2IR(Value *value, Type *type)
 	}
 	else
 	{
-		cout << "cast error!"<<endl;
+		cout << "cast error!" << endl;
 		return NULL;
 	}
 
@@ -998,7 +1091,7 @@ Value* IR::__Call2IR(CSyntaxNode *pTree)
 	//获取模块中函数定义
 	Function *CalleeF = m_module->getFunction(Callee);
 	//判断函数是否在该模块中存在
-	if (CalleeF==0)
+	if (CalleeF == 0)
 	{
 		cout << "__Call2IR Unknown function referenced" << endl;
 		return NULL;
@@ -1008,12 +1101,21 @@ Value* IR::__Call2IR(CSyntaxNode *pTree)
 	CSyntaxNode *ParameterLeader = pTree->GetChild0();
 	while (ParameterLeader != NULL)
 	{
+<<<<<<< HEAD
 		CSyntaxNode *ParameterNode = ParameterLeader->GetChild0();
 		if (ParameterNode->GetNName()!="")
 		{
 			AllocaInst* parameter = m_IRSTable[ParameterNode->GetNName()]->GetAllocaInstVar();
 			LoadInst* parameter_load = m_builder->CreateLoad(parameter);
 			vecvalue.push_back(parameter_load);
+=======
+	CSyntaxNode *ParameterNode = ParameterLeader->GetChild0();
+		if (ParameterNode->GetNName() != "")
+	{
+		AllocaInst* parameter = m_IRSTable[ParameterNode->GetNName()]->GetAllocaInstVar();
+		LoadInst* parameter_load = m_builder->CreateLoad(parameter);
+		vecvalue.push_back(parameter_load);
+>>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 		}
 		ParameterLeader = ParameterLeader->GetChild1();
 	}
@@ -1079,6 +1181,7 @@ Type* IR::GetType(Module* m_module, CSyntaxNode *pTree)
 		{
 			return Type::getVoidTy(m_module->getContext());
 		}
+<<<<<<< HEAD
 		default:
 		{
 			cout << "In function GetType() : Type is not considered !" << endl;
@@ -1086,6 +1189,8 @@ Type* IR::GetType(Module* m_module, CSyntaxNode *pTree)
 		}
 
 	}
+=======
+>>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 }
 
 

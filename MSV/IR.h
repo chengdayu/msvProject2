@@ -222,6 +222,12 @@ public:
 	bool InstIRSymbol(string name, AllocaInst* InstVar, bool sign);
 
 private:
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 	///
 	llvm::IRBuilder<> *m_builder;
 
