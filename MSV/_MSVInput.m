@@ -1,1 +1,1 @@
-output ("\n") and skip
+output ("\n") and skip 

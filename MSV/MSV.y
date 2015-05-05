@@ -1130,9 +1130,9 @@ option_function_parameter_list
           pChild0=NULL;
 		}
 		// 函数的参数可以是函数指针
-	   |OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier//函数指针类型的参数
+	   |OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier//函数指针类型的参数
 	   {
-	      CSyntaxNode* pChild0= new CSyntaxNode(FUNCP_PARAMETER_EXP, $3, VOIDTYPE);
+	      CSyntaxNode* pChild0= new CSyntaxNode(FUNCP_PARAMETER_EXP, $3,$6, VOIDTYPE);
           $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $8, FUNCPTYPE);
           pChild0=NULL;
 		}
@@ -1201,11 +1201,12 @@ inner_option_define_identifier
 		  pChild0=NULL;
 		} 2015-3-7*/
 		//  函数的参数可以是函数指针
-	   |COMMA OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier//函数指针类型的参数
+	   |COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier//函数指针类型的参数
 	   {
-	      CSyntaxNode* pChild0= new CSyntaxNode(FUNCP_PARAMETER_EXP, $4, VOIDTYPE);
+	      CSyntaxNode* pChild0= new CSyntaxNode(FUNCP_PARAMETER_EXP, $4,$7, VOIDTYPE);
           $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $9, FUNCPTYPE);
           pChild0=NULL;
+
 		}
 	   | /* empty */                                       {$$ = NULL;}
 	   
