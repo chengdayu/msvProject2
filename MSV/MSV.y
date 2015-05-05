@@ -281,11 +281,14 @@ statement
 							}
 							else
 							{
-								CSyntaxNode* p = struct_tree;
+								$3->SetChild1(struct_tree);
+								struct_tree=$3;
+																
+								/*CSyntaxNode* p = struct_tree;
 								while(p->GetChild1()!=NULL)
 								p=p->GetChild1();
 								p->SetChild1($3);
-								$$=$1;
+								$$=$1;*/
 							}
 						}					
 			}
