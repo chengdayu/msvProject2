@@ -37,85 +37,85 @@ Useless rules:
 
 
 Conflict in state 84 between rule 13 and token CHOP resolved as reduce.
-Conflict in state 84 between rule 13 and token IFF resolved as reduce.
-Conflict in state 84 between rule 13 and token PROPIMPLY resolved as reduce.
 Conflict in state 84 between rule 13 and token OR resolved as reduce.
 Conflict in state 84 between rule 13 and token AND resolved as reduce.
+Conflict in state 84 between rule 13 and token IFF resolved as reduce.
+Conflict in state 84 between rule 13 and token PROPIMPLY resolved as reduce.
 Conflict in state 84 between rule 13 and token CHOPSTAR resolved as an error.
 Conflict in state 85 between rule 22 and token CHOP resolved as reduce.
-Conflict in state 85 between rule 22 and token IFF resolved as reduce.
-Conflict in state 85 between rule 22 and token PROPIMPLY resolved as reduce.
 Conflict in state 85 between rule 22 and token OR resolved as reduce.
 Conflict in state 85 between rule 22 and token AND resolved as reduce.
+Conflict in state 85 between rule 22 and token IFF resolved as reduce.
+Conflict in state 85 between rule 22 and token PROPIMPLY resolved as reduce.
 Conflict in state 85 between rule 22 and token CHOPSTAR resolved as an error.
 Conflict in state 109 between rule 21 and token CHOP resolved as reduce.
-Conflict in state 109 between rule 21 and token IFF resolved as reduce.
-Conflict in state 109 between rule 21 and token PROPIMPLY resolved as reduce.
 Conflict in state 109 between rule 21 and token OR resolved as reduce.
 Conflict in state 109 between rule 21 and token AND resolved as reduce.
+Conflict in state 109 between rule 21 and token IFF resolved as reduce.
+Conflict in state 109 between rule 21 and token PROPIMPLY resolved as reduce.
 Conflict in state 109 between rule 21 and token CHOPSTAR resolved as an error.
 Conflict in state 110 between rule 10 and token CHOP resolved as reduce.
-Conflict in state 110 between rule 10 and token IFF resolved as reduce.
-Conflict in state 110 between rule 10 and token PROPIMPLY resolved as reduce.
 Conflict in state 110 between rule 10 and token OR resolved as reduce.
 Conflict in state 110 between rule 10 and token AND resolved as reduce.
+Conflict in state 110 between rule 10 and token IFF resolved as reduce.
+Conflict in state 110 between rule 10 and token PROPIMPLY resolved as reduce.
 Conflict in state 110 between rule 10 and token CHOPSTAR resolved as an error.
 Conflict in state 111 between rule 9 and token CHOP resolved as reduce.
-Conflict in state 111 between rule 9 and token IFF resolved as reduce.
-Conflict in state 111 between rule 9 and token PROPIMPLY resolved as reduce.
 Conflict in state 111 between rule 9 and token OR resolved as reduce.
 Conflict in state 111 between rule 9 and token AND resolved as reduce.
+Conflict in state 111 between rule 9 and token IFF resolved as reduce.
+Conflict in state 111 between rule 9 and token PROPIMPLY resolved as reduce.
 Conflict in state 111 between rule 9 and token CHOPSTAR resolved as an error.
 Conflict in state 112 between rule 20 and token CHOP resolved as reduce.
-Conflict in state 112 between rule 20 and token IFF resolved as reduce.
-Conflict in state 112 between rule 20 and token PROPIMPLY resolved as reduce.
 Conflict in state 112 between rule 20 and token OR resolved as reduce.
 Conflict in state 112 between rule 20 and token AND resolved as reduce.
+Conflict in state 112 between rule 20 and token IFF resolved as reduce.
+Conflict in state 112 between rule 20 and token PROPIMPLY resolved as reduce.
 Conflict in state 112 between rule 20 and token CHOPSTAR resolved as an error.
 Conflict in state 113 between rule 12 and token CHOP resolved as reduce.
-Conflict in state 113 between rule 12 and token IFF resolved as reduce.
-Conflict in state 113 between rule 12 and token PROPIMPLY resolved as reduce.
 Conflict in state 113 between rule 12 and token OR resolved as reduce.
 Conflict in state 113 between rule 12 and token AND resolved as reduce.
+Conflict in state 113 between rule 12 and token IFF resolved as reduce.
+Conflict in state 113 between rule 12 and token PROPIMPLY resolved as reduce.
 Conflict in state 113 between rule 12 and token CHOPSTAR resolved as an error.
 Conflict in state 114 between rule 11 and token CHOP resolved as reduce.
-Conflict in state 114 between rule 11 and token IFF resolved as reduce.
-Conflict in state 114 between rule 11 and token PROPIMPLY resolved as reduce.
 Conflict in state 114 between rule 11 and token OR resolved as reduce.
 Conflict in state 114 between rule 11 and token AND resolved as reduce.
+Conflict in state 114 between rule 11 and token IFF resolved as reduce.
+Conflict in state 114 between rule 11 and token PROPIMPLY resolved as reduce.
 Conflict in state 114 between rule 11 and token CHOPSTAR resolved as an error.
-Conflict in state 229 between rule 207 and token IMPLY resolved as reduce.
-Conflict in state 232 between rule 206 and token IMPLY resolved as reduce.
+Conflict in state 229 between rule 208 and token IMPLY resolved as shift.
+Conflict in state 232 between rule 207 and token IMPLY resolved as shift.
 Conflict in state 255 between rule 8 and token CHOP resolved as reduce.
-Conflict in state 255 between rule 8 and token IFF resolved as shift.
-Conflict in state 255 between rule 8 and token PROPIMPLY resolved as shift.
 Conflict in state 255 between rule 8 and token OR resolved as shift.
 Conflict in state 255 between rule 8 and token AND resolved as shift.
+Conflict in state 255 between rule 8 and token IFF resolved as shift.
+Conflict in state 255 between rule 8 and token PROPIMPLY resolved as shift.
 Conflict in state 255 between rule 8 and token CHOPSTAR resolved as shift.
-Conflict in state 256 between rule 6 and token CHOP resolved as reduce.
-Conflict in state 256 between rule 6 and token IFF resolved as reduce.
-Conflict in state 256 between rule 6 and token PROPIMPLY resolved as reduce.
-Conflict in state 256 between rule 6 and token OR resolved as shift.
-Conflict in state 256 between rule 6 and token AND resolved as shift.
-Conflict in state 256 between rule 6 and token CHOPSTAR resolved as shift.
-Conflict in state 257 between rule 7 and token CHOP resolved as reduce.
-Conflict in state 257 between rule 7 and token IFF resolved as reduce.
-Conflict in state 257 between rule 7 and token PROPIMPLY resolved as reduce.
-Conflict in state 257 between rule 7 and token OR resolved as shift.
-Conflict in state 257 between rule 7 and token AND resolved as shift.
-Conflict in state 257 between rule 7 and token CHOPSTAR resolved as shift.
-Conflict in state 258 between rule 5 and token CHOP resolved as reduce.
-Conflict in state 258 between rule 5 and token IFF resolved as reduce.
-Conflict in state 258 between rule 5 and token PROPIMPLY resolved as reduce.
-Conflict in state 258 between rule 5 and token OR resolved as reduce.
-Conflict in state 258 between rule 5 and token AND resolved as shift.
-Conflict in state 258 between rule 5 and token CHOPSTAR resolved as shift.
-Conflict in state 259 between rule 4 and token CHOP resolved as reduce.
-Conflict in state 259 between rule 4 and token IFF resolved as reduce.
-Conflict in state 259 between rule 4 and token PROPIMPLY resolved as reduce.
-Conflict in state 259 between rule 4 and token OR resolved as reduce.
-Conflict in state 259 between rule 4 and token AND resolved as reduce.
-Conflict in state 259 between rule 4 and token CHOPSTAR resolved as shift.
+Conflict in state 256 between rule 5 and token CHOP resolved as reduce.
+Conflict in state 256 between rule 5 and token OR resolved as reduce.
+Conflict in state 256 between rule 5 and token AND resolved as shift.
+Conflict in state 256 between rule 5 and token IFF resolved as shift.
+Conflict in state 256 between rule 5 and token PROPIMPLY resolved as shift.
+Conflict in state 256 between rule 5 and token CHOPSTAR resolved as shift.
+Conflict in state 257 between rule 4 and token CHOP resolved as reduce.
+Conflict in state 257 between rule 4 and token OR resolved as reduce.
+Conflict in state 257 between rule 4 and token AND resolved as reduce.
+Conflict in state 257 between rule 4 and token IFF resolved as shift.
+Conflict in state 257 between rule 4 and token PROPIMPLY resolved as shift.
+Conflict in state 257 between rule 4 and token CHOPSTAR resolved as shift.
+Conflict in state 258 between rule 6 and token CHOP resolved as reduce.
+Conflict in state 258 between rule 6 and token OR resolved as reduce.
+Conflict in state 258 between rule 6 and token AND resolved as reduce.
+Conflict in state 258 between rule 6 and token IFF resolved as reduce.
+Conflict in state 258 between rule 6 and token PROPIMPLY resolved as reduce.
+Conflict in state 258 between rule 6 and token CHOPSTAR resolved as shift.
+Conflict in state 259 between rule 7 and token CHOP resolved as reduce.
+Conflict in state 259 between rule 7 and token OR resolved as reduce.
+Conflict in state 259 between rule 7 and token AND resolved as reduce.
+Conflict in state 259 between rule 7 and token IFF resolved as reduce.
+Conflict in state 259 between rule 7 and token PROPIMPLY resolved as reduce.
+Conflict in state 259 between rule 7 and token CHOPSTAR resolved as shift.
 Conflict in state 266 between rule 236 and token OR resolved as reduce.
 Conflict in state 266 between rule 236 and token AND resolved as reduce.
 Conflict in state 326 between rule 329 and token OR resolved as reduce.
@@ -453,9 +453,9 @@ rule 202  inner_option_list_value -> COMMA strliteral inner_option_list_value
 rule 203  inner_option_list_value -> COMMA array_exp inner_option_list_value
 rule 204  inner_option_list_value ->		/* empty */
 rule 205  inner_option_list_value -> COMMA error
-rule 206  address_exp -> ADDRESS identifier
-rule 207  address_exp -> ADDRESS array
-rule 208  address_exp -> ADDRESS struct_member_exp
+rule 206  address_exp -> ADDRESS struct_member_exp
+rule 207  address_exp -> ADDRESS identifier
+rule 208  address_exp -> ADDRESS array
 rule 209  address_exp -> ADDRESS address_exp
 rule 210  address_exp -> OPEN_PAR address_exp CLOSE_PAR
 rule 211  type_cast -> OPEN_PAR INTDECLARATION CLOSE_PAR type_cast_alg_exp
@@ -731,16 +731,16 @@ UNSIGNED (327) 76 118 122 124 125 126 128 142 145 216 217 219 222 225
     228 260 261
 SIGNED (328) 75 214 215
 CHOP (329) 8 32
-IMPLY (330) 55 370 371 372 373 374 375 376 378 379 384 385 387
-IFF (331) 6
-PROPIMPLY (332) 7
-OR (333) 5 31 238 331
-PARALLEL (334) 54
-AND (335) 4 30 56 66 237 330
-ASS_P (336) 60 87 96 97 98 99 100 130
-ASS_N (337) 131
-CON (338) 188 191
-ADDRESS (339) 186 206 207 208 209 309
+OR (330) 5 31 238 331
+PARALLEL (331) 54
+AND (332) 4 30 56 66 237 330
+ASS_P (333) 60 87 96 97 98 99 100 130
+ASS_N (334) 131
+CON (335) 188 191
+ADDRESS (336) 186 206 207 208 209 309
+IMPLY (337) 55 370 371 372 373 374 375 376 378 379 384 385 387
+IFF (338) 6
+PROPIMPLY (339) 7
 NE (340) 245 247 249 251 253 256
 EQ (341) 244 246 248 250 252 259
 GE (342) 254
@@ -833,7 +833,7 @@ ass_right (136)
 rightaddrshift (137)
     on left: 138, on right: 137
 array (138)
-    on left: 139 140, on right: 71 112 140 151 172 207 358 359 363
+    on left: 139 140, on right: 71 112 140 151 172 208 358 359 363
     365 367 368 369 371 374 375 376 379 383 385
 array_cast_exp (139)
     on left: 141 142 143 144 145, on right: 180
@@ -912,7 +912,7 @@ statement_bpar (165)
 bool_par (166)
     on left: 315 316, on right: 333
 identifier (167)
-    on left: 317 318, on right: 56 63 84 85 94 96 110 141 149 171 206
+    on left: 317 318, on right: 56 63 84 85 94 96 110 141 149 171 207
     264 266 267 268 269 270 271 272 273 280 281 282 283 285 286 288
     290 291 292 293 294 295 296 297 299 300 301 302 318 323 356 357
     362 364 365 366 367 370 371 372 373 374 377 378 382 384
@@ -963,7 +963,7 @@ option_input (189)
     on left: 361 362 363, on right: 357 359 362 363
 struct_member_exp (190)
     on left: 364 365 366 367 368 369 370 371 372 373 374 375 376 377
-    378 379 380, on right: 111 179 208 360 380
+    378 379 380, on right: 111 179 206 360 380
 option_struct_member_exp (191)
     on left: 381 382 383 384 385 386 387, on right: 364 365 366 367
     368 369 370 371 372 373 374 375 376 379 382 383 384 385
@@ -1446,10 +1446,10 @@ state 21
 
     PEND	shift, and go to state 115
     CHOP	shift, and go to state 116
-    IFF 	shift, and go to state 117
-    PROPIMPLY	shift, and go to state 118
-    OR  	shift, and go to state 119
-    AND 	shift, and go to state 120
+    OR  	shift, and go to state 117
+    AND 	shift, and go to state 118
+    IFF 	shift, and go to state 119
+    PROPIMPLY	shift, and go to state 120
     CHOPSTAR	shift, and go to state 121
 
 
@@ -2288,10 +2288,10 @@ state 82
 
     CLOSE_PAR	shift, and go to state 209
     CHOP	shift, and go to state 116
-    IFF 	shift, and go to state 117
-    PROPIMPLY	shift, and go to state 118
-    OR  	shift, and go to state 119
-    AND 	shift, and go to state 120
+    OR  	shift, and go to state 117
+    AND 	shift, and go to state 118
+    IFF 	shift, and go to state 119
+    PROPIMPLY	shift, and go to state 120
     CHOPSTAR	shift, and go to state 121
 
 
@@ -2308,10 +2308,10 @@ state 83
 
     COMMA	shift, and go to state 210
     CHOP	shift, and go to state 116
-    IFF 	shift, and go to state 117
-    PROPIMPLY	shift, and go to state 118
-    OR  	shift, and go to state 119
-    AND 	shift, and go to state 120
+    OR  	shift, and go to state 117
+    AND 	shift, and go to state 118
+    IFF 	shift, and go to state 119
+    PROPIMPLY	shift, and go to state 120
     CHOPSTAR	shift, and go to state 121
 
     $default	reduce using rule 29 (poptional_projection)
@@ -2483,9 +2483,9 @@ state 88
 
 state 89
 
-    address_exp  ->  ADDRESS . identifier   (rule 206)
-    address_exp  ->  ADDRESS . array   (rule 207)
-    address_exp  ->  ADDRESS . struct_member_exp   (rule 208)
+    address_exp  ->  ADDRESS . struct_member_exp   (rule 206)
+    address_exp  ->  ADDRESS . identifier   (rule 207)
+    address_exp  ->  ADDRESS . array   (rule 208)
     address_exp  ->  ADDRESS . address_exp   (rule 209)
 
     OPEN_PAR	shift, and go to state 228
@@ -2909,7 +2909,7 @@ state 116
 
 state 117
 
-    complexProposition  ->  complexProposition IFF . complexProposition   (rule 6)
+    complexProposition  ->  complexProposition OR . complexProposition   (rule 5)
 
     EMPTY	shift, and go to state 3
     MORE	shift, and go to state 4
@@ -2936,7 +2936,7 @@ state 117
 
 state 118
 
-    complexProposition  ->  complexProposition PROPIMPLY . complexProposition   (rule 7)
+    complexProposition  ->  complexProposition AND . complexProposition   (rule 4)
 
     EMPTY	shift, and go to state 3
     MORE	shift, and go to state 4
@@ -2963,7 +2963,7 @@ state 118
 
 state 119
 
-    complexProposition  ->  complexProposition OR . complexProposition   (rule 5)
+    complexProposition  ->  complexProposition IFF . complexProposition   (rule 6)
 
     EMPTY	shift, and go to state 3
     MORE	shift, and go to state 4
@@ -2990,7 +2990,7 @@ state 119
 
 state 120
 
-    complexProposition  ->  complexProposition AND . complexProposition   (rule 4)
+    complexProposition  ->  complexProposition PROPIMPLY . complexProposition   (rule 7)
 
     EMPTY	shift, and go to state 3
     MORE	shift, and go to state 4
@@ -5716,16 +5716,17 @@ state 228
 
 state 229
 
-    address_exp  ->  ADDRESS array .   (rule 207)
+    address_exp  ->  ADDRESS array .   (rule 208)
     struct_member_exp  ->  array . DOT identifier option_struct_member_exp   (rule 365)
     struct_member_exp  ->  array . DOT array option_struct_member_exp   (rule 368)
     struct_member_exp  ->  array . IMPLY identifier option_struct_member_exp   (rule 371)
     struct_member_exp  ->  array . IMPLY array option_struct_member_exp   (rule 375)
 
     DOT 	shift, and go to state 201
+    IMPLY	shift, and go to state 203
 
-    DOT 	[reduce using rule 207 (address_exp)]
-    $default	reduce using rule 207 (address_exp)
+    DOT 	[reduce using rule 208 (address_exp)]
+    $default	reduce using rule 208 (address_exp)
 
 
 
@@ -5751,7 +5752,7 @@ state 231
 
 state 232
 
-    address_exp  ->  ADDRESS identifier .   (rule 206)
+    address_exp  ->  ADDRESS identifier .   (rule 207)
     struct_member_exp  ->  identifier . DOT identifier option_struct_member_exp   (rule 364)
     struct_member_exp  ->  identifier . DOT array option_struct_member_exp   (rule 367)
     struct_member_exp  ->  identifier . IMPLY identifier option_struct_member_exp   (rule 370)
@@ -5760,17 +5761,18 @@ state 232
     struct_member_exp  ->  identifier . IMPLY function   (rule 378)
 
     DOT 	shift, and go to state 206
+    IMPLY	shift, and go to state 207
 
-    DOT 	[reduce using rule 206 (address_exp)]
-    $default	reduce using rule 206 (address_exp)
+    DOT 	[reduce using rule 207 (address_exp)]
+    $default	reduce using rule 207 (address_exp)
 
 
 
 state 233
 
-    address_exp  ->  ADDRESS struct_member_exp .   (rule 208)
+    address_exp  ->  ADDRESS struct_member_exp .   (rule 206)
 
-    $default	reduce using rule 208 (address_exp)
+    $default	reduce using rule 206 (address_exp)
 
 
 
@@ -6025,10 +6027,10 @@ state 255
     complexProposition  ->  complexProposition CHOP complexProposition .   (rule 8)
     complexProposition  ->  complexProposition . CHOPSTAR   (rule 26)
 
-    IFF 	shift, and go to state 117
-    PROPIMPLY	shift, and go to state 118
-    OR  	shift, and go to state 119
-    AND 	shift, and go to state 120
+    OR  	shift, and go to state 117
+    AND 	shift, and go to state 118
+    IFF 	shift, and go to state 119
+    PROPIMPLY	shift, and go to state 120
     CHOPSTAR	shift, and go to state 121
 
     $default	reduce using rule 8 (complexProposition)
@@ -6039,56 +6041,22 @@ state 256
 
     complexProposition  ->  complexProposition . AND complexProposition   (rule 4)
     complexProposition  ->  complexProposition . OR complexProposition   (rule 5)
-    complexProposition  ->  complexProposition . IFF complexProposition   (rule 6)
-    complexProposition  ->  complexProposition IFF complexProposition .   (rule 6)
-    complexProposition  ->  complexProposition . PROPIMPLY complexProposition   (rule 7)
-    complexProposition  ->  complexProposition . CHOP complexProposition   (rule 8)
-    complexProposition  ->  complexProposition . CHOPSTAR   (rule 26)
-
-    OR  	shift, and go to state 119
-    AND 	shift, and go to state 120
-    CHOPSTAR	shift, and go to state 121
-
-    $default	reduce using rule 6 (complexProposition)
-
-
-
-state 257
-
-    complexProposition  ->  complexProposition . AND complexProposition   (rule 4)
-    complexProposition  ->  complexProposition . OR complexProposition   (rule 5)
-    complexProposition  ->  complexProposition . IFF complexProposition   (rule 6)
-    complexProposition  ->  complexProposition . PROPIMPLY complexProposition   (rule 7)
-    complexProposition  ->  complexProposition PROPIMPLY complexProposition .   (rule 7)
-    complexProposition  ->  complexProposition . CHOP complexProposition   (rule 8)
-    complexProposition  ->  complexProposition . CHOPSTAR   (rule 26)
-
-    OR  	shift, and go to state 119
-    AND 	shift, and go to state 120
-    CHOPSTAR	shift, and go to state 121
-
-    $default	reduce using rule 7 (complexProposition)
-
-
-
-state 258
-
-    complexProposition  ->  complexProposition . AND complexProposition   (rule 4)
-    complexProposition  ->  complexProposition . OR complexProposition   (rule 5)
     complexProposition  ->  complexProposition OR complexProposition .   (rule 5)
     complexProposition  ->  complexProposition . IFF complexProposition   (rule 6)
     complexProposition  ->  complexProposition . PROPIMPLY complexProposition   (rule 7)
     complexProposition  ->  complexProposition . CHOP complexProposition   (rule 8)
     complexProposition  ->  complexProposition . CHOPSTAR   (rule 26)
 
-    AND 	shift, and go to state 120
+    AND 	shift, and go to state 118
+    IFF 	shift, and go to state 119
+    PROPIMPLY	shift, and go to state 120
     CHOPSTAR	shift, and go to state 121
 
     $default	reduce using rule 5 (complexProposition)
 
 
 
-state 259
+state 257
 
     complexProposition  ->  complexProposition . AND complexProposition   (rule 4)
     complexProposition  ->  complexProposition AND complexProposition .   (rule 4)
@@ -6098,9 +6066,43 @@ state 259
     complexProposition  ->  complexProposition . CHOP complexProposition   (rule 8)
     complexProposition  ->  complexProposition . CHOPSTAR   (rule 26)
 
+    IFF 	shift, and go to state 119
+    PROPIMPLY	shift, and go to state 120
     CHOPSTAR	shift, and go to state 121
 
     $default	reduce using rule 4 (complexProposition)
+
+
+
+state 258
+
+    complexProposition  ->  complexProposition . AND complexProposition   (rule 4)
+    complexProposition  ->  complexProposition . OR complexProposition   (rule 5)
+    complexProposition  ->  complexProposition . IFF complexProposition   (rule 6)
+    complexProposition  ->  complexProposition IFF complexProposition .   (rule 6)
+    complexProposition  ->  complexProposition . PROPIMPLY complexProposition   (rule 7)
+    complexProposition  ->  complexProposition . CHOP complexProposition   (rule 8)
+    complexProposition  ->  complexProposition . CHOPSTAR   (rule 26)
+
+    CHOPSTAR	shift, and go to state 121
+
+    $default	reduce using rule 6 (complexProposition)
+
+
+
+state 259
+
+    complexProposition  ->  complexProposition . AND complexProposition   (rule 4)
+    complexProposition  ->  complexProposition . OR complexProposition   (rule 5)
+    complexProposition  ->  complexProposition . IFF complexProposition   (rule 6)
+    complexProposition  ->  complexProposition . PROPIMPLY complexProposition   (rule 7)
+    complexProposition  ->  complexProposition PROPIMPLY complexProposition .   (rule 7)
+    complexProposition  ->  complexProposition . CHOP complexProposition   (rule 8)
+    complexProposition  ->  complexProposition . CHOPSTAR   (rule 26)
+
+    CHOPSTAR	shift, and go to state 121
+
+    $default	reduce using rule 7 (complexProposition)
 
 
 
@@ -8557,9 +8559,9 @@ state 365
 
 state 366
 
-    address_exp  ->  ADDRESS . identifier   (rule 206)
-    address_exp  ->  ADDRESS . array   (rule 207)
-    address_exp  ->  ADDRESS . struct_member_exp   (rule 208)
+    address_exp  ->  ADDRESS . struct_member_exp   (rule 206)
+    address_exp  ->  ADDRESS . identifier   (rule 207)
+    address_exp  ->  ADDRESS . array   (rule 208)
     address_exp  ->  ADDRESS . address_exp   (rule 209)
     option_function_identifier  ->  ADDRESS . error   (rule 309)
 
@@ -9073,10 +9075,10 @@ state 402
 
     COMMA	shift, and go to state 210
     CHOP	shift, and go to state 116
-    IFF 	shift, and go to state 117
-    PROPIMPLY	shift, and go to state 118
-    OR  	shift, and go to state 119
-    AND 	shift, and go to state 120
+    OR  	shift, and go to state 117
+    AND 	shift, and go to state 118
+    IFF 	shift, and go to state 119
+    PROPIMPLY	shift, and go to state 120
     CHOPSTAR	shift, and go to state 121
 
     $default	reduce using rule 29 (poptional_projection)
@@ -15965,10 +15967,10 @@ state 826
 
     CLOSE_BPAR	shift, and go to state 904
     CHOP	shift, and go to state 116
-    IFF 	shift, and go to state 117
-    PROPIMPLY	shift, and go to state 118
-    OR  	shift, and go to state 119
-    AND 	shift, and go to state 120
+    OR  	shift, and go to state 117
+    AND 	shift, and go to state 118
+    IFF 	shift, and go to state 119
+    PROPIMPLY	shift, and go to state 120
     CHOPSTAR	shift, and go to state 121
 
 

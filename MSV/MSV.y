@@ -71,7 +71,6 @@ extern int yylex(void);
 %token UNSIGNED SIGNED
 %left COMMA 
 %left CHOP
-%left IMPLY IFF PROPIMPLY
 %left OR PARALLEL CYLINDER
 %left AND 
 %right ASS_P ASS_N 
@@ -79,6 +78,7 @@ extern int yylex(void);
 %left OVEREP	
 %left CON   //按位异或
 %left ADDRESS //按位与
+%left IMPLY IFF PROPIMPLY
 %left NE EQ  
 %left GE LE  GT LT 
 %left LST RST  //左移右移
@@ -115,6 +115,8 @@ extern int yylex(void);
 %type<tnode> option_list_value inner_option_list_value option_ari_exp ass_right array_exp array_cast_exp
 
 %type<tnode> declaration option_identifier_array_declaration inner_option_identifier_array_declaration point_exp array option_struct_declaration
+//结构体串联
+%type<tnode> struct_member_exp  option_struct_member_exp
 %type<tnode> address_exp//added by Jane
 %type<tnode> option_array_declaration inner_option_array_declaration//added by Jane
 
@@ -129,8 +131,7 @@ extern int yylex(void);
 
 %type<tnode> casted_element 
 
-//结构体串联
-%type<tnode> struct_member_exp  option_struct_member_exp
+
 
 
 %type<nodetype>		assign_operator relation_operator bi_operator  ari_operator
@@ -649,7 +650,10 @@ inner_option_array_declaration
 
 ass_statement
        :ass_left assign_operator ass_right       
-										{$$=new CSyntaxNode($2, $1, $3, VOIDTYPE);}	
+										{$$=new CSyntaxNode($2, $1, $3, VOIDTYPE);
+										CSyntaxNode* tmp=$$;
+										tmp=NULL;
+										}	
 	   ;
 ass_left
        :identifier                      {$$=$1;}
@@ -715,27 +719,27 @@ array_cast_exp
        // 增加((unsigned char*)a)[2]='b',可作为左值或者右值
        :OPEN_PAR OPEN_PAR INTDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
 	   {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, $6, INTPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,$6,NULL,VOIDTYPE), INTPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $9, $10, VOIDTYPE);
 	   }  
 	   | OPEN_PAR OPEN_PAR UNSIGNED INTDECLARATION MUL CLOSE_PAR ID CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
 	   {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, $7, UINTPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,$7,NULL,VOIDTYPE), UINTPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $10, $11, VOIDTYPE);
 	   }  
 	   | OPEN_PAR OPEN_PAR FLOATDECLARATION MUL CLOSE_PAR ID CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR  
 	   {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, $6,FLOATPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,$6,NULL,VOIDTYPE), FLOATPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $9, $10, VOIDTYPE);
 	   }  
 	   | OPEN_PAR OPEN_PAR CHARDECLARATION MUL CLOSE_PAR ID CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
 	   {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, $6,CHARPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,$6,NULL,VOIDTYPE),CHARPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $9, $10, VOIDTYPE);
 	   } 
 	   | OPEN_PAR OPEN_PAR UNSIGNED CHARDECLARATION MUL CLOSE_PAR ID CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
 	   {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, $7, UCHARPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,$7,NULL,VOIDTYPE), UCHARPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $10, $11, VOIDTYPE);
 	   } 
 
@@ -902,17 +906,19 @@ inner_option_list_value
 	   ;
  
 address_exp:	 
-            ADDRESS identifier	
+            ADDRESS struct_member_exp
+			{
+			   $$=new CSyntaxNode(ADDRESS_EXP, $2, VOIDTYPE );
+			   CSyntaxNode*tmp=$$;
+			   tmp=NULL;
+			}
+            |ADDRESS identifier	
 			{
 			   $$=new CSyntaxNode(ADDRESS_EXP, $2, VOIDTYPE);
 			}
             |ADDRESS array
 			{
 			   $$=new CSyntaxNode(ADDRESS_EXP, $2, VOIDTYPE);
-			}
-            |ADDRESS struct_member_exp
-			{
-			   $$=new CSyntaxNode(ADDRESS_EXP, $2, VOIDTYPE );
 			}
 			//add by YY 2013/11/28 多重地址引用暂时不考虑
 		    |ADDRESS address_exp 
