@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function f(int x,int RValue)
 {frame(x) and
 (
@@ -17,3 +18,6 @@ frame(y) and
 		y:=5
 	}
 )
+=======
+output ("\n") and skip 
+>>>>>>> 0774b65054519981989fef0aa5dfb3dd4caf1963
