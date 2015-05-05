@@ -66,7 +66,7 @@ extern int yylex(void);
 %token OVEREP
 %token INTER_OR NON_DETERMINED 
 %token SEND RECEIVE PROCESS CHANNEL PUT GET ERROR_TOKEN
-%token STRFUNCHEAD STRFUNCTAIL STRFUNCCAT STRFUNCCMP STRFUNCCPY STRFUNCLEN 
+
 %token EXTERN
 %token UNSIGNED SIGNED
 %left COMMA 
@@ -78,6 +78,7 @@ extern int yylex(void);
 %left OVEREP	
 %left CON   //∞¥Œª“ÏªÚ
 %left ADDRESS //∞¥Œª”Î
+%left BOOL_AND
 %left IMPLY IFF PROPIMPLY
 %left NE EQ  
 %left GE LE  GT LT 
@@ -85,7 +86,7 @@ extern int yylex(void);
 %left ADD SUB 
 %left MUL DIV MOD 
 %left BNE  //∞¥Œª»°∑¥
-
+%left BOOL_OR
 
 
 
@@ -107,16 +108,14 @@ extern int yylex(void);
 
 
 %type<tnode> type_cast  /*--------cdstatement mdstatement new atrbstatement-----*/ //Annotation-Class   
-%type<tnode> statement identifier strliteral intliteral ass_statement bool_exp option_exp_else_statement leftaddrshift rightaddrshift
+%type<tnode> statement identifier strliteral intliteral ass_statement  option_exp_else_statement leftaddrshift rightaddrshift
 %type<tnode> if_statement option_else_statement while_statement extend_for_statement ass_left imply_pre for_sta_init for_sta_condition for_sta_control
 %type<tnode> ari_exp for_statement option_frame_identifier option_projection type_cast_alg_exp
-%type<tnode> prime_bool_exp option_function_parameter_list inner_option_define_identifier
+%type<tnode> option_function_parameter_list inner_option_define_identifier
 %type<tnode> option_function_identifier inner_option_function_identifier empty_statement
 %type<tnode> option_list_value inner_option_list_value option_ari_exp ass_right array_exp array_cast_exp
 
 %type<tnode> declaration option_identifier_array_declaration inner_option_identifier_array_declaration point_exp array option_struct_declaration
-//Ω·ππÃÂ¥Æ¡™
-%type<tnode> struct_member_exp  option_struct_member_exp
 %type<tnode> address_exp//added by Jane
 %type<tnode> option_array_declaration inner_option_array_declaration//added by Jane
 
@@ -131,10 +130,11 @@ extern int yylex(void);
 
 %type<tnode> casted_element 
 
+//Ω·ππÃÂ¥Æ¡™
+%type<tnode> struct_member_exp  option_struct_member_exp
 
 
-
-%type<nodetype>		assign_operator relation_operator bi_operator  ari_operator
+%type<nodetype>		assign_operator relation_operator arith_operator
 %type<returntype>  type_define sign_type_define
 %type<returntype> all_type_define
 %type<tnode> program gComplexProposition complexProposition poptional_projection 
@@ -213,7 +213,7 @@ complexProposition
 			$$=new CSyntaxNode(PROJECTION_STA, $2, $3, $7, VOIDTYPE);                         
 	   }
 	   |ID 											{$$=new CSyntaxNode(IDENT_EXP, $1, NULL, VOIDTYPE)}     //{$$=new CSyntaxNode(IDENT_EXP, $1, 0);}  
-	   |DEFINE ID COLON prime_bool_exp              
+	   |DEFINE ID COLON ari_exp             
 	   {
 			$$=NULL;
 			propositionDefineTree=new CSyntaxNode(FUNCTION_DEFINE_STA, $2, $4, propositionDefineTree, NULL, VOIDTYPE);			
@@ -359,9 +359,9 @@ statement
 //2015-3-7	   |W_NEXT OPEN_PAR statement CLOSE_PAR    {$$=new CSyntaxNode(W_NEXT_STA, $3, VOIDTYPE);}
 	   |KEEP OPEN_PAR statement CLOSE_PAR       {$$=new CSyntaxNode(KEEP_STA, $3, VOIDTYPE);}
 	   |ALWAYS OPEN_PAR statement CLOSE_PAR      {$$=new CSyntaxNode(ALWAYS_STA, $3, VOIDTYPE);}
-//2015-3-7	   |HALT OPEN_PAR bool_exp CLOSE_PAR   {$$=new CSyntaxNode(HALT_STA, $3, VOIDTYPE);}
-	   |AWAIT OPEN_PAR bool_exp CLOSE_PAR  {$$=new CSyntaxNode(AWAIT_STA, $3, VOIDTYPE);}
-	   |REPEAT OPEN_BPAR statement CLOSE_BPAR UNTIL OPEN_PAR bool_exp CLOSE_PAR  {$$=new CSyntaxNode(REPEAT_UNTIL_STA, $3, $7, VOIDTYPE);}
+//2015-3-7	   |HALT OPEN_PAR ari_exp CLOSE_PAR   {$$=new CSyntaxNode(HALT_STA, $3, VOIDTYPE);}
+	   |AWAIT OPEN_PAR ari_exp CLOSE_PAR  {$$=new CSyntaxNode(AWAIT_STA, $3, VOIDTYPE);}
+	   |REPEAT OPEN_BPAR statement CLOSE_BPAR UNTIL OPEN_PAR ari_exp CLOSE_PAR  {$$=new CSyntaxNode(REPEAT_UNTIL_STA, $3, $7, VOIDTYPE);}
 	   |SKIP                            {$$=new CSyntaxNode(SKIP_STA, VOIDTYPE);}
        |EMPTY                           {$$=new CSyntaxNode(EMPTY_EXP, VOIDTYPE);}
 	   |MORE                            {$$=new CSyntaxNode(MORE_STA, VOIDTYPE);}
@@ -441,7 +441,7 @@ option_struct_declaration
 	   {
 	      $$=$1;
 		}
-       |sign_declaration AND option_struct_declaration
+      |sign_declaration AND option_struct_declaration
 		{
 		   $$=new CSyntaxNode(AND_EXP,$1,$3,VOIDTYPE);
 		}
@@ -650,10 +650,7 @@ inner_option_array_declaration
 
 ass_statement
        :ass_left assign_operator ass_right       
-										{$$=new CSyntaxNode($2, $1, $3, VOIDTYPE);
-										CSyntaxNode* tmp=$$;
-										tmp=NULL;
-										}	
+									{$$=new CSyntaxNode($2, $1, $3, VOIDTYPE);}	
 	   ;
 ass_left
        :identifier                      {$$=$1;}
@@ -700,9 +697,6 @@ assign_operator
 ass_right
 	   :ari_exp                         {$$=$1;}
 	   |array_exp                        {$$=$1;}   // [2,3,5,9] ªÚ’ﬂ[1,3]^[2,4]
-	   |strliteral                          {$$=$1;}     
-//2015-3-9	   |bool_exp                  {$$=$1;} //bool±Ì¥Ô Ω       
-//2015-3-7	   |struct_member_exp               {$$=$1;}
 	   |OPEN_PAR strliteral CLOSE_PAR OPEN_PAR type_define CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR function {$$=new CSyntaxNode(DLL_CALL_STA, $2, $10, $5);}
 	   |OPEN_PAR ass_right CLOSE_PAR      {$$=$2;} 
 	   |rightaddrshift                  {$$=$1;}
@@ -729,7 +723,7 @@ array_cast_exp
 	   }  
 	   | OPEN_PAR OPEN_PAR FLOATDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR  
 	   {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, $6, FLOATPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, $6,FLOATPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $9, $10, VOIDTYPE);
 	   }  
 	   | OPEN_PAR OPEN_PAR CHARDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
@@ -739,7 +733,7 @@ array_cast_exp
 	   } 
 	   | OPEN_PAR OPEN_PAR UNSIGNED CHARDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
 	   {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, $7,UCHARPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, $7, UCHARPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $10, $11, VOIDTYPE);
 	   }
 	   | OPEN_PAR array_cast_exp CLOSE_PAR
@@ -773,18 +767,16 @@ point_exp
 
 //À„ ı±Ì¥Ô Ω
 ari_exp     
-	   :simple_ari_exp                  {$$=$1;}
+	   :simple_ari_exp            {$$=$1;}
 	   |simple_ari_exp relation_operator ari_exp {$$=new CSyntaxNode($2, $1, $3, BOOLTYPE);} //À„ ı±Ì¥Ô Ω÷–ø…“‘”–bool±Ì¥Ô Ω£¨»Áa+(b>c)
-	 //  |simple_ari_exp bi_operator ari_exp    {$$=new CSyntaxNode($2, $1, $3, ARITHMETICTYPE);}   
-       |ari_exp ari_operator simple_ari_exp    {$$=new CSyntaxNode($2, $1, $3, ARITHMETICTYPE);}   // +|-
-	   |IF bool_exp THEN  ari_exp option_exp_else_statement 
-	   {
-            $$ = new CSyntaxNode(IF_ELSE_EXP, $2, $4, $5, ARITHMETICTYPE);
-       }   	   
+	   |simple_ari_exp BOOL_AND ari_exp{$$=new CSyntaxNode(AND_EXP, $1, $3, BOOLTYPE);}
+	   |simple_ari_exp BOOL_OR ari_exp {$$=new CSyntaxNode(OR_EXP, $1, $3, BOOLTYPE);}
+	   |NEGATION ari_exp {$$=new CSyntaxNode(NEGATION_EXP, $2, BOOLTYPE);} 
+	   |IF ari_exp THEN  ari_exp option_exp_else_statement { $$ = new CSyntaxNode(IF_ELSE_EXP, $2, $4, $5, ARITHMETICTYPE);}   
 	   ;
+
 type_cast_alg_exp
-       :simple_ari_exp                  {$$=$1;}
-	   |simple_ari_exp ari_operator simple_ari_exp    {$$=new CSyntaxNode($2, $1, $3, ARITHMETICTYPE);}   // +|- 	   
+       :simple_ari_exp                  {$$=$1;}	   
 	   ;
 
 option_exp_else_statement
@@ -794,41 +786,42 @@ option_exp_else_statement
 
 simple_ari_exp
 	   :member_in_exp   {$$=$1;}
-	   |simple_ari_exp bi_operator member_in_exp  {$$=new CSyntaxNode($2, $1, $3, ARITHMETICTYPE);}
+	   |simple_ari_exp arith_operator member_in_exp  {$$=new CSyntaxNode($2, $1, $3, ARITHMETICTYPE);}
 	   ; 
 
 member_in_exp
-       :intliteral                         {$$=$1;}
-	   |SUB member_in_exp						{$$=new CSyntaxNode(MINUS_EXP, $2, ARITHMETICTYPE);}
-	   |BNE member_in_exp                      {$$=new CSyntaxNode(BNE_EXP, $2, ARITHMETICTYPE);}
-	   |POINTERNULL                     {$$=new CSyntaxNode(NULL_EXP, VOIDTYPE);}
-	   |floatliteral					{$$=$1;}     
-	   //|ID                            {$$=new CSyntaxNode(IDENT_EXP, $1, NULL, VOIDTYPE);}    
-       |identifier						{$$=$1;}
-	   |array                            {$$=$1;}
-	   |point_exp                       {$$=$1;}
-	   |function                        {$$=$1;}
-	   |OPEN_PAR ari_exp CLOSE_PAR      {$$=$2;}   
+       :intliteral                      {$$=$1;}
 	   |charliteral						{$$=$1;}
+	   |floatliteral					{$$=$1;} 
+	   |strliteral                      {$$=$1;}
+	   |identifier						{$$=$1;}
+	   |array                           {$$=$1;}
+	   |point_exp                       {$$=$1;}
+	   |function                        {$$=$1;} 
 	   |address_exp						{$$=$1;} // ≥ı ºªØ÷∏’Î ˝◊È”√µΩ	   
-	   |type_cast                       {$$=$1;} //  «ø÷∆◊™ªªø…“‘≤Œ”ÎÀ„ ˝‘ÀÀ„	  	   	   
-	   |struct_member_exp               {$$=$1;} //  Ω·ππÃÂ¥Æ¡™
+	   |type_cast                       {$$=$1;} // «ø÷∆◊™ªªø…“‘≤Œ”ÎÀ„ ˝‘ÀÀ„	  	   	   
+	   |struct_member_exp               {$$=$1;} // Ω·ππÃÂ¥Æ¡™
 	   |array_cast_exp                  {$$=$1;}
+	   |SUB member_in_exp				{$$=new CSyntaxNode(MINUS_EXP, $2, ARITHMETICTYPE);}
+	   |BNE member_in_exp               {$$=new CSyntaxNode(BNE_EXP, $2, ARITHMETICTYPE);}
+	   |POINTERNULL                     {$$=new CSyntaxNode(NULL_EXP, VOIDTYPE);} 
+	   |MY_TRUE                         {$$=new CSyntaxNode(TRUE_EXP, BOOLTYPE);}
+	   |MY_FALSE                        {$$=new CSyntaxNode(FALSE_EXP, BOOLTYPE);}
+	   |OPEN_PAR ari_exp CLOSE_PAR      {$$=$2;}  	 
 	   ;
-bi_operator      
-	   :MUL								{$$=MUL_EXP;}
+arith_operator
+       :ADD                             {$$=ADD_EXP;}
+	   |SUB                             {$$=SUB_EXP;}      
+	   |MUL								{$$=MUL_EXP;}
 	   |DIV								{$$=DIV_EXP;}
 	   |MOD								{$$=MOD_EXP;}
 	   |LST						     	{$$=LST_EXP;}//  ◊Û“∆ left shift
 	   |RST	 						    {$$=RST_EXP;}//  ”““∆ right shift
 	   |ADDRESS 	 					{$$=BAN_EXP;}//  ∞¥Œª”Î
 	   |INTER_OR	 					{$$=BOR_EXP;}//  ∞¥ŒªªÚ
-	   |CON	 		         			{$$=XOR_EXP;}//  “ÏªÚ	
+	   |CON	 		         			{$$=XOR_EXP;}//  “ÏªÚ
 	   ;
-ari_operator:
-		ADD								{$$=ADD_EXP;}
-	   |SUB								{$$=SUB_EXP;}
-	   ;	  
+	  
 
 array_exp
 	   :array_exp CON array_exp           {$$=new CSyntaxNode(CON_EXP, $1, $3, LISTTYPE);}
@@ -868,10 +861,10 @@ option_struct_list_value
 	   {
 			$$ = new CSyntaxNode(STRUCT_LIST_ASSVALUE_STA, $2, $3, LISTTYPE);
 		}	
-	   |OPEN_BPAR strliteral inner_option_list_value CLOSE_BPAR
+	   /*|OPEN_BPAR strliteral inner_option_list_value CLOSE_BPAR
 	   {
 			$$ = new CSyntaxNode(STRUCT_LIST_ASSVALUE_STA, $2, $3, LISTTYPE);
-	   }
+	   }*/
 	   /*2015-3-9
 	   |OPEN_BPAR charliteral inner_option_list_value CLOSE_BPAR
 	   {
@@ -910,19 +903,17 @@ inner_option_list_value
 	   ;
  
 address_exp:	 
-            ADDRESS struct_member_exp
-			{
-			   $$=new CSyntaxNode(ADDRESS_EXP, $2, VOIDTYPE );
-			   CSyntaxNode*tmp=$$;
-			   tmp=NULL;
-			}
-            |ADDRESS identifier	
+            ADDRESS identifier	
 			{
 			   $$=new CSyntaxNode(ADDRESS_EXP, $2, VOIDTYPE);
 			}
             |ADDRESS array
 			{
 			   $$=new CSyntaxNode(ADDRESS_EXP, $2, VOIDTYPE);
+			}
+            |ADDRESS struct_member_exp
+			{
+			   $$=new CSyntaxNode(ADDRESS_EXP, $2, VOIDTYPE );
 			}
 			//add by YY 2013/11/28 ∂‡÷ÿµÿ÷∑“˝”√‘› ±≤ªøº¬«
 		    |ADDRESS address_exp 
@@ -979,43 +970,7 @@ casted_element:	type_cast_alg_exp	{$$=$1;}   // mallocœ‡πÿ
 
 
 
-bool_exp
-	   :prime_bool_exp            {$$=$1;}
-	   |NEGATION bool_exp         {$$=new CSyntaxNode(NEGATION_EXP, $2, BOOLTYPE);}
-	   |bool_exp AND bool_exp    {$$=new CSyntaxNode(AND_EXP, $1, $3, BOOLTYPE);}
-	   |bool_exp OR bool_exp     {$$=new CSyntaxNode(OR_EXP, $1, $3, BOOLTYPE);}
-	   |OPEN_PAR bool_exp CLOSE_PAR    {$$=$2;}
-	   
-	   ;
 
-
-prime_bool_exp
-       :ari_exp relation_operator ari_exp {$$=new CSyntaxNode($2, $1, $3, BOOLTYPE);}
-//2015-3-7	   |NEGATION prime_bool_exp   {$$=new CSyntaxNode(NEGATION_EXP, $2, BOOLTYPE);}
-	   |MY_TRUE                         {$$=new CSyntaxNode(TRUE_EXP, BOOLTYPE);}
-	   |MY_FALSE                        {$$=new CSyntaxNode(FALSE_EXP, BOOLTYPE);}
-//2015-3-7	   |MORE                            {$$=new CSyntaxNode(MORE_STA, BOOLTYPE);}
-//2015-3-7	   |EMPTY                           {$$=new CSyntaxNode(EMPTY_EXP, BOOLTYPE);}
-	   |ari_exp                         {$$=$1;}
-		 |ari_exp EQ strliteral          {$$=new CSyntaxNode(EQU_EXP, $1, $3, BOOLTYPE);}       
-	   |ari_exp NE strliteral			{$$=new CSyntaxNode(NE_EXP, $1, $3, BOOLTYPE);}
-
-	    
-	   |strliteral EQ ari_exp            {$$=new CSyntaxNode(EQU_EXP, $1, $3, BOOLTYPE);}       
-	   |strliteral NE ari_exp   			{$$=new CSyntaxNode(NE_EXP, $1, $3, BOOLTYPE);}
-	    
-	    
-	   |ari_exp EQ POINTERNULL          {$$=new CSyntaxNode(EQU_EXP, $1, new CSyntaxNode(NULL_EXP, VOIDTYPE), BOOLTYPE);}       
-	   |ari_exp NE POINTERNULL			{$$=new CSyntaxNode(NE_EXP, $1, new CSyntaxNode(NULL_EXP, VOIDTYPE), BOOLTYPE);}
-
-	     
-	   |POINTERNULL EQ ari_exp           {$$=new CSyntaxNode(EQU_EXP, new CSyntaxNode(NULL_EXP, VOIDTYPE), $3, BOOLTYPE);}       
-	   |POINTERNULL NE ari_exp  		  {$$=new CSyntaxNode(NE_EXP, new CSyntaxNode(NULL_EXP, VOIDTYPE), $3, BOOLTYPE);}
-	   
-
-	   |ari_exp EQ charliteral     {$$=new CSyntaxNode(EQU_EXP, $1, $3, BOOLTYPE);} 
-	   |ari_exp NE  charliteral     {$$=new CSyntaxNode(NE_EXP, $1, $3, BOOLTYPE);} 
-	   ;
 
 
 relation_operator
@@ -1349,8 +1304,8 @@ statement_bpar
 
 
 bool_par
-       :OPEN_PAR bool_exp CLOSE_PAR				   {$$=$2;}
-//	   |OPEN_PAR bool_exp			{yyerror("expecting ')'"); $$=NULL;}
+       :OPEN_PAR ari_exp CLOSE_PAR				   {$$=$2;}
+//	   |OPEN_PAR ari_exp			{yyerror("expecting ')'"); $$=NULL;}
 	   |error CLOSE_PAR									   {$$=NULL;}
 //	   |OPEN_PAR CLOSE_PAR              {yyerror("expecting statement"); $$=NULL;}
 	   ;
@@ -1416,7 +1371,6 @@ imply_pre
 			$$=$1;
 	   }
 	   */
-	   prime_bool_exp            {$$=$1;}
 	   |NEGATION imply_pre              {$$=new CSyntaxNode(NEGATION_EXP, $2, BOOLTYPE);}
 	   |imply_pre AND imply_pre
 	                                    {$$=new CSyntaxNode(AND_EXP, $1, $3, BOOLTYPE);}
@@ -1464,7 +1418,7 @@ for_sta_init//for”Ôæ‰¿®∫≈÷–µƒ≥ı ºªØ”Ôæ‰,ø…“‘ «∏≥÷µ”Ôæ‰£¨“≤ø…“‘ «…˘√˜”Ôæ‰,“≤ø…“‘≤
 	   }
        ;
 for_sta_condition//for”Ôæ‰¿®∫≈÷–µƒÃıº˛”Ôæ‰£¨ «“ª∏ˆ≤º∂˚±Ì¥Ô Ω“≤ø…“‘≤ª–¥
-      :bool_exp
+      :ari_exp
 	  {
 	      $$=$1;
 	  }
@@ -1512,7 +1466,7 @@ init_case_par
 	   ;
 
 if_statement
-       : IF bool_exp THEN  statement_bpar option_else_statement
+       : IF ari_exp THEN  statement_bpar option_else_statement
         {
             $$ = new CSyntaxNode( IF_ELSE_STA, $2, $4, $5, VOIDTYPE);
         }
