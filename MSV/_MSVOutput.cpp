@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+Line 453: parse error, expecting `error' or `OPEN_PAR' or `ID'
+1 error(s) were found.
+=======
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -50,3 +54,4 @@ printf("\n");
 }
 return 0;
 }
+>>>>>>> f70eacf974d9feeb41235ff35ed0889841801b4c

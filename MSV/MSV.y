@@ -722,25 +722,29 @@ array_cast_exp
 		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,$6,NULL,VOIDTYPE), INTPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $9, $10, VOIDTYPE);
 	   }  
-	   | OPEN_PAR OPEN_PAR UNSIGNED INTDECLARATION MUL CLOSE_PAR ID CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
+	   | OPEN_PAR OPEN_PAR UNSIGNED INTDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
 	   {
 		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,$7,NULL,VOIDTYPE), UINTPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $10, $11, VOIDTYPE);
 	   }  
-	   | OPEN_PAR OPEN_PAR FLOATDECLARATION MUL CLOSE_PAR ID CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR  
+	   | OPEN_PAR OPEN_PAR FLOATDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR  
 	   {
 		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,$6,NULL,VOIDTYPE), FLOATPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $9, $10, VOIDTYPE);
 	   }  
-	   | OPEN_PAR OPEN_PAR CHARDECLARATION MUL CLOSE_PAR ID CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
+	   | OPEN_PAR OPEN_PAR CHARDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
 	   {
 		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,$6,NULL,VOIDTYPE),CHARPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $9, $10, VOIDTYPE);
 	   } 
-	   | OPEN_PAR OPEN_PAR UNSIGNED CHARDECLARATION MUL CLOSE_PAR ID CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
+	   | OPEN_PAR OPEN_PAR UNSIGNED CHARDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
 	   {
 		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,$7,NULL,VOIDTYPE), UCHARPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $10, $11, VOIDTYPE);
+	   }
+	   | OPEN_PAR array_cast_exp CLOSE_PAR
+	   { 
+	      $$=$2
 	   } 
 
 option_ari_exp
