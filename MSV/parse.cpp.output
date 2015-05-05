@@ -84,101 +84,38 @@ Conflict in state 114 between rule 11 and token AND resolved as reduce.
 Conflict in state 114 between rule 11 and token IFF resolved as reduce.
 Conflict in state 114 between rule 11 and token PROPIMPLY resolved as reduce.
 Conflict in state 114 between rule 11 and token CHOPSTAR resolved as an error.
-<<<<<<< HEAD
-Conflict in state 229 between rule 208 and token IMPLY resolved as shift.
-Conflict in state 232 between rule 207 and token IMPLY resolved as shift.
-Conflict in state 255 between rule 8 and token CHOP resolved as reduce.
-Conflict in state 255 between rule 8 and token OR resolved as shift.
-Conflict in state 255 between rule 8 and token AND resolved as shift.
-Conflict in state 255 between rule 8 and token IFF resolved as shift.
-Conflict in state 255 between rule 8 and token PROPIMPLY resolved as shift.
-Conflict in state 255 between rule 8 and token CHOPSTAR resolved as shift.
-Conflict in state 256 between rule 5 and token CHOP resolved as reduce.
-Conflict in state 256 between rule 5 and token OR resolved as reduce.
-Conflict in state 256 between rule 5 and token AND resolved as shift.
-Conflict in state 256 between rule 5 and token IFF resolved as shift.
-Conflict in state 256 between rule 5 and token PROPIMPLY resolved as shift.
-Conflict in state 256 between rule 5 and token CHOPSTAR resolved as shift.
-Conflict in state 257 between rule 4 and token CHOP resolved as reduce.
-Conflict in state 257 between rule 4 and token OR resolved as reduce.
-Conflict in state 257 between rule 4 and token AND resolved as reduce.
-Conflict in state 257 between rule 4 and token IFF resolved as shift.
-Conflict in state 257 between rule 4 and token PROPIMPLY resolved as shift.
-Conflict in state 257 between rule 4 and token CHOPSTAR resolved as shift.
-Conflict in state 258 between rule 6 and token CHOP resolved as reduce.
-Conflict in state 258 between rule 6 and token OR resolved as reduce.
-Conflict in state 258 between rule 6 and token AND resolved as reduce.
-Conflict in state 258 between rule 6 and token IFF resolved as reduce.
-Conflict in state 258 between rule 6 and token PROPIMPLY resolved as reduce.
-Conflict in state 258 between rule 6 and token CHOPSTAR resolved as shift.
-Conflict in state 259 between rule 7 and token CHOP resolved as reduce.
-Conflict in state 259 between rule 7 and token OR resolved as reduce.
-Conflict in state 259 between rule 7 and token AND resolved as reduce.
-Conflict in state 259 between rule 7 and token IFF resolved as reduce.
-Conflict in state 259 between rule 7 and token PROPIMPLY resolved as reduce.
-Conflict in state 259 between rule 7 and token CHOPSTAR resolved as shift.
-Conflict in state 266 between rule 236 and token OR resolved as reduce.
-Conflict in state 266 between rule 236 and token AND resolved as reduce.
-Conflict in state 326 between rule 329 and token OR resolved as reduce.
-Conflict in state 326 between rule 329 and token AND resolved as reduce.
-Conflict in state 378 between rule 32 and token CHOP resolved as reduce.
-Conflict in state 378 between rule 32 and token OR resolved as shift.
-Conflict in state 378 between rule 32 and token PARALLEL resolved as shift.
-Conflict in state 378 between rule 32 and token AND resolved as shift.
-Conflict in state 379 between rule 31 and token CHOP resolved as reduce.
-Conflict in state 379 between rule 31 and token OR resolved as reduce.
-Conflict in state 379 between rule 31 and token PARALLEL resolved as reduce.
-Conflict in state 379 between rule 31 and token AND resolved as shift.
-Conflict in state 380 between rule 54 and token CHOP resolved as reduce.
-Conflict in state 380 between rule 54 and token OR resolved as reduce.
-Conflict in state 380 between rule 54 and token PARALLEL resolved as reduce.
-Conflict in state 380 between rule 54 and token AND resolved as shift.
-Conflict in state 381 between rule 30 and token CHOP resolved as reduce.
-Conflict in state 381 between rule 30 and token OR resolved as reduce.
-Conflict in state 381 between rule 30 and token PARALLEL resolved as reduce.
-Conflict in state 381 between rule 30 and token AND resolved as reduce.
-Conflict in state 444 between rule 238 and token OR resolved as reduce.
-Conflict in state 444 between rule 238 and token AND resolved as shift.
-Conflict in state 445 between rule 237 and token OR resolved as reduce.
-Conflict in state 445 between rule 237 and token AND resolved as reduce.
-Conflict in state 510 between rule 331 and token OR resolved as reduce.
-Conflict in state 510 between rule 331 and token AND resolved as shift.
-Conflict in state 511 between rule 330 and token OR resolved as reduce.
-Conflict in state 511 between rule 330 and token AND resolved as reduce.
-Conflict in state 652 between rule 191 and token CON resolved as reduce.
-=======
-Conflict in state 230 between rule 208 and token IMPLY resolved as reduce.
-Conflict in state 233 between rule 207 and token IMPLY resolved as reduce.
+Conflict in state 230 between rule 209 and token IMPLY resolved as shift.
+Conflict in state 233 between rule 208 and token IMPLY resolved as shift.
 Conflict in state 256 between rule 8 and token CHOP resolved as reduce.
-Conflict in state 256 between rule 8 and token IFF resolved as shift.
-Conflict in state 256 between rule 8 and token PROPIMPLY resolved as shift.
 Conflict in state 256 between rule 8 and token OR resolved as shift.
 Conflict in state 256 between rule 8 and token AND resolved as shift.
+Conflict in state 256 between rule 8 and token IFF resolved as shift.
+Conflict in state 256 between rule 8 and token PROPIMPLY resolved as shift.
 Conflict in state 256 between rule 8 and token CHOPSTAR resolved as shift.
-Conflict in state 257 between rule 6 and token CHOP resolved as reduce.
-Conflict in state 257 between rule 6 and token IFF resolved as reduce.
-Conflict in state 257 between rule 6 and token PROPIMPLY resolved as reduce.
-Conflict in state 257 between rule 6 and token OR resolved as shift.
-Conflict in state 257 between rule 6 and token AND resolved as shift.
-Conflict in state 257 between rule 6 and token CHOPSTAR resolved as shift.
-Conflict in state 258 between rule 7 and token CHOP resolved as reduce.
-Conflict in state 258 between rule 7 and token IFF resolved as reduce.
-Conflict in state 258 between rule 7 and token PROPIMPLY resolved as reduce.
-Conflict in state 258 between rule 7 and token OR resolved as shift.
-Conflict in state 258 between rule 7 and token AND resolved as shift.
-Conflict in state 258 between rule 7 and token CHOPSTAR resolved as shift.
-Conflict in state 259 between rule 5 and token CHOP resolved as reduce.
-Conflict in state 259 between rule 5 and token IFF resolved as reduce.
-Conflict in state 259 between rule 5 and token PROPIMPLY resolved as reduce.
-Conflict in state 259 between rule 5 and token OR resolved as reduce.
-Conflict in state 259 between rule 5 and token AND resolved as shift.
-Conflict in state 259 between rule 5 and token CHOPSTAR resolved as shift.
-Conflict in state 260 between rule 4 and token CHOP resolved as reduce.
-Conflict in state 260 between rule 4 and token IFF resolved as reduce.
-Conflict in state 260 between rule 4 and token PROPIMPLY resolved as reduce.
-Conflict in state 260 between rule 4 and token OR resolved as reduce.
-Conflict in state 260 between rule 4 and token AND resolved as reduce.
-Conflict in state 260 between rule 4 and token CHOPSTAR resolved as shift.
+Conflict in state 257 between rule 5 and token CHOP resolved as reduce.
+Conflict in state 257 between rule 5 and token OR resolved as reduce.
+Conflict in state 257 between rule 5 and token AND resolved as shift.
+Conflict in state 257 between rule 5 and token IFF resolved as shift.
+Conflict in state 257 between rule 5 and token PROPIMPLY resolved as shift.
+Conflict in state 257 between rule 5 and token CHOPSTAR resolved as shift.
+Conflict in state 258 between rule 4 and token CHOP resolved as reduce.
+Conflict in state 258 between rule 4 and token OR resolved as reduce.
+Conflict in state 258 between rule 4 and token AND resolved as reduce.
+Conflict in state 258 between rule 4 and token IFF resolved as shift.
+Conflict in state 258 between rule 4 and token PROPIMPLY resolved as shift.
+Conflict in state 258 between rule 4 and token CHOPSTAR resolved as shift.
+Conflict in state 259 between rule 6 and token CHOP resolved as reduce.
+Conflict in state 259 between rule 6 and token OR resolved as reduce.
+Conflict in state 259 between rule 6 and token AND resolved as reduce.
+Conflict in state 259 between rule 6 and token IFF resolved as reduce.
+Conflict in state 259 between rule 6 and token PROPIMPLY resolved as reduce.
+Conflict in state 259 between rule 6 and token CHOPSTAR resolved as shift.
+Conflict in state 260 between rule 7 and token CHOP resolved as reduce.
+Conflict in state 260 between rule 7 and token OR resolved as reduce.
+Conflict in state 260 between rule 7 and token AND resolved as reduce.
+Conflict in state 260 between rule 7 and token IFF resolved as reduce.
+Conflict in state 260 between rule 7 and token PROPIMPLY resolved as reduce.
+Conflict in state 260 between rule 7 and token CHOPSTAR resolved as shift.
 Conflict in state 267 between rule 237 and token OR resolved as reduce.
 Conflict in state 267 between rule 237 and token AND resolved as reduce.
 Conflict in state 327 between rule 330 and token OR resolved as reduce.
@@ -208,7 +145,6 @@ Conflict in state 512 between rule 332 and token AND resolved as shift.
 Conflict in state 513 between rule 331 and token OR resolved as reduce.
 Conflict in state 513 between rule 331 and token AND resolved as reduce.
 Conflict in state 654 between rule 192 and token CON resolved as reduce.
->>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 State 96 contains 2 shift/reduce conflicts.
 State 98 contains 2 shift/reduce conflicts.
 State 100 contains 14 shift/reduce conflicts.
@@ -454,254 +390,6 @@ rule 138  rightaddrshift -> MUL OPEN_PAR leftaddrshift CLOSE_PAR
 rule 139  array -> ID OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR
 rule 140  array -> OPEN_PAR array CLOSE_PAR
 rule 141  array_cast_exp -> OPEN_PAR OPEN_PAR INTDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR
-<<<<<<< HEAD
-rule 142  array_cast_exp -> OPEN_PAR OPEN_PAR UNSIGNED INTDECLARATION MUL CLOSE_PAR ID CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR
-rule 143  array_cast_exp -> OPEN_PAR OPEN_PAR FLOATDECLARATION MUL CLOSE_PAR ID CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR
-rule 144  array_cast_exp -> OPEN_PAR OPEN_PAR CHARDECLARATION MUL CLOSE_PAR ID CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR
-rule 145  array_cast_exp -> OPEN_PAR OPEN_PAR UNSIGNED CHARDECLARATION MUL CLOSE_PAR ID CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR
-rule 146  option_ari_exp -> COMMA ari_exp option_ari_exp
-rule 147  option_ari_exp -> COMMA error
-rule 148  option_ari_exp ->		/* empty */
-rule 149  point_exp -> MUL identifier
-rule 150  point_exp -> MUL point_exp
-rule 151  point_exp -> MUL array
-rule 152  point_exp -> OPEN_PAR point_exp CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR
-rule 153  point_exp -> MUL OPEN_PAR all_type_define MUL CLOSE_PAR ari_exp
-rule 154  point_exp -> MUL OPEN_PAR ari_exp CLOSE_PAR
-rule 155  point_exp -> OPEN_PAR point_exp CLOSE_PAR
-rule 156  ari_exp -> simple_ari_exp
-rule 157  ari_exp -> simple_ari_exp relation_operator ari_exp
-rule 158  ari_exp -> ari_exp ari_operator simple_ari_exp
-rule 159  ari_exp -> IF bool_exp THEN ari_exp option_exp_else_statement
-rule 160  type_cast_alg_exp -> simple_ari_exp
-rule 161  type_cast_alg_exp -> simple_ari_exp ari_operator simple_ari_exp
-rule 162  option_exp_else_statement -> ELSE ari_exp
-rule 163  option_exp_else_statement ->		/* empty */
-rule 164  simple_ari_exp -> member_in_exp
-rule 165  simple_ari_exp -> simple_ari_exp bi_operator member_in_exp
-rule 166  member_in_exp -> intliteral
-rule 167  member_in_exp -> SUB member_in_exp
-rule 168  member_in_exp -> BNE member_in_exp
-rule 169  member_in_exp -> POINTERNULL
-rule 170  member_in_exp -> floatliteral
-rule 171  member_in_exp -> identifier
-rule 172  member_in_exp -> array
-rule 173  member_in_exp -> point_exp
-rule 174  member_in_exp -> function
-rule 175  member_in_exp -> OPEN_PAR ari_exp CLOSE_PAR
-rule 176  member_in_exp -> charliteral
-rule 177  member_in_exp -> address_exp
-rule 178  member_in_exp -> type_cast
-rule 179  member_in_exp -> struct_member_exp
-rule 180  member_in_exp -> array_cast_exp
-rule 181  bi_operator -> MUL
-rule 182  bi_operator -> DIV
-rule 183  bi_operator -> MOD
-rule 184  bi_operator -> LST
-rule 185  bi_operator -> RST
-rule 186  bi_operator -> ADDRESS
-rule 187  bi_operator -> INTER_OR
-rule 188  bi_operator -> CON
-rule 189  ari_operator -> ADD
-rule 190  ari_operator -> SUB
-rule 191  array_exp -> array_exp CON array_exp
-rule 192  array_exp -> option_list_value
-rule 193  array_exp -> option_struct_list_value
-rule 194  array_exp -> OPEN_PAR array_exp CLOSE_PAR
-rule 195  option_list_value -> OPEN_MPAR ari_exp inner_option_list_value CLOSE_MPAR
-rule 196  option_list_value -> OPEN_MPAR strliteral inner_option_list_value CLOSE_MPAR
-rule 197  option_list_value -> OPEN_MPAR array_exp inner_option_list_value CLOSE_MPAR
-rule 198  option_struct_list_value -> OPEN_BPAR ari_exp inner_option_list_value CLOSE_BPAR
-rule 199  option_struct_list_value -> OPEN_BPAR strliteral inner_option_list_value CLOSE_BPAR
-rule 200  option_struct_list_value -> OPEN_BPAR array_exp inner_option_list_value CLOSE_BPAR
-rule 201  inner_option_list_value -> COMMA ari_exp inner_option_list_value
-rule 202  inner_option_list_value -> COMMA strliteral inner_option_list_value
-rule 203  inner_option_list_value -> COMMA array_exp inner_option_list_value
-rule 204  inner_option_list_value ->		/* empty */
-rule 205  inner_option_list_value -> COMMA error
-rule 206  address_exp -> ADDRESS struct_member_exp
-rule 207  address_exp -> ADDRESS identifier
-rule 208  address_exp -> ADDRESS array
-rule 209  address_exp -> ADDRESS address_exp
-rule 210  address_exp -> OPEN_PAR address_exp CLOSE_PAR
-rule 211  type_cast -> OPEN_PAR INTDECLARATION CLOSE_PAR type_cast_alg_exp
-rule 212  type_cast -> OPEN_PAR FLOATDECLARATION CLOSE_PAR type_cast_alg_exp
-rule 213  type_cast -> OPEN_PAR CHARDECLARATION CLOSE_PAR type_cast_alg_exp
-rule 214  type_cast -> OPEN_PAR SIGNED INTDECLARATION CLOSE_PAR type_cast_alg_exp
-rule 215  type_cast -> OPEN_PAR SIGNED CHARDECLARATION CLOSE_PAR type_cast_alg_exp
-rule 216  type_cast -> OPEN_PAR UNSIGNED INTDECLARATION CLOSE_PAR type_cast_alg_exp
-rule 217  type_cast -> OPEN_PAR UNSIGNED CHARDECLARATION CLOSE_PAR type_cast_alg_exp
-rule 218  type_cast -> OPEN_PAR INTDECLARATION MUL CLOSE_PAR casted_element
-rule 219  type_cast -> OPEN_PAR UNSIGNED INTDECLARATION MUL CLOSE_PAR casted_element
-rule 220  type_cast -> OPEN_PAR FLOATDECLARATION MUL CLOSE_PAR casted_element
-rule 221  type_cast -> OPEN_PAR CHARDECLARATION MUL CLOSE_PAR casted_element
-rule 222  type_cast -> OPEN_PAR UNSIGNED CHARDECLARATION MUL CLOSE_PAR casted_element
-rule 223  type_cast -> OPEN_PAR VOIDDECLARATION MUL CLOSE_PAR casted_element
-rule 224  type_cast -> OPEN_PAR INTDECLARATION MUL MUL CLOSE_PAR casted_element
-rule 225  type_cast -> OPEN_PAR UNSIGNED INTDECLARATION MUL MUL CLOSE_PAR casted_element
-rule 226  type_cast -> OPEN_PAR FLOATDECLARATION MUL MUL CLOSE_PAR casted_element
-rule 227  type_cast -> OPEN_PAR CHARDECLARATION MUL MUL CLOSE_PAR casted_element
-rule 228  type_cast -> OPEN_PAR UNSIGNED CHARDECLARATION MUL MUL CLOSE_PAR casted_element
-rule 229  type_cast -> OPEN_PAR VOIDDECLARATION MUL MUL CLOSE_PAR casted_element
-rule 230  type_cast -> OPEN_PAR STRUCT STRUCT_TYPE MUL CLOSE_PAR casted_element
-rule 231  type_cast -> OPEN_PAR STRUCT_TYPE MUL CLOSE_PAR casted_element
-rule 232  type_cast -> OPEN_PAR STRUCT STRUCT_TYPE MUL MUL CLOSE_PAR casted_element
-rule 233  type_cast -> OPEN_PAR STRUCT_TYPE MUL MUL CLOSE_PAR casted_element
-rule 234  casted_element -> type_cast_alg_exp
-rule 235  bool_exp -> prime_bool_exp
-rule 236  bool_exp -> NEGATION bool_exp
-rule 237  bool_exp -> bool_exp AND bool_exp
-rule 238  bool_exp -> bool_exp OR bool_exp
-rule 239  bool_exp -> OPEN_PAR bool_exp CLOSE_PAR
-rule 240  prime_bool_exp -> ari_exp relation_operator ari_exp
-rule 241  prime_bool_exp -> MY_TRUE
-rule 242  prime_bool_exp -> MY_FALSE
-rule 243  prime_bool_exp -> ari_exp
-rule 244  prime_bool_exp -> ari_exp EQ strliteral
-rule 245  prime_bool_exp -> ari_exp NE strliteral
-rule 246  prime_bool_exp -> strliteral EQ ari_exp
-rule 247  prime_bool_exp -> strliteral NE ari_exp
-rule 248  prime_bool_exp -> ari_exp EQ POINTERNULL
-rule 249  prime_bool_exp -> ari_exp NE POINTERNULL
-rule 250  prime_bool_exp -> POINTERNULL EQ ari_exp
-rule 251  prime_bool_exp -> POINTERNULL NE ari_exp
-rule 252  prime_bool_exp -> ari_exp EQ charliteral
-rule 253  prime_bool_exp -> ari_exp NE charliteral
-rule 254  relation_operator -> GE
-rule 255  relation_operator -> LE
-rule 256  relation_operator -> NE
-rule 257  relation_operator -> GT
-rule 258  relation_operator -> LT
-rule 259  relation_operator -> EQ
-rule 260  sign_type_define -> UNSIGNED INTDECLARATION
-rule 261  sign_type_define -> UNSIGNED CHARDECLARATION
-rule 262  all_type_define -> sign_type_define
-rule 263  all_type_define -> type_define
-rule 264  option_function_parameter_list -> all_type_define identifier inner_option_define_identifier
-rule 265  option_function_parameter_list -> all_type_define inner_option_define_identifier
-rule 266  option_function_parameter_list -> STRUCT_TYPE identifier inner_option_define_identifier
-rule 267  option_function_parameter_list -> STRUCT_TYPE MUL identifier inner_option_define_identifier
-rule 268  option_function_parameter_list -> STRUCT_TYPE MUL MUL identifier inner_option_define_identifier
-rule 269  option_function_parameter_list -> STRUCT_TYPE identifier ARRAY inner_option_define_identifier
-rule 270  option_function_parameter_list -> ID identifier inner_option_define_identifier
-rule 271  option_function_parameter_list -> ID MUL identifier inner_option_define_identifier
-rule 272  option_function_parameter_list -> ID MUL MUL identifier inner_option_define_identifier
-rule 273  option_function_parameter_list -> ID identifier ARRAY inner_option_define_identifier
-rule 274  option_function_parameter_list -> STRUCT_TYPE inner_option_define_identifier
-rule 275  option_function_parameter_list -> STRUCT_TYPE MUL inner_option_define_identifier
-rule 276  option_function_parameter_list -> STRUCT_TYPE MUL MUL inner_option_define_identifier
-rule 277  option_function_parameter_list -> ID inner_option_define_identifier
-rule 278  option_function_parameter_list -> ID MUL inner_option_define_identifier
-rule 279  option_function_parameter_list -> ID MUL MUL inner_option_define_identifier
-rule 280  option_function_parameter_list -> all_type_define identifier ARRAY inner_option_define_identifier
-rule 281  option_function_parameter_list -> all_type_define MUL identifier ARRAY inner_option_define_identifier
-rule 282  option_function_parameter_list -> all_type_define identifier ARRAY OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier
-rule 283  option_function_parameter_list -> all_type_define MUL identifier inner_option_define_identifier
-rule 284  option_function_parameter_list -> all_type_define MUL inner_option_define_identifier
-rule 285  option_function_parameter_list -> all_type_define MUL MUL identifier inner_option_define_identifier
-rule 286  option_function_parameter_list -> OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier
-rule 287  option_function_parameter_list ->		/* empty */
-rule 288  inner_option_define_identifier -> COMMA all_type_define identifier inner_option_define_identifier
-rule 289  inner_option_define_identifier -> COMMA all_type_define inner_option_define_identifier
-rule 290  inner_option_define_identifier -> COMMA ID identifier inner_option_define_identifier
-rule 291  inner_option_define_identifier -> COMMA STRUCT_TYPE identifier inner_option_define_identifier
-rule 292  inner_option_define_identifier -> COMMA STRUCT_TYPE MUL identifier inner_option_define_identifier
-rule 293  inner_option_define_identifier -> COMMA ID identifier ARRAY inner_option_define_identifier
-rule 294  inner_option_define_identifier -> COMMA STRUCT_TYPE identifier ARRAY inner_option_define_identifier
-rule 295  inner_option_define_identifier -> COMMA all_type_define identifier ARRAY inner_option_define_identifier
-rule 296  inner_option_define_identifier -> COMMA all_type_define MUL identifier ARRAY inner_option_define_identifier
-rule 297  inner_option_define_identifier -> COMMA OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier
-rule 298  inner_option_define_identifier ->		/* empty */
-rule 299  inner_option_define_identifier -> COMMA all_type_define identifier OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier
-rule 300  inner_option_define_identifier -> COMMA all_type_define identifier OPEN_MPAR ari_exp COMMA ari_exp CLOSE_MPAR inner_option_define_identifier
-rule 301  inner_option_define_identifier -> COMMA all_type_define identifier ARRAY OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier
-rule 302  inner_option_define_identifier -> COMMA all_type_define MUL identifier inner_option_define_identifier
-rule 303  inner_option_define_identifier -> COMMA all_type_define MUL inner_option_define_identifier
-rule 304  inner_option_define_identifier -> COMMA error
-rule 305  option_function_identifier -> ass_right inner_option_function_identifier
-rule 306  option_function_identifier -> all_type_define
-rule 307  option_function_identifier -> STRUCT_TYPE
-rule 308  option_function_identifier ->		/* empty */
-rule 309  option_function_identifier -> ADDRESS error
-rule 310  inner_option_function_identifier -> COMMA ass_right inner_option_function_identifier
-rule 311  inner_option_function_identifier ->		/* empty */
-rule 312  inner_option_function_identifier -> COMMA error
-rule 313  statement_bpar -> OPEN_BPAR statement CLOSE_BPAR
-rule 314  statement_bpar -> error CLOSE_BPAR
-rule 315  bool_par -> OPEN_PAR bool_exp CLOSE_PAR
-rule 316  bool_par -> error CLOSE_PAR
-rule 317  identifier -> ID
-rule 318  identifier -> OPEN_PAR identifier CLOSE_PAR
-rule 319  strliteral -> STRLITERAL
-rule 320  intliteral -> INTLITERAL
-rule 321  charliteral -> CHARLITERAL
-rule 322  floatliteral -> FLOATLITERAL
-rule 323  option_frame_identifier -> COMMA identifier option_frame_identifier
-rule 324  option_frame_identifier ->		/* empty */
-rule 325  option_frame_identifier -> COMMA error
-rule 326  option_projection ->		/* empty */
-rule 327  option_projection -> COMMA statement option_projection
-rule 328  imply_pre -> prime_bool_exp
-rule 329  imply_pre -> NEGATION imply_pre
-rule 330  imply_pre -> imply_pre AND imply_pre
-rule 331  imply_pre -> imply_pre OR imply_pre
-rule 332  imply_pre -> OPEN_PAR imply_pre CLOSE_PAR
-rule 333  while_statement -> WHILE bool_par statement_bpar
-rule 334  for_statement -> FOR ari_exp TIMES DO statement_bpar
-rule 335  extend_for_statement -> FOR OPEN_PAR for_sta_init COMMA for_sta_condition COMMA for_sta_control CLOSE_PAR statement_bpar
-rule 336  for_sta_init -> ass_statement
-rule 337  for_sta_init -> declaration
-rule 338  for_sta_init ->		/* empty */
-rule 339  for_sta_condition -> bool_exp
-rule 340  for_sta_condition ->		/* empty */
-rule 341  for_sta_control -> ass_statement
-rule 342  for_sta_control ->		/* empty */
-rule 343  switch_statement -> SWITCH OPEN_PAR member_in_exp CLOSE_PAR OPEN_BPAR case_par CLOSE_BPAR
-rule 344  case_par -> CASE member_in_exp COLON OPEN_PAR statement CLOSE_PAR init_case_par
-rule 345  case_par -> DEFAULT COLON OPEN_PAR statement CLOSE_PAR
-rule 346  init_case_par -> BREAK case_par
-rule 347  init_case_par -> case_par
-rule 348  init_case_par ->		/* empty */
-rule 349  if_statement -> IF bool_exp THEN statement_bpar option_else_statement
-rule 350  option_else_statement -> ELSE statement_bpar
-rule 351  option_else_statement ->		/* empty */
-rule 352  output_statement -> DISPLAY OPEN_PAR ass_right CLOSE_PAR
-rule 353  output_statement -> DISPLAY OPEN_PAR ass_right option_output CLOSE_PAR
-rule 354  option_output ->		/* empty */
-rule 355  option_output -> COMMA ass_right option_output
-rule 356  input_statement -> REQUEST OPEN_PAR identifier CLOSE_PAR
-rule 357  input_statement -> REQUEST OPEN_PAR identifier option_input CLOSE_PAR
-rule 358  input_statement -> REQUEST OPEN_PAR array CLOSE_PAR
-rule 359  input_statement -> REQUEST OPEN_PAR array option_input CLOSE_PAR
-rule 360  input_statement -> REQUEST OPEN_PAR struct_member_exp CLOSE_PAR
-rule 361  option_input ->		/* empty */
-rule 362  option_input -> COMMA identifier option_input
-rule 363  option_input -> COMMA array option_input
-rule 364  struct_member_exp -> identifier DOT identifier option_struct_member_exp
-rule 365  struct_member_exp -> array DOT identifier option_struct_member_exp
-rule 366  struct_member_exp -> point_exp DOT identifier option_struct_member_exp
-rule 367  struct_member_exp -> identifier DOT array option_struct_member_exp
-rule 368  struct_member_exp -> array DOT array option_struct_member_exp
-rule 369  struct_member_exp -> point_exp DOT array option_struct_member_exp
-rule 370  struct_member_exp -> identifier IMPLY identifier option_struct_member_exp
-rule 371  struct_member_exp -> array IMPLY identifier option_struct_member_exp
-rule 372  struct_member_exp -> OPEN_PAR address_exp CLOSE_PAR IMPLY identifier option_struct_member_exp
-rule 373  struct_member_exp -> point_exp IMPLY identifier option_struct_member_exp
-rule 374  struct_member_exp -> identifier IMPLY array option_struct_member_exp
-rule 375  struct_member_exp -> array IMPLY array option_struct_member_exp
-rule 376  struct_member_exp -> OPEN_PAR address_exp CLOSE_PAR IMPLY array option_struct_member_exp
-rule 377  struct_member_exp -> identifier DOT function
-rule 378  struct_member_exp -> identifier IMPLY function
-rule 379  struct_member_exp -> point_exp IMPLY array option_struct_member_exp
-rule 380  struct_member_exp -> OPEN_PAR struct_member_exp CLOSE_PAR
-rule 381  option_struct_member_exp ->		/* empty */
-rule 382  option_struct_member_exp -> DOT identifier option_struct_member_exp
-rule 383  option_struct_member_exp -> DOT array option_struct_member_exp
-rule 384  option_struct_member_exp -> IMPLY identifier option_struct_member_exp
-rule 385  option_struct_member_exp -> IMPLY array option_struct_member_exp
-rule 386  option_struct_member_exp -> DOT function
-rule 387  option_struct_member_exp -> IMPLY function
-=======
 rule 142  array_cast_exp -> OPEN_PAR OPEN_PAR UNSIGNED INTDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR
 rule 143  array_cast_exp -> OPEN_PAR OPEN_PAR FLOATDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR
 rule 144  array_cast_exp -> OPEN_PAR OPEN_PAR CHARDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR
@@ -767,9 +455,9 @@ rule 203  inner_option_list_value -> COMMA strliteral inner_option_list_value
 rule 204  inner_option_list_value -> COMMA array_exp inner_option_list_value
 rule 205  inner_option_list_value ->		/* empty */
 rule 206  inner_option_list_value -> COMMA error
-rule 207  address_exp -> ADDRESS identifier
-rule 208  address_exp -> ADDRESS array
-rule 209  address_exp -> ADDRESS struct_member_exp
+rule 207  address_exp -> ADDRESS struct_member_exp
+rule 208  address_exp -> ADDRESS identifier
+rule 209  address_exp -> ADDRESS array
 rule 210  address_exp -> ADDRESS address_exp
 rule 211  address_exp -> OPEN_PAR address_exp CLOSE_PAR
 rule 212  type_cast -> OPEN_PAR INTDECLARATION CLOSE_PAR type_cast_alg_exp
@@ -949,7 +637,6 @@ rule 385  option_struct_member_exp -> IMPLY identifier option_struct_member_exp
 rule 386  option_struct_member_exp -> IMPLY array option_struct_member_exp
 rule 387  option_struct_member_exp -> DOT function
 rule 388  option_struct_member_exp -> IMPLY function
->>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 
 Terminals, with rules where they appear
 
@@ -1046,38 +733,16 @@ UNSIGNED (327) 76 118 122 124 125 126 128 142 145 217 218 220 223 226
     229 261 262
 SIGNED (328) 75 215 216
 CHOP (329) 8 32
-<<<<<<< HEAD
-OR (330) 5 31 238 331
+OR (330) 5 31 239 332
 PARALLEL (331) 54
-AND (332) 4 30 56 66 237 330
+AND (332) 4 30 56 66 238 331
 ASS_P (333) 60 87 96 97 98 99 100 130
 ASS_N (334) 131
-CON (335) 188 191
-ADDRESS (336) 186 206 207 208 209 309
-IMPLY (337) 55 370 371 372 373 374 375 376 378 379 384 385 387
+CON (335) 189 192
+ADDRESS (336) 187 207 208 209 210 310
+IMPLY (337) 55 371 372 373 374 375 376 377 379 380 385 386 388
 IFF (338) 6
 PROPIMPLY (339) 7
-NE (340) 245 247 249 251 253 256
-EQ (341) 244 246 248 250 252 259
-GE (342) 254
-LE (343) 255
-GT (344) 257
-LT (345) 258
-LST (346) 184
-RST (347) 185
-ADD (348) 189
-SUB (349) 167 190
-=======
-IMPLY (330) 55 371 372 373 374 375 376 377 379 380 385 386 388
-IFF (331) 6
-PROPIMPLY (332) 7
-OR (333) 5 31 239 332
-PARALLEL (334) 54
-AND (335) 4 30 56 66 238 331
-ASS_P (336) 60 87 96 97 98 99 100 130
-ASS_N (337) 131
-CON (338) 189 192
-ADDRESS (339) 187 207 208 209 210 310
 NE (340) 246 248 250 252 254 257
 EQ (341) 245 247 249 251 253 260
 GE (342) 255
@@ -1088,7 +753,6 @@ LST (346) 185
 RST (347) 186
 ADD (348) 190
 SUB (349) 168 191
->>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 MUL (350) 84 85 86 87 101 117 118 119 120 121 122 123 124 125 126 127
     128 129 138 141 142 143 144 145 150 151 152 154 155 182 219 220
     221 222 223 224 225 226 227 228 229 230 231 232 233 234 268 269
@@ -1171,13 +835,8 @@ ass_right (136)
 rightaddrshift (137)
     on left: 138, on right: 137
 array (138)
-<<<<<<< HEAD
-    on left: 139 140, on right: 71 112 140 151 172 208 358 359 363
-    365 367 368 369 371 374 375 376 379 383 385
-=======
-    on left: 139 140, on right: 71 112 140 152 173 208 359 360 364
+    on left: 139 140, on right: 71 112 140 152 173 209 359 360 364
     366 368 369 370 372 375 376 377 380 384 386
->>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 array_cast_exp (139)
     on left: 141 142 143 144 145 146, on right: 146 181
 option_ari_exp (140)
@@ -1255,18 +914,11 @@ statement_bpar (165)
 bool_par (166)
     on left: 316 317, on right: 334
 identifier (167)
-<<<<<<< HEAD
-    on left: 317 318, on right: 56 63 84 85 94 96 110 141 149 171 207
-    264 266 267 268 269 270 271 272 273 280 281 282 283 285 286 288
-    290 291 292 293 294 295 296 297 299 300 301 302 318 323 356 357
-    362 364 365 366 367 370 371 372 373 374 377 378 382 384
-=======
     on left: 318 319, on right: 56 63 84 85 94 96 110 141 142 143 144
-    145 150 172 207 265 267 268 269 270 271 272 273 274 281 282 283
+    145 150 172 208 265 267 268 269 270 271 272 273 274 281 282 283
     284 286 287 289 291 292 293 294 295 296 297 298 300 301 302 303
     319 324 357 358 363 365 366 367 368 371 372 373 374 375 378 379
     383 385
->>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 strliteral (168)
     on left: 320, on right: 98 100 134 135 197 200 203 245 246 247
     248
@@ -1313,13 +965,8 @@ input_statement (188)
 option_input (189)
     on left: 362 363 364, on right: 358 360 363 364
 struct_member_exp (190)
-<<<<<<< HEAD
-    on left: 364 365 366 367 368 369 370 371 372 373 374 375 376 377
-    378 379 380, on right: 111 179 206 360 380
-=======
     on left: 365 366 367 368 369 370 371 372 373 374 375 376 377 378
-    379 380 381, on right: 111 180 209 361 381
->>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
+    379 380 381, on right: 111 180 207 361 381
 option_struct_member_exp (191)
     on left: 382 383 384 385 386 387 388, on right: 365 366 367 368
     369 370 371 372 373 374 375 376 377 380 383 384 385 386
@@ -2840,17 +2487,10 @@ state 88
 
 state 89
 
-<<<<<<< HEAD
-    address_exp  ->  ADDRESS . struct_member_exp   (rule 206)
-    address_exp  ->  ADDRESS . identifier   (rule 207)
-    address_exp  ->  ADDRESS . array   (rule 208)
-    address_exp  ->  ADDRESS . address_exp   (rule 209)
-=======
-    address_exp  ->  ADDRESS . identifier   (rule 207)
-    address_exp  ->  ADDRESS . array   (rule 208)
-    address_exp  ->  ADDRESS . struct_member_exp   (rule 209)
+    address_exp  ->  ADDRESS . struct_member_exp   (rule 207)
+    address_exp  ->  ADDRESS . identifier   (rule 208)
+    address_exp  ->  ADDRESS . array   (rule 209)
     address_exp  ->  ADDRESS . address_exp   (rule 210)
->>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 
     OPEN_PAR	shift, and go to state 229
     ADDRESS	shift, and go to state 89
@@ -6072,19 +5712,6 @@ state 228
 
 state 229
 
-<<<<<<< HEAD
-    address_exp  ->  ADDRESS array .   (rule 208)
-    struct_member_exp  ->  array . DOT identifier option_struct_member_exp   (rule 365)
-    struct_member_exp  ->  array . DOT array option_struct_member_exp   (rule 368)
-    struct_member_exp  ->  array . IMPLY identifier option_struct_member_exp   (rule 371)
-    struct_member_exp  ->  array . IMPLY array option_struct_member_exp   (rule 375)
-
-    DOT 	shift, and go to state 201
-    IMPLY	shift, and go to state 203
-
-    DOT 	[reduce using rule 208 (address_exp)]
-    $default	reduce using rule 208 (address_exp)
-=======
     array  ->  OPEN_PAR . array CLOSE_PAR   (rule 140)
     point_exp  ->  OPEN_PAR . point_exp CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR   (rule 153)
     point_exp  ->  OPEN_PAR . point_exp CLOSE_PAR   (rule 156)
@@ -6104,22 +5731,22 @@ state 229
     address_exp	go to state 428
     identifier	go to state 429
     struct_member_exp	go to state 430
->>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 
 
 
 state 230
 
-    address_exp  ->  ADDRESS array .   (rule 208)
+    address_exp  ->  ADDRESS array .   (rule 209)
     struct_member_exp  ->  array . DOT identifier option_struct_member_exp   (rule 366)
     struct_member_exp  ->  array . DOT array option_struct_member_exp   (rule 369)
     struct_member_exp  ->  array . IMPLY identifier option_struct_member_exp   (rule 372)
     struct_member_exp  ->  array . IMPLY array option_struct_member_exp   (rule 376)
 
     DOT 	shift, and go to state 201
+    IMPLY	shift, and go to state 203
 
-    DOT 	[reduce using rule 208 (address_exp)]
-    $default	reduce using rule 208 (address_exp)
+    DOT 	[reduce using rule 209 (address_exp)]
+    $default	reduce using rule 209 (address_exp)
 
 
 
@@ -6137,36 +5764,15 @@ state 231
 
 state 232
 
-<<<<<<< HEAD
-    address_exp  ->  ADDRESS identifier .   (rule 207)
-    struct_member_exp  ->  identifier . DOT identifier option_struct_member_exp   (rule 364)
-    struct_member_exp  ->  identifier . DOT array option_struct_member_exp   (rule 367)
-    struct_member_exp  ->  identifier . IMPLY identifier option_struct_member_exp   (rule 370)
-    struct_member_exp  ->  identifier . IMPLY array option_struct_member_exp   (rule 374)
-    struct_member_exp  ->  identifier . DOT function   (rule 377)
-    struct_member_exp  ->  identifier . IMPLY function   (rule 378)
-
-    DOT 	shift, and go to state 206
-    IMPLY	shift, and go to state 207
-
-    DOT 	[reduce using rule 207 (address_exp)]
-    $default	reduce using rule 207 (address_exp)
-=======
     address_exp  ->  ADDRESS address_exp .   (rule 210)
 
     $default	reduce using rule 210 (address_exp)
->>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 
 
 
 state 233
 
-<<<<<<< HEAD
-    address_exp  ->  ADDRESS struct_member_exp .   (rule 206)
-
-    $default	reduce using rule 206 (address_exp)
-=======
-    address_exp  ->  ADDRESS identifier .   (rule 207)
+    address_exp  ->  ADDRESS identifier .   (rule 208)
     struct_member_exp  ->  identifier . DOT identifier option_struct_member_exp   (rule 365)
     struct_member_exp  ->  identifier . DOT array option_struct_member_exp   (rule 368)
     struct_member_exp  ->  identifier . IMPLY identifier option_struct_member_exp   (rule 371)
@@ -6175,18 +5781,18 @@ state 233
     struct_member_exp  ->  identifier . IMPLY function   (rule 379)
 
     DOT 	shift, and go to state 206
+    IMPLY	shift, and go to state 207
 
-    DOT 	[reduce using rule 207 (address_exp)]
-    $default	reduce using rule 207 (address_exp)
->>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
+    DOT 	[reduce using rule 208 (address_exp)]
+    $default	reduce using rule 208 (address_exp)
 
 
 
 state 234
 
-    address_exp  ->  ADDRESS struct_member_exp .   (rule 209)
+    address_exp  ->  ADDRESS struct_member_exp .   (rule 207)
 
-    $default	reduce using rule 209 (address_exp)
+    $default	reduce using rule 207 (address_exp)
 
 
 
@@ -8978,19 +8584,11 @@ state 366
 
 state 367
 
-<<<<<<< HEAD
-    address_exp  ->  ADDRESS . struct_member_exp   (rule 206)
-    address_exp  ->  ADDRESS . identifier   (rule 207)
-    address_exp  ->  ADDRESS . array   (rule 208)
-    address_exp  ->  ADDRESS . address_exp   (rule 209)
-    option_function_identifier  ->  ADDRESS . error   (rule 309)
-=======
-    address_exp  ->  ADDRESS . identifier   (rule 207)
-    address_exp  ->  ADDRESS . array   (rule 208)
-    address_exp  ->  ADDRESS . struct_member_exp   (rule 209)
+    address_exp  ->  ADDRESS . struct_member_exp   (rule 207)
+    address_exp  ->  ADDRESS . identifier   (rule 208)
+    address_exp  ->  ADDRESS . array   (rule 209)
     address_exp  ->  ADDRESS . address_exp   (rule 210)
     option_function_identifier  ->  ADDRESS . error   (rule 310)
->>>>>>> 9ebb173a31c1cef6348212635bf5307c2530de39
 
     error	shift, and go to state 543
     OPEN_PAR	shift, and go to state 229
