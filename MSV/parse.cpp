@@ -3035,35 +3035,35 @@ case 140:
 case 141:
 #line 721 "msv.y"
 {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,yyvsp[-5].tnode,NULL,VOIDTYPE), INTPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, yyvsp[-5].tnode, INTPTYPE);
 		   yyval.tnode=new CSyntaxNode(ARRAY_CAST_EXP, child0, yyvsp[-2].tnode, yyvsp[-1].tnode, VOIDTYPE);
 	   ;
     break;}
 case 142:
 #line 726 "msv.y"
 {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,yyvsp[-5].tnode,NULL,VOIDTYPE), UINTPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, yyvsp[-5].tnode, UINTPTYPE);
 		   yyval.tnode=new CSyntaxNode(ARRAY_CAST_EXP, child0, yyvsp[-2].tnode, yyvsp[-1].tnode, VOIDTYPE);
 	   ;
     break;}
 case 143:
 #line 731 "msv.y"
 {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,yyvsp[-5].tnode,NULL,VOIDTYPE), FLOATPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, yyvsp[-5].tnode, FLOATPTYPE);
 		   yyval.tnode=new CSyntaxNode(ARRAY_CAST_EXP, child0, yyvsp[-2].tnode, yyvsp[-1].tnode, VOIDTYPE);
 	   ;
     break;}
 case 144:
 #line 736 "msv.y"
 {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,yyvsp[-5].tnode,NULL,VOIDTYPE),CHARPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, yyvsp[-5].tnode,CHARPTYPE);
 		   yyval.tnode=new CSyntaxNode(ARRAY_CAST_EXP, child0, yyvsp[-2].tnode, yyvsp[-1].tnode, VOIDTYPE);
 	   ;
     break;}
 case 145:
 #line 741 "msv.y"
 {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,yyvsp[-5].tnode,NULL,VOIDTYPE), UCHARPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, yyvsp[-5].tnode,UCHARPTYPE);
 		   yyval.tnode=new CSyntaxNode(ARRAY_CAST_EXP, child0, yyvsp[-2].tnode, yyvsp[-1].tnode, VOIDTYPE);
 	   ;
     break;}

@@ -9,728 +9,427 @@ void $$changeState()
 {if ($$current == $$length){
 $$length++; $$flag[$$length - 1] = 0;}
 $$current++; }
+struct S_TAG_DECODE_00_FF;
+struct S_TAG_RECOG__00_FF;
 
+struct S_TAG_DECODE_00_FF{
+unsigned char *decodeAddr;
+int decodeSt;
+int delelteIdx[32];
+int blkNum;
+int blkIdx;
+int blkLen[1024];
+int winPos;
+};
+struct S_TAG_RECOG__00_FF{
+int index;
+int state;
+int counter;
+int num;
+};
 
-float zuhe[4]={0};
-int sum;
-int fuhe;
-float *  fsz(int $$Ext,int n);
-void  main_1(int $$Ext);
-int  zuheshu(int $$Ext,float s[],int n);
-int  zuhefu(int $$Ext);
-int  yunsuan(int $$Ext,float s[],char p[],int k0[],int k1[]);
-int  hefa(int $$Ext,float suanshi[],int r);
-float  jianjie(int $$Ext,float suanshi[],int r);
-float  qiujie(int $$Ext,float suanshi[],int n);
-float *  fsz(int $$Ext,int n){
-float *  RValue=0;
-int return_1;
-return_1=0;
-return_1=1;
-RValue=(float *)(malloc(n*sizeof(float)));
+S_TAG_DECODE_00_FF mDecodeVar;
+char *  memcpy(int $$Ext,unsigned char *des,unsigned char * src,int num);
+void  DecodeRec00(int $$Ext,int deleteIdx[],S_TAG_RECOG__00_FF* recog,unsigned char * buffer);
+void  DecodeRecFF(int $$Ext,int deleteIdx[],S_TAG_RECOG__00_FF* recog,unsigned char * buffer);
+int  DecodeFindIndexDelete(int $$Ext,unsigned char buffer[],int len$,int deleteIdx[]);
+void  DecodeRemoveBytes(int $$Ext,unsigned char buffer[],int bLen,int deleteIdx[],int dLen);
+int  DecodeWinMerge(int $$Ext,unsigned char *startAddr,int blkSize,int blkNum,int blkLen[]);
+void  DecodeRemoveBlk(int $$Ext,unsigned char *startAddr,int winPos,int blkNum,int winRemoveNum);
+int  DecodeLenUpdate(int $$Ext,int lastIdx,int winPos,int winSize,int blkNum,int newLen[]);
+int  DecodeRemoveByteBlk(int $$Ext,unsigned char buffer[],int len$,int delelteIdx[]);
+int  DecodeDataMerge(int $$Ext,unsigned char *startAddr,int winPos,int * blkNum,int newLen[]);
+void  DecodeInitial(int $$Ext,unsigned char *addr);
+void  DecodeGetState(int $$Ext,int *st,int * blockNum,int * lastLen);
+void  DecodeEntry(int $$Ext);
+void  FillBuffer(int $$Ext,unsigned char buffer[],int len$);
+void  TestCmdE2DataMerge(int $$Ext);
+char *  memcpy(int $$Ext,unsigned char *des,unsigned char * src,int num){
+char *  RValue=0;
+int i;
+i=0;
+while(i<num){des[i]=src[i];
+i=(i)+(1);
+}
+;
 return RValue;
 }
-void  main_1(int $$Ext){
-float main_1_s[4]={3,3,3,3};
-float main_1_shu[4]={0};
-int main_1_i;
-int main_1_j;
-float main_1_1_s0;
-printf("请输入四个数(0-9):\n");
-main_1_i=0;
-while(main_1_i<4){scanf("%f",&main_1_s[main_1_i]);
-main_1_j=main_1_i;
-while(main_1_j>0){if (main_1_s[main_1_j]<=main_1_s[(main_1_j)-(1)]){main_1_1_s0=main_1_s[(main_1_j)-(1)];
-main_1_s[(main_1_j)-(1)]=main_1_s[main_1_j];
-main_1_s[main_1_j]=main_1_1_s0;
+void  DecodeRec00(int $$Ext,int deleteIdx[],S_TAG_RECOG__00_FF* recog,unsigned char * buffer){
+int return_1;
+unsigned char DecodeRec00_ch;
+unsigned char DecodeRec00_ch1;
+return_1=0;
+DecodeRec00_ch=buffer[recog->index];
+if (DecodeRec00_ch==0){recog->counter=(recog->counter)+(1);
+if (recog->counter==20){DecodeRec00_ch1=buffer[(recog->index)+(1)];
+if (DecodeRec00_ch1==170){deleteIdx[recog->num]=(recog->index)+(1);
+recog->num=(recog->num)+(1);
+recog->index=(recog->index)+(1);
 }
 ;
-main_1_j=(main_1_j)-(1);
+recog->counter=0;
+recog->state=13107;
 }
 ;
-main_1_i=(main_1_i)+(1);
+} else {if (DecodeRec00_ch==255){recog->counter=1;
+recog->state=43690;
+} else {recog->counter=0;
+recog->state=13107;
 }
 ;
-printf("四个数是:");
-main_1_i=0;
-while(main_1_i<4){printf("%f",main_1_s[main_1_i]);
-printf(" ");
-printf(" ");
-main_1_i=(main_1_i)+(1);
 }
 ;
-printf("\n");
-zuheshu(0,main_1_s,4);
-printf("有");
-printf("%d",fuhe);
-printf("个算式符合\n");
+return_1=1;
 }
-int  zuheshu(int $$Ext,float s[],int n){
+void  DecodeRecFF(int $$Ext,int deleteIdx[],S_TAG_RECOG__00_FF* recog,unsigned char * buffer){
+int return_1;
+unsigned char DecodeRecFF_ch;
+unsigned char DecodeRecFF_ch1;
+return_1=0;
+DecodeRecFF_ch=buffer[recog->index];
+if (DecodeRecFF_ch==0){recog->counter=1;
+recog->state=21845;
+} else {if (DecodeRecFF_ch==255){recog->counter=(recog->counter)+(1);
+if (recog->counter==20){DecodeRecFF_ch1=buffer[(recog->index)+(1)];
+if (DecodeRecFF_ch1==85){deleteIdx[recog->num]=(recog->index)+(1);
+recog->num=(recog->num)+(1);
+recog->index=(recog->index)+(1);
+}
+;
+recog->counter=0;
+recog->state=13107;
+}
+;
+} else {recog->counter=0;
+recog->state=13107;
+}
+;
+}
+;
+return_1=1;
+}
+int  DecodeFindIndexDelete(int $$Ext,unsigned char buffer[],int len$,int deleteIdx[]){
 int  RValue=0;
 int return_1;
-int zuheshu_i;
-float *zuheshu_2_p;
-int zuheshu_2_o;
-int zuheshu_2_k;
-float *zuheshu_4_5_p;
-int zuheshu_4_5_o;
-int zuheshu_4_5_k;
+S_TAG_RECOG__00_FF DecodeFindIndexDelete_recog;
 return_1=0;
-if (n==1){zuhe[(4)-(n)]=s[0];
-zuhefu(0);
+DecodeFindIndexDelete_recog.state=13107;
+DecodeFindIndexDelete_recog.counter=0;
+DecodeFindIndexDelete_recog.num=0;
+DecodeFindIndexDelete_recog.index=0;
+while(DecodeFindIndexDelete_recog.index<(len$)-(1)){if (DecodeFindIndexDelete_recog.state==21845){DecodeRec00(0,deleteIdx,&DecodeFindIndexDelete_recog,buffer);
+} else {if (DecodeFindIndexDelete_recog.state==43690){DecodeRecFF(0,deleteIdx,&DecodeFindIndexDelete_recog,buffer);
+} else {if (buffer[DecodeFindIndexDelete_recog.index]==0){DecodeFindIndexDelete_recog.counter=1;
+DecodeFindIndexDelete_recog.state=21845;
+} else {if (buffer[DecodeFindIndexDelete_recog.index]==255){DecodeFindIndexDelete_recog.counter=1;
+DecodeFindIndexDelete_recog.state=43690;
+}
+;
+}
+;
+}
+;
+}
+;
+DecodeFindIndexDelete_recog.index=(DecodeFindIndexDelete_recog.index)+(1);
+}
+;
 return_1=1;
-RValue=1;
-}
-;
-if (return_1==0){zuheshu_i=0;
-while(zuheshu_i<n){if (zuheshu_i==0){zuhe[(4)-(n)]=s[zuheshu_i];
-zuheshu_2_o=0;
-zuheshu_2_p=fsz(0,(n)-(1));
-zuheshu_2_k=0;
-while(zuheshu_2_k<n){if (zuheshu_2_k!=zuheshu_i){zuheshu_2_p[zuheshu_2_o]=s[zuheshu_2_k];
-zuheshu_2_o=(zuheshu_2_o)+(1);
-}
-;
-zuheshu_2_k=(zuheshu_2_k)+(1);
-}
-;
-zuheshu(0,zuheshu_2_p,(n)-(1));
-free(zuheshu_2_p);
-} else {if (s[zuheshu_i]!=s[(zuheshu_i)-(1)]){zuhe[(4)-(n)]=s[zuheshu_i];
-zuheshu_4_5_o=0;
-zuheshu_4_5_p=fsz(0,(n)-(1));
-zuheshu_4_5_k=0;
-while(zuheshu_4_5_k<n){if (zuheshu_4_5_k!=zuheshu_i){zuheshu_4_5_p[zuheshu_4_5_o]=s[zuheshu_4_5_k];
-zuheshu_4_5_o=(zuheshu_4_5_o)+(1);
-}
-;
-zuheshu_4_5_k=(zuheshu_4_5_k)+(1);
-}
-;
-zuheshu(0,zuheshu_4_5_p,(n)-(1));
-free(zuheshu_4_5_p);
-}
-;
-}
-;
-zuheshu_i=(zuheshu_i)+(1);
-}
-;
-}
-;
+RValue=DecodeFindIndexDelete_recog.num;
 return RValue;
 }
-int  zuhefu(int $$Ext){
-int  RValue=0;
-int continue_1;
+void  DecodeRemoveBytes(int $$Ext,unsigned char buffer[],int bLen,int deleteIdx[],int dLen){
 int return_1;
-char zuhefu_opter[4]={'+','-','*','/'};
-int zuhefu_h;
-int zuhefu_i;
-int zuhefu_j;
-char zuhefu_op[3];
-int zuhefu_khzh[8][3]={{0,0,0},{0,0,1},{0,1,0},{1,0,0},{0,1,1},{1,0,1},{1,1,0},{1,1,1}};
-int zuhefu_k;
-int switch_1;
-int break_1$;
-int nm_1$;
-int zuhefu_1_m;
-int zuhefu_1_n;
-continue_1=0;
+int DecodeRemoveBytes_i;
+int DecodeRemoveBytes_j;
 return_1=0;
-zuhefu_h=0;
-while(zuhefu_h<4){zuhefu_i=0;
-while(zuhefu_i<4){zuhefu_j=0;
-while(zuhefu_j<4){zuhefu_op[0]=zuhefu_opter[zuhefu_h];
-zuhefu_op[1]=zuhefu_opter[zuhefu_i];
-zuhefu_op[2]=zuhefu_opter[zuhefu_j];
-zuhefu_k=0;
-while(zuhefu_k<=3){break_1$=0;
-switch_1=0;
-nm_1$=zuhefu_k;
-if ((nm_1$==0) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-yunsuan(0,zuhe,zuhefu_op,zuhefu_khzh[0],zuhefu_khzh[0]);
-break_1$=1;
+DecodeRemoveBytes_i=0;
+while(DecodeRemoveBytes_i<(dLen)-(1)){DecodeRemoveBytes_j=(deleteIdx[DecodeRemoveBytes_i])+(1);
+while(DecodeRemoveBytes_j<deleteIdx[(DecodeRemoveBytes_i)+(1)]){buffer[((DecodeRemoveBytes_j)-(DecodeRemoveBytes_i))-(1)]=buffer[DecodeRemoveBytes_j];
+DecodeRemoveBytes_j=(DecodeRemoveBytes_j)+(1);
 }
 ;
-if ((nm_1$==1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-zuhefu_1_m=1;
-while(zuhefu_1_m<=3){continue_1=0;
-zuhefu_1_n=1;
-while(zuhefu_1_n<=3){continue_1=0;
-if (((((zuhefu_1_m==2) && (zuhefu_1_n==3)) || ((zuhefu_1_m==1) && (zuhefu_1_n==2))) || ((zuhefu_1_m==3) && (zuhefu_1_n==1))) || ((zuhefu_1_m==1) && (zuhefu_1_n==3))){continue_1=1;
-zuhefu_1_n=(zuhefu_1_n)+(1);
+DecodeRemoveBytes_i=(DecodeRemoveBytes_i)+(1);
 }
 ;
-if (continue_1==0){yunsuan(0,zuhe,zuhefu_op,zuhefu_khzh[zuhefu_1_m],zuhefu_khzh[zuhefu_1_n]);
-zuhefu_1_n=(zuhefu_1_n)+(1);
+if (dLen>0){DecodeRemoveBytes_j=(deleteIdx[(dLen)-(1)])+(1);
+while(DecodeRemoveBytes_j<bLen){buffer[(DecodeRemoveBytes_j)-(dLen)]=buffer[DecodeRemoveBytes_j];
+DecodeRemoveBytes_j=(DecodeRemoveBytes_j)+(1);
 }
 ;
-}
-;
-continue_1=0;
-zuhefu_1_m=(zuhefu_1_m)+(1);
-}
-;
-break_1$=1;
-}
-;
-if ((nm_1$==2) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-yunsuan(0,zuhe,zuhefu_op,zuhefu_khzh[5],zuhefu_khzh[5]);
-break_1$=1;
-}
-;
-if ((nm_1$==3) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-break_1$=1;
-}
-;
-zuhefu_k=(zuhefu_k)+(1);
-}
-;
-zuhefu_j=(zuhefu_j)+(1);
-}
-;
-zuhefu_i=(zuhefu_i)+(1);
-}
-;
-zuhefu_h=(zuhefu_h)+(1);
 }
 ;
 return_1=1;
-RValue=1;
-return RValue;
 }
-int  yunsuan(int $$Ext,float s[],char p[],int k0[],int k1[]){
+int  DecodeWinMerge(int $$Ext,unsigned char *startAddr,int blkSize,int blkNum,int blkLen[]){
 int  RValue=0;
 int return_1;
-float yunsuan_suanshi0[13]={'0'};
-int yunsuan_r;
-int yunsuan_q;
-int switch_1;
-int break_1$;
-int nm_2$;
-float *yunsuan_suanshi;
-int yunsuan_i;
-float yunsuan_f;
-float yunsuan_sum0;
-int yunsuan_10_t;
+int DecodeWinMerge_i;
+int DecodeWinMerge_j;
+unsigned char DecodeWinMerge_tmpBuffer[40];
+int DecodeWinMerge_tmpRemoveIdx[16];
+int DecodeWinMerge_tmpNum;
+int DecodeWinMerge_shiftLen;
+int DecodeWinMerge_removeLen;
+int DecodeWinMerge_idxTarget;
 return_1=0;
-yunsuan_r=0;
-yunsuan_q=0;
-while(yunsuan_q<13){break_1$=0;
-switch_1=0;
-nm_2$=yunsuan_q;
-if ((nm_2$==0) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-if (k0[0]==1){yunsuan_suanshi0[yunsuan_r]='(';
-yunsuan_r=(yunsuan_r)+(1);
+DecodeWinMerge_tmpRemoveIdx[0]=-1;
+DecodeWinMerge_i=1;
+while(DecodeWinMerge_i<blkNum){DecodeWinMerge_j=0;
+while(DecodeWinMerge_j<20){DecodeWinMerge_tmpBuffer[DecodeWinMerge_j]=startAddr[(((((DecodeWinMerge_i)-(1))*blkSize)+(blkLen[(DecodeWinMerge_i)-(1)]))-(20))+(DecodeWinMerge_j)];
+DecodeWinMerge_tmpBuffer[(20)+(DecodeWinMerge_j)]=startAddr[(DecodeWinMerge_i*blkSize)+(DecodeWinMerge_j)];
+DecodeWinMerge_j=(DecodeWinMerge_j)+(1);
 }
 ;
-break_1$=1;
+DecodeWinMerge_tmpNum=DecodeFindIndexDelete(0,DecodeWinMerge_tmpBuffer,40,&DecodeWinMerge_tmpRemoveIdx[DecodeWinMerge_i]);
+if (DecodeWinMerge_tmpNum==0){DecodeWinMerge_tmpRemoveIdx[DecodeWinMerge_i]=-1;
+} else {DecodeWinMerge_tmpRemoveIdx[DecodeWinMerge_i]=(DecodeWinMerge_tmpRemoveIdx[DecodeWinMerge_i])-(20);
 }
 ;
-if ((nm_2$==1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-yunsuan_suanshi0[yunsuan_r]=s[0];
-yunsuan_r=(yunsuan_r)+(1);
-break_1$=1;
+DecodeWinMerge_i=(DecodeWinMerge_i)+(1);
 }
 ;
-if ((nm_2$==2) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-yunsuan_suanshi0[yunsuan_r]=p[0];
-yunsuan_r=(yunsuan_r)+(1);
-break_1$=1;
+DecodeWinMerge_shiftLen=0;
+DecodeWinMerge_removeLen=0;
+DecodeWinMerge_idxTarget=-1;
+DecodeWinMerge_i=1;
+while(DecodeWinMerge_i<blkNum){DecodeWinMerge_shiftLen=(DecodeWinMerge_shiftLen)+((blkSize)-(blkLen[(DecodeWinMerge_i)-(1)]));
+if (DecodeWinMerge_tmpRemoveIdx[(DecodeWinMerge_i)-(1)]>=0){DecodeWinMerge_removeLen=(DecodeWinMerge_removeLen)+(1);
 }
 ;
-if ((nm_2$==3) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-if (k0[1]==1){yunsuan_suanshi0[yunsuan_r]='(';
-yunsuan_r=(yunsuan_r)+(1);
+if (DecodeWinMerge_tmpRemoveIdx[DecodeWinMerge_i]<0){DecodeWinMerge_j=0;
+while(DecodeWinMerge_j<blkLen[DecodeWinMerge_i]){DecodeWinMerge_idxTarget=(((DecodeWinMerge_i*blkSize)+(DecodeWinMerge_j))-(DecodeWinMerge_removeLen))-(DecodeWinMerge_shiftLen);
+startAddr[DecodeWinMerge_idxTarget]=startAddr[(DecodeWinMerge_i*blkSize)+(DecodeWinMerge_j)];
+DecodeWinMerge_j=(DecodeWinMerge_j)+(1);
 }
 ;
-break_1$=1;
+} else {DecodeWinMerge_j=0;
+while(DecodeWinMerge_j<DecodeWinMerge_tmpRemoveIdx[DecodeWinMerge_i]){DecodeWinMerge_idxTarget=(((DecodeWinMerge_i*blkSize)+(DecodeWinMerge_j))-(DecodeWinMerge_removeLen))-(DecodeWinMerge_shiftLen);
+startAddr[DecodeWinMerge_idxTarget]=startAddr[(DecodeWinMerge_i*blkSize)+(DecodeWinMerge_j)];
+DecodeWinMerge_j=(DecodeWinMerge_j)+(1);
 }
 ;
-if ((nm_2$==4) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-yunsuan_suanshi0[yunsuan_r]=s[1];
-yunsuan_r=(yunsuan_r)+(1);
-break_1$=1;
+DecodeWinMerge_j=(DecodeWinMerge_tmpRemoveIdx[DecodeWinMerge_i])+(1);
+while(DecodeWinMerge_j<blkLen[DecodeWinMerge_i]){DecodeWinMerge_idxTarget=((((DecodeWinMerge_i*blkSize)+(DecodeWinMerge_j))-(DecodeWinMerge_removeLen))-(DecodeWinMerge_shiftLen))-(1);
+startAddr[DecodeWinMerge_idxTarget]=startAddr[(DecodeWinMerge_i*blkSize)+(DecodeWinMerge_j)];
+DecodeWinMerge_j=(DecodeWinMerge_j)+(1);
 }
 ;
-if ((nm_2$==5) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-if (k1[0]==1){yunsuan_suanshi0[yunsuan_r]=')';
-yunsuan_r=(yunsuan_r)+(1);
 }
 ;
-break_1$=1;
+DecodeWinMerge_i=(DecodeWinMerge_i)+(1);
 }
 ;
-if ((nm_2$==6) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-yunsuan_suanshi0[yunsuan_r]=p[1];
-yunsuan_r=(yunsuan_r)+(1);
-break_1$=1;
-}
-;
-if ((nm_2$==7) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-if (k0[2]==1){yunsuan_suanshi0[yunsuan_r]='(';
-yunsuan_r=(yunsuan_r)+(1);
-}
-;
-break_1$=1;
-}
-;
-if ((nm_2$==8) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-yunsuan_suanshi0[yunsuan_r]=s[2];
-yunsuan_r=(yunsuan_r)+(1);
-break_1$=1;
-}
-;
-if ((nm_2$==9) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-if (k1[1]==1){yunsuan_suanshi0[yunsuan_r]=')';
-yunsuan_r=(yunsuan_r)+(1);
-}
-;
-break_1$=1;
-}
-;
-if ((nm_2$==10) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-yunsuan_suanshi0[yunsuan_r]=p[2];
-yunsuan_r=(yunsuan_r)+(1);
-break_1$=1;
-}
-;
-if ((nm_2$==11) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-yunsuan_suanshi0[yunsuan_r]=s[3];
-yunsuan_r=(yunsuan_r)+(1);
-break_1$=1;
-}
-;
-if ((nm_2$==12) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-if (k1[2]==1){yunsuan_suanshi0[yunsuan_r]=')';
-yunsuan_r=(yunsuan_r)+(1);
-}
-;
-break_1$=1;
-}
-;
-yunsuan_q=(yunsuan_q)+(1);
-}
-;
-yunsuan_i=0;
-yunsuan_suanshi=fsz(0,yunsuan_r);
-while(yunsuan_i<yunsuan_r){yunsuan_suanshi[yunsuan_i]=yunsuan_suanshi0[yunsuan_i];
-yunsuan_i=(yunsuan_i)+(1);
-}
-;
-yunsuan_f=hefa(0,yunsuan_suanshi,yunsuan_r);
-if (yunsuan_f==0){return_1=1;
-RValue=0;
-}
-;
-if (return_1==0){yunsuan_f=jianjie(0,yunsuan_suanshi,yunsuan_r);
-if (yunsuan_f==0){return_1=1;
-RValue=0;
-}
-;
-if (return_1==0){yunsuan_sum0=qiujie(0,yunsuan_suanshi,yunsuan_r);
-if (yunsuan_sum0==24){fuhe=(fuhe)+(1);
-yunsuan_10_t=0;
-while(yunsuan_10_t<yunsuan_r){if (yunsuan_suanshi[yunsuan_10_t]>10){printf("%c",(char)(yunsuan_suanshi[yunsuan_10_t]));
-} else {printf("%f",yunsuan_suanshi[yunsuan_10_t]);
-printf("");
-}
-;
-yunsuan_10_t=(yunsuan_10_t)+(1);
-}
-;
-printf("=");
-printf("%f",yunsuan_sum0);
-printf("\n");
-}
-;
-free(yunsuan_suanshi);
 return_1=1;
-RValue=1;
-}
-;
-}
-;
+RValue=(DecodeWinMerge_idxTarget)+(1);
 return RValue;
 }
-int  hefa(int $$Ext,float suanshi[],int r){
+void  DecodeRemoveBlk(int $$Ext,unsigned char *startAddr,int winPos,int blkNum,int winRemoveNum){
+int return_1;
+int DecodeRemoveBlk_i;
+return_1=0;
+DecodeRemoveBlk_i=(winPos)+(4);
+while(DecodeRemoveBlk_i<blkNum){memcpy(0,&startAddr[((DecodeRemoveBlk_i)-(winRemoveNum))*512],&startAddr[DecodeRemoveBlk_i*512],512);
+DecodeRemoveBlk_i=(DecodeRemoveBlk_i)+(1);
+}
+;
+return_1=1;
+}
+int  DecodeLenUpdate(int $$Ext,int lastIdx,int winPos,int winSize,int blkNum,int newLen[]){
 int  RValue=0;
 int break_1;
 int return_1;
-float *hefa_p;
-float *hefa_q;
-int hefa_flag;
+int DecodeLenUpdate_i;
+int DecodeLenUpdate_winRemoveNum;
 break_1=0;
 return_1=0;
-hefa_p=&suanshi[0];
-hefa_q=&suanshi[1];
-hefa_flag=1;
 break_1=0;
-while((break_1==0) && (1)){if (*(hefa_p)==40){if ((*(hefa_q)>=0) && (*(hefa_q)<=9)){hefa_p=(hefa_p)+(1);
-hefa_q=(hefa_q)+(1);
-} else {hefa_flag=0;
+DecodeLenUpdate_i=0;
+while((break_1==0) && (DecodeLenUpdate_i<winSize)){if (lastIdx>512){newLen[(winPos)+(DecodeLenUpdate_i)]=512;
+lastIdx=(lastIdx)-(512);
+} else {newLen[(winPos)+(DecodeLenUpdate_i)]=lastIdx;
 break_1=1;
 }
 ;
-}
-;
-if (break_1==0){if ((*(hefa_p)>=0) && (*(hefa_p)<=9)){if ((hefa_p)-(suanshi)>=(r)-(1)){break_1=1;
-}
-;
-if (break_1==0){if ((*(hefa_q)==')') || ((*(hefa_q)>41) && (*(hefa_q)<48))){hefa_p=(hefa_p)+(1);
-hefa_q=(hefa_q)+(1);
-} else {hefa_flag=0;
-break_1=1;
-}
-;
-}
-;
-}
-;
-if (break_1==0){if (*(hefa_p)==41){if ((hefa_p)-(suanshi)>=(r)-(1)){break_1=1;
-}
-;
-if (break_1==0){if ((*(hefa_q)>41) && (*(hefa_q)<48)){hefa_p=(hefa_p)+(1);
-hefa_q=(hefa_q)+(1);
-} else {hefa_flag=0;
-break_1=1;
-}
-;
-}
-;
-}
-;
-if (break_1==0){if ((*(hefa_p)>41) && (*(hefa_p)<48)){if ((*(hefa_q)==40) || ((*(hefa_q)>=0) && (*(hefa_q)<=9))){hefa_p=(hefa_p)+(1);
-hefa_q=(hefa_q)+(1);
-} else {hefa_flag=0;
-break_1=1;
-}
-;
-}
-;
-}
-;
-}
-;
+if (break_1==0){DecodeLenUpdate_i=(DecodeLenUpdate_i)+(1);
 }
 ;
 }
 ;
 break_1=0;
-return_1=1;
-RValue=hefa_flag;
-return RValue;
-}
-float  jianjie(int $$Ext,float suanshi[],int r){
-float  RValue=0;
-int continue_1;
-int return_1;
-float jianjie_re;
-float *jianjie_p,*jianjie_q;
-int jianjie_k;
-int jianjie_k1;
-float jianjie_r0;
-float jianjie_r2;
-float jianjie_r1;
-int jianjie_r3;
-int jianjie_i;
-continue_1=0;
-return_1=0;
-jianjie_re=1;
-jianjie_q=&jianjie_re;
-jianjie_p=&jianjie_re;
-jianjie_k=0;
-jianjie_k1=0;
-jianjie_r0=0;
-jianjie_r2=1;
-jianjie_r1=0;
-jianjie_r3=0;
-continue_1=0;
-jianjie_i=0;
-while((return_1==0) && (jianjie_i<r)){continue_1=0;
-if (suanshi[jianjie_i]=='('){jianjie_k=(jianjie_k)+(1);
-if ((*(jianjie_p)!='(') || (jianjie_k==1)){jianjie_p=&suanshi[jianjie_i];
-if (jianjie_i!=0){if ((*((jianjie_p)-(1))=='+') || (*((jianjie_p)-(1))=='-')){jianjie_r0=1;
-} else {if ((*((jianjie_p)-(1))=='*') || (*((jianjie_p)-(1))=='/')){jianjie_r0=2;
+DecodeLenUpdate_winRemoveNum=((winSize)-(DecodeLenUpdate_i))-(1);
+if (DecodeLenUpdate_winRemoveNum>0){DecodeLenUpdate_i=(winPos)+(winSize);
+while(DecodeLenUpdate_i<blkNum){newLen[(DecodeLenUpdate_i)-(DecodeLenUpdate_winRemoveNum)]=newLen[DecodeLenUpdate_i];
+DecodeLenUpdate_i=(DecodeLenUpdate_i)+(1);
 }
 ;
-}
-;
-if (*((jianjie_p)-(1))=='-'){jianjie_r0=(jianjie_r0)+(100);
-} else {if (*((jianjie_p)-(1))=='/'){jianjie_r0=(jianjie_r0)+(1000);
-}
-;
-}
-;
-}
-;
-}
-;
-} else {if (suanshi[jianjie_i]==')'){if (jianjie_k==1){jianjie_k=(jianjie_k)-(1);
-jianjie_q=&suanshi[jianjie_i];
-if (jianjie_i!=(r)-(1)){if ((*((jianjie_q)+(1))=='+') || (*((jianjie_q)+(1))=='-')){jianjie_r1=1;
-} else {if ((*((jianjie_q)+(1))=='*') || (*((jianjie_q)+(1))=='/')){jianjie_r1=2;
-}
-;
-}
-;
-}
-;
-jianjie_re=jianjie(0,(jianjie_p)+(1),((jianjie_q)-(jianjie_p))-(1));
-if ((int)(jianjie_r0/ 100)>=1){if (((int)(jianjie_r0/ 100)==1) && ((int)(jianjie_re/ 100)==1)){continue_1=1;
-jianjie_i=(jianjie_i)+(1);
-} else {if (((int)(jianjie_r0/ 1000)==1) && ((int)(jianjie_re/ 1000)==1)){continue_1=1;
-jianjie_i=(jianjie_i)+(1);
-}
-;
-}
-;
-}
-;
-if (continue_1==0){if ((int)(jianjie_re/ 100)==1){jianjie_re=(jianjie_re)-(100);
-}
-;
-if ((int)(jianjie_re/ 1000)==1){jianjie_re=(jianjie_re)-(1000);
-}
-;
-if ((int)(jianjie_r0/ 100)==1){jianjie_r0=(jianjie_r0)-(100);
-} else {if ((int)(jianjie_r0/ 1000)==1){jianjie_r0=(jianjie_r0)-(1000);
-}
-;
-}
-;
-if (jianjie_re==0){return_1=1;
-RValue=0;
-}
-;
-if (return_1==0){if ((jianjie_re>=jianjie_r0) && (jianjie_re>=jianjie_r1)){return_1=1;
-RValue=0;
-}
-;
-}
-;
-}
-;
-} else {jianjie_k=(jianjie_k)-(1);
-}
-;
-} else {if (jianjie_k==0){if ((suanshi[jianjie_i]=='+') || (suanshi[jianjie_i]=='-')){jianjie_r2=((jianjie_r2*jianjie_k1)+(1))/ ((jianjie_k1)+(1));
-jianjie_k1=(jianjie_k1)+(1);
-jianjie_r3=(jianjie_r3/ 10)+(1);
-} else {if ((suanshi[jianjie_i]=='*') || (suanshi[jianjie_i]=='/')){jianjie_r2=((jianjie_r2*jianjie_k1)+(2))/ ((jianjie_k1)+(1));
-jianjie_k1=(jianjie_k1)+(1);
-jianjie_r3=(jianjie_r3%10)+(10);
-}
-;
-}
-;
-}
-;
-}
-;
-}
-;
-if (continue_1==0){if (return_1==0){jianjie_i=(jianjie_i)+(1);
-}
-;
-}
-;
-}
-;
-continue_1=0;
-if (return_1==0){if (jianjie_r3%10==1){jianjie_r2=(jianjie_r2)+(100);
-}
-;
-if (jianjie_r3/ 10==1){jianjie_r2=(jianjie_r2)+(1000);
 }
 ;
 return_1=1;
-RValue=jianjie_r2;
-}
-;
+RValue=DecodeLenUpdate_winRemoveNum;
 return RValue;
 }
-float  qiujie(int $$Ext,float suanshi[],int n){
-float  RValue=0;
-int continue_1;
+int  DecodeRemoveByteBlk(int $$Ext,unsigned char buffer[],int len$,int delelteIdx[]){
+int  RValue=0;
 int return_1;
-float qiujie_1_a;
+int DecodeRemoveByteBlk_delCnt;
+return_1=0;
+DecodeRemoveByteBlk_delCnt=DecodeFindIndexDelete(0,buffer,512,delelteIdx);
+DecodeRemoveBytes(0,buffer,len$,delelteIdx,DecodeRemoveByteBlk_delCnt);
+return_1=1;
+RValue=(len$)-(DecodeRemoveByteBlk_delCnt);
+return RValue;
+}
+int  DecodeDataMerge(int $$Ext,unsigned char *startAddr,int winPos,int * blkNum,int newLen[]){
+int  RValue=0;
+int return_1;
+int DecodeDataMerge_winEleCnt;
+int DecodeDataMerge_tmpWinSize;
+int DecodeDataMerge_winRemoveNum;
+return_1=0;
+if ((winPos)+(4)>*(blkNum)){DecodeDataMerge_tmpWinSize=(*(blkNum))-(winPos);
+} else {DecodeDataMerge_tmpWinSize=4;
+}
+;
+DecodeDataMerge_winRemoveNum=0;
+if (DecodeDataMerge_tmpWinSize>1){DecodeDataMerge_winEleCnt=DecodeWinMerge(0,&startAddr[winPos*512],512,DecodeDataMerge_tmpWinSize,&newLen[winPos]);
+DecodeDataMerge_winRemoveNum=DecodeLenUpdate(0,DecodeDataMerge_winEleCnt,winPos,DecodeDataMerge_tmpWinSize,*(blkNum),newLen);
+if (DecodeDataMerge_winRemoveNum>0){DecodeRemoveBlk(0,startAddr,winPos,*(blkNum),DecodeDataMerge_winRemoveNum);
+*(blkNum)=(*(blkNum))-(DecodeDataMerge_winRemoveNum);
+}
+;
+}
+;
+return_1=1;
+RValue=DecodeDataMerge_winRemoveNum;
+return RValue;
+}
+void  DecodeInitial(int $$Ext,unsigned char *addr){
+int return_1;
+return_1=0;
+mDecodeVar.decodeAddr=addr;
+mDecodeVar.decodeSt=13107;
+mDecodeVar.blkNum=1024;
+mDecodeVar.blkIdx=0;
+mDecodeVar.winPos=0;
+return_1=1;
+}
+void  DecodeGetState(int $$Ext,int *st,int * blockNum,int * lastLen){
+int return_1;
+return_1=0;
+*(st)=mDecodeVar.decodeSt;
+*(blockNum)=mDecodeVar.blkNum;
+*(lastLen)=mDecodeVar.blkLen[(mDecodeVar.blkNum)-(1)];
+return_1=1;
+}
+void  DecodeEntry(int $$Ext){
+int return_1;
+int DecodeEntry_i;
+int DecodeEntry_winRemoveNum;
 int switch_1;
 int break_1$;
-int nm_3$;
-float qiujie_pq;
-float *qiujie_p;
-float *qiujie_q;
-int qiujie_k;
-float qiujie_suanshi1[7]={'0'};
-int qiujie_s;
-float qiujie_sum;
-int qiujie_m;
-int nm_4$;
-int qiujie_9_10_11_ws;
-int qiujie_9_10_11_w;
-int qiujie_9_10_17_ws;
-int qiujie_9_10_17_w;
-continue_1=0;
+int nm_1$;
 return_1=0;
-if (n==3){qiujie_1_a=0;
 break_1$=0;
 switch_1=0;
-nm_3$=(char)(suanshi[1]);
-if ((nm_3$=='+') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-return_1=1;
-RValue=(suanshi[0])+(suanshi[2]);
+nm_1$=mDecodeVar.decodeSt;
+if ((nm_1$==13107) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
+mDecodeVar.decodeSt=21845;
+break_1$=1;
 }
 ;
-if ((nm_3$=='-') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-return_1=1;
-RValue=(suanshi[0])-(suanshi[2]);
+if ((nm_1$==21845) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
+DecodeEntry_i=0;
+while((mDecodeVar.blkIdx<mDecodeVar.blkNum) && (DecodeEntry_i<4)){mDecodeVar.blkLen[(mDecodeVar.blkIdx)+(DecodeEntry_i)]=DecodeRemoveByteBlk(0,&mDecodeVar.decodeAddr[((mDecodeVar.blkIdx)+(DecodeEntry_i))*512],512,mDecodeVar.delelteIdx);
+DecodeEntry_i=(DecodeEntry_i)+(1);
 }
 ;
-if ((nm_3$=='*') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-return_1=1;
-RValue=suanshi[0]*suanshi[2];
-}
-;
-if ((nm_3$=='/') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-return_1=1;
-RValue=suanshi[0]/ suanshi[2];
-}
-;
-}
-;
-if (return_1==0){qiujie_pq='0';
-qiujie_p=&qiujie_pq;
-qiujie_q=&qiujie_pq;
-qiujie_k=0;
-qiujie_s=0;
-qiujie_sum=0;
-continue_1=0;
-qiujie_m=0;
-while(qiujie_m<n){continue_1=0;
-if (suanshi[qiujie_m]=='('){qiujie_k=(qiujie_k)+(1);
-if (*(qiujie_p)!='('){qiujie_p=&suanshi[qiujie_m];
-}
-;
-continue_1=1;
-qiujie_m=(qiujie_m)+(1);
-}
-;
-if (continue_1==0){if (suanshi[qiujie_m]==')'){if (qiujie_k==1){qiujie_k=(qiujie_k)-(1);
-qiujie_q=&suanshi[qiujie_m];
-qiujie_suanshi1[qiujie_s]=qiujie(0,(qiujie_p)+(1),((qiujie_q)-(qiujie_p))-(1));
-qiujie_s=(qiujie_s)+(1);
-qiujie_p=&qiujie_pq;
-qiujie_q=&qiujie_pq;
-} else {qiujie_k=(qiujie_k)-(1);
-}
-;
-continue_1=1;
-qiujie_m=(qiujie_m)+(1);
-}
-;
-if (continue_1==0){if (qiujie_k==0){qiujie_suanshi1[qiujie_s]=suanshi[qiujie_m];
-qiujie_s=(qiujie_s)+(1);
-continue_1=1;
-qiujie_m=(qiujie_m)+(1);
-}
-;
-if (continue_1==0){qiujie_m=(qiujie_m)+(1);
-}
-;
-}
-;
-}
-;
-}
-;
-continue_1=0;
-if (qiujie_s==3){qiujie_sum=qiujie(0,qiujie_suanshi1,qiujie_s);
-} else {qiujie_p=&qiujie_suanshi1[0];
-qiujie_q=&qiujie_suanshi1[2];
-qiujie_m=0;
-while(qiujie_m<((qiujie_s)-(1))/ 2){break_1$=0;
-switch_1=0;
-nm_4$=(char)(qiujie_suanshi1[(2*qiujie_m)+(1)]);
-if ((nm_4$=='+') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-if ((((qiujie_s)-(1))/ 2!=1) && ((qiujie_suanshi1[(2*((qiujie_m)+(1)))+(1)]=='*') || (qiujie_suanshi1[(2*((qiujie_m)+(1)))+(1)]=='/'))){qiujie_9_10_11_ws=(&qiujie_suanshi1[(qiujie_s)-(1)])-(&qiujie_suanshi1[2*((qiujie_m)+(1))]);
-*(qiujie_q)=qiujie(0,(qiujie_p)+(2),3);
-qiujie_9_10_11_w=1;
-while(qiujie_9_10_11_w<=qiujie_9_10_11_ws){if ((((qiujie_q)+(qiujie_9_10_11_w))+(2))-((qiujie_q)+(qiujie_9_10_11_ws))>0){*((qiujie_q)+(qiujie_9_10_11_w))=-1;
-} else {*((qiujie_q)+(qiujie_9_10_11_w))=*(((qiujie_q)+(qiujie_9_10_11_w))+(2));
-}
-;
-qiujie_9_10_11_w=(qiujie_9_10_11_w)+(1);
-}
-;
-qiujie_s=(qiujie_s)-(2);
-qiujie_m=(qiujie_m)-(1);
-} else {if (qiujie_m==0){qiujie_sum=((qiujie_sum)+(*(qiujie_p)))+(*(qiujie_q));
-} else {qiujie_sum=(qiujie_sum)+(*(qiujie_q));
-}
-;
-qiujie_p=(qiujie_p)+(2);
-qiujie_q=(qiujie_q)+(2);
+if (mDecodeVar.blkIdx>=mDecodeVar.blkNum){mDecodeVar.decodeSt=43690;
+} else {mDecodeVar.blkIdx=(mDecodeVar.blkIdx)+(4);
 }
 ;
 break_1$=1;
 }
 ;
-if ((nm_4$=='-') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-if ((((qiujie_s)-(1))/ 2!=1) && ((qiujie_suanshi1[(2*((qiujie_m)+(1)))+(1)]=='*') || (qiujie_suanshi1[(2*((qiujie_m)+(1)))+(1)]=='/'))){qiujie_9_10_17_ws=(&qiujie_suanshi1[(qiujie_s)-(1)])-(&qiujie_suanshi1[2*((qiujie_m)+(1))]);
-*(qiujie_q)=qiujie(0,(qiujie_p)+(2),3);
-qiujie_9_10_17_w=1;
-while(qiujie_9_10_17_w<=qiujie_9_10_17_ws){if ((((qiujie_q)+(qiujie_9_10_17_w))+(2))-((qiujie_q)+(qiujie_9_10_17_ws))>0){*((qiujie_q)+(qiujie_9_10_17_w))=-1;
-} else {*((qiujie_q)+(qiujie_9_10_17_w))=*(((qiujie_q)+(qiujie_9_10_17_w))+(2));
+if ((nm_1$==43690) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
+DecodeEntry_i=0;
+while((mDecodeVar.winPos<mDecodeVar.blkNum) && (DecodeEntry_i<4)){DecodeEntry_winRemoveNum=DecodeDataMerge(0,mDecodeVar.decodeAddr,mDecodeVar.winPos,&mDecodeVar.blkNum,mDecodeVar.blkLen);
+mDecodeVar.winPos=(((mDecodeVar.winPos)+(4))-(1))-(DecodeEntry_winRemoveNum);
+DecodeEntry_i=(DecodeEntry_i)+(1);
 }
 ;
-qiujie_9_10_17_w=(qiujie_9_10_17_w)+(1);
-}
-;
-qiujie_s=(qiujie_s)-(2);
-qiujie_m=-1;
-} else {if (qiujie_m==0){qiujie_sum=((qiujie_sum)+(*(qiujie_p)))-(*(qiujie_q));
-} else {qiujie_sum=(qiujie_sum)-(*(qiujie_q));
-}
-;
-qiujie_p=(qiujie_p)+(2);
-qiujie_q=(qiujie_q)+(2);
+if (mDecodeVar.winPos>=mDecodeVar.blkNum){mDecodeVar.decodeSt=52428;
 }
 ;
 break_1$=1;
 }
 ;
-if ((nm_4$=='*') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-if (qiujie_m==0){qiujie_sum=(qiujie_sum)+(*(qiujie_p)**(qiujie_q));
-} else {qiujie_sum=qiujie_sum**(qiujie_q);
+if ((break_1$==0) && (return_1==0)){break_1$=1;
 }
 ;
-qiujie_p=(qiujie_p)+(2);
-qiujie_q=(qiujie_q)+(2);
-break_1$=1;
+}
+void  FillBuffer(int $$Ext,unsigned char buffer[],int len$){
+int return_1;
+unsigned char FillBuffer_flg;
+int FillBuffer_i;
+return_1=0;
+FillBuffer_flg=0;
+FillBuffer_i=0;
+while(FillBuffer_i<len$){if (FillBuffer_flg==0){buffer[FillBuffer_i]=0;
+if (((FillBuffer_i)+(1))%21==0){buffer[FillBuffer_i]=170;
+FillBuffer_flg=1;
 }
 ;
-if ((nm_4$=='/') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
-if (qiujie_m==0){qiujie_sum=(qiujie_sum)+(*(qiujie_p)/ *(qiujie_q));
-} else {qiujie_sum=qiujie_sum/ *(qiujie_q);
+} else {buffer[FillBuffer_i]=255;
+if (((FillBuffer_i)+(1))%21==0){buffer[FillBuffer_i]=85;
+FillBuffer_flg=0;
 }
 ;
-qiujie_p=(qiujie_p)+(2);
-qiujie_q=(qiujie_q)+(2);
-break_1$=1;
 }
 ;
-qiujie_m=(qiujie_m)+(1);
-}
-;
+FillBuffer_i=(FillBuffer_i)+(1);
 }
 ;
 return_1=1;
-RValue=qiujie_sum;
+}
+void  TestCmdE2DataMerge(int $$Ext){
+int break_1;
+int return_1;
+int TestCmdE2DataMerge_len08;
+unsigned char TestCmdE2DataMerge_buffer[1024][512];
+int TestCmdE2DataMerge_blkNum;
+int TestCmdE2DataMerge_i;
+int TestCmdE2DataMerge_cnt;
+int TestCmdE2DataMerge_lastLen;
+int TestCmdE2DataMerge_st;
+break_1=0;
+return_1=0;
+TestCmdE2DataMerge_len08=512*1024;
+TestCmdE2DataMerge_blkNum=1024;
+FillBuffer(0,(unsigned char *)(TestCmdE2DataMerge_buffer),TestCmdE2DataMerge_len08);
+DecodeInitial(0,(unsigned char *)(TestCmdE2DataMerge_buffer));
+break_1=0;
+while((break_1==0) && (1)){DecodeEntry(0);
+DecodeGetState(0,&TestCmdE2DataMerge_st,&TestCmdE2DataMerge_blkNum,&TestCmdE2DataMerge_lastLen);
+if (TestCmdE2DataMerge_st==52428){break_1=1;
 }
 ;
-return RValue;
+}
+;
+break_1=0;
+TestCmdE2DataMerge_cnt=(((TestCmdE2DataMerge_blkNum)-(1))*512)+(TestCmdE2DataMerge_lastLen);
+TestCmdE2DataMerge_i=0;
+while(TestCmdE2DataMerge_i<TestCmdE2DataMerge_cnt){printf("%x",((unsigned char *)(TestCmdE2DataMerge_buffer))[TestCmdE2DataMerge_i]);
+if (((TestCmdE2DataMerge_i)+(1))%20==0){printf("\n");
+}
+;
+TestCmdE2DataMerge_i=(TestCmdE2DataMerge_i)+(1);
+}
+;
+printf("%d",TestCmdE2DataMerge_cnt);
+printf("\n");
+printf("\n");
+return_1=1;
 }
 
 int main() {
@@ -741,9 +440,7 @@ $$length--;}
 else {
 $$flag[$$length - 1] = 1; break;}}
 if ($$length == 0 && $$flag[0] == 1 || $$current == -1 && $$firstTime==1){break;}
-sum=0;
-fuhe=0;
-main_1(0);
+TestCmdE2DataMerge(0);
 $$firstTime=1;
 $$state_num=0;
 printf("\n");

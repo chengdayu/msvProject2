@@ -719,27 +719,27 @@ array_cast_exp
        // 增加((unsigned char*)a)[2]='b',可作为左值或者右值
        :OPEN_PAR OPEN_PAR INTDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
 	   {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,$6,NULL,VOIDTYPE), INTPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, $6, INTPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $9, $10, VOIDTYPE);
 	   }  
 	   | OPEN_PAR OPEN_PAR UNSIGNED INTDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
 	   {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,$7,NULL,VOIDTYPE), UINTPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, $7, UINTPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $10, $11, VOIDTYPE);
 	   }  
 	   | OPEN_PAR OPEN_PAR FLOATDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR  
 	   {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,$6,NULL,VOIDTYPE), FLOATPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, $6, FLOATPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $9, $10, VOIDTYPE);
 	   }  
 	   | OPEN_PAR OPEN_PAR CHARDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
 	   {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,$6,NULL,VOIDTYPE),CHARPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, $6,CHARPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $9, $10, VOIDTYPE);
 	   } 
 	   | OPEN_PAR OPEN_PAR UNSIGNED CHARDECLARATION MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR 
 	   {
-		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, new CSyntaxNode(IDENT_EXP,$7,NULL,VOIDTYPE), UCHARPTYPE);
+		   CSyntaxNode* child0=new CSyntaxNode(TYPE_CAST_STA, $7,UCHARPTYPE);
 		   $$=new CSyntaxNode(ARRAY_CAST_EXP, child0, $10, $11, VOIDTYPE);
 	   }
 	   | OPEN_PAR array_cast_exp CLOSE_PAR
