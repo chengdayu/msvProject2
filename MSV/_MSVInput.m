@@ -4,16 +4,15 @@ function f(int x,int RValue)
  RValue:=x+1
  )
 };
+function g(int x,(*tst)(int x,int RValue))
+{frame(x) and
+(
+ x:=x+1
+ )
+};
 frame(y) and
 (
-int y<==0 and skip;
-if(extern f(y,RValue)) then
-{
-y:=4
-}
-else
-{
-y:=5
-}
+	float y and skip;
+	g(1,f)
 
 )

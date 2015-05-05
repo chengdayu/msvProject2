@@ -528,7 +528,7 @@ rule 281  option_function_parameter_list -> all_type_define identifier ARRAY OPE
 rule 282  option_function_parameter_list -> all_type_define MUL identifier inner_option_define_identifier
 rule 283  option_function_parameter_list -> all_type_define MUL inner_option_define_identifier
 rule 284  option_function_parameter_list -> all_type_define MUL MUL identifier inner_option_define_identifier
-rule 285  option_function_parameter_list -> OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier
+rule 285  option_function_parameter_list -> OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier
 rule 286  option_function_parameter_list ->		/* empty */
 rule 287  inner_option_define_identifier -> COMMA all_type_define identifier inner_option_define_identifier
 rule 288  inner_option_define_identifier -> COMMA all_type_define inner_option_define_identifier
@@ -539,7 +539,7 @@ rule 292  inner_option_define_identifier -> COMMA ID identifier ARRAY inner_opti
 rule 293  inner_option_define_identifier -> COMMA STRUCT_TYPE identifier ARRAY inner_option_define_identifier
 rule 294  inner_option_define_identifier -> COMMA all_type_define identifier ARRAY inner_option_define_identifier
 rule 295  inner_option_define_identifier -> COMMA all_type_define MUL identifier ARRAY inner_option_define_identifier
-rule 296  inner_option_define_identifier -> COMMA OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier
+rule 296  inner_option_define_identifier -> COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier
 rule 297  inner_option_define_identifier ->		/* empty */
 rule 298  inner_option_define_identifier -> COMMA all_type_define identifier OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier
 rule 299  inner_option_define_identifier -> COMMA all_type_define identifier OPEN_MPAR ari_exp COMMA ari_exp CLOSE_MPAR inner_option_define_identifier
@@ -765,7 +765,8 @@ W_NEXT (363) 12
 PREFIX (364)
 SOMETIMES (365) 11
 ID (366) 24 25 59 60 69 70 73 74 80 81 86 87 95 97 98 99 100 105 106
-    139 140 141 142 143 144 269 270 271 272 276 277 278 289 292 315
+    139 140 141 142 143 144 269 270 271 272 276 277 278 285 289 292
+    296 315
 STRLITERAL (367) 317
 STRUCT_TYPE (368) 79 82 83 229 230 231 232 265 266 267 268 273 274
     275 290 291 293
@@ -905,9 +906,9 @@ bool_par (165)
     on left: 313 314, on right: 331
 identifier (166)
     on left: 315 316, on right: 56 63 84 85 94 96 110 149 171 205 263
-    265 266 267 268 269 270 271 272 279 280 281 282 284 285 287 289
-    290 291 292 293 294 295 296 298 299 300 301 316 321 354 355 360
-    362 363 364 365 368 369 370 371 372 375 376 380 382
+    265 266 267 268 269 270 271 272 279 280 281 282 284 287 289 290
+    291 292 293 294 295 298 299 300 301 316 321 354 355 360 362 363
+    364 365 368 369 370 371 372 375 376 380 382
 strliteral (167)
     on left: 317, on right: 98 100 134 135 195 198 201 243 244 245
     246
@@ -6617,7 +6618,7 @@ state 281
     inner_option_define_identifier  ->  COMMA . STRUCT_TYPE identifier ARRAY inner_option_define_identifier   (rule 293)
     inner_option_define_identifier  ->  COMMA . all_type_define identifier ARRAY inner_option_define_identifier   (rule 294)
     inner_option_define_identifier  ->  COMMA . all_type_define MUL identifier ARRAY inner_option_define_identifier   (rule 295)
-    inner_option_define_identifier  ->  COMMA . OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
+    inner_option_define_identifier  ->  COMMA . OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
     inner_option_define_identifier  ->  COMMA . all_type_define identifier OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier   (rule 298)
     inner_option_define_identifier  ->  COMMA . all_type_define identifier OPEN_MPAR ari_exp COMMA ari_exp CLOSE_MPAR inner_option_define_identifier   (rule 299)
     inner_option_define_identifier  ->  COMMA . all_type_define identifier ARRAY OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier   (rule 300)
@@ -9539,7 +9540,7 @@ state 446
 
 state 447
 
-    option_function_parameter_list  ->  OPEN_PAR . MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 285)
+    option_function_parameter_list  ->  OPEN_PAR . MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 285)
 
     MUL 	shift, and go to state 601
 
@@ -9630,7 +9631,7 @@ state 452
 
 state 453
 
-    inner_option_define_identifier  ->  COMMA OPEN_PAR . MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
+    inner_option_define_identifier  ->  COMMA OPEN_PAR . MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
 
     MUL 	shift, and go to state 612
 
@@ -12106,12 +12107,9 @@ state 600
 
 state 601
 
-    option_function_parameter_list  ->  OPEN_PAR MUL . identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 285)
+    option_function_parameter_list  ->  OPEN_PAR MUL . ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 285)
 
-    OPEN_PAR	shift, and go to state 138
-    ID  	shift, and go to state 139
-
-    identifier	go to state 740
+    ID  	shift, and go to state 740
 
 
 
@@ -12249,12 +12247,9 @@ state 611
 
 state 612
 
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL . identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
+    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL . ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
 
-    OPEN_PAR	shift, and go to state 138
-    ID  	shift, and go to state 139
-
-    identifier	go to state 757
+    ID  	shift, and go to state 757
 
 
 
@@ -14373,7 +14368,7 @@ state 739
 
 state 740
 
-    option_function_parameter_list  ->  OPEN_PAR MUL identifier . CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 285)
+    option_function_parameter_list  ->  OPEN_PAR MUL ID . CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 285)
 
     CLOSE_PAR	shift, and go to state 849
 
@@ -14556,7 +14551,7 @@ state 756
 
 state 757
 
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL identifier . CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
+    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID . CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
 
     CLOSE_PAR	shift, and go to state 864
 
@@ -16032,7 +16027,7 @@ state 848
 
 state 849
 
-    option_function_parameter_list  ->  OPEN_PAR MUL identifier CLOSE_PAR . OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 285)
+    option_function_parameter_list  ->  OPEN_PAR MUL ID CLOSE_PAR . OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 285)
 
     OPEN_PAR	shift, and go to state 920
 
@@ -16255,7 +16250,7 @@ state 863
 
 state 864
 
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL identifier CLOSE_PAR . OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
+    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID CLOSE_PAR . OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
 
     OPEN_PAR	shift, and go to state 928
 
@@ -17140,7 +17135,7 @@ state 919
 
 state 920
 
-    option_function_parameter_list  ->  OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR . option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 285)
+    option_function_parameter_list  ->  OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR . option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 285)
 
     FILEDECLARATION	shift, and go to state 28
     INTDECLARATION	shift, and go to state 40
@@ -17234,7 +17229,7 @@ state 927
 
 state 928
 
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR . option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
+    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR . option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
 
     FILEDECLARATION	shift, and go to state 28
     INTDECLARATION	shift, and go to state 40
@@ -17963,7 +17958,7 @@ state 966
 
 state 967
 
-    option_function_parameter_list  ->  OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list . CLOSE_PAR inner_option_define_identifier   (rule 285)
+    option_function_parameter_list  ->  OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list . CLOSE_PAR inner_option_define_identifier   (rule 285)
 
     CLOSE_PAR	shift, and go to state 1007
 
@@ -17991,7 +17986,7 @@ state 969
 
 state 970
 
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list . CLOSE_PAR inner_option_define_identifier   (rule 296)
+    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list . CLOSE_PAR inner_option_define_identifier   (rule 296)
 
     CLOSE_PAR	shift, and go to state 1009
 
@@ -18509,7 +18504,7 @@ state 1006
 
 state 1007
 
-    option_function_parameter_list  ->  OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR . inner_option_define_identifier   (rule 285)
+    option_function_parameter_list  ->  OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR . inner_option_define_identifier   (rule 285)
 
     COMMA	shift, and go to state 281
 
@@ -18529,7 +18524,7 @@ state 1008
 
 state 1009
 
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR . inner_option_define_identifier   (rule 296)
+    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR . inner_option_define_identifier   (rule 296)
 
     COMMA	shift, and go to state 281
 
@@ -18962,7 +18957,7 @@ state 1041
 
 state 1042
 
-    option_function_parameter_list  ->  OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier .   (rule 285)
+    option_function_parameter_list  ->  OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier .   (rule 285)
 
     $default	reduce using rule 285 (option_function_parameter_list)
 
@@ -18970,7 +18965,7 @@ state 1042
 
 state 1043
 
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier .   (rule 296)
+    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier .   (rule 296)
 
     $default	reduce using rule 296 (inner_option_define_identifier)
 
