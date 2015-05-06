@@ -844,18 +844,10 @@ option_list_value
 	   {
 			$$ = new CSyntaxNode(LIST_ASSVALUE_STA, $2, $3, LISTTYPE);
 	   }
-	  /*2015-3-9 |OPEN_MPAR charliteral inner_option_list_value CLOSE_MPAR
-	   {
-			$$ = new CSyntaxNode(LIST_ASSVALUE_STA, $2, $3, LISTTYPE);
-	   }*/
 	   |OPEN_MPAR array_exp inner_option_list_value CLOSE_MPAR
 	   {
 			$$ = new CSyntaxNode(LIST_ASSVALUE_STA, $2, $3, LISTTYPE);
 	   }
-	   /*|OPEN_MPAR CLOSE_MPAR / * empty * /				   
-	   {
-			$$ = new CSyntaxNode(LIST_ASSVALUE_STA, LISTTYPE);
-   	   }*/
 	   ;     
 
 // 结构体的初始化列表{{1,"hello"},{2,"hi"}}
@@ -864,15 +856,6 @@ option_struct_list_value
 	   {
 			$$ = new CSyntaxNode(STRUCT_LIST_ASSVALUE_STA, $2, $3, LISTTYPE);
 		}	
-	   /*|OPEN_BPAR strliteral inner_option_list_value CLOSE_BPAR
-	   {
-			$$ = new CSyntaxNode(STRUCT_LIST_ASSVALUE_STA, $2, $3, LISTTYPE);
-	   }*/
-	   /*2015-3-9
-	   |OPEN_BPAR charliteral inner_option_list_value CLOSE_BPAR
-	   {
-			$$ = new CSyntaxNode(STRUCT_LIST_ASSVALUE_STA, $2, $3, LISTTYPE);
-	   }*/
 	   |OPEN_BPAR array_exp inner_option_list_value CLOSE_BPAR
 	   {
 			$$ = new CSyntaxNode(STRUCT_LIST_ASSVALUE_STA, $2, $3, LISTTYPE);
@@ -893,10 +876,6 @@ inner_option_list_value
 	   {
 			$$ = new CSyntaxNode(LIST_ASSVALUE_STA, $2, $3, LISTTYPE);
 	   }
-	  /*2015-3-9 |COMMA charliteral inner_option_list_value
-	   {
-			$$ = new CSyntaxNode(LIST_ASSVALUE_STA, $2, $3, LISTTYPE);
-	   }*/
 	   |COMMA array_exp inner_option_list_value
 	   {
 			$$ = new CSyntaxNode(LIST_ASSVALUE_STA, $2, $3, LISTTYPE);
@@ -1129,19 +1108,20 @@ option_function_parameter_list
           $$=new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $5, $1);
           pChild0=NULL;
 		}
-		// 函数的参数可以是函数指针
-	   |OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier//函数指针类型的参数
+	   // 函数的参数可以是函数指针
+	   |OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier//函数指针类型的参数
 	   {
-	      CSyntaxNode* pChild0= new CSyntaxNode(FUNCP_PARAMETER_EXP, $3, VOIDTYPE);
+	      CSyntaxNode* pChild0= new CSyntaxNode(FUNCP_PARAMETER_EXP, $3,$6, VOIDTYPE);
           $$=new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $8, FUNCPTYPE);
           pChild0=NULL;
 		}
-	   | /* empty */                  {$$ = NULL;}
+	   | /* empty */                                       {$$ = NULL;}
 	   ;
 inner_option_define_identifier
-     :COMMA option_function_parameter_list { $$ = $2;}
-	  |{$$=NULL}
+      : COMMA option_function_parameter_list {$$=$2}
+	  |  {$$=NULL}
 	  ;
+
 
 //调用函数和谓词的实参列表，加入字符串  
 option_function_identifier
@@ -1149,12 +1129,6 @@ option_function_identifier
 	   {
 			$$ = new CSyntaxNode(ACTUAL_PARAMETER_EXP, $1, $2, VOIDTYPE);
 	   }
-	   /*|ID OPEN_PAR option_function_identifier CLOSE_PAR  inner_option_function_identifier
-	   {
-	        CSyntaxNode* child0=new CSyntaxNode(FUNCTION_STA, $1, $3, NULL, NULL, VOIDTYPE);
-			$$=new CSyntaxNode(ACTUAL_PARAMETER_EXP, child0, $5, VOIDTYPE);
-			child0=NULL;
-	   }*/
 	   //函数参数可以是int, float, char等，这种情况用于sizeof函数
 	   |all_type_define                            
 	   {
@@ -1173,16 +1147,6 @@ inner_option_function_identifier
 	   {
 			$$ = new CSyntaxNode(ACTUAL_PARAMETER_EXP, $2, $3, VOIDTYPE);
 	   }
-	   /*|COMMA ID OPEN_PAR option_function_identifier CLOSE_PAR  inner_option_function_identifier
-	   {
-	        CSyntaxNode* child0=new CSyntaxNode(FUNCTION_STA, $2, $4, NULL, NULL, VOIDTYPE);
-			$$=new CSyntaxNode(ACTUAL_PARAMETER_EXP, child0, $6, VOIDTYPE);
-			child0=NULL;
-	   }*/
-	   //|COMMA ADDRESS identifier inner_option_function_identifier
-	   //{
-	   //		$$ = new CSyntaxNode(PARAMETER_EXP, new CSyntaxNode(ADDRESS_EXP, $3, VOIDTYPE), $4, VOIDTYPE);
-	   //}
 	   | /* empty */                                       {$$=NULL;}
 	   |COMMA error                                        {$$=NULL;}
 	   ;

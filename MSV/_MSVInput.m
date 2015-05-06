@@ -1,8 +1,9 @@
-function f(int z, void * RValue)
+function f(int RValue)
 {
-   z<==1 and skip
+RValue:=4
 };
-frame(x,y) and
+frame(x) and
 (
-   int x, y and skip
+char** x and skip;
+x:=(char **)(extern f(RValue))
 )
