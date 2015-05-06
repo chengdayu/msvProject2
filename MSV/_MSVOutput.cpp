@@ -530,7 +530,7 @@ if (cnt>0){cnt=(cnt)-(1);
 void  usage(int $$Ext){
 printf("usage: ltl2ba [-flag] -f formula\n");
 printf("                   or -F file\n");
-printf(" -f "formula"\ttranslate LTL ");
+printf(" -f \"formula\"\ttranslate LTL ");
 printf("into never claim\n");
 printf(" -F file\tlike -f, but with the LTL ");
 printf("formula stored in a 1-line file\n");
@@ -756,9 +756,9 @@ printf("%p",s2);
 } else {printf("%p",s1);
 }
 ;
-if (tl_yychar!=(-1) && (tl_yychar!=0)){printf(", saw '");
+if (tl_yychar!=(-1) && (tl_yychar!=0)){printf(", saw \'");
 tl_explain(0,tl_yychar);
-printf("'");
+printf("\'");
 }
 ;
 printf("\nltl2ba: ");
@@ -1230,12 +1230,12 @@ simplify_astates_acc=make_set(0,-1,0);
 simplify_astates_t=transition[0];
 while(simplify_astates_t){merge_sets(0,simplify_astates_acc,simplify_astates_t->to,0);
 ;
-$$$simplify_astates_t=simplify_astates_t;
-$$$simplify_astates_t=simplify_astates_t->nxt;
-int $$$simplify_astates_i;
-$$$simplify_astates_i=0;
-simplify_astates_t=$$$simplify_astates_t;
-simplify_astates_i=$$$simplify_astates_i;
+$$$simplify_astates_t0=simplify_astates_t;
+$$$simplify_astates_t0=simplify_astates_t->nxt;
+int $$$simplify_astates_i1;
+$$$simplify_astates_i1=0;
+simplify_astates_t=$$$simplify_astates_t0;
+simplify_astates_i=$$$simplify_astates_i1;
 }
 ;
 continue_1=0;
@@ -2108,12 +2108,12 @@ cache_dump_d=stored;
 while(cache_dump_d){continue_1=0;
 if (cache_dump_d->same){continue_1=1;
 ;
-$$$cache_dump_d=cache_dump_d;
-$$$cache_dump_d=cache_dump_d->nxt;
-int $$$cache_dump_nr;
-$$$cache_dump_nr=(cache_dump_nr)+(1);
-cache_dump_d=$$$cache_dump_d;
-cache_dump_nr=$$$cache_dump_nr;
+$$$cache_dump_d2=cache_dump_d;
+$$$cache_dump_d2=cache_dump_d->nxt;
+int $$$cache_dump_nr3;
+$$$cache_dump_nr3=(cache_dump_nr)+(1);
+cache_dump_d=$$$cache_dump_d2;
+cache_dump_nr=$$$cache_dump_nr3;
 }
 ;
 if (continue_1==0){printf("B");
@@ -2127,11 +2127,11 @@ printf(": ");
 dump(0,cache_dump_d->after);
 printf("\n");
 ;
-$$$cache_dump_d=cache_dump_d->nxt;
-int $$$cache_dump_nr;
-$$$cache_dump_nr=(cache_dump_nr)+(1);
-cache_dump_d=$$$cache_dump_d;
-cache_dump_nr=$$$cache_dump_nr;
+$$$cache_dump_d4=cache_dump_d->nxt;
+int $$$cache_dump_nr5;
+$$$cache_dump_nr5=(cache_dump_nr)+(1);
+cache_dump_d=$$$cache_dump_d4;
+cache_dump_nr=$$$cache_dump_nr5;
 }
 ;
 }
@@ -2164,11 +2164,11 @@ RValue=dupnode(0,in_cache_d->after);
 }
 ;
 if (return_1==0){if (return_1==0){;
-$$$in_cache_d=in_cache_d->nxt;
-int $$$in_cache_nr;
-$$$in_cache_nr=(in_cache_nr)+(1);
-in_cache_d=$$$in_cache_d;
-in_cache_nr=$$$in_cache_nr;
+$$$in_cache_d6=in_cache_d->nxt;
+int $$$in_cache_nr7;
+$$$in_cache_nr7=(in_cache_nr)+(1);
+in_cache_d=$$$in_cache_d6;
+in_cache_nr=$$$in_cache_nr7;
 }
 ;
 }
@@ -4582,11 +4582,11 @@ goto=1;
 }
 ;
 if (return_1==0){if (goto==0){;
-$$$addcan_prev=addcan_m;
+$$$addcan_prev8=addcan_m;
 ;
-$$$addcan_m=addcan_m->rgt;
-addcan_prev=$$$addcan_prev;
-addcan_m=$$$addcan_m;
+$$$addcan_m9=addcan_m->rgt;
+addcan_prev=$$$addcan_prev8;
+addcan_m=$$$addcan_m9;
 }
 ;
 }
@@ -4823,11 +4823,11 @@ Canonical_m=if (Canonical_m->ntyp==OR_1) Canonical_m->rgt else NULL
 ;
 if (goto==0){continue_1=0;
 ;
-$$$Canonical_m=can;
+$$$Canonical_m10=can;
 ;
-$$$Canonical_prev=NULL;
-Canonical_m=$$$Canonical_m;
-Canonical_prev=$$$Canonical_prev;
+$$$Canonical_prev11=NULL;
+Canonical_m=$$$Canonical_m10;
+Canonical_prev=$$$Canonical_prev11;
 while(Canonical_m){continue_1=0;
 if (Canonical_m->ntyp==-1){Canonical_k2=Canonical_m->rgt;
 releasenode(0,0,Canonical_m);
@@ -5139,7 +5139,7 @@ included_set_test=0;
 included_set_i=0;
 while(included_set_i<if (type==1) sym_size else if (type==2) scc_size else node_size 
  
-){included_set_test=(included_set_test)|((l1[included_set_i])&(^(l2[included_set_i])));
+){included_set_test=(included_set_test)|((l1[included_set_i])&(~(l2[included_set_i])));
 included_set_i=(included_set_i)+(1);
 }
 ;
