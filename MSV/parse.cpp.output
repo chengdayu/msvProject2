@@ -392,219 +392,6 @@ rule 171  member_in_exp -> identifier
 rule 172  member_in_exp -> array
 rule 173  member_in_exp -> point_exp
 rule 174  member_in_exp -> function
-<<<<<<< HEAD
-rule 175  member_in_exp -> OPEN_PAR ari_exp CLOSE_PAR
-rule 176  member_in_exp -> charliteral
-rule 177  member_in_exp -> address_exp
-rule 178  member_in_exp -> type_cast
-rule 179  member_in_exp -> struct_member_exp
-rule 180  bi_operator -> MUL
-rule 181  bi_operator -> DIV
-rule 182  bi_operator -> MOD
-rule 183  bi_operator -> LST
-rule 184  bi_operator -> RST
-rule 185  bi_operator -> ADDRESS
-rule 186  bi_operator -> INTER_OR
-rule 187  bi_operator -> CON
-rule 188  ari_operator -> ADD
-rule 189  ari_operator -> SUB
-rule 190  array_exp -> array_exp CON array_exp
-rule 191  array_exp -> option_list_value
-rule 192  array_exp -> option_struct_list_value
-rule 193  array_exp -> OPEN_PAR array_exp CLOSE_PAR
-rule 194  option_list_value -> OPEN_MPAR ari_exp inner_option_list_value CLOSE_MPAR
-rule 195  option_list_value -> OPEN_MPAR strliteral inner_option_list_value CLOSE_MPAR
-rule 196  option_list_value -> OPEN_MPAR array_exp inner_option_list_value CLOSE_MPAR
-rule 197  option_struct_list_value -> OPEN_BPAR ari_exp inner_option_list_value CLOSE_BPAR
-rule 198  option_struct_list_value -> OPEN_BPAR strliteral inner_option_list_value CLOSE_BPAR
-rule 199  option_struct_list_value -> OPEN_BPAR array_exp inner_option_list_value CLOSE_BPAR
-rule 200  inner_option_list_value -> COMMA ari_exp inner_option_list_value
-rule 201  inner_option_list_value -> COMMA strliteral inner_option_list_value
-rule 202  inner_option_list_value -> COMMA array_exp inner_option_list_value
-rule 203  inner_option_list_value ->		/* empty */
-rule 204  inner_option_list_value -> COMMA error
-rule 205  address_exp -> ADDRESS identifier
-rule 206  address_exp -> ADDRESS array
-rule 207  address_exp -> ADDRESS struct_member_exp
-rule 208  address_exp -> ADDRESS address_exp
-rule 209  address_exp -> OPEN_PAR address_exp CLOSE_PAR
-rule 210  type_cast -> OPEN_PAR INTDECLARATION CLOSE_PAR type_cast_alg_exp
-rule 211  type_cast -> OPEN_PAR FLOATDECLARATION CLOSE_PAR type_cast_alg_exp
-rule 212  type_cast -> OPEN_PAR CHARDECLARATION CLOSE_PAR type_cast_alg_exp
-rule 213  type_cast -> OPEN_PAR SIGNED INTDECLARATION CLOSE_PAR type_cast_alg_exp
-rule 214  type_cast -> OPEN_PAR SIGNED CHARDECLARATION CLOSE_PAR type_cast_alg_exp
-rule 215  type_cast -> OPEN_PAR UNSIGNED INTDECLARATION CLOSE_PAR type_cast_alg_exp
-rule 216  type_cast -> OPEN_PAR UNSIGNED CHARDECLARATION CLOSE_PAR type_cast_alg_exp
-rule 217  type_cast -> OPEN_PAR INTDECLARATION MUL CLOSE_PAR casted_element
-rule 218  type_cast -> OPEN_PAR UNSIGNED INTDECLARATION MUL CLOSE_PAR casted_element
-rule 219  type_cast -> OPEN_PAR FLOATDECLARATION MUL CLOSE_PAR casted_element
-rule 220  type_cast -> OPEN_PAR CHARDECLARATION MUL CLOSE_PAR casted_element
-rule 221  type_cast -> OPEN_PAR UNSIGNED CHARDECLARATION MUL CLOSE_PAR casted_element
-rule 222  type_cast -> OPEN_PAR VOIDDECLARATION MUL CLOSE_PAR casted_element
-rule 223  type_cast -> OPEN_PAR INTDECLARATION MUL MUL CLOSE_PAR casted_element
-rule 224  type_cast -> OPEN_PAR UNSIGNED INTDECLARATION MUL MUL CLOSE_PAR casted_element
-rule 225  type_cast -> OPEN_PAR FLOATDECLARATION MUL MUL CLOSE_PAR casted_element
-rule 226  type_cast -> OPEN_PAR CHARDECLARATION MUL MUL CLOSE_PAR casted_element
-rule 227  type_cast -> OPEN_PAR UNSIGNED CHARDECLARATION MUL MUL CLOSE_PAR casted_element
-rule 228  type_cast -> OPEN_PAR VOIDDECLARATION MUL MUL CLOSE_PAR casted_element
-rule 229  type_cast -> OPEN_PAR STRUCT STRUCT_TYPE MUL CLOSE_PAR casted_element
-rule 230  type_cast -> OPEN_PAR STRUCT_TYPE MUL CLOSE_PAR casted_element
-rule 231  type_cast -> OPEN_PAR STRUCT STRUCT_TYPE MUL MUL CLOSE_PAR casted_element
-rule 232  type_cast -> OPEN_PAR STRUCT_TYPE MUL MUL CLOSE_PAR casted_element
-rule 233  casted_element -> type_cast_alg_exp
-rule 234  bool_exp -> prime_bool_exp
-rule 235  bool_exp -> NEGATION bool_exp
-rule 236  bool_exp -> bool_exp AND bool_exp
-rule 237  bool_exp -> bool_exp OR bool_exp
-rule 238  bool_exp -> OPEN_PAR bool_exp CLOSE_PAR
-rule 239  prime_bool_exp -> ari_exp relation_operator ari_exp
-rule 240  prime_bool_exp -> MY_TRUE
-rule 241  prime_bool_exp -> MY_FALSE
-rule 242  prime_bool_exp -> ari_exp
-rule 243  prime_bool_exp -> ari_exp EQ strliteral
-rule 244  prime_bool_exp -> ari_exp NE strliteral
-rule 245  prime_bool_exp -> strliteral EQ ari_exp
-rule 246  prime_bool_exp -> strliteral NE ari_exp
-rule 247  prime_bool_exp -> ari_exp EQ POINTERNULL
-rule 248  prime_bool_exp -> ari_exp NE POINTERNULL
-rule 249  prime_bool_exp -> POINTERNULL EQ ari_exp
-rule 250  prime_bool_exp -> POINTERNULL NE ari_exp
-rule 251  prime_bool_exp -> ari_exp EQ charliteral
-rule 252  prime_bool_exp -> ari_exp NE charliteral
-rule 253  relation_operator -> GE
-rule 254  relation_operator -> LE
-rule 255  relation_operator -> NE
-rule 256  relation_operator -> GT
-rule 257  relation_operator -> LT
-rule 258  relation_operator -> EQ
-rule 259  sign_type_define -> UNSIGNED INTDECLARATION
-rule 260  sign_type_define -> UNSIGNED CHARDECLARATION
-rule 261  all_type_define -> sign_type_define
-rule 262  all_type_define -> type_define
-rule 263  option_function_parameter_list -> all_type_define identifier inner_option_define_identifier
-rule 264  option_function_parameter_list -> all_type_define inner_option_define_identifier
-rule 265  option_function_parameter_list -> STRUCT_TYPE identifier inner_option_define_identifier
-rule 266  option_function_parameter_list -> STRUCT_TYPE MUL identifier inner_option_define_identifier
-rule 267  option_function_parameter_list -> STRUCT_TYPE MUL MUL identifier inner_option_define_identifier
-rule 268  option_function_parameter_list -> STRUCT_TYPE identifier ARRAY inner_option_define_identifier
-rule 269  option_function_parameter_list -> ID identifier inner_option_define_identifier
-rule 270  option_function_parameter_list -> ID MUL identifier inner_option_define_identifier
-rule 271  option_function_parameter_list -> ID MUL MUL identifier inner_option_define_identifier
-rule 272  option_function_parameter_list -> ID identifier ARRAY inner_option_define_identifier
-rule 273  option_function_parameter_list -> STRUCT_TYPE inner_option_define_identifier
-rule 274  option_function_parameter_list -> STRUCT_TYPE MUL inner_option_define_identifier
-rule 275  option_function_parameter_list -> STRUCT_TYPE MUL MUL inner_option_define_identifier
-rule 276  option_function_parameter_list -> ID inner_option_define_identifier
-rule 277  option_function_parameter_list -> ID MUL inner_option_define_identifier
-rule 278  option_function_parameter_list -> ID MUL MUL inner_option_define_identifier
-rule 279  option_function_parameter_list -> all_type_define identifier ARRAY inner_option_define_identifier
-rule 280  option_function_parameter_list -> all_type_define MUL identifier ARRAY inner_option_define_identifier
-rule 281  option_function_parameter_list -> all_type_define identifier ARRAY OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier
-rule 282  option_function_parameter_list -> all_type_define MUL identifier inner_option_define_identifier
-rule 283  option_function_parameter_list -> all_type_define MUL inner_option_define_identifier
-rule 284  option_function_parameter_list -> all_type_define MUL MUL identifier inner_option_define_identifier
-rule 285  option_function_parameter_list -> OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier
-rule 286  option_function_parameter_list ->		/* empty */
-rule 287  inner_option_define_identifier -> COMMA all_type_define identifier inner_option_define_identifier
-rule 288  inner_option_define_identifier -> COMMA all_type_define inner_option_define_identifier
-rule 289  inner_option_define_identifier -> COMMA ID identifier inner_option_define_identifier
-rule 290  inner_option_define_identifier -> COMMA STRUCT_TYPE identifier inner_option_define_identifier
-rule 291  inner_option_define_identifier -> COMMA STRUCT_TYPE MUL identifier inner_option_define_identifier
-rule 292  inner_option_define_identifier -> COMMA ID identifier ARRAY inner_option_define_identifier
-rule 293  inner_option_define_identifier -> COMMA STRUCT_TYPE identifier ARRAY inner_option_define_identifier
-rule 294  inner_option_define_identifier -> COMMA all_type_define identifier ARRAY inner_option_define_identifier
-rule 295  inner_option_define_identifier -> COMMA all_type_define MUL identifier ARRAY inner_option_define_identifier
-rule 296  inner_option_define_identifier -> COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier
-rule 297  inner_option_define_identifier ->		/* empty */
-rule 298  inner_option_define_identifier -> COMMA all_type_define identifier OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier
-rule 299  inner_option_define_identifier -> COMMA all_type_define identifier OPEN_MPAR ari_exp COMMA ari_exp CLOSE_MPAR inner_option_define_identifier
-rule 300  inner_option_define_identifier -> COMMA all_type_define identifier ARRAY OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier
-rule 301  inner_option_define_identifier -> COMMA all_type_define MUL identifier inner_option_define_identifier
-rule 302  inner_option_define_identifier -> COMMA all_type_define MUL inner_option_define_identifier
-rule 303  inner_option_define_identifier -> COMMA error
-rule 304  option_function_identifier -> ass_right inner_option_function_identifier
-rule 305  option_function_identifier -> all_type_define
-rule 306  option_function_identifier ->		/* empty */
-rule 307  option_function_identifier -> ADDRESS error
-rule 308  inner_option_function_identifier -> COMMA ass_right inner_option_function_identifier
-rule 309  inner_option_function_identifier ->		/* empty */
-rule 310  inner_option_function_identifier -> COMMA error
-rule 311  statement_bpar -> OPEN_BPAR statement CLOSE_BPAR
-rule 312  statement_bpar -> error CLOSE_BPAR
-rule 313  bool_par -> OPEN_PAR bool_exp CLOSE_PAR
-rule 314  bool_par -> error CLOSE_PAR
-rule 315  identifier -> ID
-rule 316  identifier -> OPEN_PAR identifier CLOSE_PAR
-rule 317  strliteral -> STRLITERAL
-rule 318  intliteral -> INTLITERAL
-rule 319  charliteral -> CHARLITERAL
-rule 320  floatliteral -> FLOATLITERAL
-rule 321  option_frame_identifier -> COMMA identifier option_frame_identifier
-rule 322  option_frame_identifier ->		/* empty */
-rule 323  option_frame_identifier -> COMMA error
-rule 324  option_projection ->		/* empty */
-rule 325  option_projection -> COMMA statement option_projection
-rule 326  imply_pre -> prime_bool_exp
-rule 327  imply_pre -> NEGATION imply_pre
-rule 328  imply_pre -> imply_pre AND imply_pre
-rule 329  imply_pre -> imply_pre OR imply_pre
-rule 330  imply_pre -> OPEN_PAR imply_pre CLOSE_PAR
-rule 331  while_statement -> WHILE bool_par statement_bpar
-rule 332  for_statement -> FOR ari_exp TIMES DO statement_bpar
-rule 333  extend_for_statement -> FOR OPEN_PAR for_sta_init COMMA for_sta_condition COMMA for_sta_control CLOSE_PAR statement_bpar
-rule 334  for_sta_init -> ass_statement
-rule 335  for_sta_init -> declaration
-rule 336  for_sta_init ->		/* empty */
-rule 337  for_sta_condition -> bool_exp
-rule 338  for_sta_condition ->		/* empty */
-rule 339  for_sta_control -> ass_statement
-rule 340  for_sta_control ->		/* empty */
-rule 341  switch_statement -> SWITCH OPEN_PAR member_in_exp CLOSE_PAR OPEN_BPAR case_par CLOSE_BPAR
-rule 342  case_par -> CASE member_in_exp COLON OPEN_PAR statement CLOSE_PAR init_case_par
-rule 343  case_par -> DEFAULT COLON OPEN_PAR statement CLOSE_PAR
-rule 344  init_case_par -> BREAK case_par
-rule 345  init_case_par -> case_par
-rule 346  init_case_par ->		/* empty */
-rule 347  if_statement -> IF bool_exp THEN statement_bpar option_else_statement
-rule 348  option_else_statement -> ELSE statement_bpar
-rule 349  option_else_statement ->		/* empty */
-rule 350  output_statement -> DISPLAY OPEN_PAR ass_right CLOSE_PAR
-rule 351  output_statement -> DISPLAY OPEN_PAR ass_right option_output CLOSE_PAR
-rule 352  option_output ->		/* empty */
-rule 353  option_output -> COMMA ass_right option_output
-rule 354  input_statement -> REQUEST OPEN_PAR identifier CLOSE_PAR
-rule 355  input_statement -> REQUEST OPEN_PAR identifier option_input CLOSE_PAR
-rule 356  input_statement -> REQUEST OPEN_PAR array CLOSE_PAR
-rule 357  input_statement -> REQUEST OPEN_PAR array option_input CLOSE_PAR
-rule 358  input_statement -> REQUEST OPEN_PAR struct_member_exp CLOSE_PAR
-rule 359  option_input ->		/* empty */
-rule 360  option_input -> COMMA identifier option_input
-rule 361  option_input -> COMMA array option_input
-rule 362  struct_member_exp -> identifier DOT identifier option_struct_member_exp
-rule 363  struct_member_exp -> array DOT identifier option_struct_member_exp
-rule 364  struct_member_exp -> point_exp DOT identifier option_struct_member_exp
-rule 365  struct_member_exp -> identifier DOT array option_struct_member_exp
-rule 366  struct_member_exp -> array DOT array option_struct_member_exp
-rule 367  struct_member_exp -> point_exp DOT array option_struct_member_exp
-rule 368  struct_member_exp -> identifier IMPLY identifier option_struct_member_exp
-rule 369  struct_member_exp -> array IMPLY identifier option_struct_member_exp
-rule 370  struct_member_exp -> OPEN_PAR address_exp CLOSE_PAR IMPLY identifier option_struct_member_exp
-rule 371  struct_member_exp -> point_exp IMPLY identifier option_struct_member_exp
-rule 372  struct_member_exp -> identifier IMPLY array option_struct_member_exp
-rule 373  struct_member_exp -> array IMPLY array option_struct_member_exp
-rule 374  struct_member_exp -> OPEN_PAR address_exp CLOSE_PAR IMPLY array option_struct_member_exp
-rule 375  struct_member_exp -> identifier DOT function
-rule 376  struct_member_exp -> identifier IMPLY function
-rule 377  struct_member_exp -> point_exp IMPLY array option_struct_member_exp
-rule 378  struct_member_exp -> OPEN_PAR struct_member_exp CLOSE_PAR
-rule 379  option_struct_member_exp ->		/* empty */
-rule 380  option_struct_member_exp -> DOT identifier option_struct_member_exp
-rule 381  option_struct_member_exp -> DOT array option_struct_member_exp
-rule 382  option_struct_member_exp -> IMPLY identifier option_struct_member_exp
-rule 383  option_struct_member_exp -> IMPLY array option_struct_member_exp
-rule 384  option_struct_member_exp -> DOT function
-rule 385  option_struct_member_exp -> IMPLY function
-=======
 rule 175  member_in_exp -> address_exp
 rule 176  member_in_exp -> type_cast
 rule 177  member_in_exp -> struct_member_exp
@@ -700,7 +487,7 @@ rule 266  option_function_parameter_list -> all_type_define identifier ARRAY OPE
 rule 267  option_function_parameter_list -> all_type_define MUL identifier inner_option_define_identifier
 rule 268  option_function_parameter_list -> all_type_define MUL inner_option_define_identifier
 rule 269  option_function_parameter_list -> all_type_define MUL MUL identifier inner_option_define_identifier
-rule 270  option_function_parameter_list -> OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier
+rule 270  option_function_parameter_list -> OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier
 rule 271  option_function_parameter_list ->		/* empty */
 rule 272  inner_option_define_identifier -> COMMA all_type_define identifier inner_option_define_identifier
 rule 273  inner_option_define_identifier -> COMMA all_type_define inner_option_define_identifier
@@ -711,7 +498,7 @@ rule 277  inner_option_define_identifier -> COMMA ID identifier ARRAY inner_opti
 rule 278  inner_option_define_identifier -> COMMA STRUCT_TYPE identifier ARRAY inner_option_define_identifier
 rule 279  inner_option_define_identifier -> COMMA all_type_define identifier ARRAY inner_option_define_identifier
 rule 280  inner_option_define_identifier -> COMMA all_type_define MUL identifier ARRAY inner_option_define_identifier
-rule 281  inner_option_define_identifier -> COMMA OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier
+rule 281  inner_option_define_identifier -> COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier
 rule 282  inner_option_define_identifier ->		/* empty */
 rule 283  inner_option_define_identifier -> COMMA all_type_define identifier OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier
 rule 284  inner_option_define_identifier -> COMMA all_type_define identifier OPEN_MPAR ari_exp COMMA ari_exp CLOSE_MPAR inner_option_define_identifier
@@ -802,7 +589,6 @@ rule 368  option_struct_member_exp -> IMPLY identifier option_struct_member_exp
 rule 369  option_struct_member_exp -> IMPLY array option_struct_member_exp
 rule 370  option_struct_member_exp -> DOT function
 rule 371  option_struct_member_exp -> IMPLY function
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
 
 Terminals, with rules where they appear
 
@@ -888,68 +674,6 @@ CHANNEL (316)
 PUT (317)
 GET (318)
 ERROR_TOKEN (319)
-<<<<<<< HEAD
-STRFUNCHEAD (320)
-STRFUNCTAIL (321)
-STRFUNCCAT (322)
-STRFUNCCMP (323)
-STRFUNCCPY (324)
-STRFUNCLEN (325)
-EXTERN (326) 70
-UNSIGNED (327) 76 118 122 124 125 126 128 141 144 215 216 218 221 224
-    227 259 260
-SIGNED (328) 75 213 214
-CHOP (329) 8 32
-IMPLY (330) 55 368 369 370 371 372 373 374 376 377 382 383 385
-IFF (331) 6
-PROPIMPLY (332) 7
-OR (333) 5 31 237 329
-PARALLEL (334) 54
-AND (335) 4 30 56 66 236 328
-ASS_P (336) 60 87 96 97 98 99 100 130
-ASS_N (337) 131
-CON (338) 187 190
-ADDRESS (339) 185 205 206 207 208 307
-NE (340) 244 246 248 250 252 255
-EQ (341) 243 245 247 249 251 258
-GE (342) 253
-LE (343) 254
-GT (344) 256
-LT (345) 257
-LST (346) 183
-RST (347) 184
-ADD (348) 188
-SUB (349) 167 189
-MUL (350) 84 85 86 87 101 117 118 119 120 121 122 123 124 125 126 127
-    128 129 138 140 141 142 143 144 149 150 151 153 154 180 217 218
-    219 220 221 222 223 224 225 226 227 228 229 230 231 232 266 267
-    270 271 274 275 277 278 280 282 283 284 285 291 295 296 301 302
-DIV (351) 181
-MOD (352) 182
-BNE (353) 168
-CHOPSTAR (354) 26
-NEXT (355) 13 40 115
-NEGATION (356) 22 235 327
-LENGTH (357) 17 48
-REQUEST (358) 354 355 356 357 358
-FINAL (359) 21 53
-KEEP (360) 10 41
-ALWAYS (361) 9 42
-HALT (362) 20
-W_NEXT (363) 12
-PREFIX (364)
-SOMETIMES (365) 11
-ID (366) 24 25 59 60 69 70 73 74 80 81 86 87 95 97 98 99 100 105 106
-    139 140 141 142 143 144 269 270 271 272 276 277 278 285 289 292
-    296 315
-STRLITERAL (367) 317
-STRUCT_TYPE (368) 79 82 83 229 230 231 232 265 266 267 268 273 274
-    275 290 291 293
-INTLITERAL (369) 117 118 119 120 121 122 123 124 125 126 127 128 129
-    318
-FLOATLITERAL (370) 320
-CHARLITERAL (371) 319
-=======
 EXTERN (320) 70
 UNSIGNED (321) 76 118 122 124 125 126 128 141 144 219 220 222 225 228
     231 244 245
@@ -997,7 +721,7 @@ W_NEXT (359) 12
 PREFIX (360)
 SOMETIMES (361) 11
 ID (362) 24 25 59 60 69 70 73 74 80 81 86 87 95 97 98 99 100 105 106
-    138 254 255 256 257 261 262 263 274 277 301
+    138 254 255 256 257 261 262 263 270 274 277 281 301
 STRLITERAL (363) 303
 STRUCT_TYPE (364) 79 82 83 233 234 235 236 250 251 252 253 258 259
     260 275 276 278 291
@@ -1005,7 +729,6 @@ INTLITERAL (365) 117 118 119 120 121 122 123 124 125 126 127 128 129
     304
 FLOATLITERAL (366) 306
 CHARLITERAL (367) 305
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
 
 Nonterminals, with rules where they appear
 
@@ -1070,132 +793,6 @@ option_ari_exp (136)
     144 146 152
 point_exp (137)
     on left: 149 150 151 152 153 154 155, on right: 113 150 152 155
-<<<<<<< HEAD
-    173 364 367 371 377
-ari_exp (141)
-    on left: 156 157 158 159, on right: 17 48 86 87 95 99 100 105 106
-    117 118 119 120 121 122 123 124 125 126 127 128 129 132 139 140
-    141 142 143 144 146 152 153 154 157 158 159 162 175 194 197 200
-    239 242 243 244 245 246 247 248 249 250 251 252 281 298 299 300
-    332
-type_cast_alg_exp (142)
-    on left: 160 161, on right: 210 211 212 213 214 215 216 233
-option_exp_else_statement (143)
-    on left: 162 163, on right: 159
-simple_ari_exp (144)
-    on left: 164 165, on right: 156 157 158 160 161 165
-member_in_exp (145)
-    on left: 166 167 168 169 170 171 172 173 174 175 176 177 178 179
-   , on right: 164 165 167 168 341 342
-bi_operator (146)
-    on left: 180 181 182 183 184 185 186 187, on right: 165
-ari_operator (147)
-    on left: 188 189, on right: 158 161
-array_exp (148)
-    on left: 190 191 192 193, on right: 87 97 99 133 190 193 196 199
-    202
-option_list_value (149)
-    on left: 194 195 196, on right: 191
-option_struct_list_value (150)
-    on left: 197 198 199, on right: 192
-inner_option_list_value (151)
-    on left: 200 201 202 203 204, on right: 194 195 196 197 198 199
-    200 201 202
-address_exp (152)
-    on left: 205 206 207 208 209, on right: 177 208 209 370 374
-type_cast (153)
-    on left: 210 211 212 213 214 215 216 217 218 219 220 221 222 223
-    224 225 226 227 228 229 230 231 232, on right: 178
-casted_element (154)
-    on left: 233, on right: 217 218 219 220 221 222 223 224 225 226
-    227 228 229 230 231 232
-bool_exp (155)
-    on left: 234 235 236 237 238, on right: 43 44 159 235 236 237 238
-    313 337 347
-prime_bool_exp (156)
-    on left: 239 240 241 242 243 244 245 246 247 248 249 250 251 252
-   , on right: 25 234 326
-relation_operator (157)
-    on left: 253 254 255 256 257 258, on right: 157 239
-sign_type_define (158)
-    on left: 259 260, on right: 261
-all_type_define (159)
-    on left: 261 262, on right: 153 263 264 279 280 281 282 283 284
-    287 288 294 295 298 299 300 301 302 305
-option_function_parameter_list (160)
-    on left: 263 264 265 266 267 268 269 270 271 272 273 274 275 276
-    277 278 279 280 281 282 283 284 285 286, on right: 59 60 84 85
-    86 87 135 285 296
-inner_option_define_identifier (161)
-    on left: 287 288 289 290 291 292 293 294 295 296 297 298 299 300
-    301 302 303, on right: 63 263 264 265 266 267 268 269 270 271 272
-    273 274 275 276 277 278 279 280 281 282 283 284 285 287 288 289
-    290 291 292 293 294 295 296 298 299 300 301 302
-option_function_identifier (162)
-    on left: 304 305 306 307, on right: 69 70 71
-inner_option_function_identifier (163)
-    on left: 308 309 310, on right: 304 308
-statement_bpar (164)
-    on left: 311 312, on right: 57 58 331 332 333 347 348
-bool_par (165)
-    on left: 313 314, on right: 331
-identifier (166)
-    on left: 315 316, on right: 56 63 84 85 94 96 110 149 171 205 263
-    265 266 267 268 269 270 271 272 279 280 281 282 284 287 289 290
-    291 292 293 294 295 298 299 300 301 316 321 354 355 360 362 363
-    364 365 368 369 370 371 372 375 376 380 382
-strliteral (167)
-    on left: 317, on right: 98 100 134 135 195 198 201 243 244 245
-    246
-intliteral (168)
-    on left: 318, on right: 166
-charliteral (169)
-    on left: 319, on right: 176 251 252
-floatliteral (170)
-    on left: 320, on right: 170
-option_frame_identifier (171)
-    on left: 321 322 323, on right: 56 321
-option_projection (172)
-    on left: 324 325, on right: 57 325
-imply_pre (173)
-    on left: 326 327 328 329 330, on right: 55 327 328 329 330
-while_statement (174)
-    on left: 331, on right: 37
-for_statement (175)
-    on left: 332, on right: 38
-extend_for_statement (176)
-    on left: 333, on right: 39
-for_sta_init (177)
-    on left: 334 335 336, on right: 333
-for_sta_condition (178)
-    on left: 337 338, on right: 333
-for_sta_control (179)
-    on left: 339 340, on right: 333
-switch_statement (180)
-    on left: 341, on right: 35
-case_par (181)
-    on left: 342 343, on right: 341 344 345
-init_case_par (182)
-    on left: 344 345 346, on right: 342
-if_statement (183)
-    on left: 347, on right: 36
-option_else_statement (184)
-    on left: 348 349, on right: 347
-output_statement (185)
-    on left: 350 351, on right: 50
-option_output (186)
-    on left: 352 353, on right: 351 353
-input_statement (187)
-    on left: 354 355 356 357 358, on right: 49
-option_input (188)
-    on left: 359 360 361, on right: 355 357 360 361
-struct_member_exp (189)
-    on left: 362 363 364 365 366 367 368 369 370 371 372 373 374 375
-    376 377 378, on right: 111 179 207 358 378
-option_struct_member_exp (190)
-    on left: 379 380 381 382 383 384 385, on right: 362 363 364 365
-    366 367 368 369 370 371 372 373 374 377 380 381 382 383
-=======
     173 350 353 357 363
 ari_exp (138)
     on left: 156 157 158 159 160 161, on right: 17 25 43 44 48 86 87
@@ -1259,9 +856,8 @@ bool_par (159)
 identifier (160)
     on left: 301 302, on right: 56 63 84 85 94 96 110 140 141 142 143
     144 149 171 209 248 250 251 252 253 254 255 256 257 264 265 266
-    267 269 270 272 274 275 276 277 278 279 280 281 283 284 285 286
-    302 307 340 341 346 348 349 350 351 354 355 356 357 358 361 362
-    366 368
+    267 269 272 274 275 276 277 278 279 280 283 284 285 286 302 307
+    340 341 346 348 349 350 351 354 355 356 357 358 361 362 366 368
 strliteral (161)
     on left: 303, on right: 98 100 134 170 200 205
 intliteral (162)
@@ -1312,7 +908,6 @@ struct_member_exp (183)
 option_struct_member_exp (184)
     on left: 365 366 367 368 369 370 371, on right: 348 349 350 351
     352 353 354 355 356 357 358 359 360 363 366 367 368 369
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
 
 
 state 0
@@ -6355,7 +5950,7 @@ state 265
     inner_option_define_identifier  ->  COMMA . STRUCT_TYPE identifier ARRAY inner_option_define_identifier   (rule 278)
     inner_option_define_identifier  ->  COMMA . all_type_define identifier ARRAY inner_option_define_identifier   (rule 279)
     inner_option_define_identifier  ->  COMMA . all_type_define MUL identifier ARRAY inner_option_define_identifier   (rule 280)
-    inner_option_define_identifier  ->  COMMA . OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 281)
+    inner_option_define_identifier  ->  COMMA . OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 281)
     inner_option_define_identifier  ->  COMMA . all_type_define identifier OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier   (rule 283)
     inner_option_define_identifier  ->  COMMA . all_type_define identifier OPEN_MPAR ari_exp COMMA ari_exp CLOSE_MPAR inner_option_define_identifier   (rule 284)
     inner_option_define_identifier  ->  COMMA . all_type_define identifier ARRAY OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier   (rule 285)
@@ -6693,40 +6288,9 @@ state 280
 
 state 281
 
-<<<<<<< HEAD
-    inner_option_define_identifier  ->  COMMA . all_type_define identifier inner_option_define_identifier   (rule 287)
-    inner_option_define_identifier  ->  COMMA . all_type_define inner_option_define_identifier   (rule 288)
-    inner_option_define_identifier  ->  COMMA . ID identifier inner_option_define_identifier   (rule 289)
-    inner_option_define_identifier  ->  COMMA . STRUCT_TYPE identifier inner_option_define_identifier   (rule 290)
-    inner_option_define_identifier  ->  COMMA . STRUCT_TYPE MUL identifier inner_option_define_identifier   (rule 291)
-    inner_option_define_identifier  ->  COMMA . ID identifier ARRAY inner_option_define_identifier   (rule 292)
-    inner_option_define_identifier  ->  COMMA . STRUCT_TYPE identifier ARRAY inner_option_define_identifier   (rule 293)
-    inner_option_define_identifier  ->  COMMA . all_type_define identifier ARRAY inner_option_define_identifier   (rule 294)
-    inner_option_define_identifier  ->  COMMA . all_type_define MUL identifier ARRAY inner_option_define_identifier   (rule 295)
-    inner_option_define_identifier  ->  COMMA . OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
-    inner_option_define_identifier  ->  COMMA . all_type_define identifier OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier   (rule 298)
-    inner_option_define_identifier  ->  COMMA . all_type_define identifier OPEN_MPAR ari_exp COMMA ari_exp CLOSE_MPAR inner_option_define_identifier   (rule 299)
-    inner_option_define_identifier  ->  COMMA . all_type_define identifier ARRAY OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier   (rule 300)
-    inner_option_define_identifier  ->  COMMA . all_type_define MUL identifier inner_option_define_identifier   (rule 301)
-    inner_option_define_identifier  ->  COMMA . all_type_define MUL inner_option_define_identifier   (rule 302)
-    inner_option_define_identifier  ->  COMMA . error   (rule 303)
-
-    error	shift, and go to state 452
-    FILEDECLARATION	shift, and go to state 28
-    INTDECLARATION	shift, and go to state 40
-    STRDECLARATION	shift, and go to state 41
-    CHARDECLARATION	shift, and go to state 42
-    VOIDDECLARATION	shift, and go to state 43
-    FLOATDECLARATION	shift, and go to state 44
-    OPEN_PAR	shift, and go to state 453
-    UNSIGNED	shift, and go to state 343
-    ID  	shift, and go to state 454
-    STRUCT_TYPE	shift, and go to state 455
-=======
     ass_left  ->  struct_member_exp .   (rule 111)
     member_in_exp  ->  struct_member_exp .   (rule 177)
     struct_member_exp  ->  OPEN_PAR struct_member_exp . CLOSE_PAR   (rule 364)
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
 
     CLOSE_PAR	shift, and go to state 319
 
@@ -8909,11 +8473,7 @@ state 413
 
 state 414
 
-<<<<<<< HEAD
-    option_function_parameter_list  ->  OPEN_PAR . MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 285)
-=======
-    option_function_parameter_list  ->  OPEN_PAR . MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 270)
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
+    option_function_parameter_list  ->  OPEN_PAR . MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 270)
 
     MUL 	shift, and go to state 553
 
@@ -9004,11 +8564,7 @@ state 419
 
 state 420
 
-<<<<<<< HEAD
-    inner_option_define_identifier  ->  COMMA OPEN_PAR . MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
-=======
-    inner_option_define_identifier  ->  COMMA OPEN_PAR . MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 281)
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
+    inner_option_define_identifier  ->  COMMA OPEN_PAR . MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 281)
 
     MUL 	shift, and go to state 564
 
@@ -11217,18 +10773,9 @@ state 552
 
 state 553
 
-<<<<<<< HEAD
-    option_function_parameter_list  ->  OPEN_PAR MUL . ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 285)
+    option_function_parameter_list  ->  OPEN_PAR MUL . ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 270)
 
-    ID  	shift, and go to state 740
-=======
-    option_function_parameter_list  ->  OPEN_PAR MUL . identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 270)
-
-    OPEN_PAR	shift, and go to state 135
-    ID  	shift, and go to state 136
-
-    identifier	go to state 680
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
+    ID  	shift, and go to state 680
 
 
 
@@ -11366,18 +10913,9 @@ state 563
 
 state 564
 
-<<<<<<< HEAD
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL . ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
+    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL . ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 281)
 
-    ID  	shift, and go to state 757
-=======
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL . identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 281)
-
-    OPEN_PAR	shift, and go to state 135
-    ID  	shift, and go to state 136
-
-    identifier	go to state 697
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
+    ID  	shift, and go to state 697
 
 
 
@@ -13341,11 +12879,7 @@ state 679
 
 state 680
 
-<<<<<<< HEAD
-    option_function_parameter_list  ->  OPEN_PAR MUL ID . CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 285)
-=======
-    option_function_parameter_list  ->  OPEN_PAR MUL identifier . CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 270)
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
+    option_function_parameter_list  ->  OPEN_PAR MUL ID . CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 270)
 
     CLOSE_PAR	shift, and go to state 781
 
@@ -13528,11 +13062,7 @@ state 696
 
 state 697
 
-<<<<<<< HEAD
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID . CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
-=======
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL identifier . CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 281)
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
+    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID . CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 281)
 
     CLOSE_PAR	shift, and go to state 796
 
@@ -14776,11 +14306,7 @@ state 780
 
 state 781
 
-<<<<<<< HEAD
-    option_function_parameter_list  ->  OPEN_PAR MUL ID CLOSE_PAR . OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 285)
-=======
-    option_function_parameter_list  ->  OPEN_PAR MUL identifier CLOSE_PAR . OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 270)
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
+    option_function_parameter_list  ->  OPEN_PAR MUL ID CLOSE_PAR . OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 270)
 
     OPEN_PAR	shift, and go to state 845
 
@@ -15009,11 +14535,7 @@ state 795
 
 state 796
 
-<<<<<<< HEAD
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID CLOSE_PAR . OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
-=======
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL identifier CLOSE_PAR . OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 281)
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
+    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID CLOSE_PAR . OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 281)
 
     OPEN_PAR	shift, and go to state 853
 
@@ -15726,11 +15248,7 @@ state 844
 
 state 845
 
-<<<<<<< HEAD
-    option_function_parameter_list  ->  OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR . option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 285)
-=======
-    option_function_parameter_list  ->  OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR . option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 270)
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
+    option_function_parameter_list  ->  OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR . option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 270)
 
     FILEDECLARATION	shift, and go to state 28
     INTDECLARATION	shift, and go to state 40
@@ -15819,11 +15337,7 @@ state 852
 
 state 853
 
-<<<<<<< HEAD
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR . option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 296)
-=======
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR . option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 281)
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
+    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR . option_function_parameter_list CLOSE_PAR inner_option_define_identifier   (rule 281)
 
     FILEDECLARATION	shift, and go to state 28
     INTDECLARATION	shift, and go to state 40
@@ -16673,11 +16187,7 @@ state 891
 
 state 892
 
-<<<<<<< HEAD
-    option_function_parameter_list  ->  OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list . CLOSE_PAR inner_option_define_identifier   (rule 285)
-=======
-    option_function_parameter_list  ->  OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list . CLOSE_PAR inner_option_define_identifier   (rule 270)
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
+    option_function_parameter_list  ->  OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list . CLOSE_PAR inner_option_define_identifier   (rule 270)
 
     CLOSE_PAR	shift, and go to state 929
 
@@ -16703,15 +16213,9 @@ state 894
 
 
 
-<<<<<<< HEAD
-state 970
-
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list . CLOSE_PAR inner_option_define_identifier   (rule 296)
-=======
 state 895
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
 
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list . CLOSE_PAR inner_option_define_identifier   (rule 281)
+    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list . CLOSE_PAR inner_option_define_identifier   (rule 281)
 
     CLOSE_PAR	shift, and go to state 931
 
@@ -17396,7 +16900,7 @@ state 928
 
 state 929
 
-    option_function_parameter_list  ->  OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR . inner_option_define_identifier   (rule 270)
+    option_function_parameter_list  ->  OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR . inner_option_define_identifier   (rule 270)
 
     COMMA	shift, and go to state 265
 
@@ -17416,7 +16920,7 @@ state 930
 
 state 931
 
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR . inner_option_define_identifier   (rule 281)
+    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR . inner_option_define_identifier   (rule 281)
 
     COMMA	shift, and go to state 265
 
@@ -17459,11 +16963,7 @@ state 934
 
 
 
-<<<<<<< HEAD
-    option_function_parameter_list  ->  OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR . inner_option_define_identifier   (rule 285)
-=======
 state 935
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
 
     leftaddrshift  ->  OPEN_PAR OPEN_PAR INTDECLARATION MUL CLOSE_PAR OPEN_PAR OPEN_PAR CHARDECLARATION . MUL CLOSE_PAR INTLITERAL CLOSE_PAR CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR   (rule 127)
     array_cast_exp  ->  OPEN_PAR OPEN_PAR CHARDECLARATION . MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR   (rule 143)
@@ -17501,12 +17001,8 @@ state 937
     type_cast  ->  OPEN_PAR INTDECLARATION . MUL CLOSE_PAR casted_element   (rule 221)
     type_cast  ->  OPEN_PAR INTDECLARATION . MUL MUL CLOSE_PAR casted_element   (rule 227)
 
-<<<<<<< HEAD
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR . inner_option_define_identifier   (rule 296)
-=======
     CLOSE_PAR	shift, and go to state 384
     MUL 	shift, and go to state 968
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
 
 
 
@@ -17822,7 +17318,7 @@ state 961
 
 state 962
 
-    option_function_parameter_list  ->  OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier .   (rule 270)
+    option_function_parameter_list  ->  OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier .   (rule 270)
 
     $default	reduce using rule 270 (option_function_parameter_list)
 
@@ -17830,7 +17326,7 @@ state 962
 
 state 963
 
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier .   (rule 281)
+    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier .   (rule 281)
 
     $default	reduce using rule 281 (inner_option_define_identifier)
 
@@ -17920,15 +17416,11 @@ state 970
 
 state 971
 
-<<<<<<< HEAD
-    option_function_parameter_list  ->  OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier .   (rule 285)
-=======
     leftaddrshift  ->  OPEN_PAR OPEN_PAR UNSIGNED CHARDECLARATION MUL CLOSE_PAR OPEN_PAR OPEN_PAR INTDECLARATION . MUL CLOSE_PAR INTLITERAL CLOSE_PAR CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR   (rule 126)
     array_cast_exp  ->  OPEN_PAR OPEN_PAR INTDECLARATION . MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR   (rule 140)
     type_cast  ->  OPEN_PAR INTDECLARATION . CLOSE_PAR type_cast_alg_exp   (rule 214)
     type_cast  ->  OPEN_PAR INTDECLARATION . MUL CLOSE_PAR casted_element   (rule 221)
     type_cast  ->  OPEN_PAR INTDECLARATION . MUL MUL CLOSE_PAR casted_element   (rule 227)
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
 
     CLOSE_PAR	shift, and go to state 384
     MUL 	shift, and go to state 1003
@@ -17937,15 +17429,11 @@ state 971
 
 state 972
 
-<<<<<<< HEAD
-    inner_option_define_identifier  ->  COMMA OPEN_PAR MUL ID CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier .   (rule 296)
-=======
     leftaddrshift  ->  OPEN_PAR OPEN_PAR UNSIGNED CHARDECLARATION MUL CLOSE_PAR OPEN_PAR OPEN_PAR CHARDECLARATION . MUL CLOSE_PAR INTLITERAL CLOSE_PAR CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR   (rule 124)
     array_cast_exp  ->  OPEN_PAR OPEN_PAR CHARDECLARATION . MUL CLOSE_PAR identifier CLOSE_PAR OPEN_MPAR ari_exp option_ari_exp CLOSE_MPAR   (rule 143)
     type_cast  ->  OPEN_PAR CHARDECLARATION . CLOSE_PAR type_cast_alg_exp   (rule 216)
     type_cast  ->  OPEN_PAR CHARDECLARATION . MUL CLOSE_PAR casted_element   (rule 224)
     type_cast  ->  OPEN_PAR CHARDECLARATION . MUL MUL CLOSE_PAR casted_element   (rule 230)
->>>>>>> 548d801fb84f74412b85de9ab87f82f187558f96
 
     CLOSE_PAR	shift, and go to state 386
     MUL 	shift, and go to state 1004
