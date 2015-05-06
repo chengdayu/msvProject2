@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 frame(ALWAYS,AND_1,EQUIV,EVENTUALLY,FALSE,IMPLIES,NOT,OR_1,PREDICATE,TRUE,U_OPER,V_OPER,tl_stats,tl_simp_log,tl_simp_diff,tl_simp_fly,tl_simp_scc,tl_fjtofj,tl_errs,tl_verbose,tl_terse,All_Mem,uform,hasuform,cnt,ltl_file,add_ltl,out1,label,sym_table,transition,final_set,node_id,sym_id,node_size,sym_size,astate_count,atrans_count,bstack,bstates,bremoved,scc_stack,accept,bstate_count,btrans_count,stored,Caches,CacheHits,gstack,gremoved,gstates,init,init_size,gstate_id,gstate_count,gtrans_count,fin$,final,rank,scc_id,scc_size,bad_scc,symtab,yytext,atrans_list,gtrans_list,btrans_list,aallocs,afrees,apool,gallocs,gfrees,gpool,ballocs,bfrees,bpool,freelist,req,event,tl_yychar,tl_yylval,prec,can,mod,Stack_mx,Max_Red,Total,dumpbuf,Bscc_stack) and (
  function memset(char *des, char ch, int num,char *RValue)
  {
@@ -8901,3 +8902,19 @@ frame(ALWAYS,AND_1,EQUIV,EVENTUALLY,FALSE,IMPLIES,NOT,OR_1,PREDICATE,TRUE,U_OPER
  };
   main(RValue)
  )
+=======
+function f(int x,int RValue)
+{frame(x) and
+(
+ RValue:=x+1
+ )
+};
+frame(y) and 
+(
+	int y<==0 and skip;
+	while(!(extern f(y,RValue)<3))
+	{
+		y:=y+1
+	}
+)
+>>>>>>> 887cc154e0e70221e2ac50b882734a388d6bcb0d
