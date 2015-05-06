@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 function f(int x,int RValue)
 {frame(x) and
 (
@@ -7,17 +6,9 @@ function f(int x,int RValue)
 };
 frame(y) and 
 (
-	int y and skip;
-	if(extern f(1,RValue)<0)
-	then
+	int y<==0 and skip;
+	while(!(extern f(y,RValue)<3))
 	{
-		y:=3
-	}
-	else
-	{
-		y:=5
+		y:=y+1
 	}
 )
-=======
-output ("\n") and skip 
->>>>>>> 0774b65054519981989fef0aa5dfb3dd4caf1963
