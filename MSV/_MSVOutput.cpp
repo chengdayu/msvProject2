@@ -1587,11 +1587,11 @@ Bscc_stack=bdfs_scc;
 s->incoming=1;
 bdfs_t=s->trans->nxt;
 while(bdfs_t!=s->trans){if (bdfs_t->to->incoming==0){bdfs_1_result=bdfs(0,bdfs_t->to);
-bdfs_scc->theta=if (bdfs_scc->theta<bdfs_1_result) bdfs_scc->theta else bdfs_1_result 
+bdfs_scc->theta=(bdfs_scc->theta<bdfs_1_result) ?bdfs_scc->theta : bdfs_1_result 
 ;
 } else {break_1=0;
 bdfs_c=scc_stack->nxt;
-while(break_1==(0) && (bdfs_c!=0)){if (bdfs_c->bstate==bdfs_t->to){bdfs_scc->theta=if (bdfs_scc->theta<bdfs_c->rank) bdfs_scc->theta else bdfs_c->rank 
+while(break_1==(0) && (bdfs_c!=0)){if (bdfs_c->bstate==bdfs_t->to){bdfs_scc->theta=(bdfs_scc->theta<bdfs_c->rank) ?bdfs_scc->theta : bdfs_c->rank 
 ;
 break_1=1;
 }
@@ -1737,7 +1737,7 @@ break_1=0;
 return_1=0;
 make_btrans_state_trans=0;
 if (s->gstate->trans){make_btrans_t=s->gstate->trans->nxt;
-while(make_btrans_t!=s->gstate->trans){make_btrans_1_fin$=next_final(0,make_btrans_t->final,if (s->final==accept) 0 else s->final 
+while(make_btrans_t!=s->gstate->trans){make_btrans_1_fin$=next_final(0,make_btrans_t->final,(s->final==accept) ?0 : s->final 
 );
 break_1=0;
 make_btrans_1_to=find_bstate(0,make_btrans_t->to,make_btrans_1_fin$,s);
@@ -2914,11 +2914,11 @@ scc_stack=gdfs_scc;
 s->incoming=1;
 gdfs_t=s->trans->nxt;
 while(gdfs_t!=s->trans){if (gdfs_t->to->incoming==0){gdfs_1_result=gdfs(0,gdfs_t->to);
-gdfs_scc->theta=if (gdfs_scc->theta<gdfs_1_result) gdfs_scc->theta else gdfs_1_result 
+gdfs_scc->theta=(gdfs_scc->theta<gdfs_1_result) ?gdfs_scc->theta : gdfs_1_result 
 ;
 } else {break_1=0;
 gdfs_c=scc_stack->nxt;
-while(break_1==(0) && (gdfs_c!=0)){if (gdfs_c->gstate==gdfs_t->to){gdfs_scc->theta=if (gdfs_scc->theta<gdfs_c->rank) gdfs_scc->theta else gdfs_c->rank 
+while(break_1==(0) && (gdfs_c!=0)){if (gdfs_c->gstate==gdfs_t->to){gdfs_scc->theta=(gdfs_scc->theta<gdfs_c->rank) ?gdfs_scc->theta : gdfs_c->rank 
 ;
 break_1=1;
 }
@@ -3081,7 +3081,7 @@ RValue=s;
 }
 ;
 if (return_1==0){s=(GState*)(tl_emalloc(1,24));
-s->id=if (empty_set(1,set,0)) 0 else gstate_id 
+s->id=(empty_set(1,set,0)) ?0 : gstate_id 
 ;
 if (!(empty_set(1,set,0))){gstate_id=(gstate_id)+(1);
 }
@@ -3341,7 +3341,7 @@ gstates->nxt=gstates;
 gstates->prv=gstates;
 mk_generalized_t=transition[0];
 while(mk_generalized_t){mk_generalized_s=(GState*)(tl_emalloc(1,24));
-mk_generalized_s->id=if (empty_set(1,mk_generalized_t->to,0)) 0 else gstate_id 
+mk_generalized_s->id=(empty_set(1,mk_generalized_t->to,0)) ?0 : gstate_id 
 ;
 if (!(empty_set(1,mk_generalized_t->to,0))){gstate_id=(gstate_id)+(1);
 }
@@ -4668,12 +4668,12 @@ releasenode(0,1,n);
 if (Canonical_tok==AND_1){continue_1=0;
 Canonical_m=can;
 while(Canonical_m){continue_1=0;
-Canonical_k1=if (Canonical_m->ntyp==AND_1) Canonical_m->lft else Canonical_m 
+Canonical_k1=(Canonical_m->ntyp==AND_1) ?Canonical_m->lft : Canonical_m 
 ;
 if (Canonical_k1->ntyp==TRUE){marknode(0,AND_1,Canonical_m);
 continue_1=1;
 Canonical_dflt=tl_nn(0,TRUE,NULL,NULL);
-Canonical_m=if (Canonical_m->ntyp==AND_1) Canonical_m->rgt else NULL 
+Canonical_m=(Canonical_m->ntyp==AND_1) ?Canonical_m->rgt : NULL 
 ;
 }
 ;
@@ -4682,7 +4682,7 @@ goto=1;
 can=tl_nn(0,FALSE,NULL,NULL);
 }
 ;
-if (goto==0){Canonical_m=if (Canonical_m->ntyp==AND_1) Canonical_m->rgt else NULL 
+if (goto==0){Canonical_m=(Canonical_m->ntyp==AND_1) ?Canonical_m->rgt : NULL 
 ;
 }
 ;
@@ -4696,33 +4696,33 @@ while(Canonical_m){continue_1=0;
 Canonical_p=can;
 while(Canonical_p){continue_1=0;
 if (Canonical_p==(Canonical_m) || (Canonical_p->ntyp==(-1) || (Canonical_m->ntyp==-1))){continue_1=1;
-Canonical_p=if (Canonical_p->ntyp==AND_1) Canonical_p->rgt else NULL 
+Canonical_p=(Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NULL 
 ;
 }
 ;
-if (continue_1==0){Canonical_k1=if (Canonical_m->ntyp==AND_1) Canonical_m->lft else Canonical_m 
+if (continue_1==0){Canonical_k1=(Canonical_m->ntyp==AND_1) ?Canonical_m->lft : Canonical_m 
 ;
-Canonical_k2=if (Canonical_p->ntyp==AND_1) Canonical_p->lft else Canonical_p 
+Canonical_k2=(Canonical_p->ntyp==AND_1) ?Canonical_p->lft : Canonical_p 
 ;
 if (isequal(1,Canonical_k1,Canonical_k2)){marknode(0,AND_1,Canonical_p);
 continue_1=1;
-Canonical_p=if (Canonical_p->ntyp==AND_1) Canonical_p->rgt else NULL 
+Canonical_p=(Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NULL 
 ;
 }
 ;
 if (continue_1==0){if (anywhere(1,OR_1,Canonical_k1,Canonical_k2)){marknode(0,AND_1,Canonical_p);
 continue_1=1;
-Canonical_p=if (Canonical_p->ntyp==AND_1) Canonical_p->rgt else NULL 
+Canonical_p=(Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NULL 
 ;
 }
 ;
 if (continue_1==0){if (Canonical_k2->ntyp==(U_OPER) && (anywhere(1,AND_1,Canonical_k2->rgt,can))){marknode(0,AND_1,Canonical_p);
 continue_1=1;
-Canonical_p=if (Canonical_p->ntyp==AND_1) Canonical_p->rgt else NULL 
+Canonical_p=(Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NULL 
 ;
 }
 ;
-if (continue_1==0){Canonical_p=if (Canonical_p->ntyp==AND_1) Canonical_p->rgt else NULL 
+if (continue_1==0){Canonical_p=(Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NULL 
 ;
 }
 ;
@@ -4735,7 +4735,7 @@ if (continue_1==0){Canonical_p=if (Canonical_p->ntyp==AND_1) Canonical_p->rgt el
 }
 ;
 continue_1=0;
-Canonical_m=if (Canonical_m->ntyp==AND_1) Canonical_m->rgt else NULL 
+Canonical_m=(Canonical_m->ntyp==AND_1) ?Canonical_m->rgt : NULL 
 ;
 }
 ;
@@ -4746,12 +4746,12 @@ Canonical_m=if (Canonical_m->ntyp==AND_1) Canonical_m->rgt else NULL
 if (goto==0){if (Canonical_tok==OR_1){continue_1=0;
 Canonical_m=can;
 while(Canonical_m){continue_1=0;
-Canonical_k1=if (Canonical_m->ntyp==OR_1) Canonical_m->lft else Canonical_m 
+Canonical_k1=(Canonical_m->ntyp==OR_1) ?Canonical_m->lft : Canonical_m 
 ;
 if (Canonical_k1->ntyp==FALSE){marknode(0,OR_1,Canonical_m);
 continue_1=1;
 Canonical_dflt=tl_nn(0,FALSE,NULL,NULL);
-Canonical_m=if (Canonical_m->ntyp==OR_1) Canonical_m->rgt else NULL 
+Canonical_m=(Canonical_m->ntyp==OR_1) ?Canonical_m->rgt : NULL 
 ;
 }
 ;
@@ -4760,7 +4760,7 @@ goto=1;
 can=tl_nn(0,TRUE,NULL,NULL);
 }
 ;
-if (goto==0){Canonical_m=if (Canonical_m->ntyp==OR_1) Canonical_m->rgt else NULL 
+if (goto==0){Canonical_m=(Canonical_m->ntyp==OR_1) ?Canonical_m->rgt : NULL 
 ;
 }
 ;
@@ -4774,33 +4774,33 @@ while(Canonical_m){continue_1=0;
 Canonical_p=can;
 while(Canonical_p){continue_1=0;
 if (Canonical_p==(Canonical_m) || (Canonical_p->ntyp==(-1) || (Canonical_m->ntyp==-1))){continue_1=1;
-Canonical_p=if (Canonical_p->ntyp==OR_1) Canonical_p->rgt else NULL 
+Canonical_p=(Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NULL 
 ;
 }
 ;
-if (continue_1==0){Canonical_k1=if (Canonical_m->ntyp==OR_1) Canonical_m->lft else Canonical_m 
+if (continue_1==0){Canonical_k1=(Canonical_m->ntyp==OR_1) ?Canonical_m->lft : Canonical_m 
 ;
-Canonical_k2=if (Canonical_p->ntyp==OR_1) Canonical_p->lft else Canonical_p 
+Canonical_k2=(Canonical_p->ntyp==OR_1) ?Canonical_p->lft : Canonical_p 
 ;
 if (isequal(1,Canonical_k1,Canonical_k2)){marknode(0,OR_1,Canonical_p);
 continue_1=1;
-Canonical_p=if (Canonical_p->ntyp==OR_1) Canonical_p->rgt else NULL 
+Canonical_p=(Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NULL 
 ;
 }
 ;
 if (continue_1==0){if (anywhere(1,AND_1,Canonical_k1,Canonical_k2)){marknode(0,OR_1,Canonical_p);
 continue_1=1;
-Canonical_p=if (Canonical_p->ntyp==OR_1) Canonical_p->rgt else NULL 
+Canonical_p=(Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NULL 
 ;
 }
 ;
 if (continue_1==0){if (Canonical_k2->ntyp==(V_OPER) && (Canonical_k2->lft->ntyp==(FALSE) && (anywhere(1,AND_1,Canonical_k2->rgt,can)))){marknode(0,OR_1,Canonical_p);
 continue_1=1;
-Canonical_p=if (Canonical_p->ntyp==OR_1) Canonical_p->rgt else NULL 
+Canonical_p=(Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NULL 
 ;
 }
 ;
-if (continue_1==0){Canonical_p=if (Canonical_p->ntyp==OR_1) Canonical_p->rgt else NULL 
+if (continue_1==0){Canonical_p=(Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NULL 
 ;
 }
 ;
@@ -4813,7 +4813,7 @@ if (continue_1==0){Canonical_p=if (Canonical_p->ntyp==OR_1) Canonical_p->rgt els
 }
 ;
 continue_1=0;
-Canonical_m=if (Canonical_m->ntyp==OR_1) Canonical_m->rgt else NULL 
+Canonical_m=(Canonical_m->ntyp==OR_1) ?Canonical_m->rgt : NULL 
 ;
 }
 ;
@@ -4892,7 +4892,7 @@ int * RValue=0;
 int return_1;
 return_1=0;
 return_1=1;
-RValue=(int *)(tl_emalloc(1,if (type==1) sym_size else if (type==2) scc_size else node_size 
+RValue=(int *)(tl_emalloc(1,(type==1) ?sym_size : (type==2) ?scc_size : node_size 
  
 *4));
 return RValue;
@@ -4903,7 +4903,7 @@ int return_1;
 int clear_set_i;
 return_1=0;
 clear_set_i=0;
-while(clear_set_i<if (type==1) sym_size else if (type==2) scc_size else node_size 
+while(clear_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
  
 ){l[clear_set_i]=0;
 clear_set_i=(clear_set_i)+(1);
@@ -4935,7 +4935,7 @@ return RValue;
 void  copy_set(int $$Ext,int *from,int *to,int type){
 int copy_set_i;
 copy_set_i=0;
-while(copy_set_i<if (type==1) sym_size else if (type==2) scc_size else node_size 
+while(copy_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
  
 ){to[copy_set_i]=from[copy_set_i];
 copy_set_i=(copy_set_i)+(1);
@@ -4949,7 +4949,7 @@ int dup_set_i,*dup_set_m;
 return_1=0;
 dup_set_m=new_set(0,type);
 dup_set_i=0;
-while(dup_set_i<if (type==1) sym_size else if (type==2) scc_size else node_size 
+while(dup_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
  
 ){dup_set_m[dup_set_i]=l[dup_set_i];
 dup_set_i=(dup_set_i)+(1);
@@ -4962,7 +4962,7 @@ return RValue;
 void  merge_sets(int $$Ext,int *l1,int *l2,int type){
 int merge_sets_i;
 merge_sets_i=0;
-while(merge_sets_i<if (type==1) sym_size else if (type==2) scc_size else node_size 
+while(merge_sets_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
  
 ){l1[merge_sets_i]=(l1[merge_sets_i])|(l2[merge_sets_i]);
 merge_sets_i=(merge_sets_i)+(1);
@@ -4972,7 +4972,7 @@ merge_sets_i=(merge_sets_i)+(1);
 void  do_merge_sets(int $$Ext,int *l,int *l1,int *l2,int type){
 int do_merge_sets_i;
 do_merge_sets_i=0;
-while(do_merge_sets_i<if (type==1) sym_size else if (type==2) scc_size else node_size 
+while(do_merge_sets_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
  
 ){l[do_merge_sets_i]=(l1[do_merge_sets_i])|(l2[do_merge_sets_i]);
 do_merge_sets_i=(do_merge_sets_i)+(1);
@@ -4986,7 +4986,7 @@ int intersect_sets_i,*intersect_sets_l;
 return_1=0;
 intersect_sets_l=new_set(0,type);
 intersect_sets_i=0;
-while(intersect_sets_i<if (type==1) sym_size else if (type==2) scc_size else node_size 
+while(intersect_sets_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
  
 ){intersect_sets_l[intersect_sets_i]=(l1[intersect_sets_i])&(l2[intersect_sets_i]);
 intersect_sets_i=(intersect_sets_i)+(1);
@@ -5001,7 +5001,7 @@ int  RValue=0;
 int empty_intersect_sets_i,empty_intersect_sets_test;
 empty_intersect_sets_test=0;
 empty_intersect_sets_i=0;
-while(empty_intersect_sets_i<if (type==1) sym_size else if (type==2) scc_size else node_size 
+while(empty_intersect_sets_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
  
 ){empty_intersect_sets_test=(empty_intersect_sets_test)|((l1[empty_intersect_sets_i])&(l2[empty_intersect_sets_i]));
 empty_intersect_sets_i=(empty_intersect_sets_i)+(1);
@@ -5057,7 +5057,7 @@ if (type!=1){printf("{");
 }
 ;
 print_set_i=0;
-while(print_set_i<if (type==1) sym_size else if (type==2) scc_size else node_size 
+while(print_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
  
 ){print_set_j=0;
 while(print_set_j<mod){if ((l[print_set_i])&((1)<<(print_set_j))){break_1$=0;
@@ -5103,7 +5103,7 @@ int empty_set_i,empty_set_test;
 return_1=0;
 empty_set_test=0;
 empty_set_i=0;
-while(empty_set_i<if (type==1) sym_size else if (type==2) scc_size else node_size 
+while(empty_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
  
 ){empty_set_test=(empty_set_test)|(l[empty_set_i]);
 empty_set_i=(empty_set_i)+(1);
@@ -5120,7 +5120,7 @@ int same_sets_i,same_sets_test;
 return_1=0;
 same_sets_test=1;
 same_sets_i=0;
-while(same_sets_i<if (type==1) sym_size else if (type==2) scc_size else node_size 
+while(same_sets_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
  
 ){same_sets_test=(same_sets_test)&(l1[same_sets_i]==l2[same_sets_i]);
 same_sets_i=(same_sets_i)+(1);
@@ -5137,7 +5137,7 @@ int included_set_i,included_set_test;
 return_1=0;
 included_set_test=0;
 included_set_i=0;
-while(included_set_i<if (type==1) sym_size else if (type==2) scc_size else node_size 
+while(included_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
  
 ){included_set_test=(included_set_test)|((l1[included_set_i])&(~(l2[included_set_i])));
 included_set_i=(included_set_i)+(1);
@@ -5160,7 +5160,7 @@ int list_set_i,list_set_j,list_set_size,*list_set_list$;
 return_1=0;
 list_set_size=1;
 list_set_i=0;
-while(list_set_i<if (type==1) sym_size else if (type==2) scc_size else node_size 
+while(list_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
  
 ){list_set_j=0;
 while(list_set_j<mod){if ((l[list_set_i])&((1)<<(list_set_j))){list_set_size=(list_set_size)+(1);
@@ -5176,7 +5176,7 @@ list_set_list$=(int *)(tl_emalloc(1,list_set_size*4));
 list_set_list$[0]=list_set_size;
 list_set_size=1;
 list_set_i=0;
-while(list_set_i<if (type==1) sym_size else if (type==2) scc_size else node_size 
+while(list_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
  
 ){list_set_j=0;
 while(list_set_j<mod){if ((l[list_set_i])&((1)<<(list_set_j))){list_set_list$[list_set_size]=(mod*list_set_i)+(list_set_j);
