@@ -1,4 +1,4 @@
-frame(zuhe,sum,fuhe) and (
+ frame(zuhe,sum,fuhe) and (
 float zuhe[4]<==[0] and skip;
 int sum<==0 and skip;
  function fsz ( int n,float* RValue )
@@ -12,46 +12,46 @@ int sum<==0 and skip;
       int fuhe<==0 and skip;
  function main_1 (  )
  {
-     frame(main_1_s,main_1_shu,main_1_i,main_1_j,main_1_1_s0) and ( 
-     float main_1_s[4]<==[3,3,3,3],main_1_shu[4]<==[0] and skip;
+     frame(main_s,main_shu,main_i,main_j,main_1_s0) and ( 
+     float main_s[4]<==[3,3,3,3],main_shu[4]<==[0] and skip;
      output ("请输入四个数(0-9):\n") and skip;
-     int main_1_i<==0 and skip;
+     int main_i<==0 and skip;
      
-     while(main_1_i<4)
+     while(main_i<4)
      {
-         input(main_1_s[main_1_i]) and skip;
-         int main_1_j<==main_1_i and skip;
+         input(main_s[main_i]) and skip;
+         int main_j<==main_i and skip;
          
-         while(main_1_j>0)
+         while(main_j>0)
          {
-             if(main_1_s[main_1_j]<=main_1_s[main_1_j-1]) then 
+             if(main_s[main_j]<=main_s[main_j-1]) then 
              {
-                 float main_1_1_s0<==main_1_s[main_1_j-1] and skip;
-                 main_1_s[main_1_j-1]:=main_1_s[main_1_j];
-                 main_1_s[main_1_j]:=main_1_1_s0
+                 float main_1_s0<==main_s[main_j-1] and skip;
+                 main_s[main_j-1]:=main_s[main_j];
+                 main_s[main_j]:=main_1_s0
                  
              }
              else 
              {
                   skip 
              };
-             main_1_j:=main_1_j-1
+             main_j:=main_j-1
              
          };
-         main_1_i:=main_1_i+1
+         main_i:=main_i+1
          
      };
      output ("四个数是:") and skip;
-     main_1_i:=0;
+     main_i:=0;
      
-     while(main_1_i<4)
+     while(main_i<4)
      {
-         output (main_1_s[main_1_i]," "," ") and skip;
-         main_1_i:=main_1_i+1
+         output (main_s[main_i]," "," ") and skip;
+         main_i:=main_i+1
          
      };
      output ("\n") and skip;
-     zuheshu(main_1_s,4,RValue);
+     zuheshu(main_s,4,RValue);
      output ("有",fuhe,"个算式符合\n") and skip
      )
      }; 
@@ -179,7 +179,7 @@ int sum<==0 and skip;
                       switch_1<==0 and skip;
                       int nm_1$ and skip;
                      nm_1$ := zuhefu_k;
-                     if (nm_1$=0 OR (switch_1=1 and break_1$=0 and return_1=0) ) then 
+                     if (nm_1$=0 OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
                      {
                          switch_1<==1 and skip;
                          yunsuan(zuhe,zuhefu_op,zuhefu_khzh[0],zuhefu_khzh[0],RValue);
@@ -190,7 +190,7 @@ int sum<==0 and skip;
                      {
                          skip
                      };
-                     if (nm_1$=1 or (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
+                     if (nm_1$=1 OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
                      {
                          switch_1<==1 and skip;
                          int zuhefu_1_m<==1 and skip;
@@ -203,7 +203,7 @@ int sum<==0 and skip;
                              while(zuhefu_1_n<=3)
                              {
                                   continue_1<==0 and skip;
-                                 if((zuhefu_1_m=2 and zuhefu_1_n=3) or (zuhefu_1_m=1 and zuhefu_1_n=2) or (zuhefu_1_m=3 and zuhefu_1_n=1) or (zuhefu_1_m=1 and zuhefu_1_n=3)) then 
+                                 if((zuhefu_1_m=2 AND zuhefu_1_n=3) OR (zuhefu_1_m=1 AND zuhefu_1_n=2) OR (zuhefu_1_m=3 AND zuhefu_1_n=1) OR (zuhefu_1_m=1 AND zuhefu_1_n=3)) then 
                                  {
                                      continue_1<==1 and skip;
                                       zuhefu_1_n:=zuhefu_1_n+1}
@@ -286,7 +286,7 @@ int sum<==0 and skip;
           switch_1<==0 and skip;
           int nm_2$ and skip;
          nm_2$ := yunsuan_q;
-         if (nm_2$=0 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_2$=0 OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              if(k0[0]=1) then 
@@ -305,7 +305,7 @@ int sum<==0 and skip;
          {
              skip
          };
-         if (nm_2$=1 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_2$=1 OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              yunsuan_suanshi0[yunsuan_r]:=s[0];
@@ -317,7 +317,7 @@ int sum<==0 and skip;
          {
              skip
          };
-         if (nm_2$=2 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_2$=2 OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              yunsuan_suanshi0[yunsuan_r]:=p[0];
@@ -329,7 +329,7 @@ int sum<==0 and skip;
          {
              skip
          };
-         if (nm_2$=3 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_2$=3 OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              if(k0[1]=1) then 
@@ -348,7 +348,7 @@ int sum<==0 and skip;
          {
              skip
          };
-         if (nm_2$=4 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_2$=4 OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              yunsuan_suanshi0[yunsuan_r]:=s[1];
@@ -360,7 +360,7 @@ int sum<==0 and skip;
          {
              skip
          };
-         if (nm_2$=5 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_2$=5 OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              if(k1[0]=1) then 
@@ -379,7 +379,7 @@ int sum<==0 and skip;
          {
              skip
          };
-         if (nm_2$=6 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_2$=6 OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              yunsuan_suanshi0[yunsuan_r]:=p[1];
@@ -391,7 +391,7 @@ int sum<==0 and skip;
          {
              skip
          };
-         if (nm_2$=7 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_2$=7 OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              if(k0[2]=1) then 
@@ -410,7 +410,7 @@ int sum<==0 and skip;
          {
              skip
          };
-         if (nm_2$=8 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_2$=8 OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              yunsuan_suanshi0[yunsuan_r]:=s[2];
@@ -422,7 +422,7 @@ int sum<==0 and skip;
          {
              skip
          };
-         if (nm_2$=9 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_2$=9 OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              if(k1[1]=1) then 
@@ -441,7 +441,7 @@ int sum<==0 and skip;
          {
              skip
          };
-         if (nm_2$=10 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_2$=10 OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              yunsuan_suanshi0[yunsuan_r]:=p[2];
@@ -453,7 +453,7 @@ int sum<==0 and skip;
          {
              skip
          };
-         if (nm_2$=11 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_2$=11 OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              yunsuan_suanshi0[yunsuan_r]:=s[3];
@@ -465,7 +465,7 @@ int sum<==0 and skip;
          {
              skip
          };
-         if (nm_2$=12 or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_2$=12 OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              if(k1[2]=1) then 
@@ -576,11 +576,11 @@ int sum<==0 and skip;
      float *hefa_q<==&suanshi[1] and skip;
      int hefa_flag<==1 and skip;
      break_1<==0 and skip;
-     while( break_1=0 and  1)
+     while( break_1=0 AND  1)
      {
          if(* hefa_p=40) then 
          {
-             if((* hefa_q>=0) and (* hefa_q<=9)) then 
+             if((* hefa_q>=0) AND (* hefa_q<=9)) then 
              {
                  hefa_p:=hefa_p+1;
                  hefa_q:=hefa_q+1
@@ -598,7 +598,7 @@ int sum<==0 and skip;
          };
          if(break_1=0)   then 
          {
-             if((* hefa_p>=0) and (* hefa_p<=9)) then 
+             if((* hefa_p>=0) AND (* hefa_p<=9)) then 
              {
                  if((hefa_p-suanshi)>=(r-1)) then 
                  {
@@ -611,7 +611,7 @@ int sum<==0 and skip;
                  };
                  if(break_1=0)   then
                  {
-                     if(* hefa_q=')' or ((* hefa_q>41) and (* hefa_q<48))) then 
+                     if(* hefa_q=')' OR ((* hefa_q>41) AND (* hefa_q<48))) then 
                      {
                          hefa_p:=hefa_p+1;
                          hefa_q:=hefa_q+1
@@ -647,7 +647,7 @@ int sum<==0 and skip;
                      };
                      if(break_1=0)   then
                      {
-                         if((* hefa_q>41) and (* hefa_q<48)) then 
+                         if((* hefa_q>41) AND (* hefa_q<48)) then 
                          {
                              hefa_p:=hefa_p+1;
                              hefa_q:=hefa_q+1
@@ -670,9 +670,9 @@ int sum<==0 and skip;
                  };
                  if(break_1=0)   then 
                  {
-                     if((* hefa_p>41) and (* hefa_p<48)) then 
+                     if((* hefa_p>41) AND (* hefa_p<48)) then 
                      {
-                         if(* hefa_q=40 or ((* hefa_q>=0) and (* hefa_q<=9))) then 
+                         if(* hefa_q=40 OR ((* hefa_q>=0) AND (* hefa_q<=9))) then 
                          {
                              hefa_p:=hefa_p+1;
                              hefa_q:=hefa_q+1
@@ -725,25 +725,25 @@ int sum<==0 and skip;
      continue_1<==0 and skip;
      int jianjie_i<==0 and skip;
      
-     while( return_1=0 and  jianjie_i<r)
+     while( return_1=0 AND  jianjie_i<r)
      {
           continue_1<==0 and skip;
          if(suanshi[jianjie_i]='(') then 
          {
              jianjie_k:=jianjie_k+1;
-             if(* jianjie_p!='(' or jianjie_k=1) then 
+             if(* jianjie_p!='(' OR jianjie_k=1) then 
              {
                  jianjie_p:=&suanshi[jianjie_i];
                  if(jianjie_i!=0) then 
                  {
-                     if(* (jianjie_p-1)='+' or * (jianjie_p-1)='-') then 
+                     if(* (jianjie_p-1)='+' OR * (jianjie_p-1)='-') then 
                      {
                          jianjie_r0:=1
                          
                      }
                      else
                      {
-                         if(* (jianjie_p-1)='*' or * (jianjie_p-1)='/') then 
+                         if(* (jianjie_p-1)='*' OR * (jianjie_p-1)='/') then 
                          {
                              jianjie_r0:=2
                              
@@ -793,13 +793,13 @@ int sum<==0 and skip;
                      jianjie_q:=&suanshi[jianjie_i];
                      if(jianjie_i!=r-1) then 
                      {
-                         if(* (jianjie_q+1)='+' or * (jianjie_q+1)='-') then 
+                         if(* (jianjie_q+1)='+' OR * (jianjie_q+1)='-') then 
                          {
                              jianjie_r1:=1
                          }
                          else
                          {
-                             if(* (jianjie_q+1)='*' or * (jianjie_q+1)='/') then 
+                             if(* (jianjie_q+1)='*' OR * (jianjie_q+1)='/') then 
                              {
                                  jianjie_r1:=2
                                  
@@ -818,13 +818,13 @@ int sum<==0 and skip;
                      jianjie_re:=jianjie(jianjie_p+1,jianjie_q-jianjie_p-1,RValue);
                      if((int)(jianjie_r0/ 100)>=1) then 
                      {
-                         if(((int)(jianjie_r0/ 100))=1 and ((int)(jianjie_re/ 100))=1) then 
+                         if(((int)(jianjie_r0/ 100))=1 AND ((int)(jianjie_re/ 100))=1) then 
                          {
                              continue_1<==1 and skip;
                               jianjie_i:=jianjie_i+1}
                              else
                              {
-                                 if(((int)(jianjie_r0/ 1000))=1 and ((int)(jianjie_re/ 1000))=1) then 
+                                 if(((int)(jianjie_r0/ 1000))=1 AND ((int)(jianjie_re/ 1000))=1) then 
                                  {
                                      continue_1<==1 and skip;
                                       jianjie_i:=jianjie_i+1
@@ -884,7 +884,7 @@ int sum<==0 and skip;
                              };
                              if(return_1=0)   then 
                              {
-                                 if(jianjie_re>=jianjie_r0 and jianjie_re>=jianjie_r1) then 
+                                 if(jianjie_re>=jianjie_r0 AND jianjie_re>=jianjie_r1) then 
                                  {
                                      return_1<==1 and RValue:=0;
                                      skip
@@ -915,7 +915,7 @@ int sum<==0 and skip;
                  {
                      if(jianjie_k=0) then 
                      {
-                         if(suanshi[jianjie_i]='+' or suanshi[jianjie_i]='-') then 
+                         if(suanshi[jianjie_i]='+' OR suanshi[jianjie_i]='-') then 
                          {
                              jianjie_r2:=((jianjie_r2*jianjie_k1)+1)/ ((jianjie_k1+1));
                              jianjie_k1:=jianjie_k1+1;
@@ -923,7 +923,7 @@ int sum<==0 and skip;
                          }
                          else
                          {
-                             if(suanshi[jianjie_i]='*' or suanshi[jianjie_i]='/') then 
+                             if(suanshi[jianjie_i]='*' OR suanshi[jianjie_i]='/') then 
                              {
                                  jianjie_r2:=(jianjie_r2*jianjie_k1+2)/ ((jianjie_k1+1));
                                  jianjie_k1:=jianjie_k1+1;
@@ -1002,7 +1002,7 @@ int sum<==0 and skip;
           switch_1<==0 and skip;
           int nm_3$ and skip;
          nm_3$ := (char)(suanshi[1]);
-         if (nm_3$='+' or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_3$='+' OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              return_1<==1 and RValue:=(suanshi[0]+suanshi[2]);
@@ -1013,7 +1013,7 @@ int sum<==0 and skip;
          {
              skip
          };
-         if (nm_3$='-' or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_3$='-' OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              return_1<==1 and RValue:=(suanshi[0]-suanshi[2]);
@@ -1024,7 +1024,7 @@ int sum<==0 and skip;
          {
              skip
          };
-         if (nm_3$='*' or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_3$='*' OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              return_1<==1 and RValue:=(suanshi[0]*suanshi[2]);
@@ -1035,7 +1035,7 @@ int sum<==0 and skip;
          {
              skip
          };
-         if (nm_3$='/' or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+         if (nm_3$='/' OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
          {
              switch_1<==1 and skip;
              return_1<==1 and RValue:=(suanshi[0]/ suanshi[2]);
@@ -1057,7 +1057,7 @@ int sum<==0 and skip;
          float *qiujie_p<==&qiujie_pq and skip;
          float *qiujie_q<==&qiujie_pq and skip;
          int qiujie_k<==0 and skip;
-         float qiujie_suanshi1[7]<==['0'] and skip;
+         float qiujie_suanshi1[8]<==['0'] and skip;
          int qiujie_s<==0 and skip;
          float qiujie_sum<==0 and skip;
          continue_1<==0 and skip;
@@ -1162,10 +1162,10 @@ int sum<==0 and skip;
                   switch_1<==0 and skip;
                   int nm_4$ and skip;
                  nm_4$ := (char)(qiujie_suanshi1[2*qiujie_m+1]);
-                 if (nm_4$='+' or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+                 if (nm_4$='+' OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
                  {
                      switch_1<==1 and skip;
-                     if((qiujie_s-1)/ 2!=1 and (qiujie_suanshi1[2*(qiujie_m+1)+1]='*' or qiujie_suanshi1[2*(qiujie_m+1)+1]='/')) then 
+                     if((qiujie_s-1)/ 2!=1 AND (qiujie_suanshi1[2*(qiujie_m+1)+1]='*' OR qiujie_suanshi1[2*(qiujie_m+1)+1]='/')) then 
                      {
                          * qiujie_q:=qiujie(qiujie_p+2,3,RValue);
                          int qiujie_9_10_11_ws<==&qiujie_suanshi1[qiujie_s-1]-&qiujie_suanshi1[2*(qiujie_m+1)] and skip;
@@ -1210,10 +1210,10 @@ int sum<==0 and skip;
                  {
                      skip
                  };
-                 if (nm_4$='-' or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+                 if (nm_4$='-' OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
                  {
                      switch_1<==1 and skip;
-                     if((qiujie_s-1)/ 2!=1 and (qiujie_suanshi1[2*(qiujie_m+1)+1]='*' or qiujie_suanshi1[2*(qiujie_m+1)+1]='/')) then 
+                     if((qiujie_s-1)/ 2!=1 AND (qiujie_suanshi1[2*(qiujie_m+1)+1]='*' OR qiujie_suanshi1[2*(qiujie_m+1)+1]='/')) then 
                      {
                          * qiujie_q:=qiujie(qiujie_p+2,3,RValue);
                          int qiujie_9_10_17_ws<==&qiujie_suanshi1[qiujie_s-1]-&qiujie_suanshi1[2*(qiujie_m+1)] and skip;
@@ -1257,7 +1257,7 @@ int sum<==0 and skip;
                  {
                      skip
                  };
-                 if (nm_4$='*' or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+                 if (nm_4$='*' OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
                  {
                      switch_1<==1 and skip;
                      if(qiujie_m=0) then 
@@ -1277,7 +1277,7 @@ int sum<==0 and skip;
                  {
                      skip
                  };
-                 if (nm_4$='/' or (switch_1=1 and break_1$=0 and return_1=0) ) then 
+                 if (nm_4$='/' OR (switch_1=1 AND break_1$=0 AND return_1=0) ) then 
                  {
                      switch_1<==1 and skip;
                      if(qiujie_m=0) then 
