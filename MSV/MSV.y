@@ -1004,7 +1004,7 @@ all_type_define:
 option_function_parameter_list
 	   :all_type_define identifier inner_option_define_identifier
 	   {
-			$$ = new CSyntaxNode(PARAMETER_EXP, $2, $3, $1);
+			$$ = new CSyntaxNode(FORMAL_PARAMETER_EXP, $2, $3, $1);
 	   }
 	   |all_type_define inner_option_define_identifier //  函数指针的形参列表可以没有参数名字
 	   {
@@ -1014,26 +1014,26 @@ option_function_parameter_list
 	   |STRUCT_TYPE identifier inner_option_define_identifier //结构体 S s	 
 	   {
 	        CSyntaxNode* pChild0=new CSyntaxNode(STRUCT_PARAMETER_EXP, $1, $2, VOIDTYPE);
-			$$=new CSyntaxNode(PARAMETER_EXP, pChild0, $3, STRUCTTYPE);
+			$$=new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $3, STRUCTTYPE);
 			pChild0=NULL;
 		}
        |STRUCT_TYPE MUL identifier inner_option_define_identifier//结构体指针类型的参数S *s
 	   {
 	        CSyntaxNode* pChild0= new CSyntaxNode(STRUCTP_PARAMETER_EXP, $1, $3, VOIDTYPE);
-            $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $4, STRUCTPTYPE);
+            $$=new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $4, STRUCTPTYPE);
             pChild0=NULL;
 	   }
        |STRUCT_TYPE MUL MUL identifier inner_option_define_identifier//结构体指针类型的参数S **s //二重结构体指针
 	   {
 	        CSyntaxNode* pChild0= new CSyntaxNode(DOUBLESTRUCTP_PARAMETER_EXP, $1, $4, VOIDTYPE);
-            $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $5, STRUCTPTYPE);
+            $$=new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $5, STRUCTPTYPE);
             pChild0=NULL;
 	   }
 	   |STRUCT_TYPE identifier ARRAY inner_option_define_identifier //结构体数组 S a[]	 
 	   {
 
 			CSyntaxNode* pChild0=new CSyntaxNode(STRUCT_ARRAY_PARAMETER_EXP, $1, $2, VOIDTYPE);
-			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $4, STRUCTTYPE);
+			$$ = new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $4, STRUCTTYPE);
             pChild0=NULL;
 		}
 	   
@@ -1042,25 +1042,25 @@ option_function_parameter_list
 	   |ID identifier inner_option_define_identifier //结构体 S s	 
 	   {
 	        CSyntaxNode* pChild0=new CSyntaxNode(STRUCT_PARAMETER_EXP, $1, $2, VOIDTYPE);
-			$$=new CSyntaxNode(PARAMETER_EXP, pChild0, $3, STRUCTTYPE);
+			$$=new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $3, STRUCTTYPE);
 			pChild0=NULL;
 		}
 	   |ID MUL identifier inner_option_define_identifier//结构体指针类型的参数S *s
 	   {
 	        CSyntaxNode* pChild0= new CSyntaxNode(STRUCTP_PARAMETER_EXP, $1, $3, VOIDTYPE);
-            $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $4, STRUCTPTYPE);
+            $$=new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $4, STRUCTPTYPE);
             pChild0=NULL;
 	   }
        |ID MUL MUL identifier inner_option_define_identifier//结构体指针类型的参数S **s //二重结构体指针
 	   {
 	        CSyntaxNode* pChild0= new CSyntaxNode(DOUBLESTRUCTP_PARAMETER_EXP, $1, $4, VOIDTYPE);
-            $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $5, STRUCTPTYPE);
+            $$=new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $5, STRUCTPTYPE);
             pChild0=NULL;
 	   }
 	   |ID identifier ARRAY inner_option_define_identifier //结构体数组 S a[]	 
 	   {
 			CSyntaxNode* pChild0=new CSyntaxNode(STRUCT_ARRAY_PARAMETER_EXP, $1, $2, VOIDTYPE);
-			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $4, STRUCTTYPE);
+			$$ = new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $4, STRUCTTYPE);
             pChild0=NULL;
 		}
 
@@ -1096,26 +1096,26 @@ option_function_parameter_list
 	   |all_type_define identifier ARRAY inner_option_define_identifier//数组类型的参数int a[]
 	   {
 			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $2, VOIDTYPE);
-			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $4, $1);
+			$$ = new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $4, $1);
             pChild0=NULL;
 	   }
 	   |all_type_define MUL identifier ARRAY inner_option_define_identifier //指针数组int *a[]
 	   {
             CSyntaxNode* pChild0=new CSyntaxNode(POINTER_ARRAY_PARAMETER_EXP, $3, VOIDTYPE);
-			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $5, $1);
+			$$ = new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $5, $1);
             pChild0=NULL;
 	   }
 	    //数组类型的参数a[][100]
 	   |all_type_define identifier ARRAY OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier
 	   {
 			CSyntaxNode* pChild0=new CSyntaxNode(DOUBLEARRAY_PARAMETER_EXP, $2, VOIDTYPE);
-			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $7, $1);
+			$$ = new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $7, $1);
             pChild0=NULL;
 	   }
 	   |all_type_define MUL identifier inner_option_define_identifier//指针类型的参数*p
 	   {
 	      CSyntaxNode* pChild0= new CSyntaxNode(ADDRESS_DECLARE_STA, $3, VOIDTYPE);
-          $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $4, $1);
+          $$=new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $4, $1);
           pChild0=NULL;
 		}
 	   |all_type_define MUL inner_option_define_identifier//指针类型的参数*p
@@ -1126,128 +1126,22 @@ option_function_parameter_list
 	   {
 		  CSyntaxNode* pChild00=new CSyntaxNode(ADDRESS_DECLARE_STA, $4, VOIDTYPE);
 		  CSyntaxNode* pChild0= new CSyntaxNode(ADDRESS_DECLARE_STA, pChild00, VOIDTYPE);
-          $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $5, $1);
+          $$=new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $5, $1);
           pChild0=NULL;
 		}
 		// 函数的参数可以是函数指针
 	   |OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier//函数指针类型的参数
 	   {
 	      CSyntaxNode* pChild0= new CSyntaxNode(FUNCP_PARAMETER_EXP, $3, VOIDTYPE);
-          $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $8, FUNCPTYPE);
+          $$=new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $8, FUNCPTYPE);
           pChild0=NULL;
 		}
-	   | /* empty */                                       {$$ = NULL;}
+	   | /* empty */                  {$$ = NULL;}
 	   ;
 inner_option_define_identifier
-       : COMMA all_type_define identifier inner_option_define_identifier        
-	    { 
-		   $$ = new CSyntaxNode(PARAMETER_EXP, $3, $4, $2);
-		}
-		|COMMA all_type_define inner_option_define_identifier  // 函数指针的形参列表可以没有参数名字       
-	    { 
-		   $$ = NULL;
-		}
-	   |COMMA ID identifier inner_option_define_identifier
-	   {
-	        CSyntaxNode* pChild0=new CSyntaxNode(STRUCT_PARAMETER_EXP, $2, $3, VOIDTYPE);
-			$$=new CSyntaxNode(PARAMETER_EXP, pChild0, $4, STRUCTTYPE);
-			pChild0=NULL;
-	   }
-	   |COMMA  STRUCT_TYPE identifier inner_option_define_identifier
-	   {
-	        CSyntaxNode* pChild0=new CSyntaxNode(STRUCT_PARAMETER_EXP, $2, $3, VOIDTYPE);
-			$$=new CSyntaxNode(PARAMETER_EXP, pChild0, $4, STRUCTTYPE);
-			pChild0=NULL;
-	   }
-	   |COMMA STRUCT_TYPE MUL identifier inner_option_define_identifier//结构体指针类型的参数
-	   {
-	        CSyntaxNode* pChild0= new CSyntaxNode(STRUCTP_PARAMETER_EXP, $2, $4, VOIDTYPE);
-            $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $5, STRUCTPTYPE);
-            pChild0=NULL;
-	   }
-	   |COMMA ID identifier ARRAY inner_option_define_identifier //结构体数组 S a[]	 
-	   {
-
-			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $3, VOIDTYPE);
-			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $5, STRUCTTYPE);
-            pChild0=NULL;
-		}
-	   |COMMA STRUCT_TYPE identifier ARRAY inner_option_define_identifier //结构体数组 S a[]	 
-	   {
-
-			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $3, VOIDTYPE);
-			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $5, STRUCTTYPE);
-            pChild0=NULL;
-		}
-	   
-	   |COMMA all_type_define identifier ARRAY inner_option_define_identifier        
-	   { 
-		    CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $3, VOIDTYPE);
-		    $$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $5, $2);
-            pChild0=NULL;
-		}
-		|COMMA all_type_define MUL identifier ARRAY inner_option_define_identifier  //指针数组 int *a[]
-	    { 
-		    CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $4, VOIDTYPE);
-		    $$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $6, $2);
-            pChild0=NULL;
-		}
-	  /* |COMMA all_type_define MUL identifier inner_option_define_identifier
-	   {
-	      CSyntaxNode* pChild0= new CSyntaxNode(POINT_PARAMETER_EXP,$4,VOIDTYPE);
-
-	      $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $5, $2);
-
-		  pChild0=NULL;
-		} 2015-3-7*/
-		//  函数的参数可以是函数指针
-	   |COMMA OPEN_PAR MUL identifier CLOSE_PAR OPEN_PAR option_function_parameter_list CLOSE_PAR inner_option_define_identifier//函数指针类型的参数
-	   {
-	      CSyntaxNode* pChild0= new CSyntaxNode(FUNCP_PARAMETER_EXP, $4, VOIDTYPE);
-          $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $9, FUNCPTYPE);
-          pChild0=NULL;
-		}
-	   | /* empty */                                       {$$ = NULL;}
-	   
-	    //数组类型的参数a[4]
-	   |COMMA all_type_define identifier OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier  
-	   
-	   {
-			CSyntaxNode* pChild0=new CSyntaxNode(ARRAY_PARAMETER_EXP, $3, VOIDTYPE);
-			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $7, $2);
-            pChild0=NULL;
-	   }
-	   	 //数组类型的参数a[3,2]
-	   |COMMA all_type_define identifier OPEN_MPAR ari_exp COMMA ari_exp CLOSE_MPAR inner_option_define_identifier
-	   
-	   {
-			CSyntaxNode* pChild0=new CSyntaxNode(DOUBLEARRAY_PARAMETER_EXP, $3, VOIDTYPE);
-			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $9, $2);
-            pChild0=NULL;
-	   }
-	    //数组类型的参数a[][100]
-	   |COMMA all_type_define identifier ARRAY OPEN_MPAR ari_exp CLOSE_MPAR inner_option_define_identifier
-	   {
-			CSyntaxNode* pChild0=new CSyntaxNode(DOUBLEARRAY_PARAMETER_EXP, $3, VOIDTYPE);
-			$$ = new CSyntaxNode(PARAMETER_EXP, pChild0, $8, $2);
-            pChild0=NULL;
-	   }
-	   |COMMA all_type_define MUL identifier inner_option_define_identifier//指针类型的参数*p
-	   {
-	      CSyntaxNode* pChild0= new CSyntaxNode(POINT_PARAMETER_EXP, $4, VOIDTYPE);
-          $$=new CSyntaxNode(PARAMETER_EXP, pChild0, $5, $2);
-          pChild0=NULL;
-		}
-	   |COMMA all_type_define MUL inner_option_define_identifier//指针类型的参数*p
-	   {
-	      $$=NULL;
-		}
-	   |COMMA error                                        {$$=NULL;}
-	   ;
-
- 
-
-
+     :COMMA option_function_parameter_list { $$ = $2;}
+	  |{$$=NULL}
+	  ;
 
 //调用函数和谓词的实参列表，加入字符串  
 option_function_identifier
