@@ -1,17 +1,5 @@
-<<<<<<< HEAD
 frame(ALWAYS,AND_1,EQUIV,EVENTUALLY,FALSE,IMPLIES,NOT,OR_1,PREDICATE,TRUE,U_OPER,V_OPER,tl_stats,tl_simp_log,tl_simp_diff,tl_simp_fly,tl_simp_scc,tl_fjtofj,tl_errs,tl_verbose,tl_terse,All_Mem,uform,hasuform,cnt,ltl_file,add_ltl,out1,label,sym_table,transition,final_set,node_id,sym_id,node_size,sym_size,astate_count,atrans_count,bstack,bstates,bremoved,scc_stack,accept,bstate_count,btrans_count,stored,Caches,CacheHits,gstack,gremoved,gstates,init,init_size,gstate_id,gstate_count,gtrans_count,fin$,final,rank,scc_id,scc_size,bad_scc,symtab,yytext,atrans_list,gtrans_list,btrans_list,aallocs,afrees,apool,gallocs,gfrees,gpool,ballocs,bfrees,bpool,freelist,req,event,tl_yychar,tl_yylval,prec,can,mod,Stack_mx,Max_Red,Total,dumpbuf,Bscc_stack) and (
- function memset(char *des, char ch, int num,char *RValue)
- {
-         frame(i) and (
-         int i<==0 and skip;
-         while(i<num)
-         {
-     	des[i]:=ch;
-     	i:=i+1
-         };
-         RValue:=des
-         )
- };
+
  union __anonunion___value_2 {
  int __wch and 
  char __wchb[4] 
@@ -327,7 +315,7 @@ frame(ALWAYS,AND_1,EQUIV,EVENTUALLY,FALSE,IMPLIES,NOT,OR_1,PREDICATE,TRUE,U_OPER
      {
           skip 
      };
-     memset(emalloc_tmp,0,n,RValue);
+     memset(emalloc_tmp,0,n) and skip;
      return_1<==1 and RValue:=emalloc_tmp;
      skip
      )
@@ -5426,7 +5414,7 @@ frame(ALWAYS,AND_1,EQUIV,EVENTUALLY,FALSE,IMPLIES,NOT,OR_1,PREDICATE,TRUE,U_OPER
  {
      frame(return_1) and ( 
      int return_1<==0 and skip;
-     return_1<==1 and RValue:=((c>47 and c<58) OR (c>64 and c<91) OR (c>96 and c<123) or c='_')
+     return_1<==1 and RValue:=(((c>47) AND (c<58)) OR ((c>64) AND (c<91)) OR ((c>96) AND (c<123)) OR (c='_'))
      )
      }; 
   function hash ( char *s,int RValue )
@@ -5493,7 +5481,7 @@ frame(ALWAYS,AND_1,EQUIV,EVENTUALLY,FALSE,IMPLIES,NOT,OR_1,PREDICATE,TRUE,U_OPER
      {
          tl_UnGetchar();
          tl_yychar:=follow_c;
-         sprintf(follow_buf,"expected '%c'",tok,RValue);
+         sprintf(follow_buf,"expected '%c'",tok) and skip;
          tl_yyerror(follow_buf);
          return_1<==1 and RValue:=ifno;
          skip
@@ -5865,7 +5853,7 @@ frame(ALWAYS,AND_1,EQUIV,EVENTUALLY,FALSE,IMPLIES,NOT,OR_1,PREDICATE,TRUE,U_OPER
      int return_1<==0 and skip;
      void *tl_emalloc_r and skip;
      tl_emalloc_r:=(void *)malloc(U);
-     memset(tl_emalloc_r,0,U,RValue);
+     memset(tl_emalloc_r,0,U) and skip;
      return_1<==1 and RValue:=tl_emalloc_r;
      skip
      )
@@ -8332,8 +8320,7 @@ frame(ALWAYS,AND_1,EQUIV,EVENTUALLY,FALSE,IMPLIES,NOT,OR_1,PREDICATE,TRUE,U_OPER
          empty_intersect_sets_i:=empty_intersect_sets_i+1
          
      };
-     return_1<==1 and RValue:=!empty_intersect_sets_test;
-     skip
+     return_1<==1 and RValue:=!empty_intersect_sets_test
      )
      }; 
   function add_set ( int *l,int n )
@@ -8556,8 +8543,7 @@ frame(ALWAYS,AND_1,EQUIV,EVENTUALLY,FALSE,IMPLIES,NOT,OR_1,PREDICATE,TRUE,U_OPER
          included_set_i:=included_set_i+1
          
      };
-    return_1<==1 and RValue:=!included_set_test;
-     skip
+     return_1<==1 and RValue:=!included_set_test
      )
      }; 
   function in_set ( int *l,int n,int RValue )
@@ -8899,27 +8885,4 @@ frame(ALWAYS,AND_1,EQUIV,EVENTUALLY,FALSE,IMPLIES,NOT,OR_1,PREDICATE,TRUE,U_OPER
      )
  };
   main_1(RValue)
-=======
-function f(int x,int RValue)
-{frame(x) and
-(
- RValue:=x+1
  )
-};
-function g(int x,(*tst)(int,int RValue))
-{frame(x) and
-(
- x:=x+1;
- while(extern tst(1,RValue)>1)
- {
-	x:=x+2
- }
->>>>>>> c02b13e7922f6c04a0f6c1bf1fb6bfc6b593eb4e
- )
-};
-frame(y) and
-(
-	float y and skip;
-	g(1,f)
-
-)

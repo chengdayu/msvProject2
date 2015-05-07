@@ -121,7 +121,7 @@ extern int yylex(void);
 %type<tnode> option_array_declaration inner_option_array_declaration//added by Jane
 
 %type<tnode> statement_bpar bool_par option_output option_input output_statement input_statement function//add by yubin 2015/4/15    
-%type<tnode> member_in_exp simple_ari_exp  
+%type<tnode> simple_ari_exp  
 %type<tnode> charliteral floatliteral 
 %type<tnode> struct_define_statement struct_identifier
 %type<tnode> option_struct_list_value //结构体的初始化列表{{1,"hello"},{2,"hi"}}
@@ -135,7 +135,7 @@ extern int yylex(void);
 %type<tnode> struct_member_exp  option_struct_member_exp
 
 
-%type<nodetype>		assign_operator relation_operator arith_operator
+%type<nodetype>		assign_operator
 %type<returntype>  type_define sign_type_define
 %type<returntype> all_type_define
 %type<tnode> program gComplexProposition complexProposition poptional_projection 
@@ -771,12 +771,29 @@ point_exp
 
 //算术表达式
 ari_exp     
-	   :simple_ari_exp            {$$=$1;}
-	   |simple_ari_exp relation_operator ari_exp {$$=new CSyntaxNode($2, $1, $3, BOOLTYPE);} //算术表达式中可以有bool表达式，如a+(b>c)
-	   |simple_ari_exp BOOL_AND ari_exp{$$=new CSyntaxNode(AND_EXP, $1, $3, BOOLTYPE);}
-	   |simple_ari_exp BOOL_OR ari_exp {$$=new CSyntaxNode(OR_EXP, $1, $3, BOOLTYPE);}
-	   |NEGATION ari_exp {$$=new CSyntaxNode(NEGATION_EXP, $2, BOOLTYPE);} 
+	   :simple_ari_exp  {$$=$1;}
+	   ///算术表达式
+	   |ari_exp ADD ari_exp  {$$=new CSyntaxNode(ADD_EXP, $1, $3, ARITHMETICTYPE);}
+	   |ari_exp SUB ari_exp  {$$=new CSyntaxNode(SUB_EXP, $1, $3, ARITHMETICTYPE);}
+	   |ari_exp MUL ari_exp  {$$=new CSyntaxNode(MUL_EXP, $1, $3, ARITHMETICTYPE);}
+	   |ari_exp DIV ari_exp  {$$=new CSyntaxNode(DIV_EXP, $1, $3, ARITHMETICTYPE);}
+	   |ari_exp MOD ari_exp  {$$=new CSyntaxNode(MOD_EXP, $1, $3, ARITHMETICTYPE);}
+	   |ari_exp LST ari_exp  {$$=new CSyntaxNode(LST_EXP, $1, $3, ARITHMETICTYPE);}
+	   |ari_exp RST ari_exp  {$$=new CSyntaxNode(RST_EXP, $1, $3, ARITHMETICTYPE);}
+	   |ari_exp ADDRESS ari_exp  {$$=new CSyntaxNode(BAN_EXP, $1, $3, ARITHMETICTYPE);}
+	   |ari_exp INTER_OR ari_exp  {$$=new CSyntaxNode(BOR_EXP, $1, $3, ARITHMETICTYPE);}
+	   |ari_exp CON ari_exp  {$$=new CSyntaxNode(XOR_EXP, $1, $3, ARITHMETICTYPE);}
 	   |IF ari_exp THEN  ari_exp option_exp_else_statement { $$ = new CSyntaxNode(IF_ELSE_EXP, $2, $4, $5, ARITHMETICTYPE);}   
+	   ///bool 表达式
+	   |ari_exp GT ari_exp     { $$=new CSyntaxNode(GT_EXP, $1, $3, BOOLTYPE);}
+	   |ari_exp GE ari_exp     { $$=new CSyntaxNode(GE_EXP, $1, $3, BOOLTYPE);}
+	   |ari_exp LE ari_exp     { $$=new CSyntaxNode(LE_EXP, $1, $3, BOOLTYPE);}
+	   |ari_exp NE ari_exp     { $$=new CSyntaxNode(NE_EXP, $1, $3, BOOLTYPE);}
+	   |ari_exp LT ari_exp     { $$=new CSyntaxNode(LT_EXP, $1, $3, BOOLTYPE);}
+	   |ari_exp EQ ari_exp     { $$=new CSyntaxNode(EQU_EXP, $1, $3, BOOLTYPE);}
+	   |ari_exp BOOL_AND ari_exp{ $$=new CSyntaxNode(AND_EXP, $1, $3, BOOLTYPE);   }
+	   |ari_exp BOOL_OR ari_exp {$$=new CSyntaxNode(OR_EXP, $1, $3, BOOLTYPE);}
+	   |NEGATION ari_exp {$$=new CSyntaxNode(NEGATION_EXP, $2, BOOLTYPE);} 	   	  
 	   ;
 
 type_cast_alg_exp
@@ -788,12 +805,8 @@ option_exp_else_statement
        | /* empty */                                       {$$=NULL;}
        ;
 
-simple_ari_exp
-	   :member_in_exp   {$$=$1;}
-	   |simple_ari_exp arith_operator member_in_exp  {$$=new CSyntaxNode($2, $1, $3, ARITHMETICTYPE);}
-	   ; 
 
-member_in_exp
+simple_ari_exp
        :intliteral                      {$$=$1;}
 	   |charliteral						{$$=$1;}
 	   |floatliteral					{$$=$1;} 
@@ -806,25 +819,14 @@ member_in_exp
 	   |type_cast                       {$$=$1;} // 强制转换可以参与算数运算	  	   	   
 	   |struct_member_exp               {$$=$1;} // 结构体串联
 	   |array_cast_exp                  {$$=$1;}
-	   |SUB member_in_exp				{$$=new CSyntaxNode(MINUS_EXP, $2, ARITHMETICTYPE);}
-	   |BNE member_in_exp               {$$=new CSyntaxNode(BNE_EXP, $2, ARITHMETICTYPE);}
+	   |SUB simple_ari_exp				{$$=new CSyntaxNode(MINUS_EXP, $2, ARITHMETICTYPE);}
+	   |BNE simple_ari_exp               {$$=new CSyntaxNode(BNE_EXP, $2, ARITHMETICTYPE);}
 	   |POINTERNULL                     {$$=new CSyntaxNode(NULL_EXP, VOIDTYPE);} 
 	   |MY_TRUE                         {$$=new CSyntaxNode(TRUE_EXP, BOOLTYPE);}
 	   |MY_FALSE                        {$$=new CSyntaxNode(FALSE_EXP, BOOLTYPE);}
 	   |OPEN_PAR ari_exp CLOSE_PAR      {$$=$2;}  	 
 	   ;
-arith_operator
-       :ADD                             {$$=ADD_EXP;}
-	   |SUB                             {$$=SUB_EXP;}      
-	   |MUL								{$$=MUL_EXP;}
-	   |DIV								{$$=DIV_EXP;}
-	   |MOD								{$$=MOD_EXP;}
-	   |LST						     	{$$=LST_EXP;}//  左移 left shift
-	   |RST	 						    {$$=RST_EXP;}//  右移 right shift
-	   |ADDRESS 	 					{$$=BAN_EXP;}//  按位与
-	   |INTER_OR	 					{$$=BOR_EXP;}//  按位或
-	   |CON	 		         			{$$=XOR_EXP;}//  异或
-	   ;
+
 	  
 
 array_exp
@@ -956,14 +958,7 @@ casted_element:	type_cast_alg_exp	{$$=$1;}   // malloc相关
 
 
 
-relation_operator
-	   :GE                              {$$=GE_EXP;}
-	   |LE                              {$$=LE_EXP;}
-	   |NE                              {$$=NE_EXP;}
-	   |GT                              {$$=GT_EXP;}
-	   |LT                              {$$=LT_EXP;}
-	   |EQ                             {$$=EQU_EXP;}     //[add fixed]
-	   ;
+
 
 
 //添加类型需要改动的地方 
@@ -991,6 +986,7 @@ option_function_parameter_list
 			CSyntaxNode* pChild0=new CSyntaxNode(IDENT_EXP, "$$NoCare", NULL, VOIDTYPE);
 			$$ = new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $2, $1);
 	   }
+
 	   
 	   |STRUCT_TYPE identifier inner_option_define_identifier //结构体 S s	 
 	   {
@@ -1302,11 +1298,11 @@ for_sta_control//for语句括号中的控制语句，是一个赋值语句也可以不写
 	  ;
 //add by yubin 2015-3-23
 switch_statement
-       :SWITCH OPEN_PAR member_in_exp CLOSE_PAR OPEN_BPAR case_par CLOSE_BPAR 
+       :SWITCH OPEN_PAR simple_ari_exp CLOSE_PAR OPEN_BPAR case_par CLOSE_BPAR 
 	   {$$=new CSyntaxNode(SWITCH_STA, $3, $6,VOIDTYPE);}
 	   ;   
 case_par
-       :CASE member_in_exp COLON OPEN_PAR statement CLOSE_PAR init_case_par 
+       :CASE simple_ari_exp COLON OPEN_PAR statement CLOSE_PAR init_case_par 
 	   {
 	     $$=new CSyntaxNode(CASE_STA, $2, $5, $7, VOIDTYPE);
 	   }

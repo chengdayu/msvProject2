@@ -10,7 +10,6 @@ void $$changeState()
 {if ($$current == $$length){
 $$length++; $$flag[$$length - 1] = 0;}
 $$current++; }
-<<<<<<< HEAD
 struct __anonunion___value_2{
 int __wch;
 char __wchb[4];
@@ -341,7 +340,6 @@ struct Node *can;
 int mod;
 int Stack_mx,Max_Red,Total;
 char dumpbuf[2048];
-char * memset(int $$Ext,char *des,char ch,int num);
 void  alldone(int $$Ext,int estatus);
 char * emalloc(int $$Ext,int n);
 int  tl_Getchar(int $$Ext);
@@ -423,7 +421,7 @@ void  print_generalized(int $$Ext);
 void  mk_generalized(int $$Ext);
 int  isalnum_(int $$Ext,int c);
 int  hash(int $$Ext,char *s);
-void  getword(int $$Ext,int first,void (*tst)(int $$Ext));
+void  getword(int $$Ext,int first,int (*tst)(int $$Ext,int $$NoCare));
 int  follow(int $$Ext,int tok,int ifyes,int ifno);
 int  tl_yylex(int $$Ext);
 int  tl_lex(int $$Ext);
@@ -474,17 +472,6 @@ int  dump_cond(int $$Ext,Node* pp,Node* r,int first);
 void  sdump(int $$Ext,Node* n);
 Symbol*  DoDump(int $$Ext,Node* n);
 void  trans(int $$Ext,Node* p);
-char * memset(int $$Ext,char *des,char ch,int num){
-char * RValue=0;
-int i;
-i=0;
-while(i<num){des[i]=ch;
-i=(i)+(1);
-}
-;
-RValue=des;
-return RValue;
-}
 void  alldone(int $$Ext,int estatus){
 if (strlen(out1)>0){unlink((char *)(out1));
 }
@@ -499,7 +486,7 @@ emalloc_tmp=(char *)(malloc(n));
 if (!emalloc_tmp){fatal(0,"not enough memory",NULL);
 }
 ;
-memset(0,emalloc_tmp,0,n);
+memset(emalloc_tmp,0,n);
 return_1=1;
 RValue=emalloc_tmp;
 return RValue;
@@ -596,7 +583,7 @@ if (!n){return_1=1;
 if (return_1==0){break_1$=0;
 switch_1=0;
 nm_1$=n->ntyp;
-if (nm_1$==(OR_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_1$==OR_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("(");
 dump(0,n->lft);
 printf(" || ");
@@ -605,7 +592,7 @@ printf(")");
 break_1$=1;
 }
 ;
-if (nm_1$==(AND_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_1$==AND_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("(");
 dump(0,n->lft);
 printf(" && ");
@@ -614,7 +601,7 @@ printf(")");
 break_1$=1;
 }
 ;
-if (nm_1$==(U_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_1$==U_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("(");
 dump(0,n->lft);
 printf(" U ");
@@ -623,7 +610,7 @@ printf(")");
 break_1$=1;
 }
 ;
-if (nm_1$==(V_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_1$==V_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("(");
 dump(0,n->lft);
 printf(" V ");
@@ -632,7 +619,7 @@ printf(")");
 break_1$=1;
 }
 ;
-if (nm_1$==(NOT) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_1$==NOT) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("!");
 printf(" (");
 dump(0,n->lft);
@@ -640,29 +627,29 @@ printf(")");
 break_1$=1;
 }
 ;
-if (nm_1$==(FALSE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_1$==FALSE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("false");
 break_1$=1;
 }
 ;
-if (nm_1$==(TRUE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_1$==TRUE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("true");
 break_1$=1;
 }
 ;
-if (nm_1$==(PREDICATE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_1$==PREDICATE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("(");
 ;
 printf(")");
 break_1$=1;
 }
 ;
-if (nm_1$==(-1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_1$==-1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf(" D ");
 break_1$=1;
 }
 ;
-if (break_1$==(0) && (return_1==0)){printf("Unknown token: ");
+if ((break_1$==0) && (return_1==0)){printf("Unknown token: ");
 tl_explain(0,n->ntyp);
 break_1$=1;
 }
@@ -679,72 +666,72 @@ return_1=0;
 break_1$=0;
 switch_1=0;
 nm_2$=n;
-if (nm_2$==(ALWAYS) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_2$==ALWAYS) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("[]");
 break_1$=1;
 }
 ;
-if (nm_2$==(EVENTUALLY) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_2$==EVENTUALLY) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("<>");
 break_1$=1;
 }
 ;
-if (nm_2$==(IMPLIES) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_2$==IMPLIES) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("->");
 break_1$=1;
 }
 ;
-if (nm_2$==(EQUIV) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_2$==EQUIV) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("<->");
 break_1$=1;
 }
 ;
-if (nm_2$==(PREDICATE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_2$==PREDICATE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("predicate");
 break_1$=1;
 }
 ;
-if (nm_2$==(OR_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_2$==OR_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("||");
 break_1$=1;
 }
 ;
-if (nm_2$==(AND_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_2$==AND_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("&&");
 break_1$=1;
 }
 ;
-if (nm_2$==(NOT) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_2$==NOT) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("!");
 break_1$=1;
 }
 ;
-if (nm_2$==(U_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_2$==U_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("U");
 break_1$=1;
 }
 ;
-if (nm_2$==(V_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_2$==V_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("V");
 break_1$=1;
 }
 ;
-if (nm_2$==(TRUE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_2$==TRUE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("true");
 break_1$=1;
 }
 ;
-if (nm_2$==(FALSE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_2$==FALSE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("false");
 break_1$=1;
 }
 ;
-if (nm_2$==(';') || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_2$==';') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 printf("end of formula");
 break_1$=1;
 }
 ;
-if (break_1$==(0) && (return_1==0)){printf("%d",n);
+if ((break_1$==0) && (return_1==0)){printf("%d",n);
 break_1$=1;
 }
 ;
@@ -757,7 +744,7 @@ printf("%p",s2);
 } else {printf("%p",s1);
 }
 ;
-if (tl_yychar!=(-1) && (tl_yychar!=0)){printf(", saw \'");
+if (((tl_yychar)!=(-1)) && ((tl_yychar)!=(0))){printf(", saw \'");
 tl_explain(0,tl_yychar);
 printf("\'");
 }
@@ -794,21 +781,21 @@ return_1=0;
 break_1$=0;
 switch_1=0;
 nm_3$=p->ntyp;
-if (nm_3$==(AND_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_3$==AND_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 }
 ;
-if (nm_3$==(OR_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_3$==OR_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 }
 ;
-if (nm_3$==(U_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_3$==U_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 }
 ;
-if (nm_3$==(V_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_3$==V_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 return_1=1;
 RValue=((calculate_node_size(1,p->lft))+(calculate_node_size(1,p->rgt)))+(1);
 }
 ;
-if (break_1$==(0) && (return_1==0)){return_1=1;
+if ((break_1$==0) && (return_1==0)){return_1=1;
 RValue=1;
 break_1$=1;
 }
@@ -825,29 +812,29 @@ return_1=0;
 break_1$=0;
 switch_1=0;
 nm_4$=p->ntyp;
-if (nm_4$==(AND_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_4$==AND_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 }
 ;
-if (nm_4$==(OR_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_4$==OR_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 }
 ;
-if (nm_4$==(U_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_4$==U_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 }
 ;
-if (nm_4$==(V_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_4$==V_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 return_1=1;
 RValue=(calculate_sym_size(1,p->lft))+(calculate_sym_size(1,p->rgt));
 }
 ;
-if (nm_4$==(NOT) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_4$==NOT) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 }
 ;
-if (nm_4$==(PREDICATE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_4$==PREDICATE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 return_1=1;
 RValue=1;
 }
 ;
-if (break_1$==(0) && (return_1==0)){return_1=1;
+if ((break_1$==0) && (return_1==0)){return_1=1;
 RValue=0;
 }
 ;
@@ -875,7 +862,7 @@ return RValue;
 void  do_merge_trans(int $$Ext,ATrans** result,ATrans* trans1,ATrans* trans2){
 int return_1;
 return_1=0;
-if (!((trans1) || (!trans2))){free_atrans(0,(*(result)),0);
+if ((!trans1) || (!trans2)){free_atrans(0,(*(result)),0);
 (*(result))=NULL;
 return_1=1;
 }
@@ -910,7 +897,7 @@ int return_1;
 int already_done_i;
 return_1=0;
 already_done_i=1;
-while(return_1==(0) && (already_done_i<node_id)){if (isequal(1,p,label[already_done_i])){return_1=1;
+while((return_1==0) && (already_done_i<node_id)){if (isequal(1,p,label[already_done_i])){return_1=1;
 RValue=already_done_i;
 }
 ;
@@ -931,7 +918,7 @@ int return_1;
 int get_sym_id_i;
 return_1=0;
 get_sym_id_i=0;
-while(return_1==(0) && (get_sym_id_i<sym_id)){if (!(strcmp(s,sym_table[get_sym_id_i]))){return_1=1;
+while((return_1==0) && (get_sym_id_i<sym_id)){if (!(strcmp(s,sym_table[get_sym_id_i]))){return_1=1;
 RValue=get_sym_id_i;
 }
 ;
@@ -965,20 +952,20 @@ boolean_result=NULL;
 break_1$=0;
 switch_1=0;
 nm_5$=p->ntyp;
-if (nm_5$==(TRUE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_5$==TRUE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 boolean_result=emalloc_atrans(0);
 clear_set(0,boolean_result->to,0);
 clear_set(0,boolean_result->pos,1);
 clear_set(0,boolean_result->neg,1);
 }
 ;
-if (nm_5$==(FALSE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_5$==FALSE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 break_1$=1;
 }
 ;
-if (nm_5$==(AND_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
-boolean_rgt=boolean(0,p->rgt);
+if ((nm_5$==AND_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 boolean_lft=boolean(0,p->lft);
+boolean_rgt=boolean(0,p->rgt);
 boolean_t1=boolean_lft;
 while(boolean_t1){boolean_t2=boolean_rgt;
 while(boolean_t2){boolean_1_tmp=merge_trans(0,boolean_t1,boolean_t2);
@@ -997,7 +984,7 @@ free_atrans(0,boolean_rgt,1);
 break_1$=1;
 }
 ;
-if (nm_5$==(OR_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_5$==OR_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 boolean_lft=boolean(0,p->lft);
 boolean_t1=boolean_lft;
 while(boolean_t1){boolean_1_tmp_1=dup_trans(0,boolean_t1);
@@ -1019,7 +1006,7 @@ free_atrans(0,boolean_rgt,1);
 break_1$=1;
 }
 ;
-if (break_1$==(0) && (return_1==0)){build_alternating(0,p);
+if ((break_1$==0) && (return_1==0)){build_alternating(0,p);
 boolean_result=emalloc_atrans(0);
 clear_set(0,boolean_result->to,0);
 clear_set(0,boolean_result->pos,1);
@@ -1058,18 +1045,18 @@ RValue=transition[build_alternating_node];
 if (return_1==0){break_1$=0;
 switch_1=0;
 nm_6$=p->ntyp;
-if (nm_6$==(TRUE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_6$==TRUE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 build_alternating_t=emalloc_atrans(0);
 clear_set(0,build_alternating_t->to,0);
 clear_set(0,build_alternating_t->pos,1);
 clear_set(0,build_alternating_t->neg,1);
 }
 ;
-if (nm_6$==(FALSE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_6$==FALSE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 break_1$=1;
 }
 ;
-if (nm_6$==(PREDICATE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_6$==PREDICATE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 build_alternating_t=emalloc_atrans(0);
 clear_set(0,build_alternating_t->to,0);
 clear_set(0,build_alternating_t->pos,1);
@@ -1079,7 +1066,7 @@ add_set(0,build_alternating_t->pos,build_alternating_2_temp$_1);
 break_1$=1;
 }
 ;
-if (nm_6$==(NOT) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_6$==NOT) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 build_alternating_t=emalloc_atrans(0);
 clear_set(0,build_alternating_t->to,0);
 clear_set(0,build_alternating_t->pos,1);
@@ -1089,7 +1076,7 @@ add_set(0,build_alternating_t->neg,build_alternating_2_temp$_2);
 break_1$=1;
 }
 ;
-if (nm_6$==(U_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_6$==U_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 build_alternating_t2=build_alternating(0,p->rgt);
 while(build_alternating_t2){build_alternating_2_tmp=dup_trans(0,build_alternating_t2);
 build_alternating_2_tmp->nxt=build_alternating_t;
@@ -1109,7 +1096,7 @@ add_set(0,final_set,node_id);
 break_1$=1;
 }
 ;
-if (nm_6$==(V_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_6$==V_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 build_alternating_t1=build_alternating(0,p->rgt);
 while(build_alternating_t1){build_alternating_t2=build_alternating(0,p->lft);
 while(build_alternating_t2){build_alternating_2_tmp_3=merge_trans(0,build_alternating_t1,build_alternating_t2);
@@ -1130,7 +1117,7 @@ build_alternating_t1=build_alternating_t1->nxt;
 break_1$=1;
 }
 ;
-if (nm_6$==(AND_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_6$==AND_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 build_alternating_t=NULL;
 build_alternating_t1=build_alternating(0,p->lft);
 while(build_alternating_t1){build_alternating_t2=build_alternating(0,p->rgt);
@@ -1148,7 +1135,7 @@ build_alternating_t1=build_alternating_t1->nxt;
 break_1$=1;
 }
 ;
-if (nm_6$==(OR_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_6$==OR_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 build_alternating_t=NULL;
 build_alternating_t1=build_alternating(0,p->lft);
 while(build_alternating_t1){build_alternating_2_tmp_5=dup_trans(0,build_alternating_t1);
@@ -1167,7 +1154,7 @@ build_alternating_t1=build_alternating_t1->nxt;
 break_1$=1;
 }
 ;
-if (break_1$==(0) && (return_1==0)){break_1$=1;
+if ((break_1$==0) && (return_1==0)){break_1$=1;
 }
 ;
 transition[node_id]=build_alternating_t;
@@ -1192,7 +1179,7 @@ simplify_atrans_t=(*(trans));
 while(simplify_atrans_t){continue_1=0;
 break_1=0;
 simplify_atrans_t1=(*(trans));
-while(break_1==(0) && (simplify_atrans_t1)){if ((simplify_atrans_t1!=simplify_atrans_t) && ((included_set(1,simplify_atrans_t1->to,simplify_atrans_t->to,0)) && ((included_set(1,simplify_atrans_t1->pos,simplify_atrans_t->pos,1)) && (included_set(1,simplify_atrans_t1->neg,simplify_atrans_t->neg,1))))){break_1=1;
+while((break_1==0) && (simplify_atrans_t1)){if (((((simplify_atrans_t1)!=(simplify_atrans_t)) && (included_set(1,simplify_atrans_t1->to,simplify_atrans_t->to,0))) && (included_set(1,simplify_atrans_t1->pos,simplify_atrans_t->pos,1))) && (included_set(1,simplify_atrans_t1->neg,simplify_atrans_t->neg,1))){break_1=1;
 }
 ;
 if (break_1==0){simplify_atrans_t1=simplify_atrans_t1->nxt;
@@ -1293,7 +1280,7 @@ while(print_alternating_t){if ((empty_set(1,print_alternating_t->pos,1)) && (emp
 }
 ;
 print_set(0,print_alternating_t->pos,1);
-if (!((empty_set(1,print_alternating_t->pos,1)) && (!(empty_set(1,print_alternating_t->neg,1))))){printf(" & ");
+if ((!(empty_set(1,print_alternating_t->pos,1))) && (!(empty_set(1,print_alternating_t->neg,1)))){printf(" & ");
 }
 ;
 print_set(0,print_alternating_t->neg,2);
@@ -1312,14 +1299,14 @@ continue_1=0;
 }
 void  mk_alternating(int $$Ext,Node* p){
 node_size=(calculate_node_size(1,p))+(1);
-label=(Node**)(tl_emalloc(1,node_size*4));
-transition=(ATrans**)(tl_emalloc(1,node_size*4));
-node_size=(node_size/ 8*4)+(1);
+label=(Node**)(tl_emalloc(1,(node_size*4)));
+transition=(ATrans**)(tl_emalloc(1,(node_size*4)));
+node_size=((node_size/ (8*4)))+(1);
 sym_size=calculate_sym_size(0,p);
-if (sym_size){sym_table=(char**)(tl_emalloc(1,sym_size*4));
+if (sym_size){sym_table=(char**)(tl_emalloc(1,(sym_size*4)));
 }
 ;
-sym_size=(sym_size/ 8*4)+(1);
+sym_size=((sym_size/ (8*4)))+(1);
 final_set=make_set(0,-1,0);
 transition[0]=boolean(0,p);
 if (tl_verbose){printf("\nAlternating automaton before simplification\n");
@@ -1354,7 +1341,7 @@ s->nxt=bremoved->nxt;
 bremoved->nxt=s;
 s->prv=s1;
 s1=bremoved->nxt;
-while(s1!=bremoved){if (s1->prv==s){s1->prv=s->prv;
+while((s1)!=(bremoved)){if (s1->prv==s){s1->prv=s->prv;
 }
 ;
 s1=s1->nxt;
@@ -1379,13 +1366,13 @@ struct BTrans *simplify_btrans_1_3_free;
 return_1=0;
 simplify_btrans_changed=0;
 simplify_btrans_s=bstates->nxt;
-while(simplify_btrans_s!=bstates){simplify_btrans_t=simplify_btrans_s->trans->nxt;
-while(simplify_btrans_t!=simplify_btrans_s->trans){simplify_btrans_t1=simplify_btrans_s->trans->nxt;
+while((simplify_btrans_s)!=(bstates)){simplify_btrans_t=simplify_btrans_s->trans->nxt;
+while((simplify_btrans_t)!=(simplify_btrans_s->trans)){simplify_btrans_t1=simplify_btrans_s->trans->nxt;
 copy_btrans(0,simplify_btrans_t,simplify_btrans_s->trans);
-while((simplify_btrans_t==simplify_btrans_t1) || ((simplify_btrans_t->to!=simplify_btrans_t1->to) || (!((included_set(1,simplify_btrans_t1->pos,simplify_btrans_t->pos,1)) || (!(included_set(1,simplify_btrans_t1->neg,simplify_btrans_t->neg,1))))))){simplify_btrans_t1=simplify_btrans_t1->nxt;
+while((((simplify_btrans_t==simplify_btrans_t1) || ((simplify_btrans_t->to)!=(simplify_btrans_t1->to))) || (!(included_set(1,simplify_btrans_t1->pos,simplify_btrans_t->pos,1)))) || (!(included_set(1,simplify_btrans_t1->neg,simplify_btrans_t->neg,1)))){simplify_btrans_t1=simplify_btrans_t1->nxt;
 }
 ;
-if (simplify_btrans_t1!=simplify_btrans_s->trans){simplify_btrans_1_3_free=simplify_btrans_t->nxt;
+if ((simplify_btrans_t1)!=(simplify_btrans_s->trans)){simplify_btrans_1_3_free=simplify_btrans_t->nxt;
 simplify_btrans_t->to=simplify_btrans_1_3_free->to;
 copy_set(0,simplify_btrans_1_3_free->pos,simplify_btrans_t->pos,1);
 copy_set(0,simplify_btrans_1_3_free->neg,simplify_btrans_t->neg,1);
@@ -1417,7 +1404,7 @@ int  RValue=0;
 int return_1;
 return_1=0;
 return_1=1;
-RValue=(s->to==t->to) && ((same_sets(0,s->pos,t->pos,1)) && (same_sets(0,s->neg,t->neg,1)));
+RValue=((s->to==t->to) && (same_sets(0,s->pos,t->pos,1))) && (same_sets(0,s->neg,t->neg,1));
 return RValue;
 }
 void  remove_btrans(int $$Ext,BState* to){
@@ -1426,8 +1413,8 @@ struct BTrans *remove_btrans_t;
 int remove_btrans_i;
 struct BTrans *remove_btrans_1_2_3_free;
 remove_btrans_s=bstates->nxt;
-while(remove_btrans_s!=bstates){remove_btrans_t=remove_btrans_s->trans->nxt;
-while(remove_btrans_t!=remove_btrans_s->trans){if (remove_btrans_t->to==to){remove_btrans_1_2_3_free=remove_btrans_t->nxt;
+while((remove_btrans_s)!=(bstates)){remove_btrans_t=remove_btrans_s->trans->nxt;
+while((remove_btrans_t)!=(remove_btrans_s->trans)){if (remove_btrans_t->to==to){remove_btrans_1_2_3_free=remove_btrans_t->nxt;
 remove_btrans_t->to=remove_btrans_1_2_3_free->to;
 copy_set(0,remove_btrans_1_2_3_free->pos,remove_btrans_t->pos,1);
 copy_set(0,remove_btrans_1_2_3_free->neg,remove_btrans_t->neg,1);
@@ -1450,8 +1437,8 @@ struct BState *retarget_all_btrans_s;
 struct BTrans *retarget_all_btrans_t;
 struct BTrans *retarget_all_btrans_1_2_3_4_free;
 retarget_all_btrans_s=bstates->nxt;
-while(retarget_all_btrans_s!=bstates){retarget_all_btrans_t=retarget_all_btrans_s->trans->nxt;
-while(retarget_all_btrans_t!=retarget_all_btrans_s->trans){if (!(retarget_all_btrans_t->to->trans)){retarget_all_btrans_t->to=retarget_all_btrans_t->to->prv;
+while((retarget_all_btrans_s)!=(bstates)){retarget_all_btrans_t=retarget_all_btrans_s->trans->nxt;
+while((retarget_all_btrans_t)!=(retarget_all_btrans_s->trans)){if (!(retarget_all_btrans_t->to->trans)){retarget_all_btrans_t->to=retarget_all_btrans_t->to->prv;
 if (!(retarget_all_btrans_t->to)){retarget_all_btrans_1_2_3_4_free=retarget_all_btrans_t->nxt;
 retarget_all_btrans_t->to=retarget_all_btrans_1_2_3_4_free->to;
 copy_set(0,retarget_all_btrans_1_2_3_4_free->pos,retarget_all_btrans_t->pos,1);
@@ -1471,7 +1458,7 @@ retarget_all_btrans_t=retarget_all_btrans_t->nxt;
 retarget_all_btrans_s=retarget_all_btrans_s->nxt;
 }
 ;
-while(bremoved->nxt!=bremoved){retarget_all_btrans_s=bremoved->nxt;
+while((bremoved->nxt)!=(bremoved)){retarget_all_btrans_s=bremoved->nxt;
 bremoved->nxt=bremoved->nxt->nxt;
 tfree(0,retarget_all_btrans_s);
 }
@@ -1482,12 +1469,12 @@ int  RValue=0;
 int return_1;
 struct BTrans *all_btrans_match_s,*all_btrans_match_t;
 return_1=0;
-if (((a->final==accept) || (b->final==accept)) && (((a->final)+(b->final)!=2*accept) && (a->incoming>=(0) && (b->incoming>=0)))){return_1=1;
+if (((((a->final==accept) || (b->final==accept)) && (((a->final)+(b->final))!=((2*accept)))) && (a->incoming>=0)) && (b->incoming>=0)){return_1=1;
 RValue=0;
 }
 ;
 if (return_1==0){all_btrans_match_s=a->trans->nxt;
-while(return_1==(0) && (all_btrans_match_s!=a->trans)){copy_btrans(0,all_btrans_match_s,b->trans);
+while((return_1==0) && ((all_btrans_match_s)!=(a->trans))){copy_btrans(0,all_btrans_match_s,b->trans);
 all_btrans_match_t=b->trans->nxt;
 while(!(same_btrans(1,all_btrans_match_s,all_btrans_match_t))){all_btrans_match_t=all_btrans_match_t->nxt;
 }
@@ -1502,7 +1489,7 @@ if (return_1==0){all_btrans_match_s=all_btrans_match_s->nxt;
 }
 ;
 if (return_1==0){all_btrans_match_s=b->trans->nxt;
-while(return_1==(0) && (all_btrans_match_s!=b->trans)){copy_btrans(0,all_btrans_match_s,a->trans);
+while((return_1==0) && ((all_btrans_match_s)!=(b->trans))){copy_btrans(0,all_btrans_match_s,a->trans);
 all_btrans_match_t=a->trans->nxt;
 while(!(same_btrans(1,all_btrans_match_s,all_btrans_match_t))){all_btrans_match_t=all_btrans_match_t->nxt;
 }
@@ -1537,7 +1524,7 @@ return_1=0;
 simplify_bstates_changed=0;
 continue_1=0;
 simplify_bstates_s=bstates->nxt;
-while(simplify_bstates_s!=bstates){continue_1=0;
+while((simplify_bstates_s)!=(bstates)){continue_1=0;
 if (simplify_bstates_s->trans==simplify_bstates_s->trans->nxt){simplify_bstates_s=remove_bstate(0,simplify_bstates_s,NULL);
 simplify_bstates_changed=(simplify_bstates_changed)+(1);
 continue_1=1;
@@ -1550,7 +1537,7 @@ simplify_bstates_s1=simplify_bstates_s->nxt;
 while(!(all_btrans_match(1,simplify_bstates_s,simplify_bstates_s1))){simplify_bstates_s1=simplify_bstates_s1->nxt;
 }
 ;
-if (simplify_bstates_s1!=bstates){if (simplify_bstates_s1->incoming==-1){simplify_bstates_s1->final=simplify_bstates_s->final;
+if ((simplify_bstates_s1)!=(bstates)){if (simplify_bstates_s1->incoming==-1){simplify_bstates_s1->final=simplify_bstates_s->final;
 }
 ;
 simplify_bstates_s=remove_bstate(0,simplify_bstates_s,simplify_bstates_s1);
@@ -1587,13 +1574,11 @@ bdfs_scc->nxt=Bscc_stack;
 Bscc_stack=bdfs_scc;
 s->incoming=1;
 bdfs_t=s->trans->nxt;
-while(bdfs_t!=s->trans){if (bdfs_t->to->incoming==0){bdfs_1_result=bdfs(0,bdfs_t->to);
-bdfs_scc->theta=(bdfs_scc->theta<bdfs_1_result) ?bdfs_scc->theta : bdfs_1_result 
-;
+while((bdfs_t)!=(s->trans)){if (bdfs_t->to->incoming==0){bdfs_1_result=bdfs(0,bdfs_t->to);
+bdfs_scc->theta=((bdfs_scc->theta<bdfs_1_result) ?bdfs_scc->theta : bdfs_1_result );
 } else {break_1=0;
 bdfs_c=Bscc_stack->nxt;
-while(break_1==(0) && (bdfs_c!=0)){if (bdfs_c->bstate==bdfs_t->to){bdfs_scc->theta=(bdfs_scc->theta<bdfs_c->rank) ?bdfs_scc->theta : bdfs_c->rank 
-;
+while((break_1==0) && ((bdfs_c)!=(0))){if (bdfs_c->bstate==bdfs_t->to){bdfs_scc->theta=((bdfs_scc->theta<bdfs_c->rank) ?bdfs_scc->theta : bdfs_c->rank );
 break_1=1;
 }
 ;
@@ -1610,7 +1595,7 @@ bdfs_t=bdfs_t->nxt;
 ;
 if (bdfs_scc->rank==bdfs_scc->theta){if (Bscc_stack==bdfs_scc){s->incoming=-1;
 bdfs_t=s->trans->nxt;
-while(bdfs_t!=s->trans){if (bdfs_t->to==s){s->incoming=1;
+while((bdfs_t)!=(s->trans)){if (bdfs_t->to==s){s->incoming=1;
 }
 ;
 bdfs_t=bdfs_t->nxt;
@@ -1635,13 +1620,13 @@ if (bstates==bstates->nxt){return_1=1;
 }
 ;
 if (return_1==0){simplify_bscc_s=bstates->nxt;
-while(simplify_bscc_s!=bstates){simplify_bscc_s->incoming=0;
+while((simplify_bscc_s)!=(bstates)){simplify_bscc_s->incoming=0;
 simplify_bscc_s=simplify_bscc_s->nxt;
 }
 ;
 bdfs(0,bstates->prv);
 simplify_bscc_s=bstates->nxt;
-while(simplify_bscc_s!=bstates){if (simplify_bscc_s->incoming==0){remove_bstate(0,simplify_bscc_s,0);
+while((simplify_bscc_s)!=(bstates)){if (simplify_bscc_s->incoming==0){remove_bstate(0,simplify_bscc_s,0);
 }
 ;
 simplify_bscc_s=simplify_bscc_s->nxt;
@@ -1661,30 +1646,30 @@ RValue=s;
 if (return_1==0){s=bstack->nxt;
 bstack->gstate=(*(state));
 bstack->final=final;
-while(!((s->gstate==(*(state))) || (!(s->final==final)))){s=s->nxt;
+while((!(s->gstate==(*(state)))) || (!(s->final==final))){s=s->nxt;
 }
 ;
-if (s!=bstack){return_1=1;
+if ((s)!=(bstack)){return_1=1;
 RValue=s;
 }
 ;
 if (return_1==0){s=bstates->nxt;
 bstates->gstate=(*(state));
 bstates->final=final;
-while(!((s->gstate==(*(state))) || (!(s->final==final)))){s=s->nxt;
+while((!(s->gstate==(*(state)))) || (!(s->final==final))){s=s->nxt;
 }
 ;
-if (s!=bstates){return_1=1;
+if ((s)!=(bstates)){return_1=1;
 RValue=s;
 }
 ;
 if (return_1==0){s=bremoved->nxt;
 bremoved->gstate=(*(state));
 bremoved->final=final;
-while(!((s->gstate==(*(state))) || (!(s->final==final)))){s=s->nxt;
+while((!(s->gstate==(*(state)))) || (!(s->final==final))){s=s->nxt;
 }
 ;
-if (s!=bremoved){return_1=1;
+if ((s)!=(bremoved)){return_1=1;
 RValue=s;
 }
 ;
@@ -1713,7 +1698,7 @@ int  next_final(int $$Ext,int *set,int fin$){
 int  RValue=0;
 int return_1;
 return_1=0;
-if ((fin$!=accept) && (in_set(1,set,final[(fin$)+(1)]))){return_1=1;
+if (((fin$)!=(accept)) && (in_set(1,set,final[(fin$)+(1)]))){return_1=1;
 RValue=next_final(0,set,(fin$)+(1));
 }
 ;
@@ -1738,12 +1723,11 @@ break_1=0;
 return_1=0;
 make_btrans_state_trans=0;
 if (s->gstate->trans){make_btrans_t=s->gstate->trans->nxt;
-while(make_btrans_t!=s->gstate->trans){make_btrans_1_fin$=next_final(0,make_btrans_t->final,(s->final==accept) ?0 : s->final 
-);
+while((make_btrans_t)!=(s->gstate->trans)){make_btrans_1_fin$=next_final(0,make_btrans_t->final,((s->final==accept) ?0 : s->final ));
 break_1=0;
 make_btrans_1_to=find_bstate(0,&make_btrans_t->to,make_btrans_1_fin$,s);
 make_btrans_t1=s->trans->nxt;
-while(break_1==(0) && (make_btrans_t1!=s->trans)){if ((tl_simp_fly) && ((make_btrans_1_to==make_btrans_t1->to) && ((included_set(1,make_btrans_t->pos,make_btrans_t1->pos,1)) && (included_set(1,make_btrans_t->neg,make_btrans_t1->neg,1))))){make_btrans_1_2_free=make_btrans_t1->nxt;
+while((break_1==0) && ((make_btrans_t1)!=(s->trans))){if ((((tl_simp_fly) && (make_btrans_1_to==make_btrans_t1->to)) && (included_set(1,make_btrans_t->pos,make_btrans_t1->pos,1))) && (included_set(1,make_btrans_t->neg,make_btrans_t1->neg,1))){make_btrans_1_2_free=make_btrans_t1->nxt;
 make_btrans_t1->to->incoming=(make_btrans_t1->to->incoming)-(1);
 make_btrans_t1->to=make_btrans_1_2_free->to;
 copy_set(0,make_btrans_1_2_free->pos,make_btrans_t1->pos,1);
@@ -1754,7 +1738,7 @@ if (make_btrans_1_2_free==s->trans){s->trans=make_btrans_t1;
 ;
 free_btrans(0,make_btrans_1_2_free,0,0);
 make_btrans_state_trans=(make_btrans_state_trans)-(1);
-} else {if ((tl_simp_fly) && ((make_btrans_t1->to==make_btrans_1_to) && ((included_set(1,make_btrans_t1->pos,make_btrans_t->pos,1)) && (included_set(1,make_btrans_t1->neg,make_btrans_t->neg,1))))){break_1=1;
+} else {if ((((tl_simp_fly) && (make_btrans_t1->to==make_btrans_1_to)) && (included_set(1,make_btrans_t1->pos,make_btrans_t->pos,1))) && (included_set(1,make_btrans_t1->neg,make_btrans_t->neg,1))){break_1=1;
 } else {make_btrans_t1=make_btrans_t1->nxt;
 }
 ;
@@ -1784,7 +1768,7 @@ s->prv=NULL;
 s->nxt=bremoved->nxt;
 bremoved->nxt=s;
 make_btrans_s1=bremoved->nxt;
-while(make_btrans_s1!=bremoved){if (make_btrans_s1->prv==s){make_btrans_s1->prv=NULL;
+while((make_btrans_s1)!=(bremoved)){if (make_btrans_s1->prv==s){make_btrans_s1->prv=NULL;
 }
 ;
 make_btrans_s1=make_btrans_s1->nxt;
@@ -1799,13 +1783,13 @@ make_btrans_s1=bstates->nxt;
 while(!(all_btrans_match(1,s,make_btrans_s1))){make_btrans_s1=make_btrans_s1->nxt;
 }
 ;
-if (make_btrans_s1!=bstates){free_btrans(0,s->trans->nxt,s->trans,1);
+if ((make_btrans_s1)!=(bstates)){free_btrans(0,s->trans->nxt,s->trans,1);
 s->trans=NULL;
 s->prv=make_btrans_s1;
 s->nxt=bremoved->nxt;
 bremoved->nxt=s;
 make_btrans_s1=bremoved->nxt;
-while(make_btrans_s1!=bremoved){if (make_btrans_s1->prv==s){make_btrans_s1->prv=s->prv;
+while((make_btrans_s1)!=(bremoved)){if (make_btrans_s1->prv==s){make_btrans_s1->prv=s->prv;
 }
 ;
 make_btrans_s1=make_btrans_s1->nxt;
@@ -1850,11 +1834,11 @@ printf("i");
 ;
 printf("\n");
 print_buchi_t=s->trans->nxt;
-while(print_buchi_t!=s->trans){if ((empty_set(1,print_buchi_t->pos,1)) && (empty_set(1,print_buchi_t->neg,1))){printf("1");
+while((print_buchi_t)!=(s->trans)){if ((empty_set(1,print_buchi_t->pos,1)) && (empty_set(1,print_buchi_t->neg,1))){printf("1");
 }
 ;
 print_set(0,print_buchi_t->pos,1);
-if (!((empty_set(1,print_buchi_t->pos,1)) && (!(empty_set(1,print_buchi_t->neg,1))))){printf(" & ");
+if ((!(empty_set(1,print_buchi_t->pos,1))) && (!(empty_set(1,print_buchi_t->neg,1)))){printf(" & ");
 }
 ;
 print_set(0,print_buchi_t->neg,2);
@@ -1895,7 +1879,7 @@ printf("}\n");
 return_1=1;
 }
 ;
-if (return_1==0){if (bstates->nxt->nxt==(bstates) && (bstates->nxt->id==0)){printf("never {\n             \n");
+if (return_1==0){if ((bstates->nxt->nxt==bstates) && (bstates->nxt->id==0)){printf("never {\n             \n");
 printf("accept_init:\n");
 printf("\tif\n");
 printf("\t:: (1) -> goto_1 accept_init\n");
@@ -1907,7 +1891,7 @@ return_1=1;
 if (return_1==0){printf("never {\n             \n");
 continue_1=0;
 print_spin_buchi_s=bstates->prv;
-while(print_spin_buchi_s!=bstates){continue_1=0;
+while((print_spin_buchi_s)!=(bstates)){continue_1=0;
 if (print_spin_buchi_s->id==0){print_spin_buchi_accept_all=1;
 continue_1=1;
 print_spin_buchi_s=print_spin_buchi_s->prv;
@@ -1932,10 +1916,10 @@ print_spin_buchi_s=print_spin_buchi_s->prv;
 ;
 if (continue_1==0){printf("\tif\n");
 print_spin_buchi_t=print_spin_buchi_s->trans->nxt;
-while(print_spin_buchi_t!=print_spin_buchi_s->trans){printf("\t:: (");
+while((print_spin_buchi_t)!=(print_spin_buchi_s->trans)){printf("\t:: (");
 spin_print_set(0,print_spin_buchi_t->pos,print_spin_buchi_t->neg);
 print_spin_buchi_t1=print_spin_buchi_t;
-while(print_spin_buchi_t1->nxt!=print_spin_buchi_s->trans){if (print_spin_buchi_t1->nxt->to->id==(print_spin_buchi_t->to->id) && (print_spin_buchi_t1->nxt->to->final==print_spin_buchi_t->to->final)){printf(") || (");
+while((print_spin_buchi_t1->nxt)!=(print_spin_buchi_s->trans)){if ((print_spin_buchi_t1->nxt->to->id==print_spin_buchi_t->to->id) && (print_spin_buchi_t1->nxt->to->final==print_spin_buchi_t->to->final)){printf(") || (");
 spin_print_set(0,print_spin_buchi_t1->nxt->pos,print_spin_buchi_t1->nxt->neg);
 print_spin_buchi_t1->nxt=print_spin_buchi_t1->nxt->nxt;
 } else {print_spin_buchi_t1=print_spin_buchi_t1->nxt;
@@ -2014,11 +1998,11 @@ mk_buchi_s->trans=emalloc_btrans(0);
 mk_buchi_s->trans->nxt=mk_buchi_s->trans;
 mk_buchi_i=0;
 while(mk_buchi_i<init_size){if (init[mk_buchi_i]){mk_buchi_t=init[mk_buchi_i]->trans->nxt;
-while(mk_buchi_t!=init[mk_buchi_i]->trans){mk_buchi_1_fin$=next_final(0,mk_buchi_t->final,0);
+while((mk_buchi_t)!=(init[mk_buchi_i]->trans)){mk_buchi_1_fin$=next_final(0,mk_buchi_t->final,0);
 break_1=0;
 mk_buchi_1_to=find_bstate(0,&mk_buchi_t->to,mk_buchi_1_fin$,mk_buchi_s);
 mk_buchi_t1=mk_buchi_s->trans->nxt;
-while(break_1==(0) && (mk_buchi_t1!=mk_buchi_s->trans)){if ((tl_simp_fly) && ((mk_buchi_1_to==mk_buchi_t1->to) && ((included_set(1,mk_buchi_t->pos,mk_buchi_t1->pos,1)) && (included_set(1,mk_buchi_t->neg,mk_buchi_t1->neg,1))))){mk_buchi_1_2_free=mk_buchi_t1->nxt;
+while((break_1==0) && ((mk_buchi_t1)!=(mk_buchi_s->trans))){if ((((tl_simp_fly) && (mk_buchi_1_to==mk_buchi_t1->to)) && (included_set(1,mk_buchi_t->pos,mk_buchi_t1->pos,1))) && (included_set(1,mk_buchi_t->neg,mk_buchi_t1->neg,1))){mk_buchi_1_2_free=mk_buchi_t1->nxt;
 mk_buchi_t1->to->incoming=(mk_buchi_t1->to->incoming)-(1);
 mk_buchi_t1->to=mk_buchi_1_2_free->to;
 copy_set(0,mk_buchi_1_2_free->pos,mk_buchi_t1->pos,1);
@@ -2028,7 +2012,7 @@ if (mk_buchi_1_2_free==mk_buchi_s->trans){mk_buchi_s->trans=mk_buchi_t1;
 }
 ;
 free_btrans(0,mk_buchi_1_2_free,0,0);
-} else {if ((tl_simp_fly) && ((mk_buchi_t1->to==mk_buchi_1_to) && ((included_set(1,mk_buchi_t1->pos,mk_buchi_t->pos,1)) && (included_set(1,mk_buchi_t1->neg,mk_buchi_t->neg,1))))){break_1=1;
+} else {if ((((tl_simp_fly) && (mk_buchi_t1->to==mk_buchi_1_to)) && (included_set(1,mk_buchi_t1->pos,mk_buchi_t->pos,1))) && (included_set(1,mk_buchi_t1->neg,mk_buchi_t->neg,1))){break_1=1;
 } else {mk_buchi_t1=mk_buchi_t1->nxt;
 }
 ;
@@ -2054,7 +2038,7 @@ mk_buchi_t=mk_buchi_t->nxt;
 mk_buchi_i=(mk_buchi_i)+(1);
 }
 ;
-while(bstack->nxt!=bstack){continue_1=0;
+while((bstack->nxt)!=(bstack)){continue_1=0;
 mk_buchi_s=bstack->nxt;
 bstack->nxt=bstack->nxt->nxt;
 if (!(mk_buchi_s->incoming)){free_bstate(0,mk_buchi_s);
@@ -2154,7 +2138,7 @@ in_cache_d=in_cache_d->nxt;
 }
 ;
 in_cache_d=stored;
-while(return_1==(0) && (in_cache_d)){if (isequal(1,in_cache_d->before,n)){CacheHits=(CacheHits)+(1);
+while((return_1==0) && (in_cache_d)){if (isequal(1,in_cache_d->before,n)){CacheHits=(CacheHits)+(1);
 if ((in_cache_d->same) && (ismatch(1,n,in_cache_d->before))){return_1=1;
 RValue=n;
 }
@@ -2201,8 +2185,8 @@ RValue=cached_m;
 ;
 if (return_1==0){Caches=(Caches)+(1);
 cached_d=(Cache*)(tl_emalloc(1,16));
-cached_d->after=Canonical(0,n);
 cached_d->before=dupnode(0,n);
+cached_d->after=Canonical(0,n);
 if (ismatch(1,cached_d->before,cached_d->after)){cached_d->same=1;
 releasenode(0,1,cached_d->after);
 cached_d->after=cached_d->before;
@@ -2286,8 +2270,8 @@ RValue=n;
 ;
 if (return_1==0){return_1=1;
 dupnode_d=getnode(0,n);
-dupnode_d->rgt=dupnode(0,n->rgt);
 dupnode_d->lft=dupnode(0,n->lft);
+dupnode_d->rgt=dupnode(0,n->rgt);
 RValue=dupnode_d;
 }
 ;
@@ -2309,7 +2293,7 @@ if (return_1==0){if (sameform(1,x,in)){return_1=1;
 RValue=1;
 }
 ;
-if (return_1==0){if (in->ntyp!=ntyp){return_1=1;
+if (return_1==0){if ((in->ntyp)!=(ntyp)){return_1=1;
 RValue=0;
 }
 ;
@@ -2339,7 +2323,7 @@ if (!from){return_1=1;
 RValue=1;
 }
 ;
-if (return_1==0){if (from->ntyp!=ntyp){return_1=1;
+if (return_1==0){if ((from->ntyp)!=(ntyp)){return_1=1;
 RValue=one_lft(0,ntyp,from,in);
 }
 ;
@@ -2378,50 +2362,50 @@ int switch_1;
 int break_1$;
 int nm_7$;
 return_1=0;
-if (!((a) && (!b))){return_1=1;
+if ((!a) && (!b)){return_1=1;
 RValue=1;
 }
 ;
-if (return_1==0){if (!((a) || (!b))){return_1=1;
+if (return_1==0){if ((!a) || (!b)){return_1=1;
 RValue=0;
 }
 ;
-if (return_1==0){if (a->ntyp!=b->ntyp){return_1=1;
+if (return_1==0){if ((a->ntyp)!=(b->ntyp)){return_1=1;
 RValue=0;
 }
 ;
-if (return_1==0){if ((a->sym) && ((b->sym) && (strcmp(a->sym->name,b->sym->name)!=0))){return_1=1;
+if (return_1==0){if (((a->sym) && (b->sym)) && ((strcmp(a->sym->name,b->sym->name))!=(0))){return_1=1;
 RValue=0;
 }
 ;
 if (return_1==0){break_1$=0;
 switch_1=0;
 nm_7$=a->ntyp;
-if (nm_7$==(TRUE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_7$==TRUE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 }
 ;
-if (nm_7$==(FALSE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_7$==FALSE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 return_1=1;
 RValue=1;
 }
 ;
-if (nm_7$==(PREDICATE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
-if (!((a->sym) || (!(b->sym)))){fatal(0,"sameform...",NULL);
+if ((nm_7$==PREDICATE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
+if ((!(a->sym)) || (!(b->sym))){fatal(0,"sameform...",NULL);
 }
 ;
 return_1=1;
 RValue=!(strcmp(a->sym->name,b->sym->name));
 }
 ;
-if (nm_7$==(NOT) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_7$==NOT) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 return_1=1;
 RValue=sameform(0,a->lft,b->lft);
 }
 ;
-if (nm_7$==(U_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_7$==U_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 }
 ;
-if (nm_7$==(V_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_7$==V_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 if (!(sameform(1,a->lft,b->lft))){return_1=1;
 RValue=0;
 }
@@ -2438,15 +2422,15 @@ RValue=1;
 ;
 }
 ;
-if (nm_7$==(AND_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_7$==AND_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 }
 ;
-if (nm_7$==(OR_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_7$==OR_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 return_1=1;
 RValue=sametrees(0,a->ntyp,a,b);
 }
 ;
-if (break_1$==(0) && (return_1==0)){printf("type: ");
+if ((break_1$==0) && (return_1==0)){printf("type: ");
 ;
 printf("\n");
 fatal(0,"cannot happen, sameform",NULL);
@@ -2470,11 +2454,11 @@ int  isequal(int $$Ext,Node* a,Node* b){
 int  RValue=0;
 int return_1;
 return_1=0;
-if (!((a) && (!b))){return_1=1;
+if ((!a) && (!b)){return_1=1;
 RValue=1;
 }
 ;
-if (return_1==0){if (!((a) || (!b))){if (!a){if (b->ntyp==TRUE){return_1=1;
+if (return_1==0){if ((!a) || (!b)){if (!a){if (b->ntyp==TRUE){return_1=1;
 RValue=1;
 }
 ;
@@ -2490,11 +2474,11 @@ RValue=0;
 ;
 }
 ;
-if (return_1==0){if (return_1==0){if (a->ntyp!=b->ntyp){return_1=1;
+if (return_1==0){if (return_1==0){if ((a->ntyp)!=(b->ntyp)){return_1=1;
 RValue=0;
 }
 ;
-if (return_1==0){if ((a->sym) && ((b->sym) && (strcmp(a->sym->name,b->sym->name)!=0))){return_1=1;
+if (return_1==0){if (((a->sym) && (b->sym)) && ((strcmp(a->sym->name,b->sym->name))!=(0))){return_1=1;
 RValue=0;
 }
 ;
@@ -2522,19 +2506,19 @@ int  ismatch(int $$Ext,Node* a,Node* b){
 int  RValue=0;
 int return_1;
 return_1=0;
-if (!((a) && (!b))){return_1=1;
+if ((!a) && (!b)){return_1=1;
 RValue=1;
 }
 ;
-if (return_1==0){if (!((a) || (!b))){return_1=1;
+if (return_1==0){if ((!a) || (!b)){return_1=1;
 RValue=0;
 }
 ;
-if (return_1==0){if (a->ntyp!=b->ntyp){return_1=1;
+if (return_1==0){if ((a->ntyp)!=(b->ntyp)){return_1=1;
 RValue=0;
 }
 ;
-if (return_1==0){if ((a->sym) && ((b->sym) && (strcmp(a->sym->name,b->sym->name)!=0))){return_1=1;
+if (return_1==0){if (((a->sym) && (b->sym)) && ((strcmp(a->sym->name,b->sym->name))!=(0))){return_1=1;
 RValue=0;
 }
 ;
@@ -2630,17 +2614,17 @@ RValue=0;
 if (return_1==0){break_1$=0;
 switch_1=0;
 nm_8$=tok;
-if (nm_8$==(AND_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_8$==AND_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 return_1=1;
 RValue=any_and(0,srch,in);
 }
 ;
-if (nm_8$==(OR_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_8$==OR_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 return_1=1;
 RValue=any_lor(0,srch,in);
 }
 ;
-if (nm_8$==(0) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_8$==0) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 return_1=1;
 RValue=any_term(0,srch,in);
 }
@@ -2675,7 +2659,7 @@ s->nxt=gremoved->nxt;
 gremoved->nxt=s;
 s->prv=s1;
 s1=gremoved->nxt;
-while(s1!=gremoved){if (s1->prv==s){s1->prv=s->prv;
+while((s1)!=(gremoved)){if (s1->prv==s){s1->prv=s->prv;
 }
 ;
 s1=s1->nxt;
@@ -2695,7 +2679,7 @@ int  same_gtrans(int $$Ext,GState* a,GTrans* s,GState* b,GTrans* t,int use_scc){
 int  RValue=0;
 int return_1;
 return_1=0;
-if ((s->to!=t->to) || (!((same_sets(1,s->pos,t->pos,1)) || (!(same_sets(1,s->neg,t->neg,1)))))){return_1=1;
+if ((((s->to)!=(t->to)) || (!(same_sets(1,s->pos,t->pos,1)))) || (!(same_sets(1,s->neg,t->neg,1)))){return_1=1;
 RValue=0;
 }
 ;
@@ -2703,7 +2687,7 @@ if (return_1==0){if (same_sets(1,s->final,t->final,0)){return_1=1;
 RValue=1;
 }
 ;
-if (return_1==0){if ((use_scc) && ((in_set(1,bad_scc,a->incoming)) || ((in_set(1,bad_scc,b->incoming)) || ((a->incoming!=s->to->incoming) || (b->incoming!=t->to->incoming))))){return_1=1;
+if (return_1==0){if ((use_scc) && ((((in_set(1,bad_scc,a->incoming)) || (in_set(1,bad_scc,b->incoming))) || ((a->incoming)!=(s->to->incoming))) || ((b->incoming)!=(t->to->incoming)))){return_1=1;
 RValue=1;
 }
 ;
@@ -2741,13 +2725,13 @@ struct GTrans *simplify_gtrans_1_3_free;
 return_1=0;
 simplify_gtrans_changed=0;
 simplify_gtrans_s=gstates->nxt;
-while(simplify_gtrans_s!=gstates){simplify_gtrans_t=simplify_gtrans_s->trans->nxt;
-while(simplify_gtrans_t!=simplify_gtrans_s->trans){copy_gtrans(0,simplify_gtrans_t,simplify_gtrans_s->trans);
+while((simplify_gtrans_s)!=(gstates)){simplify_gtrans_t=simplify_gtrans_s->trans->nxt;
+while((simplify_gtrans_t)!=(simplify_gtrans_s->trans)){copy_gtrans(0,simplify_gtrans_t,simplify_gtrans_s->trans);
 simplify_gtrans_t1=simplify_gtrans_s->trans->nxt;
-while(!((simplify_gtrans_t!=simplify_gtrans_t1) && ((simplify_gtrans_t1->to==simplify_gtrans_t->to) && ((included_set(1,simplify_gtrans_t1->pos,simplify_gtrans_t->pos,1)) && ((included_set(1,simplify_gtrans_t1->neg,simplify_gtrans_t->neg,1)) && ((included_set(1,simplify_gtrans_t->final,simplify_gtrans_t1->final,0)) || ((tl_simp_scc) && ((simplify_gtrans_s->incoming!=simplify_gtrans_t->to->incoming) || (in_set(1,bad_scc,simplify_gtrans_s->incoming)))))))))){simplify_gtrans_t1=simplify_gtrans_t1->nxt;
+while(!((((((simplify_gtrans_t)!=(simplify_gtrans_t1)) && (simplify_gtrans_t1->to==simplify_gtrans_t->to)) && (included_set(1,simplify_gtrans_t1->pos,simplify_gtrans_t->pos,1))) && (included_set(1,simplify_gtrans_t1->neg,simplify_gtrans_t->neg,1))) && ((included_set(1,simplify_gtrans_t->final,simplify_gtrans_t1->final,0)) || ((tl_simp_scc) && (((simplify_gtrans_s->incoming)!=(simplify_gtrans_t->to->incoming)) || (in_set(1,bad_scc,simplify_gtrans_s->incoming))))))){simplify_gtrans_t1=simplify_gtrans_t1->nxt;
 }
 ;
-if (simplify_gtrans_t1!=simplify_gtrans_s->trans){simplify_gtrans_1_3_free=simplify_gtrans_t->nxt;
+if ((simplify_gtrans_t1)!=(simplify_gtrans_s->trans)){simplify_gtrans_1_3_free=simplify_gtrans_t->nxt;
 simplify_gtrans_t->to=simplify_gtrans_1_3_free->to;
 copy_set(0,simplify_gtrans_1_3_free->pos,simplify_gtrans_t->pos,1);
 copy_set(0,simplify_gtrans_1_3_free->neg,simplify_gtrans_t->neg,1);
@@ -2783,8 +2767,8 @@ retarget_all_gtrans_i=(retarget_all_gtrans_i)+(1);
 }
 ;
 retarget_all_gtrans_s=gstates->nxt;
-while(retarget_all_gtrans_s!=gstates){retarget_all_gtrans_t=retarget_all_gtrans_s->trans->nxt;
-while(retarget_all_gtrans_t!=retarget_all_gtrans_s->trans){if (!(retarget_all_gtrans_t->to->trans)){retarget_all_gtrans_t->to=retarget_all_gtrans_t->to->prv;
+while((retarget_all_gtrans_s)!=(gstates)){retarget_all_gtrans_t=retarget_all_gtrans_s->trans->nxt;
+while((retarget_all_gtrans_t)!=(retarget_all_gtrans_s->trans)){if (!(retarget_all_gtrans_t->to->trans)){retarget_all_gtrans_t->to=retarget_all_gtrans_t->to->prv;
 if (!(retarget_all_gtrans_t->to)){retarget_all_gtrans_3_4_5_6_free=retarget_all_gtrans_t->nxt;
 retarget_all_gtrans_t->to=retarget_all_gtrans_3_4_5_6_free->to;
 copy_set(0,retarget_all_gtrans_3_4_5_6_free->pos,retarget_all_gtrans_t->pos,1);
@@ -2806,7 +2790,7 @@ free_gtrans(0,retarget_all_gtrans_3_4_5_6_free,0,0);
 retarget_all_gtrans_s=retarget_all_gtrans_s->nxt;
 }
 ;
-while(gremoved->nxt!=gremoved){retarget_all_gtrans_s=gremoved->nxt;
+while((gremoved->nxt)!=(gremoved)){retarget_all_gtrans_s=gremoved->nxt;
 gremoved->nxt=gremoved->nxt->nxt;
 if (retarget_all_gtrans_s->nodes_set){tfree(0,retarget_all_gtrans_s->nodes_set);
 }
@@ -2821,7 +2805,7 @@ int return_1;
 struct GTrans *all_gtrans_match_s,*all_gtrans_match_t;
 return_1=0;
 all_gtrans_match_s=a->trans->nxt;
-while(return_1==(0) && (all_gtrans_match_s!=a->trans)){copy_gtrans(0,all_gtrans_match_s,b->trans);
+while((return_1==0) && ((all_gtrans_match_s)!=(a->trans))){copy_gtrans(0,all_gtrans_match_s,b->trans);
 all_gtrans_match_t=b->trans->nxt;
 while(!(same_gtrans(1,a,all_gtrans_match_s,b,all_gtrans_match_t,use_scc))){all_gtrans_match_t=all_gtrans_match_t->nxt;
 }
@@ -2836,7 +2820,7 @@ if (return_1==0){all_gtrans_match_s=all_gtrans_match_s->nxt;
 }
 ;
 if (return_1==0){all_gtrans_match_t=b->trans->nxt;
-while(return_1==(0) && (all_gtrans_match_t!=b->trans)){copy_gtrans(0,all_gtrans_match_t,a->trans);
+while((return_1==0) && ((all_gtrans_match_t)!=(b->trans))){copy_gtrans(0,all_gtrans_match_t,a->trans);
 all_gtrans_match_s=a->trans->nxt;
 while(!(same_gtrans(1,a,all_gtrans_match_s,b,all_gtrans_match_t,use_scc))){all_gtrans_match_s=all_gtrans_match_s->nxt;
 }
@@ -2869,7 +2853,7 @@ return_1=0;
 simplify_gstates_changed=0;
 continue_1=0;
 simplify_gstates_a=gstates->nxt;
-while(simplify_gstates_a!=gstates){continue_1=0;
+while((simplify_gstates_a)!=(gstates)){continue_1=0;
 if (simplify_gstates_a->trans==simplify_gstates_a->trans->nxt){simplify_gstates_a=remove_gstate(0,simplify_gstates_a,NULL);
 simplify_gstates_changed=(simplify_gstates_changed)+(1);
 continue_1=1;
@@ -2881,7 +2865,7 @@ simplify_gstates_b=simplify_gstates_a->nxt;
 while(!(all_gtrans_match(1,simplify_gstates_a,simplify_gstates_b,tl_simp_scc))){simplify_gstates_b=simplify_gstates_b->nxt;
 }
 ;
-if (simplify_gstates_b!=gstates){if (simplify_gstates_a->incoming>simplify_gstates_b->incoming){simplify_gstates_a=remove_gstate(0,simplify_gstates_a,simplify_gstates_b);
+if ((simplify_gstates_b)!=(gstates)){if (simplify_gstates_a->incoming>simplify_gstates_b->incoming){simplify_gstates_a=remove_gstate(0,simplify_gstates_a,simplify_gstates_b);
 } else {remove_gstate(0,simplify_gstates_b,simplify_gstates_a);
 }
 ;
@@ -2918,13 +2902,11 @@ gdfs_scc->nxt=scc_stack;
 scc_stack=gdfs_scc;
 s->incoming=1;
 gdfs_t=s->trans->nxt;
-while(gdfs_t!=s->trans){if (gdfs_t->to->incoming==0){gdfs_1_result=gdfs(0,gdfs_t->to);
-gdfs_scc->theta=(gdfs_scc->theta<gdfs_1_result) ?gdfs_scc->theta : gdfs_1_result 
-;
+while((gdfs_t)!=(s->trans)){if (gdfs_t->to->incoming==0){gdfs_1_result=gdfs(0,gdfs_t->to);
+gdfs_scc->theta=((gdfs_scc->theta<gdfs_1_result) ?gdfs_scc->theta : gdfs_1_result );
 } else {break_1=0;
 gdfs_c=scc_stack->nxt;
-while(break_1==(0) && (gdfs_c!=0)){if (gdfs_c->gstate==gdfs_t->to){gdfs_scc->theta=(gdfs_scc->theta<gdfs_c->rank) ?gdfs_scc->theta : gdfs_c->rank 
-;
+while((break_1==0) && ((gdfs_c)!=(0))){if (gdfs_c->gstate==gdfs_t->to){gdfs_scc->theta=((gdfs_scc->theta<gdfs_c->rank) ?gdfs_scc->theta : gdfs_c->rank );
 break_1=1;
 }
 ;
@@ -2939,7 +2921,7 @@ break_1=0;
 gdfs_t=gdfs_t->nxt;
 }
 ;
-if (gdfs_scc->rank==gdfs_scc->theta){while(scc_stack!=gdfs_scc){scc_stack->gstate->incoming=scc_id;
+if (gdfs_scc->rank==gdfs_scc->theta){while((scc_stack)!=(gdfs_scc)){scc_stack->gstate->incoming=scc_id;
 scc_stack=scc_stack->nxt;
 }
 ;
@@ -2965,7 +2947,7 @@ if (gstates==gstates->nxt){return_1=1;
 }
 ;
 if (return_1==0){simplify_gscc_s=gstates->nxt;
-while(simplify_gscc_s!=gstates){simplify_gscc_s->incoming=0;
+while((simplify_gscc_s)!=(gstates)){simplify_gscc_s->incoming=0;
 simplify_gscc_s=simplify_gscc_s->nxt;
 }
 ;
@@ -2976,16 +2958,16 @@ while(simplify_gscc_i<init_size){if ((init[simplify_gscc_i]) && (init[simplify_g
 simplify_gscc_i=(simplify_gscc_i)+(1);
 }
 ;
-simplify_gscc_scc_final=(int**)(tl_emalloc(1,scc_id*4));
+simplify_gscc_scc_final=(int**)(tl_emalloc(1,(scc_id*4)));
 simplify_gscc_i=0;
 while(simplify_gscc_i<scc_id){simplify_gscc_scc_final[simplify_gscc_i]=make_set(0,-1,0);
 simplify_gscc_i=(simplify_gscc_i)+(1);
 }
 ;
 simplify_gscc_s=gstates->nxt;
-while(simplify_gscc_s!=gstates){if (simplify_gscc_s->incoming==0){simplify_gscc_s=remove_gstate(0,simplify_gscc_s,0);
+while((simplify_gscc_s)!=(gstates)){if (simplify_gscc_s->incoming==0){simplify_gscc_s=remove_gstate(0,simplify_gscc_s,0);
 } else {simplify_gscc_t=simplify_gscc_s->trans->nxt;
-while(simplify_gscc_t!=simplify_gscc_s->trans){if (simplify_gscc_t->to->incoming==simplify_gscc_s->incoming){merge_sets(0,simplify_gscc_scc_final[simplify_gscc_s->incoming],simplify_gscc_t->final,0);
+while((simplify_gscc_t)!=(simplify_gscc_s->trans)){if (simplify_gscc_t->to->incoming==simplify_gscc_s->incoming){merge_sets(0,simplify_gscc_scc_final[simplify_gscc_s->incoming],simplify_gscc_t->final,0);
 }
 ;
 simplify_gscc_t=simplify_gscc_t->nxt;
@@ -2996,7 +2978,7 @@ simplify_gscc_t=simplify_gscc_t->nxt;
 simplify_gscc_s=simplify_gscc_s->nxt;
 }
 ;
-scc_size=(((scc_id)+(1))/ 8*4)+(1);
+scc_size=((((scc_id)+(1))/ (8*4)))+(1);
 bad_scc=make_set(0,-1,2);
 simplify_gscc_i=0;
 while(simplify_gscc_i<scc_id){if (!(included_set(1,final_set,simplify_gscc_scc_final[simplify_gscc_i],0))){add_set(0,bad_scc,simplify_gscc_i);
@@ -3020,14 +3002,14 @@ int return_1;
 struct ATrans *is_final_t;
 int is_final_in_to;
 return_1=0;
-if (((tl_fjtofj) && (!(in_set(1,at->to,i)))) || (!((tl_fjtofj) && (!(in_set(1,from,i)))))){return_1=1;
+if (((tl_fjtofj) && (!(in_set(1,at->to,i)))) || ((!tl_fjtofj) && (!(in_set(1,from,i))))){return_1=1;
 RValue=1;
 }
 ;
 if (return_1==0){is_final_in_to=in_set(0,at->to,i);
 rem_set(0,at->to,i);
 is_final_t=transition[i];
-while(return_1==(0) && (is_final_t)){if ((included_set(1,is_final_t->to,at->to,0)) && ((included_set(1,is_final_t->pos,at->pos,1)) && (included_set(1,is_final_t->neg,at->neg,1)))){if (is_final_in_to){add_set(0,at->to,i);
+while((return_1==0) && (is_final_t)){if (((included_set(1,is_final_t->to,at->to,0)) && (included_set(1,is_final_t->pos,at->pos,1))) && (included_set(1,is_final_t->neg,at->neg,1))){if (is_final_in_to){add_set(0,at->to,i);
 }
 ;
 return_1=1;
@@ -3063,7 +3045,7 @@ gstack->nodes_set=set;
 while(!(same_sets(1,set,s->nodes_set,0))){s=s->nxt;
 }
 ;
-if (s!=gstack){return_1=1;
+if ((s)!=(gstack)){return_1=1;
 RValue=s;
 }
 ;
@@ -3072,7 +3054,7 @@ gstates->nodes_set=set;
 while(!(same_sets(1,set,s->nodes_set,0))){s=s->nxt;
 }
 ;
-if (s!=gstates){return_1=1;
+if ((s)!=(gstates)){return_1=1;
 RValue=s;
 }
 ;
@@ -3081,19 +3063,18 @@ gremoved->nodes_set=set;
 while(!(same_sets(1,set,s->nodes_set,0))){s=s->nxt;
 }
 ;
-if (s!=gremoved){return_1=1;
+if ((s)!=(gremoved)){return_1=1;
 RValue=s;
 }
 ;
 if (return_1==0){s=(GState*)(tl_emalloc(1,24));
-s->id=(empty_set(1,set,0)) ?0 : gstate_id 
-;
+s->id=((empty_set(1,set,0)) ?0 : gstate_id );
 if (!(empty_set(1,set,0))){gstate_id=(gstate_id)+(1);
 }
 ;
 s->incoming=0;
-s->trans=emalloc_gtrans(0);
 s->nodes_set=dup_set(0,set,0);
+s->trans=emalloc_gtrans(0);
 s->trans->nxt=s->trans;
 s->nxt=gstack->nxt;
 gstack->nxt=s;
@@ -3152,7 +3133,7 @@ make_gtrans_i=(make_gtrans_i)+(1);
 }
 ;
 break_1=0;
-while(break_1==(0) && (make_gtrans_trans_exist)){make_gtrans_2_p=make_gtrans_prod->nxt;
+while((break_1==0) && (make_gtrans_trans_exist)){make_gtrans_2_p=make_gtrans_prod->nxt;
 make_gtrans_t1=make_gtrans_2_p->prod;
 if (make_gtrans_t1){clear_set(0,fin$,0);
 make_gtrans_i=1;
@@ -3164,7 +3145,7 @@ make_gtrans_i=(make_gtrans_i)+(1);
 ;
 break_1=0;
 make_gtrans_2_3_t2=s->trans->nxt;
-while(break_1==(0) && (make_gtrans_2_3_t2!=s->trans)){if ((tl_simp_fly) && ((included_set(1,make_gtrans_t1->to,make_gtrans_2_3_t2->to->nodes_set,0)) && ((included_set(1,make_gtrans_t1->pos,make_gtrans_2_3_t2->pos,1)) && ((included_set(1,make_gtrans_t1->neg,make_gtrans_2_3_t2->neg,1)) && (same_sets(1,fin$,make_gtrans_2_3_t2->final,0)))))){make_gtrans_2_3_5_free=make_gtrans_2_3_t2->nxt;
+while((break_1==0) && ((make_gtrans_2_3_t2)!=(s->trans))){if (((((tl_simp_fly) && (included_set(1,make_gtrans_t1->to,make_gtrans_2_3_t2->to->nodes_set,0))) && (included_set(1,make_gtrans_t1->pos,make_gtrans_2_3_t2->pos,1))) && (included_set(1,make_gtrans_t1->neg,make_gtrans_2_3_t2->neg,1))) && (same_sets(1,fin$,make_gtrans_2_3_t2->final,0))){make_gtrans_2_3_5_free=make_gtrans_2_3_t2->nxt;
 make_gtrans_2_3_t2->to->incoming=(make_gtrans_2_3_t2->to->incoming)-(1);
 make_gtrans_2_3_t2->to=make_gtrans_2_3_5_free->to;
 copy_set(0,make_gtrans_2_3_5_free->pos,make_gtrans_2_3_t2->pos,1);
@@ -3176,7 +3157,7 @@ if (make_gtrans_2_3_5_free==s->trans){s->trans=make_gtrans_2_3_t2;
 ;
 free_gtrans(0,make_gtrans_2_3_5_free,0,0);
 make_gtrans_state_trans=(make_gtrans_state_trans)-(1);
-} else {if ((tl_simp_fly) && ((included_set(1,make_gtrans_2_3_t2->to->nodes_set,make_gtrans_t1->to,0)) && ((included_set(1,make_gtrans_2_3_t2->pos,make_gtrans_t1->pos,1)) && ((included_set(1,make_gtrans_2_3_t2->neg,make_gtrans_t1->neg,1)) && (same_sets(1,make_gtrans_2_3_t2->final,fin$,0)))))){break_1=1;
+} else {if (((((tl_simp_fly) && (included_set(1,make_gtrans_2_3_t2->to->nodes_set,make_gtrans_t1->to,0))) && (included_set(1,make_gtrans_2_3_t2->pos,make_gtrans_t1->pos,1))) && (included_set(1,make_gtrans_2_3_t2->neg,make_gtrans_t1->neg,1))) && (same_sets(1,make_gtrans_2_3_t2->final,fin$,0))){break_1=1;
 } else {make_gtrans_2_3_t2=make_gtrans_2_3_t2->nxt;
 }
 ;
@@ -3210,7 +3191,7 @@ if (make_gtrans_2_p==make_gtrans_prod){break_1=1;
 if (break_1==0){make_gtrans_2_p->trans=make_gtrans_2_p->trans->nxt;
 do_merge_trans(0,&make_gtrans_2_p->prod,make_gtrans_2_p->nxt->prod,make_gtrans_2_p->trans);
 make_gtrans_2_p=make_gtrans_2_p->prv;
-while(make_gtrans_2_p!=make_gtrans_prod){make_gtrans_2_p->trans=transition[make_gtrans_2_p->astate];
+while((make_gtrans_2_p)!=(make_gtrans_prod)){make_gtrans_2_p->trans=transition[make_gtrans_2_p->astate];
 do_merge_trans(0,&make_gtrans_2_p->prod,make_gtrans_2_p->nxt->prod,make_gtrans_2_p->trans);
 make_gtrans_2_p=make_gtrans_2_p->prv;
 }
@@ -3223,7 +3204,7 @@ make_gtrans_2_p=make_gtrans_2_p->prv;
 ;
 break_1=0;
 tfree(0,make_gtrans_list$);
-while(make_gtrans_prod->nxt!=make_gtrans_prod){make_gtrans_15_p=make_gtrans_prod->nxt;
+while((make_gtrans_prod->nxt)!=(make_gtrans_prod)){make_gtrans_15_p=make_gtrans_prod->nxt;
 make_gtrans_prod->nxt=make_gtrans_15_p->nxt;
 free_atrans(0,make_gtrans_15_p->prod,0);
 tfree(0,make_gtrans_15_p);
@@ -3237,7 +3218,7 @@ s->prv=NULL;
 s->nxt=gremoved->nxt;
 gremoved->nxt=s;
 make_gtrans_s1=gremoved->nxt;
-while(make_gtrans_s1!=gremoved){if (make_gtrans_s1->prv==s){make_gtrans_s1->prv=NULL;
+while((make_gtrans_s1)!=(gremoved)){if (make_gtrans_s1->prv==s){make_gtrans_s1->prv=NULL;
 }
 ;
 make_gtrans_s1=make_gtrans_s1->nxt;
@@ -3251,13 +3232,13 @@ make_gtrans_s1=gstates->nxt;
 while(!(all_gtrans_match(1,s,make_gtrans_s1,0))){make_gtrans_s1=make_gtrans_s1->nxt;
 }
 ;
-if (make_gtrans_s1!=gstates){free_gtrans(0,s->trans->nxt,s->trans,1);
+if ((make_gtrans_s1)!=(gstates)){free_gtrans(0,s->trans->nxt,s->trans,1);
 s->trans=NULL;
 s->prv=make_gtrans_s1;
 s->nxt=gremoved->nxt;
 gremoved->nxt=s;
 make_gtrans_s1=gremoved->nxt;
-while(make_gtrans_s1!=gremoved){if (make_gtrans_s1->prv==s){make_gtrans_s1->prv=s->prv;
+while((make_gtrans_s1)!=(gremoved)){if (make_gtrans_s1->prv==s){make_gtrans_s1->prv=s->prv;
 }
 ;
 make_gtrans_s1=make_gtrans_s1->nxt;
@@ -3295,11 +3276,11 @@ printf(") : ");
 ;
 printf("i\n");
 reverse_print_generalized_t=s->trans->nxt;
-while(reverse_print_generalized_t!=s->trans){if ((empty_set(1,reverse_print_generalized_t->pos,1)) && (empty_set(1,reverse_print_generalized_t->neg,1))){printf("1");
+while((reverse_print_generalized_t)!=(s->trans)){if ((empty_set(1,reverse_print_generalized_t->pos,1)) && (empty_set(1,reverse_print_generalized_t->neg,1))){printf("1");
 }
 ;
 print_set(0,reverse_print_generalized_t->pos,1);
-if (!((empty_set(1,reverse_print_generalized_t->pos,1)) && (!(empty_set(1,reverse_print_generalized_t->neg,1))))){printf(" & ");
+if ((!(empty_set(1,reverse_print_generalized_t->pos,1))) && (!(empty_set(1,reverse_print_generalized_t->neg,1)))){printf(" & ");
 }
 ;
 print_set(0,reverse_print_generalized_t->neg,1);
@@ -3346,14 +3327,13 @@ gstates->nxt=gstates;
 gstates->prv=gstates;
 mk_generalized_t=transition[0];
 while(mk_generalized_t){mk_generalized_s=(GState*)(tl_emalloc(1,24));
-mk_generalized_s->id=(empty_set(1,mk_generalized_t->to,0)) ?0 : gstate_id 
-;
+mk_generalized_s->id=((empty_set(1,mk_generalized_t->to,0)) ?0 : gstate_id );
 if (!(empty_set(1,mk_generalized_t->to,0))){gstate_id=(gstate_id)+(1);
 }
 ;
 mk_generalized_s->incoming=1;
-mk_generalized_s->trans=emalloc_gtrans(0);
 mk_generalized_s->nodes_set=dup_set(0,mk_generalized_t->to,0);
+mk_generalized_s->trans=emalloc_gtrans(0);
 mk_generalized_s->trans->nxt=mk_generalized_s->trans;
 mk_generalized_s->nxt=gstack->nxt;
 gstack->nxt=mk_generalized_s;
@@ -3361,17 +3341,17 @@ init_size=(init_size)+(1);
 mk_generalized_t=mk_generalized_t->nxt;
 }
 ;
-if (init_size){init=(GState**)(tl_emalloc(1,init_size*4));
+if (init_size){init=(GState**)(tl_emalloc(1,(init_size*4)));
 }
 ;
 init_size=0;
 mk_generalized_s=gstack->nxt;
-while(mk_generalized_s!=gstack){init[init_size]=mk_generalized_s;
+while((mk_generalized_s)!=(gstack)){init[init_size]=mk_generalized_s;
 init_size=(init_size)+(1);
 mk_generalized_s=mk_generalized_s->nxt;
 }
 ;
-while(gstack->nxt!=gstack){continue_1=0;
+while((gstack->nxt)!=(gstack)){continue_1=0;
 mk_generalized_s=gstack->nxt;
 gstack->nxt=gstack->nxt->nxt;
 if (!(mk_generalized_s->incoming)){free_gstate(0,mk_generalized_s);
@@ -3419,6 +3399,8 @@ int  isalnum_(int $$Ext,int c){
 int  RValue=0;
 int return_1;
 return_1=0;
+return_1=1;
+RValue=((((c>47) && (c<58)) || ((c>64) && (c<91))) || ((c>96) && (c<123))) || (c=='_');
 return RValue;
 }
 int  hash(int $$Ext,char *s){
@@ -3439,7 +3421,7 @@ return_1=1;
 RValue=(hash_h)&(255);
 return RValue;
 }
-void  getword(int $$Ext,int first,int (*tst)(int $$Ext,int)){
+void  getword(int $$Ext,int first,int (*tst)(int $$Ext,int $$NoCare)){
 int getword_i;
 char getword_c;
 int getword_1_temp$_1;
@@ -3470,6 +3452,7 @@ RValue=ifyes;
 ;
 if (return_1==0){tl_UnGetchar(0);
 tl_yychar=follow_c;
+sprintf(follow_buf,"expected \'%c\'",tok);
 tl_yyerror(0,follow_buf);
 return_1=1;
 RValue=ifno;
@@ -3497,18 +3480,18 @@ int break_1$;
 int nm_9$;
 return_1=0;
 count$=0;
-while(return_1==(0) && (count$==(0) || (tl_lex_c==' '))){count$=(count$)+(1);
+while((return_1==0) && ((count$==0) || (tl_lex_c==' '))){count$=(count$)+(1);
 tl_lex_c=tl_Getchar(0);
 yytext[0]=(char)(tl_lex_c);
 yytext[1]='\0';
-if (tl_lex_c<=0){tl_yylval=tl_nn(0,';',NULL,NULL);
+if ((tl_lex_c)<=(0)){tl_yylval=tl_nn(0,';',NULL,NULL);
 return_1=1;
 RValue=';';
 }
 ;
 }
 ;
-if (return_1==0){if (tl_lex_c>(96) && (tl_lex_c<123)){getword(0,tl_lex_c,isalnum_);
+if (return_1==0){if ((tl_lex_c>96) && (tl_lex_c<123)){getword(0,tl_lex_c,isalnum_);
 if (strcmp("true",yytext)==0){return_1=1;
 tl_yylval=tl_nn(0,TRUE,NULL,NULL);
 RValue=TRUE;
@@ -3535,7 +3518,7 @@ tl_yylval=tl_nn(0,EVENTUALLY,NULL,NULL);
 RValue=EVENTUALLY;
 }
 ;
-if (return_1==0){if (tl_lex_c!='-'){tl_UnGetchar(0);
+if (return_1==0){if ((tl_lex_c)!=('-')){tl_UnGetchar(0);
 tl_yyerror(0,"expected \'<>\' or \'<->\'");
 }
 ;
@@ -3556,52 +3539,52 @@ tl_yyerror(0,"expected \'<->\'");
 if (return_1==0){break_1$=0;
 switch_1=0;
 nm_9$=tl_lex_c;
-if (nm_9$==('/') || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_9$=='/') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 break_1$=1;
 tl_lex_c=follow(0,'\\',AND_1,'/');
 }
 ;
-if (nm_9$==('\\') || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_9$=='\\') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 break_1$=1;
 tl_lex_c=follow(0,'/',OR_1,'\\');
 }
 ;
-if (nm_9$==('&') || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_9$=='&') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 break_1$=1;
 tl_lex_c=follow(0,'&',AND_1,'&');
 }
 ;
-if (nm_9$==('|') || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_9$=='|') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 break_1$=1;
 tl_lex_c=follow(0,'|',OR_1,'|');
 }
 ;
-if (nm_9$==('[') || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_9$=='[') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 break_1$=1;
 tl_lex_c=follow(0,']',ALWAYS,'[');
 }
 ;
-if (nm_9$==('-') || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_9$=='-') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 break_1$=1;
 tl_lex_c=follow(0,'>',IMPLIES,'-');
 }
 ;
-if (nm_9$==('!') || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_9$=='!') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 tl_lex_c=NOT;
 break_1$=1;
 }
 ;
-if (nm_9$==('U') || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_9$=='U') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 tl_lex_c=U_OPER;
 break_1$=1;
 }
 ;
-if (nm_9$==('V') || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_9$=='V') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 tl_lex_c=V_OPER;
 break_1$=1;
 }
 ;
-if (break_1$==(0) && (return_1==0)){break_1$=1;
+if ((break_1$==0) && (return_1==0)){break_1$=1;
 }
 ;
 return_1=1;
@@ -3632,7 +3615,7 @@ tl_lookup_j=(tl_lookup_j)+(1);
 }
 ;
 tl_lookup_sp=symtab[tl_lookup_h];
-while(return_1==(0) && (tl_lookup_sp)){if (strcmp(tl_lookup_sp->name,s)==0){return_1=1;
+while((return_1==0) && (tl_lookup_sp)){if (strcmp(tl_lookup_sp->name,s)==0){return_1=1;
 RValue=tl_lookup_sp;
 }
 ;
@@ -3670,7 +3653,7 @@ int return_1;
 void *tl_emalloc_r;
 return_1=0;
 tl_emalloc_r=(void *)(malloc(U));
-memset(0,tl_emalloc_r,0,U);
+memset(tl_emalloc_r,0,U);
 return_1=1;
 RValue=tl_emalloc_r;
 return RValue;
@@ -3686,9 +3669,9 @@ int return_1;
 struct ATrans *emalloc_atrans_result;
 return_1=0;
 if (!atrans_list){emalloc_atrans_result=(ATrans*)(tl_emalloc(1,20));
-emalloc_atrans_result->to=new_set(0,0);
 emalloc_atrans_result->neg=new_set(0,1);
 emalloc_atrans_result->pos=new_set(0,1);
+emalloc_atrans_result->to=new_set(0,0);
 apool=(apool)+(1);
 } else {emalloc_atrans_result=atrans_list;
 atrans_list=atrans_list->nxt;
@@ -3732,9 +3715,9 @@ int return_1;
 struct GTrans *emalloc_gtrans_result;
 return_1=0;
 if (!gtrans_list){emalloc_gtrans_result=(GTrans*)(tl_emalloc(1,20));
-emalloc_gtrans_result->final=new_set(0,0);
 emalloc_gtrans_result->neg=new_set(0,1);
 emalloc_gtrans_result->pos=new_set(0,1);
+emalloc_gtrans_result->final=new_set(0,0);
 gpool=(gpool)+(1);
 } else {emalloc_gtrans_result=gtrans_list;
 gtrans_list=gtrans_list->nxt;
@@ -3747,7 +3730,7 @@ return RValue;
 }
 void  free_gtrans(int $$Ext,GTrans* t,GTrans* sentinel,int fly){
 gfrees=(gfrees)+(1);
-if ((sentinel) && (t!=sentinel)){free_gtrans(0,t->nxt,sentinel,fly);
+if ((sentinel) && ((t)!=(sentinel))){free_gtrans(0,t->nxt,sentinel,fly);
 if (fly){t->to->incoming=(t->to->incoming)-(1);
 }
 ;
@@ -3762,8 +3745,8 @@ int return_1;
 struct BTrans *emalloc_btrans_result;
 return_1=0;
 if (!btrans_list){emalloc_btrans_result=(BTrans*)(tl_emalloc(1,16));
-emalloc_btrans_result->neg=new_set(0,1);
 emalloc_btrans_result->pos=new_set(0,1);
+emalloc_btrans_result->neg=new_set(0,1);
 bpool=(bpool)+(1);
 } else {emalloc_btrans_result=btrans_list;
 btrans_list=btrans_list->nxt;
@@ -3776,7 +3759,7 @@ return RValue;
 }
 void  free_btrans(int $$Ext,BTrans* t,BTrans* sentinel,int fly){
 bfrees=(bfrees)+(1);
-if ((sentinel) && (t!=sentinel)){free_btrans(0,t->nxt,sentinel,fly);
+if ((sentinel) && ((t)!=(sentinel))){free_btrans(0,t->nxt,sentinel,fly);
 if (fly){t->to->incoming=(t->to->incoming)-(1);
 }
 ;
@@ -3834,7 +3817,7 @@ int  RValue=0;
 int return_1;
 return_1=0;
 return_1=1;
-RValue=(isequal(1,a,b)) || (b->ntyp==(TRUE) || (a->ntyp==(FALSE) || ((b->ntyp==(AND_1) && ((implies(1,a,b->lft)) && (implies(1,a,b->rgt)))) || ((a->ntyp==(OR_1) && ((implies(1,a->lft,b)) && (implies(1,a->rgt,b)))) || ((a->ntyp==(AND_1) && ((implies(1,a->lft,b)) || (implies(1,a->rgt,b)))) || ((b->ntyp==(OR_1) && ((implies(1,a,b->lft)) || (implies(1,a,b->rgt)))) || ((b->ntyp==(U_OPER) && (implies(1,a,b->rgt))) || ((a->ntyp==(V_OPER) && (implies(1,a->rgt,b))) || ((a->ntyp==(U_OPER) && ((implies(1,a->lft,b)) && (implies(1,a->rgt,b)))) || ((b->ntyp==(V_OPER) && ((implies(1,a,b->lft)) && (implies(1,a,b->rgt)))) || ((a->ntyp==(U_OPER) || (a->ntyp==V_OPER)) && (a->ntyp==(b->ntyp) && ((implies(1,a->lft,b->lft)) && (implies(1,a->rgt,b->rgt)))))))))))))));
+RValue=(((((((((((isequal(1,a,b)) || (b->ntyp==TRUE)) || (a->ntyp==FALSE)) || (((b->ntyp==AND_1) && (implies(1,a,b->lft))) && (implies(1,a,b->rgt)))) || (((a->ntyp==OR_1) && (implies(1,a->lft,b))) && (implies(1,a->rgt,b)))) || ((a->ntyp==AND_1) && ((implies(1,a->lft,b)) || (implies(1,a->rgt,b))))) || ((b->ntyp==OR_1) && ((implies(1,a,b->lft)) || (implies(1,a,b->rgt))))) || ((b->ntyp==U_OPER) && (implies(1,a,b->rgt)))) || ((a->ntyp==V_OPER) && (implies(1,a->rgt,b)))) || (((a->ntyp==U_OPER) && (implies(1,a->lft,b))) && (implies(1,a->rgt,b)))) || (((b->ntyp==V_OPER) && (implies(1,a,b->lft))) && (implies(1,a,b->rgt)))) || (((((a->ntyp==U_OPER) || (a->ntyp==V_OPER)) && (a->ntyp==b->ntyp)) && (implies(1,a->lft,b->lft))) && (implies(1,a->rgt,b->rgt)));
 return RValue;
 }
 Node*  bin_simpler(int $$Ext,Node* ptr){
@@ -3892,8 +3875,8 @@ return_1=0;
 if (ptr){break_1$=0;
 switch_1=0;
 nm_10$=ptr->ntyp;
-if (nm_10$==(U_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
-if (ptr->rgt->ntyp==(TRUE) || (ptr->rgt->ntyp==(FALSE) || (ptr->lft->ntyp==FALSE))){ptr=ptr->rgt;
+if ((nm_10$==U_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
+if (((ptr->rgt->ntyp==TRUE) || (ptr->rgt->ntyp==FALSE)) || (ptr->lft->ntyp==FALSE)){ptr=ptr->rgt;
 break_1$=1;
 }
 ;
@@ -3901,22 +3884,22 @@ if (break_1$==0){if (implies(1,ptr->lft,ptr->rgt)){ptr=ptr->rgt;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->lft->ntyp==(U_OPER) && (isequal(1,ptr->lft->lft,ptr->rgt))){ptr->lft=ptr->lft->rgt;
+if (break_1$==0){if ((ptr->lft->ntyp==U_OPER) && (isequal(1,ptr->lft->lft,ptr->rgt))){ptr->lft=ptr->lft->rgt;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->rgt->ntyp==(U_OPER) && (implies(1,ptr->lft,ptr->rgt->lft))){ptr=ptr->rgt;
+if (break_1$==0){if ((ptr->rgt->ntyp==U_OPER) && (implies(1,ptr->lft,ptr->rgt->lft))){ptr=ptr->rgt;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->lft->ntyp==(TRUE) && (ptr->rgt->ntyp==(V_OPER) && (ptr->rgt->lft->ntyp==(FALSE) && (ptr->rgt->rgt->ntyp==(U_OPER) && (ptr->rgt->rgt->lft->ntyp==TRUE))))){ptr=ptr->rgt;
+if (break_1$==0){if (((((ptr->lft->ntyp==TRUE) && (ptr->rgt->ntyp==V_OPER)) && (ptr->rgt->lft->ntyp==FALSE)) && (ptr->rgt->rgt->ntyp==U_OPER)) && (ptr->rgt->rgt->lft->ntyp==TRUE)){ptr=ptr->rgt;
 break_1$=1;
 }
 ;
 if (break_1$==0){bin_simpler_1_2_8_temp$_1=dupnode(0,ptr->rgt);
 bin_simpler_1_2_8_temp$_2=tl_nn(0,NOT,bin_simpler_1_2_8_temp$_1,NULL);
 bin_simpler_1_2_8_temp$_3=push_negation(0,bin_simpler_1_2_8_temp$_2);
-if (ptr->lft->ntyp!=(TRUE) && (implies(1,bin_simpler_1_2_8_temp$_3,ptr->lft))){break_1$=1;
+if (((ptr->lft->ntyp)!=(TRUE)) && (implies(1,bin_simpler_1_2_8_temp$_3,ptr->lft))){break_1$=1;
 ptr->lft=tl_nn(0,TRUE,NULL,NULL);
 }
 ;
@@ -3935,8 +3918,8 @@ if (break_1$==0){break_1$=1;
 ;
 }
 ;
-if (nm_10$==(V_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
-if (ptr->rgt->ntyp==(FALSE) || (ptr->rgt->ntyp==(TRUE) || (ptr->lft->ntyp==TRUE))){ptr=ptr->rgt;
+if ((nm_10$==V_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
+if (((ptr->rgt->ntyp==FALSE) || (ptr->rgt->ntyp==TRUE)) || (ptr->lft->ntyp==TRUE)){ptr=ptr->rgt;
 break_1$=1;
 }
 ;
@@ -3944,22 +3927,22 @@ if (break_1$==0){if (implies(1,ptr->rgt,ptr->lft)){ptr=ptr->rgt;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->lft->ntyp==(FALSE) && (ptr->rgt->ntyp==V_OPER)){ptr->rgt=ptr->rgt->rgt;
+if (break_1$==0){if ((ptr->lft->ntyp==FALSE) && (ptr->rgt->ntyp==V_OPER)){ptr->rgt=ptr->rgt->rgt;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->lft->ntyp==(FALSE) && (ptr->rgt->ntyp==(U_OPER) && (ptr->rgt->lft->ntyp==(TRUE) && (ptr->rgt->rgt->ntyp==(V_OPER) && (ptr->rgt->rgt->lft->ntyp==FALSE))))){ptr=ptr->rgt;
+if (break_1$==0){if (((((ptr->lft->ntyp==FALSE) && (ptr->rgt->ntyp==U_OPER)) && (ptr->rgt->lft->ntyp==TRUE)) && (ptr->rgt->rgt->ntyp==V_OPER)) && (ptr->rgt->rgt->lft->ntyp==FALSE)){ptr=ptr->rgt;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->rgt->ntyp==(V_OPER) && (implies(1,ptr->rgt->lft,ptr->lft))){ptr=ptr->rgt;
+if (break_1$==0){if ((ptr->rgt->ntyp==V_OPER) && (implies(1,ptr->rgt->lft,ptr->lft))){ptr=ptr->rgt;
 break_1$=1;
 }
 ;
 if (break_1$==0){bin_simpler_1_2_14_temp$_4=dupnode(0,ptr->rgt);
 bin_simpler_1_2_14_temp$_5=tl_nn(0,NOT,bin_simpler_1_2_14_temp$_4,NULL);
 bin_simpler_1_2_14_temp$_6=push_negation(0,bin_simpler_1_2_14_temp$_5);
-if (ptr->lft->ntyp!=(FALSE) && (implies(1,ptr->lft,bin_simpler_1_2_14_temp$_6))){break_1$=1;
+if (((ptr->lft->ntyp)!=(FALSE)) && (implies(1,ptr->lft,bin_simpler_1_2_14_temp$_6))){break_1$=1;
 ptr->lft=tl_nn(0,FALSE,NULL,NULL);
 }
 ;
@@ -3978,7 +3961,7 @@ if (break_1$==0){break_1$=1;
 ;
 }
 ;
-if (nm_10$==(IMPLIES) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_10$==IMPLIES) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 if (implies(1,ptr->lft,ptr->rgt)){break_1$=1;
 ptr=tl_nn(0,TRUE,NULL,NULL);
 }
@@ -3993,7 +3976,7 @@ ptr=canonical(0,bin_simpler_1_2_temp$_9);
 ;
 }
 ;
-if (nm_10$==(EQUIV) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_10$==EQUIV) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 if ((implies(1,ptr->lft,ptr->rgt)) && (implies(1,ptr->rgt,ptr->lft))){break_1$=1;
 ptr=tl_nn(0,TRUE,NULL,NULL);
 }
@@ -4008,9 +3991,9 @@ bin_simpler_1_2_temp$_15=push_negation(0,bin_simpler_1_2_temp$_14);
 bin_simpler_1_2_temp$_16=tl_nn(0,NOT,ptr->lft,NULL);
 bin_simpler_1_2_temp$_17=push_negation(0,bin_simpler_1_2_temp$_16);
 bin_simpler_1_2_temp$_18=tl_nn(0,AND_1,bin_simpler_1_2_temp$_17,bin_simpler_1_2_temp$_15);
-ptr=tl_nn(0,OR_1,bin_simpler_a,bin_simpler_b);
 bin_simpler_1_2_temp$_19=right_linked(0,bin_simpler_1_2_temp$_18);
 bin_simpler_b=canonical(0,bin_simpler_1_2_temp$_19);
+ptr=tl_nn(0,OR_1,bin_simpler_a,bin_simpler_b);
 break_1$=1;
 bin_simpler_1_2_temp$_20=right_linked(0,ptr);
 ptr=canonical(0,bin_simpler_1_2_temp$_20);
@@ -4018,46 +4001,46 @@ ptr=canonical(0,bin_simpler_1_2_temp$_20);
 ;
 }
 ;
-if (nm_10$==(AND_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
-if (ptr->rgt->ntyp==(U_OPER) && (isequal(1,ptr->rgt->rgt,ptr->lft))){ptr=ptr->lft;
+if ((nm_10$==AND_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
+if ((ptr->rgt->ntyp==U_OPER) && (isequal(1,ptr->rgt->rgt,ptr->lft))){ptr=ptr->lft;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->lft->ntyp==(U_OPER) && (isequal(1,ptr->lft->rgt,ptr->rgt))){ptr=ptr->rgt;
+if (break_1$==0){if ((ptr->lft->ntyp==U_OPER) && (isequal(1,ptr->lft->rgt,ptr->rgt))){ptr=ptr->rgt;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->rgt->ntyp==(V_OPER) && (isequal(1,ptr->rgt->rgt,ptr->lft))){ptr=ptr->rgt;
+if (break_1$==0){if ((ptr->rgt->ntyp==V_OPER) && (isequal(1,ptr->rgt->rgt,ptr->lft))){ptr=ptr->rgt;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->lft->ntyp==(V_OPER) && (isequal(1,ptr->lft->rgt,ptr->rgt))){ptr=ptr->lft;
+if (break_1$==0){if ((ptr->lft->ntyp==V_OPER) && (isequal(1,ptr->lft->rgt,ptr->rgt))){ptr=ptr->lft;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->rgt->ntyp==(U_OPER) && (ptr->lft->ntyp==(U_OPER) && (isequal(1,ptr->rgt->rgt,ptr->lft->rgt)))){break_1$=1;
+if (break_1$==0){if (((ptr->rgt->ntyp==U_OPER) && (ptr->lft->ntyp==U_OPER)) && (isequal(1,ptr->rgt->rgt,ptr->lft->rgt))){break_1$=1;
 bin_simpler_1_2_21_temp$_21=tl_nn(0,AND_1,ptr->lft->lft,ptr->rgt->lft);
 ptr=tl_nn(0,U_OPER,bin_simpler_1_2_21_temp$_21,ptr->lft->rgt);
 }
 ;
-if (break_1$==0){if (ptr->rgt->ntyp==(V_OPER) && (ptr->lft->ntyp==(V_OPER) && (isequal(1,ptr->rgt->lft,ptr->lft->lft)))){break_1$=1;
+if (break_1$==0){if (((ptr->rgt->ntyp==V_OPER) && (ptr->lft->ntyp==V_OPER)) && (isequal(1,ptr->rgt->lft,ptr->lft->lft))){break_1$=1;
 bin_simpler_1_2_22_temp$_22=tl_nn(0,AND_1,ptr->lft->rgt,ptr->rgt->rgt);
 ptr=tl_nn(0,V_OPER,ptr->rgt->lft,bin_simpler_1_2_22_temp$_22);
 }
 ;
-if (break_1$==0){if (ptr->rgt->ntyp==(U_OPER) && (ptr->lft->ntyp==(V_OPER) && (isequal(1,ptr->lft->rgt,ptr->rgt->rgt)))){ptr=ptr->lft;
+if (break_1$==0){if (((ptr->rgt->ntyp==U_OPER) && (ptr->lft->ntyp==V_OPER)) && (isequal(1,ptr->lft->rgt,ptr->rgt->rgt))){ptr=ptr->lft;
 break_1$=1;
 }
 ;
-if (break_1$==0){if ((isequal(1,ptr->lft,ptr->rgt)) || (ptr->rgt->ntyp==(FALSE) || (ptr->lft->ntyp==(TRUE) || (implies(1,ptr->rgt,ptr->lft))))){ptr=ptr->rgt;
+if (break_1$==0){if ((((isequal(1,ptr->lft,ptr->rgt)) || (ptr->rgt->ntyp==FALSE)) || (ptr->lft->ntyp==TRUE)) || (implies(1,ptr->rgt,ptr->lft))){ptr=ptr->rgt;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->rgt->ntyp==(TRUE) || (ptr->lft->ntyp==(FALSE) || (implies(1,ptr->lft,ptr->rgt)))){ptr=ptr->lft;
+if (break_1$==0){if (((ptr->rgt->ntyp==TRUE) || (ptr->lft->ntyp==FALSE)) || (implies(1,ptr->lft,ptr->rgt))){ptr=ptr->lft;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->lft->ntyp==(U_OPER) && (ptr->lft->lft->ntyp==(TRUE) && (ptr->lft->rgt->ntyp==(V_OPER) && (ptr->lft->rgt->lft->ntyp==(FALSE) && (ptr->rgt->ntyp==(U_OPER) && (ptr->rgt->lft->ntyp==(TRUE) && (ptr->rgt->rgt->ntyp==(V_OPER) && (ptr->rgt->rgt->lft->ntyp==FALSE)))))))){bin_simpler_1_2_26_temp$_23=tl_nn(0,AND_1,ptr->lft->rgt->rgt,ptr->rgt->rgt->rgt);
+if (break_1$==0){if ((((((((ptr->lft->ntyp==U_OPER) && (ptr->lft->lft->ntyp==TRUE)) && (ptr->lft->rgt->ntyp==V_OPER)) && (ptr->lft->rgt->lft->ntyp==FALSE)) && (ptr->rgt->ntyp==U_OPER)) && (ptr->rgt->lft->ntyp==TRUE)) && (ptr->rgt->rgt->ntyp==V_OPER)) && (ptr->rgt->rgt->lft->ntyp==FALSE)){bin_simpler_1_2_26_temp$_23=tl_nn(0,AND_1,ptr->lft->rgt->rgt,ptr->rgt->rgt->rgt);
 bin_simpler_1_2_26_temp$_24=tl_nn(0,FALSE,NULL,NULL);
 bin_simpler_1_2_26_temp$_25=tl_nn(0,V_OPER,bin_simpler_1_2_26_temp$_24,bin_simpler_1_2_26_temp$_23);
 break_1$=1;
@@ -4100,38 +4083,38 @@ if (break_1$==0){break_1$=1;
 ;
 }
 ;
-if (nm_10$==(OR_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
-if (ptr->rgt->ntyp==(U_OPER) && (isequal(1,ptr->rgt->rgt,ptr->lft))){ptr=ptr->rgt;
+if ((nm_10$==OR_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
+if ((ptr->rgt->ntyp==U_OPER) && (isequal(1,ptr->rgt->rgt,ptr->lft))){ptr=ptr->rgt;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->rgt->ntyp==(V_OPER) && (isequal(1,ptr->rgt->rgt,ptr->lft))){ptr=ptr->lft;
+if (break_1$==0){if ((ptr->rgt->ntyp==V_OPER) && (isequal(1,ptr->rgt->rgt,ptr->lft))){ptr=ptr->lft;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->rgt->ntyp==(U_OPER) && (ptr->lft->ntyp==(U_OPER) && (isequal(1,ptr->rgt->lft,ptr->lft->lft)))){break_1$=1;
+if (break_1$==0){if (((ptr->rgt->ntyp==U_OPER) && (ptr->lft->ntyp==U_OPER)) && (isequal(1,ptr->rgt->lft,ptr->lft->lft))){break_1$=1;
 bin_simpler_1_2_30_temp$_33=tl_nn(0,OR_1,ptr->lft->rgt,ptr->rgt->rgt);
 ptr=tl_nn(0,U_OPER,ptr->rgt->lft,bin_simpler_1_2_30_temp$_33);
 }
 ;
-if (break_1$==0){if ((isequal(1,ptr->lft,ptr->rgt)) || (ptr->rgt->ntyp==(FALSE) || (ptr->lft->ntyp==(TRUE) || (implies(1,ptr->rgt,ptr->lft))))){ptr=ptr->lft;
+if (break_1$==0){if ((((isequal(1,ptr->lft,ptr->rgt)) || (ptr->rgt->ntyp==FALSE)) || (ptr->lft->ntyp==TRUE)) || (implies(1,ptr->rgt,ptr->lft))){ptr=ptr->lft;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->rgt->ntyp==(TRUE) || (ptr->lft->ntyp==(FALSE) || (implies(1,ptr->lft,ptr->rgt)))){ptr=ptr->rgt;
+if (break_1$==0){if (((ptr->rgt->ntyp==TRUE) || (ptr->lft->ntyp==FALSE)) || (implies(1,ptr->lft,ptr->rgt))){ptr=ptr->rgt;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->rgt->ntyp==(V_OPER) && (ptr->lft->ntyp==(V_OPER) && (isequal(1,ptr->lft->rgt,ptr->rgt->rgt)))){break_1$=1;
+if (break_1$==0){if (((ptr->rgt->ntyp==V_OPER) && (ptr->lft->ntyp==V_OPER)) && (isequal(1,ptr->lft->rgt,ptr->rgt->rgt))){break_1$=1;
 bin_simpler_1_2_33_temp$_34=tl_nn(0,OR_1,ptr->lft->lft,ptr->rgt->lft);
 ptr=tl_nn(0,V_OPER,bin_simpler_1_2_33_temp$_34,ptr->rgt->rgt);
 }
 ;
-if (break_1$==0){if (ptr->rgt->ntyp==(U_OPER) && (ptr->lft->ntyp==(V_OPER) && (isequal(1,ptr->lft->rgt,ptr->rgt->rgt)))){ptr=ptr->rgt;
+if (break_1$==0){if (((ptr->rgt->ntyp==U_OPER) && (ptr->lft->ntyp==V_OPER)) && (isequal(1,ptr->lft->rgt,ptr->rgt->rgt))){ptr=ptr->rgt;
 break_1$=1;
 }
 ;
-if (break_1$==0){if (ptr->lft->ntyp==(V_OPER) && (ptr->lft->lft->ntyp==(FALSE) && (ptr->lft->rgt->ntyp==(U_OPER) && (ptr->lft->rgt->lft->ntyp==(TRUE) && (ptr->rgt->ntyp==(V_OPER) && (ptr->rgt->lft->ntyp==(FALSE) && (ptr->rgt->rgt->ntyp==(U_OPER) && (ptr->rgt->rgt->lft->ntyp==TRUE)))))))){bin_simpler_1_2_35_temp$_35=tl_nn(0,OR_1,ptr->lft->rgt->rgt,ptr->rgt->rgt->rgt);
+if (break_1$==0){if ((((((((ptr->lft->ntyp==V_OPER) && (ptr->lft->lft->ntyp==FALSE)) && (ptr->lft->rgt->ntyp==U_OPER)) && (ptr->lft->rgt->lft->ntyp==TRUE)) && (ptr->rgt->ntyp==V_OPER)) && (ptr->rgt->lft->ntyp==FALSE)) && (ptr->rgt->rgt->ntyp==U_OPER)) && (ptr->rgt->rgt->lft->ntyp==TRUE)){bin_simpler_1_2_35_temp$_35=tl_nn(0,OR_1,ptr->lft->rgt->rgt,ptr->rgt->rgt->rgt);
 bin_simpler_1_2_35_temp$_36=tl_nn(0,TRUE,NULL,NULL);
 bin_simpler_1_2_35_temp$_37=tl_nn(0,U_OPER,bin_simpler_1_2_35_temp$_36,bin_simpler_1_2_35_temp$_35);
 break_1$=1;
@@ -4196,14 +4179,14 @@ return_1=0;
 if (ptr){break_1$=0;
 switch_1=0;
 nm_11$=ptr->ntyp;
-if (nm_11$==(IMPLIES) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_11$==IMPLIES) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 bin_minimal_1_2_temp$_1=tl_nn(0,NOT,ptr->lft,NULL);
 return_1=1;
 bin_minimal_1_2_temp$_2=push_negation(0,bin_minimal_1_2_temp$_1);
 RValue=tl_nn(0,OR_1,bin_minimal_1_2_temp$_2,ptr->rgt);
 }
 ;
-if (nm_11$==(EQUIV) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_11$==EQUIV) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 bin_minimal_1_2_temp$_3=tl_nn(0,NOT,ptr->rgt,NULL);
 bin_minimal_1_2_temp$_4=push_negation(0,bin_minimal_1_2_temp$_3);
 bin_minimal_1_2_temp$_5=tl_nn(0,NOT,ptr->lft,NULL);
@@ -4238,9 +4221,9 @@ tl_factor_ptr=NULL;
 break_1$=0;
 switch_1=0;
 nm_12$=tl_yychar;
-if (nm_12$==('(') || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_12$=='(') || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 tl_factor_ptr=tl_formula(0);
-if (tl_yychar!=')'){tl_yyerror(0,"expected \')\'");
+if ((tl_yychar)!=(')')){tl_yyerror(0,"expected \')\'");
 }
 ;
 tl_yychar=tl_yylex(0);
@@ -4250,7 +4233,7 @@ if (tl_simp_log){tl_factor_ptr=bin_simpler(0,tl_factor_ptr);
 break_1$=1;
 }
 ;
-if (nm_12$==(NOT) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_12$==NOT) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 tl_factor_ptr=tl_yylval;
 tl_yychar=tl_yylex(0);
 tl_factor_ptr=push_negation(0,tl_factor_ptr);
@@ -4261,10 +4244,10 @@ if (tl_simp_log){tl_factor_ptr=bin_simpler(0,tl_factor_ptr);
 break_1$=1;
 }
 ;
-if (nm_12$==(ALWAYS) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_12$==ALWAYS) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 tl_yychar=tl_yylex(0);
 tl_factor_ptr=tl_factor(0);
-if (tl_simp_log){if (tl_factor_ptr->ntyp==(FALSE) || (tl_factor_ptr->ntyp==TRUE)){break_1$=1;
+if (tl_simp_log){if ((tl_factor_ptr->ntyp==FALSE) || (tl_factor_ptr->ntyp==TRUE)){break_1$=1;
 }
 ;
 if (break_1$==0){if (tl_factor_ptr->ntyp==V_OPER){if (tl_factor_ptr->lft->ntyp==FALSE){break_1$=1;
@@ -4289,13 +4272,13 @@ break_1$=1;
 ;
 }
 ;
-if (nm_12$==(EVENTUALLY) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_12$==EVENTUALLY) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 tl_yychar=tl_yylex(0);
 tl_factor_ptr=tl_factor(0);
-if (tl_simp_log){if (tl_factor_ptr->ntyp==(TRUE) || (tl_factor_ptr->ntyp==FALSE)){break_1$=1;
+if (tl_simp_log){if ((tl_factor_ptr->ntyp==TRUE) || (tl_factor_ptr->ntyp==FALSE)){break_1$=1;
 }
 ;
-if (break_1$==0){if (tl_factor_ptr->ntyp==(U_OPER) && (tl_factor_ptr->lft->ntyp==TRUE)){break_1$=1;
+if (break_1$==0){if ((tl_factor_ptr->ntyp==U_OPER) && (tl_factor_ptr->lft->ntyp==TRUE)){break_1$=1;
 }
 ;
 if (break_1$==0){if (tl_factor_ptr->ntyp==U_OPER){tl_factor_ptr=tl_factor_ptr->rgt;
@@ -4317,16 +4300,16 @@ break_1$=1;
 ;
 }
 ;
-if (nm_12$==(PREDICATE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_12$==PREDICATE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 tl_factor_ptr=tl_yylval;
 tl_yychar=tl_yylex(0);
 break_1$=1;
 }
 ;
-if (nm_12$==(TRUE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_12$==TRUE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 }
 ;
-if (nm_12$==(FALSE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_12$==FALSE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 tl_factor_ptr=tl_yylval;
 tl_yychar=tl_yylex(0);
 break_1$=1;
@@ -4403,7 +4386,7 @@ if (!n){return_1=1;
 RValue=n;
 }
 ;
-if (return_1==0){if (n->ntyp==(AND_1) || (n->ntyp==OR_1)){while((n->lft) && (n->lft->ntyp==n->ntyp)){right_linked_2_3_tmp=n->lft;
+if (return_1==0){if ((n->ntyp==AND_1) || (n->ntyp==OR_1)){while((n->lft) && (n->lft->ntyp==n->ntyp)){right_linked_2_3_tmp=n->lft;
 n->lft=right_linked_2_3_tmp->rgt;
 right_linked_2_3_tmp->rgt=n;
 n=right_linked_2_3_tmp;
@@ -4412,8 +4395,8 @@ n=right_linked_2_3_tmp;
 }
 ;
 return_1=1;
-n->rgt=right_linked(0,n->rgt);
 n->lft=right_linked(0,n->lft);
+n->rgt=right_linked(0,n->rgt);
 RValue=n;
 }
 ;
@@ -4434,9 +4417,9 @@ RValue=canonical_m;
 }
 ;
 if (return_1==0){return_1=1;
-RValue=cached(0,n);
 n->lft=canonical(0,n->lft);
 n->rgt=canonical(0,n->rgt);
+RValue=cached(0,n);
 }
 ;
 }
@@ -4463,21 +4446,21 @@ Fatal(0,": assertion failed\n",NULL);
 break_1$=0;
 switch_1=0;
 nm_13$=n->lft->ntyp;
-if (nm_13$==(TRUE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_13$==TRUE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 releasenode(0,0,n->lft);
 n->lft=NULL;
 n->ntyp=FALSE;
 break_1$=1;
 }
 ;
-if (nm_13$==(FALSE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_13$==FALSE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 releasenode(0,0,n->lft);
 n->lft=NULL;
 n->ntyp=TRUE;
 break_1$=1;
 }
 ;
-if (nm_13$==(NOT) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_13$==NOT) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 push_negation_m=n->lft->lft;
 releasenode(0,0,n->lft);
 n->lft=NULL;
@@ -4486,7 +4469,7 @@ n=push_negation_m;
 break_1$=1;
 }
 ;
-if (nm_13$==(V_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_13$==V_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 n->ntyp=U_OPER;
 push_negation_m=n->lft->rgt;
 n->lft->rgt=NULL;
@@ -4498,7 +4481,7 @@ break_1$=1;
 n->lft=push_negation(0,push_negation_m);
 }
 ;
-if (nm_13$==(U_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_13$==U_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 n->ntyp=V_OPER;
 push_negation_m=n->lft->rgt;
 n->lft->rgt=NULL;
@@ -4510,7 +4493,7 @@ break_1$=1;
 n->lft=push_negation(0,push_negation_m);
 }
 ;
-if (nm_13$==(AND_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_13$==AND_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 n->ntyp=OR_1;
 push_negation_m=n->lft->rgt;
 n->lft->rgt=NULL;
@@ -4522,7 +4505,7 @@ break_1$=1;
 n->lft=push_negation(0,push_negation_m);
 }
 ;
-if (nm_13$==(OR_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_13$==OR_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 n->ntyp=AND_1;
 push_negation_m=n->lft->rgt;
 n->lft->rgt=NULL;
@@ -4564,13 +4547,13 @@ return_1=1;
 }
 ;
 if (return_1==0){addcan_s=DoDump(0,addcan_N);
-if (can->ntyp!=tok){addcan_ptr=&can;
+if ((can->ntyp)!=(tok)){addcan_ptr=&can;
 goto_1=1;
 }
 ;
 if (goto_1==0){addcan_prev=NULL;
 addcan_m=can;
-while(return_1==(0) && (addcan_m->ntyp==(tok) && (addcan_m->rgt))){addcan_t=DoDump(0,addcan_m->lft);
+while(((return_1==0) && (addcan_m->ntyp==tok)) && (addcan_m->rgt)){addcan_t=DoDump(0,addcan_m->lft);
 addcan_cmp=strcmp(addcan_s->name,addcan_t->name);
 if (addcan_cmp==0){return_1=1;
 }
@@ -4627,7 +4610,7 @@ if (return_1==0){if (addcan_cmp<0){(*(addcan_ptr))=tl_nn(0,tok,addcan_N,(*(addca
 ;
 }
 void  marknode(int $$Ext,int tok,Node* m){
-if (m->ntyp!=tok){releasenode(0,0,m->rgt);
+if ((m->ntyp)!=(tok)){releasenode(0,0,m->rgt);
 m->rgt=NULL;
 }
 ;
@@ -4649,7 +4632,7 @@ RValue=n;
 }
 ;
 if (return_1==0){Canonical_tok=n->ntyp;
-if (Canonical_tok!=(AND_1) && (Canonical_tok!=OR_1)){return_1=1;
+if (((Canonical_tok)!=(AND_1)) && ((Canonical_tok)!=(OR_1))){return_1=1;
 RValue=n;
 }
 ;
@@ -4674,13 +4657,11 @@ releasenode(0,1,n);
 if (Canonical_tok==AND_1){continue_1=0;
 Canonical_m=can;
 while(Canonical_m){continue_1=0;
-Canonical_k1=(Canonical_m->ntyp==AND_1) ?Canonical_m->lft : Canonical_m 
-;
+Canonical_k1=((Canonical_m->ntyp==AND_1) ?Canonical_m->lft : Canonical_m );
 if (Canonical_k1->ntyp==TRUE){marknode(0,AND_1,Canonical_m);
 continue_1=1;
 Canonical_dflt=tl_nn(0,TRUE,NULL,NULL);
-Canonical_m=(Canonical_m->ntyp==AND_1) ?Canonical_m->rgt : NULL 
-;
+Canonical_m=((Canonical_m->ntyp==AND_1) ?Canonical_m->rgt : NULL );
 }
 ;
 if (continue_1==0){if (Canonical_k1->ntyp==FALSE){releasenode(0,1,can);
@@ -4688,8 +4669,7 @@ goto_1=1;
 can=tl_nn(0,FALSE,NULL,NULL);
 }
 ;
-if (goto_1==0){Canonical_m=(Canonical_m->ntyp==AND_1) ?Canonical_m->rgt : NULL 
-;
+if (goto_1==0){Canonical_m=((Canonical_m->ntyp==AND_1) ?Canonical_m->rgt : NULL );
 }
 ;
 }
@@ -4701,35 +4681,28 @@ if (goto_1==0){Canonical_m=can;
 while(Canonical_m){continue_1=0;
 Canonical_p=can;
 while(Canonical_p){continue_1=0;
-if (Canonical_p==(Canonical_m) || (Canonical_p->ntyp==(-1) || (Canonical_m->ntyp==-1))){continue_1=1;
-Canonical_p=(Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NULL 
-;
+if (((Canonical_p==Canonical_m) || (Canonical_p->ntyp==-1)) || (Canonical_m->ntyp==-1)){continue_1=1;
+Canonical_p=((Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NULL );
 }
 ;
-if (continue_1==0){Canonical_k1=(Canonical_m->ntyp==AND_1) ?Canonical_m->lft : Canonical_m 
-;
-Canonical_k2=(Canonical_p->ntyp==AND_1) ?Canonical_p->lft : Canonical_p 
-;
+if (continue_1==0){Canonical_k1=((Canonical_m->ntyp==AND_1) ?Canonical_m->lft : Canonical_m );
+Canonical_k2=((Canonical_p->ntyp==AND_1) ?Canonical_p->lft : Canonical_p );
 if (isequal(1,Canonical_k1,Canonical_k2)){marknode(0,AND_1,Canonical_p);
 continue_1=1;
-Canonical_p=(Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NULL 
-;
+Canonical_p=((Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NULL );
 }
 ;
 if (continue_1==0){if (anywhere(1,OR_1,Canonical_k1,Canonical_k2)){marknode(0,AND_1,Canonical_p);
 continue_1=1;
-Canonical_p=(Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NULL 
-;
+Canonical_p=((Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NULL );
 }
 ;
-if (continue_1==0){if (Canonical_k2->ntyp==(U_OPER) && (anywhere(1,AND_1,Canonical_k2->rgt,can))){marknode(0,AND_1,Canonical_p);
+if (continue_1==0){if ((Canonical_k2->ntyp==U_OPER) && (anywhere(1,AND_1,Canonical_k2->rgt,can))){marknode(0,AND_1,Canonical_p);
 continue_1=1;
-Canonical_p=(Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NULL 
-;
+Canonical_p=((Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NULL );
 }
 ;
-if (continue_1==0){Canonical_p=(Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NULL 
-;
+if (continue_1==0){Canonical_p=((Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NULL );
 }
 ;
 }
@@ -4741,8 +4714,7 @@ if (continue_1==0){Canonical_p=(Canonical_p->ntyp==AND_1) ?Canonical_p->rgt : NU
 }
 ;
 continue_1=0;
-Canonical_m=(Canonical_m->ntyp==AND_1) ?Canonical_m->rgt : NULL 
-;
+Canonical_m=((Canonical_m->ntyp==AND_1) ?Canonical_m->rgt : NULL );
 }
 ;
 }
@@ -4752,13 +4724,11 @@ Canonical_m=(Canonical_m->ntyp==AND_1) ?Canonical_m->rgt : NULL
 if (goto_1==0){if (Canonical_tok==OR_1){continue_1=0;
 Canonical_m=can;
 while(Canonical_m){continue_1=0;
-Canonical_k1=(Canonical_m->ntyp==OR_1) ?Canonical_m->lft : Canonical_m 
-;
+Canonical_k1=((Canonical_m->ntyp==OR_1) ?Canonical_m->lft : Canonical_m );
 if (Canonical_k1->ntyp==FALSE){marknode(0,OR_1,Canonical_m);
 continue_1=1;
 Canonical_dflt=tl_nn(0,FALSE,NULL,NULL);
-Canonical_m=(Canonical_m->ntyp==OR_1) ?Canonical_m->rgt : NULL 
-;
+Canonical_m=((Canonical_m->ntyp==OR_1) ?Canonical_m->rgt : NULL );
 }
 ;
 if (continue_1==0){if (Canonical_k1->ntyp==TRUE){releasenode(0,1,can);
@@ -4766,8 +4736,7 @@ goto_1=1;
 can=tl_nn(0,TRUE,NULL,NULL);
 }
 ;
-if (goto_1==0){Canonical_m=(Canonical_m->ntyp==OR_1) ?Canonical_m->rgt : NULL 
-;
+if (goto_1==0){Canonical_m=((Canonical_m->ntyp==OR_1) ?Canonical_m->rgt : NULL );
 }
 ;
 }
@@ -4779,35 +4748,28 @@ if (goto_1==0){Canonical_m=can;
 while(Canonical_m){continue_1=0;
 Canonical_p=can;
 while(Canonical_p){continue_1=0;
-if (Canonical_p==(Canonical_m) || (Canonical_p->ntyp==(-1) || (Canonical_m->ntyp==-1))){continue_1=1;
-Canonical_p=(Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NULL 
-;
+if (((Canonical_p==Canonical_m) || (Canonical_p->ntyp==-1)) || (Canonical_m->ntyp==-1)){continue_1=1;
+Canonical_p=((Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NULL );
 }
 ;
-if (continue_1==0){Canonical_k1=(Canonical_m->ntyp==OR_1) ?Canonical_m->lft : Canonical_m 
-;
-Canonical_k2=(Canonical_p->ntyp==OR_1) ?Canonical_p->lft : Canonical_p 
-;
+if (continue_1==0){Canonical_k1=((Canonical_m->ntyp==OR_1) ?Canonical_m->lft : Canonical_m );
+Canonical_k2=((Canonical_p->ntyp==OR_1) ?Canonical_p->lft : Canonical_p );
 if (isequal(1,Canonical_k1,Canonical_k2)){marknode(0,OR_1,Canonical_p);
 continue_1=1;
-Canonical_p=(Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NULL 
-;
+Canonical_p=((Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NULL );
 }
 ;
 if (continue_1==0){if (anywhere(1,AND_1,Canonical_k1,Canonical_k2)){marknode(0,OR_1,Canonical_p);
 continue_1=1;
-Canonical_p=(Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NULL 
-;
+Canonical_p=((Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NULL );
 }
 ;
-if (continue_1==0){if (Canonical_k2->ntyp==(V_OPER) && (Canonical_k2->lft->ntyp==(FALSE) && (anywhere(1,AND_1,Canonical_k2->rgt,can)))){marknode(0,OR_1,Canonical_p);
+if (continue_1==0){if (((Canonical_k2->ntyp==V_OPER) && (Canonical_k2->lft->ntyp==FALSE)) && (anywhere(1,AND_1,Canonical_k2->rgt,can))){marknode(0,OR_1,Canonical_p);
 continue_1=1;
-Canonical_p=(Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NULL 
-;
+Canonical_p=((Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NULL );
 }
 ;
-if (continue_1==0){Canonical_p=(Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NULL 
-;
+if (continue_1==0){Canonical_p=((Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NULL );
 }
 ;
 }
@@ -4819,8 +4781,7 @@ if (continue_1==0){Canonical_p=(Canonical_p->ntyp==OR_1) ?Canonical_p->rgt : NUL
 }
 ;
 continue_1=0;
-Canonical_m=(Canonical_m->ntyp==OR_1) ?Canonical_m->rgt : NULL 
-;
+Canonical_m=((Canonical_m->ntyp==OR_1) ?Canonical_m->rgt : NULL );
 }
 ;
 }
@@ -4843,7 +4804,7 @@ if (!Canonical_prev){can=can->rgt;
 Canonical_m=can;
 } else {Canonical_prev->rgt=Canonical_k2;
 Canonical_m=Canonical_prev->rgt;
-if (!((Canonical_prev->rgt) && ((Canonical_prev->lft) && (Canonical_prev->ntyp==(AND_1) || (Canonical_prev->ntyp==OR_1))))){Canonical_k1=Canonical_prev->lft;
+if (((!(Canonical_prev->rgt)) && (Canonical_prev->lft)) && ((Canonical_prev->ntyp==AND_1) || (Canonical_prev->ntyp==OR_1))){Canonical_k1=Canonical_prev->lft;
 Canonical_prev->ntyp=Canonical_prev->lft->ntyp;
 Canonical_prev->sym=Canonical_prev->lft->sym;
 Canonical_prev->rgt=Canonical_prev->lft->rgt;
@@ -4900,9 +4861,7 @@ int * RValue=0;
 int return_1;
 return_1=0;
 return_1=1;
-RValue=(int *)(tl_emalloc(1,(type==1) ?sym_size : (type==2) ?scc_size : node_size 
- 
-*4));
+RValue=(int *)(tl_emalloc(1,(((type==1) ?sym_size : ((type==2) ?scc_size : node_size ) )*4)));
 return RValue;
 }
 int * clear_set(int $$Ext,int *l,int type){
@@ -4911,9 +4870,7 @@ int return_1;
 int clear_set_i;
 return_1=0;
 clear_set_i=0;
-while(clear_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
- 
-){l[clear_set_i]=0;
+while(clear_set_i<((type==1) ?sym_size : ((type==2) ?scc_size : node_size ) )){l[clear_set_i]=0;
 clear_set_i=(clear_set_i)+(1);
 }
 ;
@@ -4933,7 +4890,7 @@ if (n==-1){return_1=1;
 RValue=make_set_l;
 }
 ;
-if (return_1==0){make_set_l[n/ mod]=(1)<<(n%mod);
+if (return_1==0){make_set_l[(n/ mod)]=(1)<<((n%mod));
 return_1=1;
 RValue=make_set_l;
 }
@@ -4943,9 +4900,7 @@ return RValue;
 void  copy_set(int $$Ext,int *from,int *to,int type){
 int copy_set_i;
 copy_set_i=0;
-while(copy_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
- 
-){to[copy_set_i]=from[copy_set_i];
+while(copy_set_i<((type==1) ?sym_size : ((type==2) ?scc_size : node_size ) )){to[copy_set_i]=from[copy_set_i];
 copy_set_i=(copy_set_i)+(1);
 }
 ;
@@ -4957,9 +4912,7 @@ int dup_set_i,*dup_set_m;
 return_1=0;
 dup_set_m=new_set(0,type);
 dup_set_i=0;
-while(dup_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
- 
-){dup_set_m[dup_set_i]=l[dup_set_i];
+while(dup_set_i<((type==1) ?sym_size : ((type==2) ?scc_size : node_size ) )){dup_set_m[dup_set_i]=l[dup_set_i];
 dup_set_i=(dup_set_i)+(1);
 }
 ;
@@ -4970,9 +4923,7 @@ return RValue;
 void  merge_sets(int $$Ext,int *l1,int *l2,int type){
 int merge_sets_i;
 merge_sets_i=0;
-while(merge_sets_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
- 
-){l1[merge_sets_i]=(l1[merge_sets_i])|(l2[merge_sets_i]);
+while(merge_sets_i<((type==1) ?sym_size : ((type==2) ?scc_size : node_size ) )){l1[merge_sets_i]=(l1[merge_sets_i])|(l2[merge_sets_i]);
 merge_sets_i=(merge_sets_i)+(1);
 }
 ;
@@ -4980,9 +4931,7 @@ merge_sets_i=(merge_sets_i)+(1);
 void  do_merge_sets(int $$Ext,int *l,int *l1,int *l2,int type){
 int do_merge_sets_i;
 do_merge_sets_i=0;
-while(do_merge_sets_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
- 
-){l[do_merge_sets_i]=(l1[do_merge_sets_i])|(l2[do_merge_sets_i]);
+while(do_merge_sets_i<((type==1) ?sym_size : ((type==2) ?scc_size : node_size ) )){l[do_merge_sets_i]=(l1[do_merge_sets_i])|(l2[do_merge_sets_i]);
 do_merge_sets_i=(do_merge_sets_i)+(1);
 }
 ;
@@ -4994,9 +4943,7 @@ int intersect_sets_i,*intersect_sets_l;
 return_1=0;
 intersect_sets_l=new_set(0,type);
 intersect_sets_i=0;
-while(intersect_sets_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
- 
-){intersect_sets_l[intersect_sets_i]=(l1[intersect_sets_i])&(l2[intersect_sets_i]);
+while(intersect_sets_i<((type==1) ?sym_size : ((type==2) ?scc_size : node_size ) )){intersect_sets_l[intersect_sets_i]=(l1[intersect_sets_i])&(l2[intersect_sets_i]);
 intersect_sets_i=(intersect_sets_i)+(1);
 }
 ;
@@ -5006,22 +4953,24 @@ return RValue;
 }
 int  empty_intersect_sets(int $$Ext,int *l1,int *l2,int type){
 int  RValue=0;
+int return_1;
 int empty_intersect_sets_i,empty_intersect_sets_test;
+return_1=0;
 empty_intersect_sets_test=0;
 empty_intersect_sets_i=0;
-while(empty_intersect_sets_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
- 
-){empty_intersect_sets_test=(empty_intersect_sets_test)|((l1[empty_intersect_sets_i])&(l2[empty_intersect_sets_i]));
+while(empty_intersect_sets_i<((type==1) ?sym_size : ((type==2) ?scc_size : node_size ) )){empty_intersect_sets_test=(empty_intersect_sets_test)|((l1[empty_intersect_sets_i])&(l2[empty_intersect_sets_i]));
 empty_intersect_sets_i=(empty_intersect_sets_i)+(1);
 }
 ;
+return_1=1;
+RValue=!empty_intersect_sets_test;
 return RValue;
 }
 void  add_set(int $$Ext,int *l,int n){
-l[n/ mod]=(l[n/ mod])|((1)<<(n%mod));
+l[(n/ mod)]=(l[(n/ mod)])|((1)<<((n%mod)));
 }
 void  rem_set(int $$Ext,int *l,int n){
-l[n/ mod]=(l[n/ mod])&((-1)-((1)<<(n%mod)));
+l[(n/ mod)]=(l[(n/ mod)])&((-1)-((1)<<((n%mod))));
 }
 void  spin_print_set(int $$Ext,int *pos,int *neg){
 int spin_print_set_i,spin_print_set_j,spin_print_set_start;
@@ -5031,7 +4980,7 @@ while(spin_print_set_i<sym_size){spin_print_set_j=0;
 while(spin_print_set_j<mod){if ((pos[spin_print_set_i])&((1)<<(spin_print_set_j))){if (!spin_print_set_start){printf(" && ");
 }
 ;
-printf("%p",sym_table[(mod*spin_print_set_i)+(spin_print_set_j)]);
+printf("%p",sym_table[((mod*spin_print_set_i))+(spin_print_set_j)]);
 spin_print_set_start=0;
 }
 ;
@@ -5039,7 +4988,7 @@ if ((neg[spin_print_set_i])&((1)<<(spin_print_set_j))){if (!spin_print_set_start
 }
 ;
 printf("!");
-printf("%p",sym_table[(mod*spin_print_set_i)+(spin_print_set_j)]);
+printf("%p",sym_table[((mod*spin_print_set_i))+(spin_print_set_j)]);
 spin_print_set_start=0;
 }
 ;
@@ -5061,20 +5010,18 @@ int break_1$;
 int nm_14$;
 return_1=0;
 print_set_start=1;
-if (type!=1){printf("{");
+if ((type)!=(1)){printf("{");
 }
 ;
 print_set_i=0;
-while(print_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
- 
-){print_set_j=0;
+while(print_set_i<((type==1) ?sym_size : ((type==2) ?scc_size : node_size ) )){print_set_j=0;
 while(print_set_j<mod){if ((l[print_set_i])&((1)<<(print_set_j))){break_1$=0;
 switch_1=0;
 nm_14$=type;
-if (nm_14$==(0) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_14$==0) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 }
 ;
-if (nm_14$==(2) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_14$==2) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 if (!print_set_start){printf(",");
 }
 ;
@@ -5083,11 +5030,11 @@ printf("i");
 break_1$=1;
 }
 ;
-if (nm_14$==(1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_14$==1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 if (!print_set_start){printf(" & ");
 }
 ;
-printf("%p",sym_table[(mod*print_set_i)+(print_set_j)]);
+printf("%p",sym_table[((mod*print_set_i))+(print_set_j)]);
 break_1$=1;
 }
 ;
@@ -5100,7 +5047,7 @@ print_set_j=(print_set_j)+(1);
 print_set_i=(print_set_i)+(1);
 }
 ;
-if (type!=1){printf("}");
+if ((type)!=(1)){printf("}");
 }
 ;
 }
@@ -5111,9 +5058,7 @@ int empty_set_i,empty_set_test;
 return_1=0;
 empty_set_test=0;
 empty_set_i=0;
-while(empty_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
- 
-){empty_set_test=(empty_set_test)|(l[empty_set_i]);
+while(empty_set_i<((type==1) ?sym_size : ((type==2) ?scc_size : node_size ) )){empty_set_test=(empty_set_test)|(l[empty_set_i]);
 empty_set_i=(empty_set_i)+(1);
 }
 ;
@@ -5128,9 +5073,7 @@ int same_sets_i,same_sets_test;
 return_1=0;
 same_sets_test=1;
 same_sets_i=0;
-while(same_sets_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
- 
-){same_sets_test=(same_sets_test)&(l1[same_sets_i]==l2[same_sets_i]);
+while(same_sets_i<((type==1) ?sym_size : ((type==2) ?scc_size : node_size ) )){same_sets_test=(same_sets_test)&(l1[same_sets_i]==l2[same_sets_i]);
 same_sets_i=(same_sets_i)+(1);
 }
 ;
@@ -5145,12 +5088,12 @@ int included_set_i,included_set_test;
 return_1=0;
 included_set_test=0;
 included_set_i=0;
-while(included_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
- 
-){included_set_test=(included_set_test)|((l1[included_set_i])&(~(l2[included_set_i])));
+while(included_set_i<((type==1) ?sym_size : ((type==2) ?scc_size : node_size ) )){included_set_test=(included_set_test)|((l1[included_set_i])&(~(l2[included_set_i])));
 included_set_i=(included_set_i)+(1);
 }
 ;
+return_1=1;
+RValue=!included_set_test;
 return RValue;
 }
 int  in_set(int $$Ext,int *l,int n){
@@ -5158,7 +5101,7 @@ int  RValue=0;
 int return_1;
 return_1=0;
 return_1=1;
-RValue=(l[n/ mod])&((1)<<(n%mod));
+RValue=(l[(n/ mod)])&((1)<<((n%mod)));
 return RValue;
 }
 int * list_set(int $$Ext,int *l,int type){
@@ -5168,9 +5111,7 @@ int list_set_i,list_set_j,list_set_size,*list_set_list$;
 return_1=0;
 list_set_size=1;
 list_set_i=0;
-while(list_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
- 
-){list_set_j=0;
+while(list_set_i<((type==1) ?sym_size : ((type==2) ?scc_size : node_size ) )){list_set_j=0;
 while(list_set_j<mod){if ((l[list_set_i])&((1)<<(list_set_j))){list_set_size=(list_set_size)+(1);
 }
 ;
@@ -5180,14 +5121,12 @@ list_set_j=(list_set_j)+(1);
 list_set_i=(list_set_i)+(1);
 }
 ;
-list_set_list$=(int *)(tl_emalloc(1,list_set_size*4));
+list_set_list$=(int *)(tl_emalloc(1,(list_set_size*4)));
 list_set_list$[0]=list_set_size;
 list_set_size=1;
 list_set_i=0;
-while(list_set_i<(type==1) ?sym_size : (type==2) ?scc_size : node_size 
- 
-){list_set_j=0;
-while(list_set_j<mod){if ((l[list_set_i])&((1)<<(list_set_j))){list_set_list$[list_set_size]=(mod*list_set_i)+(list_set_j);
+while(list_set_i<((type==1) ?sym_size : ((type==2) ?scc_size : node_size ) )){list_set_j=0;
+while(list_set_j<mod){if ((l[list_set_i])&((1)<<(list_set_j))){list_set_list$[list_set_size]=((mod*list_set_i))+(list_set_j);
 list_set_size=(list_set_size)+(1);
 }
 ;
@@ -5216,12 +5155,12 @@ RValue=dump_cond_frst;
 if (return_1==0){dump_cond_q=dupnode(0,pp);
 dump_cond_temp$_1=right_linked(0,dump_cond_q);
 dump_cond_q=canonical(0,dump_cond_temp$_1);
-if (dump_cond_q->ntyp==(PREDICATE) || (dump_cond_q->ntyp==(NOT) || (dump_cond_q->ntyp==(OR_1) || (dump_cond_q->ntyp==FALSE)))){if (!dump_cond_frst){printf(" && ");
+if ((((dump_cond_q->ntyp==PREDICATE) || (dump_cond_q->ntyp==NOT)) || (dump_cond_q->ntyp==OR_1)) || (dump_cond_q->ntyp==FALSE)){if (!dump_cond_frst){printf(" && ");
 }
 ;
 dump(0,dump_cond_q);
 dump_cond_frst=0;
-} else {if (dump_cond_q->ntyp==(V_OPER) && (!(anywhere(1,AND_1,dump_cond_q->rgt,r)))){dump_cond_frst=dump_cond(0,dump_cond_q->rgt,r,dump_cond_frst);
+} else {if ((dump_cond_q->ntyp==V_OPER) && (!(anywhere(1,AND_1,dump_cond_q->rgt,r)))){dump_cond_frst=dump_cond(0,dump_cond_q->rgt,r,dump_cond_frst);
 } else {if (dump_cond_q->ntyp==AND_1){dump_cond_frst=dump_cond(0,dump_cond_q->lft,r,dump_cond_frst);
 dump_cond_frst=dump_cond(0,dump_cond_q->rgt,r,dump_cond_frst);
 }
@@ -5245,56 +5184,56 @@ return_1=0;
 break_1$=0;
 switch_1=0;
 nm_15$=n->ntyp;
-if (nm_15$==(PREDICATE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_15$==PREDICATE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 strcat(dumpbuf,n->sym->name);
 break_1$=1;
 }
 ;
-if (nm_15$==(U_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_15$==U_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 strcat(dumpbuf,"U");
 sdump(0,n->rgt);
 sdump(0,n->lft);
 break_1$=1;
 }
 ;
-if (nm_15$==(V_OPER) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_15$==V_OPER) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 strcat(dumpbuf,"V");
 sdump(0,n->rgt);
 sdump(0,n->lft);
 break_1$=1;
 }
 ;
-if (nm_15$==(OR_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_15$==OR_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 strcat(dumpbuf,"|");
 sdump(0,n->rgt);
 sdump(0,n->lft);
 break_1$=1;
 }
 ;
-if (nm_15$==(AND_1) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_15$==AND_1) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 strcat(dumpbuf,"&");
 sdump(0,n->rgt);
 sdump(0,n->lft);
 break_1$=1;
 }
 ;
-if (nm_15$==(NOT) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_15$==NOT) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 strcat(dumpbuf,"!");
 sdump(0,n->lft);
 break_1$=1;
 }
 ;
-if (nm_15$==(TRUE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_15$==TRUE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 strcat(dumpbuf,"T");
 break_1$=1;
 }
 ;
-if (nm_15$==(FALSE) || (switch_1==(1) && (break_1$==(0) && (return_1==0)))){switch_1=1;
+if ((nm_15$==FALSE) || (((switch_1==1) && (break_1$==0)) && (return_1==0))){switch_1=1;
 strcat(dumpbuf,"F");
 break_1$=1;
 }
 ;
-if (break_1$==(0) && (return_1==0)){strcat(dumpbuf,"?");
+if ((break_1$==0) && (return_1==0)){strcat(dumpbuf,"?");
 break_1$=1;
 }
 ;
@@ -5324,7 +5263,7 @@ return RValue;
 void  trans(int $$Ext,Node* p){
 int return_1;
 return_1=0;
-if (!((p) || (tl_errs))){return_1=1;
+if ((!p) || (tl_errs)){return_1=1;
 }
 ;
 if (return_1==0){if ((tl_verbose) || (tl_terse)){printf("\t\n             \n");
@@ -5340,22 +5279,6 @@ mk_buchi(0);
 ;
 }
 ;
-=======
-
-float y;
-void  g(int $$Ext,int x,int (*tst)(int $$Ext,int $$NoCare));
-int  f(int $$Ext,int x);
-void  g(int $$Ext,int x,int (*tst)(int $$Ext,int $$NoCare)){
-x=(x)+(1);
-while((tst(1,1))>(1)){x=(x)+(2);
-}
-;
-}
-int  f(int $$Ext,int x){
-int  RValue=0;
-RValue=(x)+(1);
-return RValue;
->>>>>>> c02b13e7922f6c04a0f6c1bf1fb6bfc6b593eb4e
 }
 
 int main() {
@@ -5369,7 +5292,6 @@ if ( ($$length == 0 && $$flag[0] == 1) || ($$current == 0 && $$firstTime==1)){br
 $$current = 0;
 printf("Path Number: %d",$$pathNum);
 printf("\n");
-<<<<<<< HEAD
 ALWAYS=257;
 AND_1=258;
 EQUIV=259;
@@ -5423,14 +5345,11 @@ bfrees=0;
 bpool=0;
 tl_yychar=0;
 can=NULL;
-mod=8*4;
+mod=(8*4);
 Stack_mx=0;
 Max_Red=0;
 Total=0;
 main_1(0);
-=======
-g(0,1,f);
->>>>>>> c02b13e7922f6c04a0f6c1bf1fb6bfc6b593eb4e
 $$firstTime=1;
 $$state_num=0;
 printf("\n");
