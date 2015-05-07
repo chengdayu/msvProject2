@@ -988,7 +988,8 @@ option_function_parameter_list
 	   }
 	   |all_type_define inner_option_define_identifier //  函数指针的形参列表可以没有参数名字
 	   {
-			$$=NULL;
+			CSyntaxNode* pChild0=new CSyntaxNode(IDENT_EXP, "$$NoCare", NULL, VOIDTYPE);
+			$$ = new CSyntaxNode(FORMAL_PARAMETER_EXP, pChild0, $2, $1);
 	   }
 	   
 	   |STRUCT_TYPE identifier inner_option_define_identifier //结构体 S s	 

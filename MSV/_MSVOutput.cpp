@@ -10,6 +10,7 @@ void $$changeState()
 {if ($$current == $$length){
 $$length++; $$flag[$$length - 1] = 0;}
 $$current++; }
+<<<<<<< HEAD
 struct __anonunion___value_2{
 int __wch;
 char __wchb[4];
@@ -5339,6 +5340,22 @@ mk_buchi(0);
 ;
 }
 ;
+=======
+
+float y;
+void  g(int $$Ext,int x,int (*tst)(int $$Ext,int $$NoCare));
+int  f(int $$Ext,int x);
+void  g(int $$Ext,int x,int (*tst)(int $$Ext,int $$NoCare)){
+x=(x)+(1);
+while((tst(1,1))>(1)){x=(x)+(2);
+}
+;
+}
+int  f(int $$Ext,int x){
+int  RValue=0;
+RValue=(x)+(1);
+return RValue;
+>>>>>>> c02b13e7922f6c04a0f6c1bf1fb6bfc6b593eb4e
 }
 
 int main() {
@@ -5352,6 +5369,7 @@ if ( ($$length == 0 && $$flag[0] == 1) || ($$current == 0 && $$firstTime==1)){br
 $$current = 0;
 printf("Path Number: %d",$$pathNum);
 printf("\n");
+<<<<<<< HEAD
 ALWAYS=257;
 AND_1=258;
 EQUIV=259;
@@ -5410,6 +5428,9 @@ Stack_mx=0;
 Max_Red=0;
 Total=0;
 main_1(0);
+=======
+g(0,1,f);
+>>>>>>> c02b13e7922f6c04a0f6c1bf1fb6bfc6b593eb4e
 $$firstTime=1;
 $$state_num=0;
 printf("\n");
