@@ -10,15 +10,18 @@ void $$changeState()
 {if ($$current == $$length){
 $$length++; $$flag[$$length - 1] = 0;}
 $$current++; }
-
-float y;
-void  g(int $$Ext,int x,int (*tst)(int $$Ext,int $$NoCare));
-int  f(int $$Ext,int x);
-void  g(int $$Ext,int x,int (*tst)(int $$Ext,int $$NoCare)){
-x=(x)+(1);
-while((tst(1,1))>(1)){x=(x)+(2);
+struct S{
+int a;
 }
 ;
+int y;
+struct S s;
+int  g(int $$Ext,int x);
+int  f(int $$Ext,int x);
+int  g(int $$Ext,int x){
+int  RValue=0;
+RValue=(x)+(1);
+return RValue;
 }
 int  f(int $$Ext,int x){
 int  RValue=0;
@@ -37,7 +40,8 @@ if ( ($$length == 0 && $$flag[0] == 1) || ($$current == 0 && $$firstTime==1)){br
 $$current = 0;
 printf("Path Number: %d",$$pathNum);
 printf("\n");
-g(0,1,f);
+s.a=f(0,1);
+s.a=g(0,1);
 $$firstTime=1;
 $$state_num=0;
 printf("\n");
