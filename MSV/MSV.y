@@ -74,6 +74,7 @@ extern int yylex(void);
 %left OR PARALLEL CYLINDER
 %left AND 
 %right ASS_P ASS_N 
+%left BOOL_OR
 %left INTER_OR	//按位异或	
 %left OVEREP	
 %left CON   //按位异或
@@ -86,7 +87,7 @@ extern int yylex(void);
 %left ADD SUB 
 %left MUL DIV MOD 
 %left BNE  //按位取反
-%left BOOL_OR
+
 
 
 

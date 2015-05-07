@@ -668,30 +668,30 @@ PARALLEL (325) 54
 AND (326) 4 30 56 66 299
 ASS_P (327) 60 87 96 97 98 99 100 130
 ASS_N (328) 131
-CON (329) 194 195
-ADDRESS (330) 192 209 210 211 212 278
-BOOL_AND (331) 158
-IMPLY (332) 55 339 340 341 342 343 344 345 347 348 353 354 356
-IFF (333) 6
-PROPIMPLY (334) 7
-NE (335) 240
-EQ (336) 243
-GE (337) 238
-LE (338) 239
-GT (339) 241
-LT (340) 242
-LST (341) 190
-RST (342) 191
-ADD (343) 185
-SUB (344) 179 186
-MUL (345) 84 85 86 87 101 117 118 119 120 121 122 123 124 125 126 127
+BOOL_OR (329) 159
+CON (330) 194 195
+ADDRESS (331) 192 209 210 211 212 278
+BOOL_AND (332) 158
+IMPLY (333) 55 339 340 341 342 343 344 345 347 348 353 354 356
+IFF (334) 6
+PROPIMPLY (335) 7
+NE (336) 240
+EQ (337) 243
+GE (338) 238
+LE (339) 239
+GT (340) 241
+LT (341) 242
+LST (342) 190
+RST (343) 191
+ADD (344) 185
+SUB (345) 179 186
+MUL (346) 84 85 86 87 101 117 118 119 120 121 122 123 124 125 126 127
     128 129 137 140 141 142 143 144 149 150 151 153 154 187 221 222
     223 224 225 226 227 228 229 230 231 232 233 234 235 236 251 252
     255 256 259 260 262 263 265 267 268 269 270
-DIV (346) 188
-MOD (347) 189
-BNE (348) 180
-BOOL_OR (349) 159
+DIV (347) 188
+MOD (348) 189
+BNE (349) 180
 CHOPSTAR (350) 26
 NEXT (351) 13 40 115
 NEGATION (352) 22 160 298
@@ -2645,25 +2645,26 @@ state 104
     simple_ari_exp  ->  simple_ari_exp . arith_operator member_in_exp   (rule 166)
 
     INTER_OR	shift, and go to state 231
-    CON 	shift, and go to state 232
-    ADDRESS	shift, and go to state 233
-    BOOL_AND	shift, and go to state 234
-    NE  	shift, and go to state 235
-    EQ  	shift, and go to state 236
-    GE  	shift, and go to state 237
-    LE  	shift, and go to state 238
-    GT  	shift, and go to state 239
-    LT  	shift, and go to state 240
-    LST 	shift, and go to state 241
-    RST 	shift, and go to state 242
-    ADD 	shift, and go to state 243
-    SUB 	shift, and go to state 244
-    MUL 	shift, and go to state 245
-    DIV 	shift, and go to state 246
-    MOD 	shift, and go to state 247
-    BOOL_OR	shift, and go to state 248
+    BOOL_OR	shift, and go to state 232
+    CON 	shift, and go to state 233
+    ADDRESS	shift, and go to state 234
+    BOOL_AND	shift, and go to state 235
+    NE  	shift, and go to state 236
+    EQ  	shift, and go to state 237
+    GE  	shift, and go to state 238
+    LE  	shift, and go to state 239
+    GT  	shift, and go to state 240
+    LT  	shift, and go to state 241
+    LST 	shift, and go to state 242
+    RST 	shift, and go to state 243
+    ADD 	shift, and go to state 244
+    SUB 	shift, and go to state 245
+    MUL 	shift, and go to state 246
+    DIV 	shift, and go to state 247
+    MOD 	shift, and go to state 248
 
     INTER_OR	[reduce using rule 156 (ari_exp)]
+    BOOL_OR	[reduce using rule 156 (ari_exp)]
     CON 	[reduce using rule 156 (ari_exp)]
     ADDRESS	[reduce using rule 156 (ari_exp)]
     BOOL_AND	[reduce using rule 156 (ari_exp)]
@@ -2680,7 +2681,6 @@ state 104
     MUL 	[reduce using rule 156 (ari_exp)]
     DIV 	[reduce using rule 156 (ari_exp)]
     MOD 	[reduce using rule 156 (ari_exp)]
-    BOOL_OR	[reduce using rule 156 (ari_exp)]
     $default	reduce using rule 156 (ari_exp)
 
     arith_operator	go to state 249
@@ -5471,23 +5471,7 @@ state 231
 
 state 232
 
-    arith_operator  ->  CON .   (rule 194)
-
-    $default	reduce using rule 194 (arith_operator)
-
-
-
-state 233
-
-    arith_operator  ->  ADDRESS .   (rule 192)
-
-    $default	reduce using rule 192 (arith_operator)
-
-
-
-state 234
-
-    ari_exp  ->  simple_ari_exp BOOL_AND . ari_exp   (rule 158)
+    ari_exp  ->  simple_ari_exp BOOL_OR . ari_exp   (rule 159)
 
     IF  	shift, and go to state 86
     POINTERNULL	shift, and go to state 87
@@ -5524,113 +5508,25 @@ state 234
 
 
 
+state 233
+
+    arith_operator  ->  CON .   (rule 194)
+
+    $default	reduce using rule 194 (arith_operator)
+
+
+
+state 234
+
+    arith_operator  ->  ADDRESS .   (rule 192)
+
+    $default	reduce using rule 192 (arith_operator)
+
+
+
 state 235
 
-    relation_operator  ->  NE .   (rule 240)
-
-    $default	reduce using rule 240 (relation_operator)
-
-
-
-state 236
-
-    relation_operator  ->  EQ .   (rule 243)
-
-    $default	reduce using rule 243 (relation_operator)
-
-
-
-state 237
-
-    relation_operator  ->  GE .   (rule 238)
-
-    $default	reduce using rule 238 (relation_operator)
-
-
-
-state 238
-
-    relation_operator  ->  LE .   (rule 239)
-
-    $default	reduce using rule 239 (relation_operator)
-
-
-
-state 239
-
-    relation_operator  ->  GT .   (rule 241)
-
-    $default	reduce using rule 241 (relation_operator)
-
-
-
-state 240
-
-    relation_operator  ->  LT .   (rule 242)
-
-    $default	reduce using rule 242 (relation_operator)
-
-
-
-state 241
-
-    arith_operator  ->  LST .   (rule 190)
-
-    $default	reduce using rule 190 (arith_operator)
-
-
-
-state 242
-
-    arith_operator  ->  RST .   (rule 191)
-
-    $default	reduce using rule 191 (arith_operator)
-
-
-
-state 243
-
-    arith_operator  ->  ADD .   (rule 185)
-
-    $default	reduce using rule 185 (arith_operator)
-
-
-
-state 244
-
-    arith_operator  ->  SUB .   (rule 186)
-
-    $default	reduce using rule 186 (arith_operator)
-
-
-
-state 245
-
-    arith_operator  ->  MUL .   (rule 187)
-
-    $default	reduce using rule 187 (arith_operator)
-
-
-
-state 246
-
-    arith_operator  ->  DIV .   (rule 188)
-
-    $default	reduce using rule 188 (arith_operator)
-
-
-
-state 247
-
-    arith_operator  ->  MOD .   (rule 189)
-
-    $default	reduce using rule 189 (arith_operator)
-
-
-
-state 248
-
-    ari_exp  ->  simple_ari_exp BOOL_OR . ari_exp   (rule 159)
+    ari_exp  ->  simple_ari_exp BOOL_AND . ari_exp   (rule 158)
 
     IF  	shift, and go to state 86
     POINTERNULL	shift, and go to state 87
@@ -5664,6 +5560,110 @@ state 248
     charliteral	go to state 111
     floatliteral	go to state 112
     struct_member_exp	go to state 113
+
+
+
+state 236
+
+    relation_operator  ->  NE .   (rule 240)
+
+    $default	reduce using rule 240 (relation_operator)
+
+
+
+state 237
+
+    relation_operator  ->  EQ .   (rule 243)
+
+    $default	reduce using rule 243 (relation_operator)
+
+
+
+state 238
+
+    relation_operator  ->  GE .   (rule 238)
+
+    $default	reduce using rule 238 (relation_operator)
+
+
+
+state 239
+
+    relation_operator  ->  LE .   (rule 239)
+
+    $default	reduce using rule 239 (relation_operator)
+
+
+
+state 240
+
+    relation_operator  ->  GT .   (rule 241)
+
+    $default	reduce using rule 241 (relation_operator)
+
+
+
+state 241
+
+    relation_operator  ->  LT .   (rule 242)
+
+    $default	reduce using rule 242 (relation_operator)
+
+
+
+state 242
+
+    arith_operator  ->  LST .   (rule 190)
+
+    $default	reduce using rule 190 (arith_operator)
+
+
+
+state 243
+
+    arith_operator  ->  RST .   (rule 191)
+
+    $default	reduce using rule 191 (arith_operator)
+
+
+
+state 244
+
+    arith_operator  ->  ADD .   (rule 185)
+
+    $default	reduce using rule 185 (arith_operator)
+
+
+
+state 245
+
+    arith_operator  ->  SUB .   (rule 186)
+
+    $default	reduce using rule 186 (arith_operator)
+
+
+
+state 246
+
+    arith_operator  ->  MUL .   (rule 187)
+
+    $default	reduce using rule 187 (arith_operator)
+
+
+
+state 247
+
+    arith_operator  ->  DIV .   (rule 188)
+
+    $default	reduce using rule 188 (arith_operator)
+
+
+
+state 248
+
+    arith_operator  ->  MOD .   (rule 189)
+
+    $default	reduce using rule 189 (arith_operator)
 
 
 
@@ -8382,17 +8382,17 @@ state 406
 
 state 407
 
-    ari_exp  ->  simple_ari_exp BOOL_AND ari_exp .   (rule 158)
+    ari_exp  ->  simple_ari_exp BOOL_OR ari_exp .   (rule 159)
 
-    $default	reduce using rule 158 (ari_exp)
+    $default	reduce using rule 159 (ari_exp)
 
 
 
 state 408
 
-    ari_exp  ->  simple_ari_exp BOOL_OR ari_exp .   (rule 159)
+    ari_exp  ->  simple_ari_exp BOOL_AND ari_exp .   (rule 158)
 
-    $default	reduce using rule 159 (ari_exp)
+    $default	reduce using rule 158 (ari_exp)
 
 
 
@@ -10155,15 +10155,15 @@ state 522
     simple_ari_exp  ->  simple_ari_exp . arith_operator member_in_exp   (rule 166)
 
     INTER_OR	shift, and go to state 231
-    CON 	shift, and go to state 232
-    ADDRESS	shift, and go to state 233
-    LST 	shift, and go to state 241
-    RST 	shift, and go to state 242
-    ADD 	shift, and go to state 243
-    SUB 	shift, and go to state 244
-    MUL 	shift, and go to state 245
-    DIV 	shift, and go to state 246
-    MOD 	shift, and go to state 247
+    CON 	shift, and go to state 233
+    ADDRESS	shift, and go to state 234
+    LST 	shift, and go to state 242
+    RST 	shift, and go to state 243
+    ADD 	shift, and go to state 244
+    SUB 	shift, and go to state 245
+    MUL 	shift, and go to state 246
+    DIV 	shift, and go to state 247
+    MOD 	shift, and go to state 248
 
     INTER_OR	[reduce using rule 162 (type_cast_alg_exp)]
     CON 	[reduce using rule 162 (type_cast_alg_exp)]
