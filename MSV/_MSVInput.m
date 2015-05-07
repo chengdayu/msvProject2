@@ -5425,8 +5425,7 @@ frame(ALWAYS,AND_1,EQUIV,EVENTUALLY,FALSE,IMPLIES,NOT,OR_1,PREDICATE,TRUE,U_OPER
  {
      frame(return_1) and ( 
      int return_1<==0 and skip;
-    // return_1<==1 and RValue:=((c>47 and c<58) or (c>64 and c<91) or (c>96 and c<123) or c='_');
-     skip
+     return_1<==1 and RValue:=((c>47 and c<58) OR (c>64 and c<91) OR (c>96 and c<123) or c='_')
      )
      }; 
   function hash ( char *s,int RValue )
@@ -5493,7 +5492,7 @@ frame(ALWAYS,AND_1,EQUIV,EVENTUALLY,FALSE,IMPLIES,NOT,OR_1,PREDICATE,TRUE,U_OPER
      {
          tl_UnGetchar();
          tl_yychar:=follow_c;
-         //sprintf(follow_buf,"expected '%c'",tok,RValue);
+         sprintf(follow_buf,"expected '%c'",tok,RValue);
          tl_yyerror(follow_buf);
          return_1<==1 and RValue:=ifno;
          skip
@@ -8322,7 +8321,7 @@ frame(ALWAYS,AND_1,EQUIV,EVENTUALLY,FALSE,IMPLIES,NOT,OR_1,PREDICATE,TRUE,U_OPER
   function empty_intersect_sets ( int *l1,int *l2,int type,int RValue )
  {
      frame(empty_intersect_sets_i,empty_intersect_sets_test,return_1) and ( 
-     //int return_1<==0 and skip;
+     int return_1<==0 and skip;
      int empty_intersect_sets_i,empty_intersect_sets_test<==0 and skip;
      empty_intersect_sets_i:=0;
      
@@ -8332,7 +8331,7 @@ frame(ALWAYS,AND_1,EQUIV,EVENTUALLY,FALSE,IMPLIES,NOT,OR_1,PREDICATE,TRUE,U_OPER
          empty_intersect_sets_i:=empty_intersect_sets_i+1
          
      };
-     //return_1<==1 and RValue:=!empty_intersect_sets_test;
+     return_1<==1 and RValue:=!empty_intersect_sets_test;
      skip
      )
      }; 
@@ -8556,7 +8555,7 @@ frame(ALWAYS,AND_1,EQUIV,EVENTUALLY,FALSE,IMPLIES,NOT,OR_1,PREDICATE,TRUE,U_OPER
          included_set_i:=included_set_i+1
          
      };
-    //return_1<==1 and RValue:=!included_set_test;
+    return_1<==1 and RValue:=!included_set_test;
      skip
      )
      }; 
