@@ -10,12 +10,9 @@ void $$changeState()
 {if ($$current == $$length){
 $$length++; $$flag[$$length - 1] = 0;}
 $$current++; }
-struct S{
-int a;
-}
-;
+
 int y;
-struct S s;
+int z;
 int  g(int $$Ext,int x);
 int  f(int $$Ext,int x);
 int  g(int $$Ext,int x){
@@ -40,8 +37,8 @@ if ( ($$length == 0 && $$flag[0] == 1) || ($$current == 0 && $$firstTime==1)){br
 $$current = 0;
 printf("Path Number: %d",$$pathNum);
 printf("\n");
-s.a=f(0,1);
-s.a=g(0,1);
+y=0;
+z=f(0,y);
 $$firstTime=1;
 $$state_num=0;
 printf("\n");
