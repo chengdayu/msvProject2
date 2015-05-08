@@ -453,19 +453,27 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 			return ConstantInt::get(m_module->getContext(), APInt(32, pTree->GetiValue()));
 			break;
 			}
-		//add by chengyu	2015-5-7
+		//add by chengyu	2015-5-6
 		//负数 
 		case MINUS_EXP:
 		{
+			//int类型的负值	例：-3
 			if (pTree->GetChild0()->GetNType() == INTEGER_EXP)
 			{
 				return ConstantInt::get(m_module->getContext(), APInt(32, -(pTree->GetChild0()->GetiValue())));
 				break;
 			}
+			//float类型的负值	例：-3.1
 			else if (pTree->GetChild0()->GetNType() == FLOATLITERAL_EXP)
 			{
 				return ConstantFP::get(m_module->getContext(), APFloat(-(pTree->GetChild0()->GetfValue())));
 			}
+			//变量取负值 例:-x
+			/*
+			else if (pTree->GetChild0()->GetNType() == IDENT_EXP)
+			{
+			Value *res = m_builder->CreateLoad(m_IRSTable[pTree->GetChild0()->GetNName()]->GetAllocaInstVar());
+			}*/
 		}
 		///浮点数 例：3.1
 		case FLOATLITERAL_EXP:
@@ -1192,6 +1200,7 @@ Value * IR::__Mod2IR(CSyntaxNode* pTree)
 * @return 转换后的IR代码
 */
 ///2015-4-9 add by wangmeng
+///2015-5-6 modified by chengyu 
 //2015-5-8 modified by wanglei，另添加sign变量，表示当前操作的数值的类型是否带符号
 Value* IR::__Cast2IR(Value *value, Type *type, bool sign)
 {
@@ -1220,10 +1229,18 @@ Value* IR::__Cast2IR(Value *value, Type *type, bool sign)
 	{
 		return m_builder->CreatePtrToInt(value, type);
 	}
-	//else if ()   //i8->i32
-	//{ }
-	//else if ()   //i32->i8
-	//{ }
+	//add by chengyu
+	//int类型转char类型
+	else if (type->isIntegerTy(8) && valType->isIntegerTy(32))
+	{
+		return m_builder->CreateTrunc(value, IntegerType::get(m_module->getContext(), 8));
+	}
+	//char类型转int类型
+	else if (type->isIntegerTy(32) && valType->isIntegerTy(8))
+	{
+		return m_builder->CreateZExt(value, IntegerType::get(m_module->getContext(), 32));
+	}
+
 	else
 	{
 		cout << "cast error!" << endl;
