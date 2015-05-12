@@ -109,7 +109,7 @@ void IR::Trslt2IR(CSyntaxTree* m_GlbVarTree,CSyntaxNode *function_tree, CSyntaxT
 	//EE->runFunction(FooF, noargs);
 	GenericValue gv = EE->runFunction(MainFunc, noargs);
 
-	//outs() << "Result: " << gv.IntVal << "\n";
+	outs() << "Result: " << gv.IntVal << "\n";
 
 	outs().flush();
 	delete EE;
@@ -345,7 +345,7 @@ void IR::__DeclrArray(Type *type, CSyntaxNode *pTree, int alignment, bool sign)
 		else if (TempNode->GetChild0() != NULL)
 		{
 			//计算表达式的值
-			Value* integer_exp = __Expr2IR(TempNode->GetChild0());
+			Value* integer_exp = __Expr2IR(TempNode->GetChild0(),true);
 			//判断表达式计算结果的值是否为i32类型
 			if (integer_exp->getType() == IntegerType::get(m_module->getContext(), 32))
 			{
@@ -409,9 +409,17 @@ void IR::__Ass2IR(CSyntaxNode* pTree)
 		return;
 	}
 
-	AllocaInst *LeftValue = m_IRSTable[pTree->GetChild0()->GetNName()]->GetAllocaInstVar();
+	///changed by shiyifang 计算复杂的左值
+	Value *LeftValue = __Expr2IR(pTree->GetChild0(),false);
+	if (LeftValue == NULL || !LeftValue->getType()->isPointerTy())
+	{
+		cout << "__Ass2IR() handle left error!" << endl;
+		return;
+	}
+		
+	Type*LType = LeftValue->getType();
 	
-	Type*LType = LeftValue->getAllocatedType();
+	LType = LType->getContainedType(0);
 
 	Value *tmpRtValue = __Expr2IR(pTree->GetChild1());
 	if (tmpRtValue == NULL)
@@ -428,7 +436,7 @@ void IR::__Ass2IR(CSyntaxNode* pTree)
 		return;
 	}
 
-	StoreInst *store = m_builder->CreateStore(RightValue, LeftValue, false);
+	StoreInst *store = m_builder->CreateStore(RightValue, LeftValue);
 	store->setAlignment(4);
 }
 
@@ -438,7 +446,7 @@ void IR::__Ass2IR(CSyntaxNode* pTree)
 * @return 转换之后的结果
 */
 ///2015-4-7 add by wangmeng
-Value * IR::__Expr2IR(CSyntaxNode* pTree)
+Value * IR::__Expr2IR(CSyntaxNode* pTree, bool load)
 {
 	if (pTree == NULL)
 	{
@@ -492,7 +500,39 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 		{
 			return m_IRSTable[pTree->GetChild0()->GetNName()]->GetAllocaInstVar();
 			break;
-			}
+		}
+
+		//add by shiyifang 2015-05-11
+		case LIST_SYMBOL_STA:
+		{
+			Value *value = __Array2IR(pTree);
+			if (value == NULL)
+				return NULL;
+			if (load)
+				value = m_builder->CreateLoad(value);
+			return value;
+		}
+		
+		//add by shiyifang 2015-05-11
+		case STRUCT_IDENT_EXP:
+		case STRUCT_LIST_EXP:
+		{
+			__StructEle2IR(pTree,false);
+		}
+
+		//add by shiyifang 2015-05-11
+		case STRUCTP_IDENT_EXP:
+		case STRUCTP_LIST_EXP:
+		{
+			__StructEle2IR(pTree, true);
+		}
+
+		//add by shiyifang 2015-05-11
+		case VALUE_EXP:
+		{
+			break;
+		}
+
 		case STR_EXP:
 		{
 			return m_builder->CreateGlobalStringPtr(pTree->GetsValue());
@@ -500,7 +540,10 @@ Value * IR::__Expr2IR(CSyntaxNode* pTree)
 		///变量 例：x
 		case IDENT_EXP:
 		{
-			return m_builder->CreateLoad(m_IRSTable[pTree->GetNName()]->GetAllocaInstVar());
+			if (load)
+				return m_builder->CreateLoad(m_IRSTable[pTree->GetNName()]->GetAllocaInstVar());
+
+			return m_IRSTable[pTree->GetNName()]->GetAllocaInstVar();
 		}
 
 		///加 例：x+y
@@ -616,6 +659,71 @@ void IR::__Out2IR(CSyntaxNode *pTree)
 	__AddOne2IR(m_StNum);//将状态数加1
 }
 
+///add by shiyifang 2015-05-11
+Value * IR::__Array2IR(CSyntaxNode* pTree)
+{
+	//数组首元素地址
+	Value * value = m_IRSTable[pTree->GetNName()]->GetAllocaInstVar();
+	if (pTree == NULL || value == NULL)
+		return NULL;
+	vector<Value*> subScript;
+	subScript.push_back(ConstantInt::get(m_module->getContext(), APInt(32, 0)));
+	//数组下标
+	while (pTree != NULL && pTree->GetChild0() != NULL)
+	{
+		subScript.push_back(ConstantInt::get(m_module->getContext(), APInt(32, pTree->GetChild0()->GetiValue())));
+		pTree = pTree->GetChild1();
+	}
+	//取下标处的值
+	value = m_builder->CreateInBoundsGEP(value, subScript);
+	
+
+	return value;
+}
+
+///add by shiyifang 2015-05-12
+Value * IR::__StructEle2IR(CSyntaxNode* pTree, bool StructP)
+{
+	Value * left = __Expr2IR(pTree->GetChild0());
+	if (left == NULL || !left->getType()->isStructTy())
+		return NULL;
+
+	vector<Value*> right;
+	right.push_back(ConstantInt::get(m_module->getContext(), APInt(32, 0)));
+	bool ok = true;
+	pTree = pTree->GetChild1();
+	while (ok)
+	{
+		IRStruct * s = m_IRStruct[(string)left->getType()->getStructName()];
+		switch (pTree->GetNType())
+		{
+
+		case IDENT_EXP:
+		{
+			right.push_back(ConstantInt::get(m_module->getContext(), APInt(32, s->GetElementPos(pTree->GetNName()))));
+			ok = false;
+			break;
+		}
+
+		case LIST_SYMBOL_STA:
+		{
+			right.push_back(ConstantInt::get(m_module->getContext(), APInt(32, s->GetElementPos(pTree->GetNName()))));
+			while (pTree != NULL && pTree->GetChild0() != NULL)
+			{
+				right.push_back(ConstantInt::get(m_module->getContext(), APInt(32, pTree->GetChild0()->GetiValue())));
+				pTree = pTree->GetChild1();
+			}
+			ok = false;
+			break;
+		}
+
+		
+		}
+	}
+	
+	return NULL;
+}
+
 /**
 * 变量自加操作转成对应的IR代码
 * @param 待处理的变量
@@ -683,7 +791,7 @@ Value * IR::__Cond2IR(CSyntaxNode* pTree)
 	case DIV_EXP:    //除，如if(1/2)
 	case MOD_EXP:    //取模，如if(1%2)
 	{
-		return __Expr2IR(pTree);
+		return __Expr2IR(pTree, true);
 		break;
 	}
 
@@ -871,7 +979,6 @@ Value * IR::__LE2IR(Value* LHS, Value* RHS)
 {
 	Type* LType = LHS->getType();
 	Type* RType = RHS->getType();
-
 	if (LType->isIntegerTy() && RType->isIntegerTy())
 	{
 		return m_builder->CreateICmpSLE(LHS, RHS, "ICmpLE");

@@ -10,21 +10,11 @@ void $$changeState()
 {if ($$current == $$length){
 $$length++; $$flag[$$length - 1] = 0;}
 $$current++; }
-
-int y;
-int z;
-int  g(int $$Ext,int x);
-int  f(int $$Ext,int x);
-int  g(int $$Ext,int x){
-int  RValue=0;
-RValue=(x)+(1);
-return RValue;
+struct aaa{
+int x;
+int y[10];
 }
-int  f(int $$Ext,int x){
-int  RValue=0;
-RValue=(x)+(1);
-return RValue;
-}
+;
 
 int main() {
 while (true){
@@ -37,8 +27,16 @@ if ( ($$length == 0 && $$flag[0] == 1) || ($$current == 0 && $$firstTime==1)){br
 $$current = 0;
 printf("Path Number: %d",$$pathNum);
 printf("\n");
-y=0;
-z=f(0,y);
+struct aaa c[10];
+c[2].x=1;
+printf("state %d:", $$state_num);
+printf("Global: ");
+printf("\n");
+$$state_num++;
+printf("state %d:", $$state_num);
+printf("Global: ");
+printf("\n");
+$$state_num++;
 $$firstTime=1;
 $$state_num=0;
 printf("\n");

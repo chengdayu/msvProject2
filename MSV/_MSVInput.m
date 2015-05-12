@@ -1,18 +1,3 @@
-function f(int x,int RValue)
-{frame(x) and
-(
- RValue:=x+1
- )
-};
-function g(int x,int RValue)
-{frame(x) and
-(
- RValue:=x+1
- )
-};
-frame(y,z) and
-(
-	int y and int z and skip;
-	y<==0 and skip;
-	z:=f(y,RValue)
-)
+struct aaa {int x and int y[10]};
+
+aaa c[10] and c[2].x<==1 and skip
